@@ -38,6 +38,7 @@ class MarketingPageParser(HTMLParser):
         # State tracking
         self._current_tag = None
         self._current_attrs = {}
+        self._in_head = False
         self._in_title = False
         self._in_heading = None
         self._in_button = False
@@ -91,7 +92,10 @@ class MarketingPageParser(HTMLParser):
         self._current_tag = tag
         self._current_attrs = attrs_dict
 
-        if tag == "title":
+        if tag == "head":
+            self._in_head = True
+
+        elif tag == "title" and self._in_head and not self.title:
             self._in_title = True
             self._current_text = ""
 
@@ -196,9 +200,13 @@ class MarketingPageParser(HTMLParser):
                         self.tracking_scripts.append(name)
 
     def handle_endtag(self, tag):
-        if tag == "title":
+        if tag == "head":
+            self._in_head = False
+
+        elif tag == "title" and self._in_title:
             self._in_title = False
-            self.title = self._current_text.strip()
+            if not self.title:
+                self.title = self._current_text.strip()
 
         elif tag in self.headings and self._in_heading == tag:
             text = self._current_text.strip()
