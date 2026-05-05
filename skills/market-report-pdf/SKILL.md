@@ -162,7 +162,7 @@ Exactly 6 categories with their scores. The categories map to these evaluation a
 | Content & Messaging | Copy quality, value proposition, headline clarity, CTA text, brand voice consistency | 80+: Clear, benefit-driven, specific. 60-79: Adequate but generic. <60: Vague, feature-focused, unclear |
 | Conversion Optimization | Social proof, form design, CTA placement, objection handling, urgency | 80+: Multiple proof types, optimized forms, clear CTAs. 60-79: Some elements present. <60: Missing critical elements |
 | SEO & Discoverability | Title tags, meta descriptions, headers, schema, internal linking, page speed | 80+: Fully optimized. 60-79: Mostly present with gaps. <60: Major issues or missing elements |
-| Competitive Positioning | Differentiation, pricing clarity, comparison content, market awareness | 80+: Clear positioning, comparison pages exist. 60-79: Some differentiation. <60: No clear positioning |
+| Competitive Positioning | Differentiation, commercial path clarity, comparison content, market awareness | 80+: Clear positioning, comparison pages or equivalent proof assets exist. 60-79: Some differentiation. <60: No clear positioning |
 | Brand & Trust | Design quality, trust badges, security indicators, professional appearance | 80+: Modern design, trust signals throughout. 60-79: Adequate design. <60: Outdated or unprofessional |
 | Growth & Strategy | Lead capture, email marketing, content strategy, acquisition channels | 80+: Multi-channel strategy in place. 60-79: Some channels active. <60: No clear growth strategy |
 
@@ -179,7 +179,7 @@ An array of finding objects, each with `severity` and `finding` fields.
 - Be specific: "Homepage headline says 'Welcome to Our Platform'" not "Headline needs improvement"
 - Quantify impact: "Missing meta descriptions on 8 of 12 landing pages"
 - Reference benchmarks: "Page load time is 4.2s (benchmark: under 2s)"
-- Include evidence: "No testimonials found on homepage, pricing page, or signup page"
+- Include evidence: "No testimonials found on homepage, pricing/RFQ/contact page, or signup/enrollment page"
 
 Aim for 5-10 findings. Order from most to least severe.
 

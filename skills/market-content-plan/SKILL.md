@@ -499,7 +499,7 @@ This section enables `FAQPage` schema and directly boosts AI citability (ChatGPT
 
 **CTA (call to action)**
 Final section before FAQ — one specific, benefit-led call to action aligned with the site's primary commercial intent:
-- Aligned with site's commercial intent (e.g., "Try [Product]", "Get a free audit", "Download the guide")
+- Aligned with site's commercial intent (e.g., "Try [Product]", "Get a free audit", "Download the guide", "Request a quote", "Download the datasheet", "Book technical consultation", "Reserve a course seat")
 - If commercial intent is unclear, use a newsletter or resource CTA
 - Single, specific CTA — not multiple competing actions
 

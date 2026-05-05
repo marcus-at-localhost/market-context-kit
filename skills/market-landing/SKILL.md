@@ -24,6 +24,11 @@ Determine which type of landing page you are analyzing. This affects benchmark e
 | Waitlist | Join waitlist | 15-25% | 35%+ |
 | Consultation Booking | Schedule a call | 5-10% | 15%+ |
 | Nonprofit Donation | Make a donation | 2-5% | 8%+ |
+| B2B Corporate Homepage | Route to inquiry, product, solution, or content path | 1-3% | 4-6% |
+| Industrial Solution Page | Qualified inquiry / RFQ / datasheet download | 1-3% | 3-6% |
+| Technical Product Page | Datasheet download, quote request, catalog/portal action | 2-5% | 6-10% |
+| RFQ / Inquiry Page | Submit qualified request | 5-12% | 15%+ |
+| Course / Certification Page | Enroll, reserve seat, or request schedule | 3-8% | 10-15% |
 
 ### Step 2: Run the 7-Point CRO Framework
 Analyze each section in order. Score each section 1-10 and provide specific findings.
@@ -42,7 +47,7 @@ The first screen a visitor sees. This is where 80% of conversion decisions begin
 - [ ] Hero image or video supports the message (not generic stock)
 - [ ] Trust badges or social proof visible above the fold
 - [ ] Page loads in under 3 seconds
-- [ ] No navigation menu competing with the CTA (for dedicated landing pages)
+- [ ] No navigation menu competing with the CTA on dedicated landing pages; for corporate/B2B homepages, navigation is allowed but the primary inquiry path must remain visually dominant
 
 **Scoring Criteria:**
 - 9-10: Headline is benefit-driven, specific, and compelling. CTA is clear and contrasting. Visual supports the message. Trust indicators present.
@@ -79,8 +84,9 @@ Evidence that others trust and benefit from this product/service.
 5. Star ratings and review counts
 6. Media mentions ("As seen in...")
 7. Certifications and awards
-8. User-generated content
-9. Social media follower counts
+8. Standards, technical test data, association memberships, customer approvals, and named experts (especially for regulated/industrial buyers)
+9. User-generated content
+10. Social media follower counts
 
 **Checklist:**
 - [ ] At least 2 types of social proof present
@@ -121,10 +127,14 @@ How the page addresses reasons a visitor might NOT convert.
 | "What if I don't like it?" | Free trial, money-back guarantee, cancel anytime |
 | "Is my data safe?" | Security badges, compliance logos, privacy policy link |
 | "I need to ask my team" | Shareable comparison page, team trial, ROI one-pager |
+| "Will this meet our standard/audit?" | Certifications, standards references, test data, audit documentation |
+| "Can you handle my application?" | Industry use cases, technical specs, expert consultation CTA |
+| "How fast can we get it?" | Lead time, stock, delivery SLA, location/distributor proof |
 
 **Checklist:**
 - [ ] FAQ section addresses top 3-5 objections
 - [ ] Risk reversals present (guarantee, free trial, cancel anytime)
+- [ ] Context-specific risk reducers present (certification proof, compliance documentation, response-time promise, sample request, course schedule, delivery SLA)
 - [ ] Pricing transparency (no hidden fees or surprise costs)
 - [ ] Security and privacy indicators where relevant
 - [ ] Comparison with alternatives (if applicable)
@@ -145,6 +155,7 @@ The conversion mechanism itself.
 - Weak: "Submit", "Click Here", "Learn More"
 - Medium: "Sign Up", "Get Started", "Download Now"
 - Strong: "Start My Free Trial", "Get My Custom Report", "Claim Your Discount"
+- Strong for B2B/RFQ: "Technische Beratung anfragen", "Datenblatt herunterladen", "Angebot anfordern", "Kursplatz reservieren"
 
 #### Section 7: Footer and Secondary Elements (Weight: 5%)
 The bottom of the page and supporting elements.
@@ -174,7 +185,7 @@ If the page has a form, evaluate:
 
 | Element | Best Practice |
 |---|---|
-| Field count | Every additional field reduces conversion ~7%. Lead capture: 3-5 fields max. |
+| Field count | Every additional field reduces conversion. Lead capture: 3-5 fields max; RFQ and technical forms may use optional fields or multi-step progressive disclosure. |
 | Labels | Use inline labels or floating labels. Avoid placeholder-only labels. |
 | Button text | Match the value proposition. "Get My Free Guide" > "Submit". |
 | Error handling | Inline validation. Specific error messages. Don't clear the entire form on error. |

@@ -28,6 +28,13 @@ Classify the business into one of these categories. This classification shapes e
 | **Local Business** | Address, phone number, hours, "near me", Google Maps embed | Local SEO, Google Business Profile, reviews, NAP consistency |
 | **Creator/Course** | Lead magnets, email capture, course listings, community links | Email capture rate, funnel design, testimonials, content quality |
 | **Marketplace** | Two-sided messaging, buyer/seller flows, listing pages | Supply/demand balance, trust mechanisms, network effects |
+| **B2B Industrial Manufacturer** | Product categories, datasheets, certifications, RFQ/contact CTAs, industry solution pages | RFQ paths, technical proof, compliance trust, product/category clarity, inquiry conversion |
+| **Technical Supplier/Distributor** | Catalog search, stock/availability claims, part numbers, downloads, customer portal | Product findability, repeat-order paths, quote requests, cross-reference tools, delivery confidence |
+| **Regulated/Compliance-Driven Business** | Standards, audits, certifications, safety/compliance language, regulated industries | Audit readiness, risk reduction, proof above the fold, schema, expert credibility |
+| **Training/Academy** | Course pages, schedules, instructor bios, certifications, enrollment CTAs | Course clarity, certification outcomes, enrollment friction, Course schema, post-training nurture |
+| **Knowledge-Led B2B Brand** | White papers, webinars, newsletter, podcast, content hub, expert authors | Authority building, gated assets, expert attribution, nurture flows, sales enablement |
+
+If multiple contexts apply, combine them instead of forcing one category. For example, IDT should be treated as B2B Industrial Manufacturer + Regulated/Compliance + Technical Supplier + Training/Academy + Knowledge-Led B2B Brand.
 
 ### 1.3 Identify Key Pages
 
@@ -35,10 +42,13 @@ Map the site architecture to identify:
 - Homepage
 - Primary landing pages
 - Pricing page (if exists)
+- RFQ, inquiry, contact, quote, or consultation page
 - Product/feature pages
+- Product category, catalog, datasheet, downloads, certification, or portal pages
+- Industry solution, use-case, service, course, event, or training pages
 - About/team page
 - Blog/content hub
-- Contact/signup/trial page
+- Contact/signup/trial/RFQ/enrollment page
 - Legal pages (privacy, terms)
 
 Store this page map for all subagents to reference.
@@ -73,8 +83,8 @@ Evaluates:
 - Page layout and visual hierarchy (does the eye flow toward conversion?)
 - Trust signals near conversion points (guarantees, security badges, testimonials)
 - Mobile conversion experience
-- Signup/checkout flow steps and drop-off risk
-- Pricing page effectiveness (anchoring, packaging, FAQ)
+- Signup/checkout/RFQ/inquiry/enrollment flow steps and drop-off risk
+- Commercial action page effectiveness (pricing, RFQ, inquiry, catalog, datasheet, demo, or course enrollment)
 
 **Scores:** Conversion Optimization (0-100)
 
@@ -86,7 +96,7 @@ Evaluates:
 - Unique positioning clarity (how differentiated is the messaging?)
 - Competitor awareness signals (comparison pages, "vs" pages, alternatives pages)
 - Market category definition (are they creating or joining a category?)
-- Pricing relative to likely competitors
+- Commercial model relative to likely competitors (pricing, RFQ, distributor, self-serve, sales-led, partner-led)
 - Feature differentiation signals
 - Review/reputation presence on third-party sites
 
@@ -111,11 +121,11 @@ Evaluates:
 
 ### Subagent 5: market-strategy
 
-**Focus:** Overall strategy, pricing, growth opportunities
+**Focus:** Overall strategy, commercial model, growth opportunities
 
 Evaluates:
 - Business model clarity
-- Pricing strategy (value-based, competitor-based, cost-plus)
+- Pricing/commercial strategy (public pricing, RFQ, sales-led, distributor-led, subscription, usage, course fee, donation, or hybrid)
 - Growth loops (referral, viral, content, sales-led)
 - Retention signals (loyalty programs, community, email nurture)
 - Expansion revenue opportunities (upsells, cross-sells, tiers)
@@ -164,9 +174,9 @@ Collect all recommendations from subagents and classify them:
 - Adding urgency or social proof
 
 **Strategic Recommendations** (1-4 weeks, medium effort, high impact):
-- Redesigning pricing page
+- Redesigning pricing, RFQ, inquiry, quote, or enrollment flow
 - Building comparison/alternatives pages
-- Creating lead magnets or content upgrades
+- Creating lead magnets, gated technical assets, calculators, selectors, or content upgrades
 - Email sequence implementation
 - Landing page A/B test designs
 

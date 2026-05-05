@@ -19,7 +19,7 @@ Before generating the playbook, collect these inputs from the user (ask if not p
 3. **What is the primary launch goal?** (revenue target, signups, downloads, awareness)
 4. **What is the launch date?** (or desired timeline)
 5. **What channels do you have access to?** (email list size, social following, ad budget, partnerships)
-6. **What is the price point?** (if applicable)
+6. **What is the commercial model?** (price point, RFQ, sales-led, distributor-led, enrollment, donation, or hybrid)
 7. **Do you have existing customers/users?** (for beta, testimonials, case studies)
 8. **What is the budget?** (bootstrapped, moderate, well-funded)
 
@@ -34,6 +34,9 @@ Select the primary launch strategy based on the user's context:
 | Paid Ads Launch | E-commerce, established product | Facebook/Google Ads | 2-4 weeks prep |
 | Community Launch | Niche product, developer tools | Reddit, Discord, Slack communities | 6-8 weeks |
 | Partner Launch | B2B, enterprise, marketplace | Partner channels | 8-12 weeks |
+| Industrial / RFQ Launch | Technical products, industrial services, regulated B2B | Sales team, LinkedIn, Google Search, trade media, distributors | 8-12 weeks |
+| Course / Certification Launch | Academy, training, professional education | Email, LinkedIn, associations, events | 6-10 weeks |
+| Regulatory / Thought Leadership Launch | Compliance, technical guides, knowledge-led B2B | Newsletter, LinkedIn, trade press, webinars | 4-8 weeks |
 | Hybrid Launch | Any high-stakes launch | Multi-channel coordinated | 8-12 weeks |
 
 ### Step 3: Generate the 8-Week Launch Timeline

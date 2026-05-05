@@ -28,6 +28,7 @@ Use multiple methods to identify competitors:
 - Search for the target site's primary keywords
 - Note which companies rank on page 1
 - Search for "[product category] software/service/tool"
+- For industrial or technical suppliers, also search for "[product category] manufacturer/supplier/distributor", "[standard/certification] [product]", "[application] [product]", and "[brand] equivalent/alternative"
 - Search for "[target brand] alternatives"
 - Search for "[target brand] vs"
 
@@ -41,6 +42,7 @@ Use multiple methods to identify competitors:
 - Search G2, Capterra, Trustpilot for the product category
 - Note top-rated competitors in the same category
 - Check "Compare" features on review sites
+- For B2B industrial, regulated, or local categories where software review sites are irrelevant, use trade directories, industry associations, procurement directories, trade press, certification bodies, distributor listings, and forum/community discussions instead.
 
 **Method 4: Social and Community Discovery**
 - Search Reddit for "[product category] recommendations"
@@ -58,6 +60,7 @@ python scripts/competitor_scanner.py --url [competitor-url] --output json
 The script can collect:
 - Homepage content and metadata
 - Pricing page data (if public)
+- RFQ/contact/catalog/datasheet/distributor data (if pricing is not public)
 - Blog post count and recent topics
 - Social media profile links and follower counts
 - Technology stack detection
@@ -107,9 +110,9 @@ POSITIONING MAP
 
 Adjust axes based on what matters most in the specific industry.
 
-### 2.2 Pricing Comparison
+### 2.2 Pricing / Commercial Model Comparison
 
-Build a detailed pricing matrix:
+Build the matrix that fits the business model. For SaaS and e-commerce, use pricing/plan rows. For RFQ-led, regulated, industrial, distributor, academy, or services businesses, compare commercial path and proof instead of forcing SaaS tiers.
 
 ```markdown
 | Feature/Plan | [Target] | Competitor A | Competitor B | Competitor C |
@@ -124,12 +127,28 @@ Build a detailed pricing matrix:
 | Usage Limits | [detail] | [detail] | [detail] | [detail] |
 ```
 
+```markdown
+| Commercial Factor | [Target] | Competitor A | Competitor B | Competitor C |
+|-------------------|----------|--------------|--------------|--------------|
+| Public Pricing | Yes/No/Partial | | | |
+| Primary Conversion | RFQ / Contact / Buy / Enroll / Distributor | | | |
+| Quote Path Clarity | Strong / Medium / Weak | | | |
+| Datasheets / Downloads | Open / Gated / Missing | | | |
+| Certifications / Standards | [list] | | | |
+| Product Finder / Selector | Yes/No/Partial | | | |
+| Stock / Lead-Time Signals | Yes/No/Partial | | | |
+| Distributor / Partner Locator | Yes/No | | | |
+| Proof Assets | Case studies / test data / testimonials / logos | | | |
+```
+
 **Pricing Strategy Assessment:**
 - Is the target priced above, below, or at market average?
 - Is pricing transparent or hidden (requiring sales calls)?
 - What pricing model is used (per-user, per-usage, flat-rate, tiered)?
 - Are there pricing anchoring tactics being used?
 - Does the pricing page communicate value before showing numbers?
+- If pricing is hidden by category norm, does the RFQ/contact path reduce uncertainty with response time, technical fields, proof, and clear next steps?
+- For industrial/regulatory categories, compare standards, approvals, test data, engineering access, distributor coverage, and delivery confidence as commercial differentiators.
 
 ### 2.3 Feature Comparison Matrix
 
@@ -330,6 +349,11 @@ Sections:
   8. CTA: "Try [Target] free" or "See how [Target] compares"
 ```
 
+For industrial, regulated, services, or RFQ-led categories, replace SaaS elements with relevant proof:
+- Quick comparison table: standards, applications, engineering access, lead time, datasheets, test data, service coverage
+- Where each competitor wins: be honest about scale, certifications, tools, geography, or product breadth
+- Switching offer: "Send us your existing specification", "Request equivalent recommendation", "Book technical review", or "Get RFQ response in [timeframe]"
+
 **SEO value:** These pages target high-intent search queries like "[competitor] alternatives" and "[target] vs [competitor]" which are bottom-of-funnel searches.
 
 ### 4.4 Switching Narrative Development
@@ -354,6 +378,10 @@ Switching offer:
   - Extended trial for [Competitor] users
   - Matching or discounting pricing
   - Dedicated onboarding for switchers
+  - Technical specification review
+  - Equivalent product / part-number cross-reference
+  - Compliance documentation pack
+  - Distributor or account-manager handoff
 ```
 
 ---

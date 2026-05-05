@@ -10,7 +10,7 @@ You are one of 5 parallel subagents launched during a `/market audit`. Your job 
 
 ### Step 1: Brand & Trust Assessment
 
-Use WebFetch to analyze the homepage, about page, and pricing page.
+Use WebFetch to analyze the homepage, about/trust page, and the main commercial path. Depending on business context, this may be a pricing page, RFQ/contact page, catalog, product page, solution page, distributor page, datasheet library, course page, or lead magnet.
 
 **Brand Consistency (0-10)**
 - Visual consistency across pages (colors, typography, imagery style)
@@ -37,13 +37,13 @@ Use WebFetch to analyze the homepage, about page, and pricing page.
 
 ### Step 2: Growth Strategy Assessment
 
-**Pricing Strategy (0-10)**
-- Is pricing transparent and easy to understand?
-- Is there a free tier, trial, or low-friction entry point?
-- Do tiers follow Good-Better-Best structure?
-- Is the pricing metric aligned with value delivery?
-- Are there upsell/expansion paths visible?
-- Scoring: 9-10 = strategic + optimized, 7-8 = solid structure, 5-6 = functional but not optimized, 3-4 = confusing or misaligned, 0-2 = no pricing visible or major issues
+**Commercial Model & Pricing Strategy (0-10)**
+- Is the commercial model clear for this business type: public pricing, RFQ, sales-led, distributor-led, subscription, usage, course fee, donation, or hybrid?
+- If pricing is public: is it transparent, value-framed, and easy to compare?
+- If pricing is not public: is the RFQ/inquiry process clear, low-friction, and confidence-building?
+- If regulated/industrial: are certifications, standards, lead times, datasheets, and technical proof visible before the buyer contacts sales?
+- Are there upsell, repeat-order, account expansion, partner/distributor, or cross-sell paths visible?
+- Scoring: 9-10 = strategic + optimized for the model, 7-8 = solid structure, 5-6 = functional but not optimized, 3-4 = confusing or misaligned, 0-2 = commercial path unclear or broken
 
 **Acquisition Channels (0-10)**
 - How many acquisition channels are they using?
@@ -68,10 +68,10 @@ Use WebFetch to analyze the homepage, about page, and pricing page.
 Identify the top growth opportunities:
 
 1. **Quick Revenue Wins** (implementable in 1-2 weeks)
-   - Pricing page optimizations
+   - Pricing/RFQ/inquiry/enrollment flow optimizations
    - CTA improvements
    - Social proof additions
-   - Urgency or scarcity elements
+   - Authentic urgency, risk reduction, or proof elements
 
 2. **Medium-Term Growth** (1-3 months)
    - Content marketing expansion
@@ -81,7 +81,7 @@ Identify the top growth opportunities:
 
 3. **Strategic Initiatives** (3-6 months)
    - New acquisition channel development
-   - Product-led growth features
+   - Product-led, self-serve, RFQ, selector, partner, or distributor enablement features
    - Partnership or integration strategy
    - Community building
 
@@ -111,7 +111,7 @@ For each recommendation, estimate:
 ### Growth Assessment
 | Dimension | Score | Key Finding |
 |-----------|-------|-------------|
-| Pricing Strategy | X/10 | [finding] |
+| Commercial Model | X/10 | [finding] |
 | Acquisition Channels | X/10 | [finding] |
 | Retention & Expansion | X/10 | [finding] |
 
@@ -135,11 +135,11 @@ For each recommendation, estimate:
 | [action] | High | [estimate] |
 | [action] | High | [estimate] |
 
-### Pricing Analysis
+### Commercial Model Analysis
 - Current structure: [description]
 - Strengths: [what works]
 - Weaknesses: [what doesn't]
-- Recommendation: [specific pricing suggestion]
+- Recommendation: [specific pricing, RFQ, inquiry, channel, or enrollment suggestion]
 
 ### Channel Strategy
 - **Active Channels**: [list]
@@ -148,8 +148,8 @@ For each recommendation, estimate:
 ```
 
 ## Important Rules
-- Always check pricing pages, about pages, and blog to assess strategy
+- Always check the actual commercial path for the business type: pricing, RFQ, inquiry, catalog, datasheet, quote, distributor, contact, or enrollment
 - Be specific with revenue estimates — even rough ranges are helpful
 - Frame everything through a revenue lens, not just "best practices"
 - Identify the single biggest growth lever — what one change would have the most impact?
-- Consider the business type when making recommendations (SaaS vs E-commerce vs Agency, etc.)
+- Consider the business type when making recommendations; don't penalize RFQ-led, industrial, regulated, local, or academy businesses for not using SaaS pricing/trial mechanics

@@ -17,7 +17,7 @@ Before writing any ads, establish:
 | Context Element | Source | Purpose |
 |----------------|--------|---------|
 | **Product/Service** | URL analysis | Core of all ad messaging |
-| **Price point** | Pricing page | Determines funnel depth and ad strategy |
+| **Commercial model** | Pricing, RFQ, contact, catalog, distributor, or enrollment path | Determines funnel depth, CTA, and ad strategy |
 | **Target audience** | Site copy, user input | Audience targeting parameters |
 | **Unique selling proposition** | Homepage, features | Primary ad differentiation |
 | **Conversion action** | CTAs on site | What the ad should drive toward |
@@ -38,6 +38,10 @@ Map the business goal to the right campaign objective:
 | App installs | App Install | Meta, Google, TikTok | App install ads |
 | Event registration | Conversions | Meta, LinkedIn | Event ads, Landing pages |
 | Content promotion | Engagement / Traffic | Meta, Twitter, LinkedIn | Boosted posts, Video |
+| RFQ / technical inquiry | Lead Gen / Conversions | Google Search, LinkedIn | Search, Lead forms, Landing pages |
+| Distributor or catalog demand | Search / Conversions | Google Search, Microsoft Ads | Search, Call, Landing pages |
+| Regulated buyer education | Lead Gen / Traffic | LinkedIn, Google Search, trade media | Document ads, Search, Sponsored content |
+| Course enrollment | Conversions / Lead Gen | Google, LinkedIn, Meta | Search, Event ads, Landing pages |
 
 ---
 
@@ -120,6 +124,7 @@ Angle 3: BEFORE/AFTER
 Angle 4: OBJECTION HANDLING
   "Think [product type] is [common objection]? [Counter with evidence].
    Try it free for [trial period] — no [risk]."
+  For RFQ/industrial: "Need [standard/application] proof before you specify? [Brand] provides [certification/test/data] and direct expert review."
 
 Angle 5: URGENCY/SCARCITY
   "[Limited offer detail]. [Number] spots left this month.
@@ -248,10 +253,10 @@ STAGE 2: CONSIDERATION (Warm Audience)
   Metrics: CPC, CTR, landing page conversion rate
 
 STAGE 3: CONVERSION (Hot Audience)
-  Audience: Cart abandoners, pricing page visitors, trial users,
-            high-intent page visitors
+  Audience: Cart abandoners, pricing/RFQ/contact page visitors, trial users,
+            datasheet downloaders, course schedule viewers, high-intent page visitors
   Goal: Drive the final conversion action
-  Ad Type: Direct offer, urgency, guarantee, limited-time discount
+  Ad Type: Direct offer, RFQ CTA, expert consultation, enrollment reminder, authentic urgency, guarantee, limited-time discount
   Budget: 25% of total ad spend
   Metrics: CPA, ROAS, conversion rate
 ```
@@ -277,6 +282,8 @@ Stage 3 Ads (Conversion):
   Ad 3B: Urgency — "Your free trial starts now (no credit card)"
   Ad 3C: Guarantee — "Try [product] risk-free for [period]"
   Ad 3D: Testimonial — "'[Quote about specific result]' — Start yours"
+  Ad 3E: RFQ — "Send your specification — get a technical response in [timeframe]"
+  Ad 3F: Compliance — "[Standard] documentation available for [application]"
 ```
 
 ---
@@ -295,6 +302,10 @@ Stage 3 Ads (Conversion):
 | Agency | 20% | 30% | 35% | 5% | 10% |
 | Local Business | 50% | 35% | 0% | 5% | 10% |
 | Creator/Course | 10% | 40% | 10% | 30% | 10% |
+| B2B Industrial / Manufacturing | 45% | 5% | 35% | 0% | 15% (trade media/directories) |
+| Technical Supplier / Distributor | 55% | 10% | 20% | 0% | 15% (Microsoft/search partners) |
+| Regulated / Compliance B2B | 35% | 5% | 45% | 0% | 15% (trade media/webinars) |
+| Training / Academy | 30% | 20% | 30% | 5% | 15% (industry associations) |
 
 **By Funnel Stage:**
 - Awareness: 40% (audience building)
@@ -310,6 +321,8 @@ Stage 3 Ads (Conversion):
 | Lead Gen | 2:1 (by lead value) | 4:1 | 7:1+ |
 | Courses | 3:1 | 6:1 | 10:1+ |
 | Local Services | 2:1 | 3:1 | 5:1+ |
+| Industrial B2B Lead Gen | 2:1 (pipeline value) | 4:1 | 6:1+ |
+| Regulated B2B | 2:1 (pipeline value) | 3:1 | 5:1+ |
 
 **CPA Benchmarks (approximate):**
 
@@ -319,6 +332,7 @@ Stage 3 Ads (Conversion):
 | Meta | $20-60 | $5-20 | $10-30 | $15-45 |
 | LinkedIn | $50-150 | N/A | N/A | $40-100 |
 | TikTok | $15-40 | $3-15 | $8-25 | $10-35 |
+| Trade Media / Directories | $80-250 | N/A | N/A | N/A |
 
 ### 4.3 Landing Page Alignment
 
@@ -352,7 +366,7 @@ For each ad concept, generate:
 
 **Test Priority Order:**
 1. Audience (who you target matters most)
-2. Offer (what you offer: free trial vs demo vs discount)
+2. Offer (what you offer: free trial vs demo vs discount vs RFQ vs datasheet vs expert review vs enrollment)
 3. Creative concept (the big idea and visual approach)
 4. Headline (specific wording of the hook)
 5. Body copy (supporting text)

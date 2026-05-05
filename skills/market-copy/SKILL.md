@@ -38,6 +38,13 @@ Identify what kind of page this is, because each type has different copy priorit
 | **Feature Page** | Explain a specific capability | Problem-solution framing, use cases, comparison |
 | **Blog Post** | Educate and capture leads | Headline hook, intro engagement, CTA placement |
 | **Contact/Demo Page** | Capture lead information | Form headline, friction reduction, trust signals |
+| **Industrial Product Page** | Support technical evaluation and RFQ | Specifications, standards, datasheets, use cases, quote CTA |
+| **Industry/Solution Page** | Prove fit for a vertical or application | Buyer pain, compliance proof, case examples, expert inquiry CTA |
+| **Technical Service Page** | Sell engineering, implementation, or support expertise | Process clarity, credentials, outcomes, direct consultation CTA |
+| **Compliance/Regulatory Page** | Build trust for regulated buyers | Standards, audit language, risk reduction, expert attribution |
+| **Course/Certification Page** | Drive enrollment or schedule inquiry | Outcomes, certification value, instructor proof, schedule CTA |
+
+Also detect business context before rewriting. Do not force SaaS language ("trial", "pricing tiers", "book a demo") onto RFQ-led, regulated, distributor, academy, local, or industrial businesses.
 
 ### 1.3 Voice and Tone Analysis
 
@@ -115,7 +122,7 @@ Score the entire page copy across 5 dimensions:
 
 | Dimension | Score | What It Measures |
 |-----------|-------|------------------|
-| **Clarity** | 0-10 | Can a 12-year-old understand what you do? No jargon, no fluff. |
+| **Clarity** | 0-10 | Can the target buyer quickly understand what you do? Avoid fluff; keep necessary technical language when the audience expects it. |
 | **Persuasion** | 0-10 | Does the copy move the reader toward action? Handles objections? |
 | **Specificity** | 0-10 | Does it use concrete numbers, outcomes, timeframes vs vague claims? |
 | **Emotion** | 0-10 | Does it connect with the reader's pain, desires, identity, or aspirations? |
@@ -199,6 +206,35 @@ If any element is missing or weak in the current copy, flag it.
 5. Comparison: How this is different from alternatives
 6. CTA: "Try [feature] free" or "See it in action"
 
+**Industrial Product Page Copy Structure:**
+1. Product/category name: Clear technical descriptor plus application context
+2. Qualification statement: Material, standards, temperature/pressure range, industries served
+3. Use cases: Where this product is specified and where it should not be used
+4. Specifications: Scannable table, datasheet link, standards/certifications, compatibility notes
+5. Proof: Test data, approvals, case examples, expert attribution
+6. CTA: "Datenblatt herunterladen", "Produkt anfragen", or "Technische Beratung anfragen"
+
+**Industry/Solution Page Copy Structure:**
+1. Audience and application: Name the industry and operational problem
+2. Stakes: Downtime, compliance risk, safety, audit failure, cost of inaction
+3. Solution architecture: Product/service combination that solves the application
+4. Proof: Standards, certifications, case study, named expert, process
+5. Conversion block: Expert contact, RFQ, datasheet, checklist, or assessment
+
+**Technical Service / Academy Page Copy Structure:**
+1. Outcome: What the service/course enables the buyer to do
+2. Credentials: Instructor/expert authority, certifications, standards, partner bodies
+3. Format and process: Duration, location, schedule, deliverables, prerequisites
+4. Proof: Participants, customer examples, audit/compliance relevance
+5. CTA: "Kursplatz reservieren", "Termin anfragen", or "Mit Experten sprechen"
+
+**Compliance / Regulatory Page Copy Structure:**
+1. Regulation or standard: Name it explicitly
+2. Practical implication: What the buyer must decide, document, or change
+3. Technical interpretation: Clear guidance with caveats and evidence
+4. Brand role: Where the company helps, without unsupported legal claims
+5. CTA: Checklist, consultation, technical assessment, or documentation download
+
 ### 3.2 CTA Optimization
 
 Analyze every CTA on the page:
@@ -206,9 +242,10 @@ Analyze every CTA on the page:
 **CTA Button Text Best Practices:**
 - Use first person: "Start My Free Trial" not "Start Your Free Trial"
 - Include the value: "Get My Report" not "Submit"
-- Reduce risk: "Try Free for 14 Days" not "Buy Now"
+- Reduce risk in context: "Try Free for 14 Days", "Antwort innerhalb von 1 Werktag", "Datenblatt ohne Registrierung", or "Kostenfreie Erstprüfung"
 - Be specific: "Download the 2026 Marketing Guide" not "Download"
 - Add urgency when appropriate: "Claim My Spot (12 Left)" not "Register"
+- For RFQ-led businesses, prefer direct buyer-language CTAs: "Angebot anfordern", "Technische Beratung anfragen", "Produkt spezifizieren", "Datenblatt herunterladen"
 
 **CTA Placement Analysis:**
 - Is there a CTA above the fold? (Required)

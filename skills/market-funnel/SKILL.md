@@ -24,6 +24,10 @@ Detect which funnel type the site uses:
 | **Application** | Premium services, programs | Info page -> Application form -> Review -> Interview -> Accept | Application-to-accept rate |
 | **Community** | Memberships, communities | Landing -> Free trial/preview -> Engage -> Paid membership | Free-to-paid rate |
 | **Content** | Media, publishers | Blog -> Email capture -> Nurture -> Premium content -> Subscribe | Reader-to-subscriber rate |
+| **B2B RFQ** | Industrial, manufacturing, technical services | Homepage -> Product/Solution -> Datasheet/Proof -> RFQ/Inquiry -> Sales follow-up | Inquiry-to-opportunity rate |
+| **Technical Catalog** | Suppliers, distributors, parts businesses | Search/category -> Product detail -> Datasheet/Stock -> Quote/order/portal | Product-to-RFQ or reorder rate |
+| **Regulated Procurement** | Pharma, chemical, finance, healthcare, safety-critical B2B | Trust/compliance proof -> Solution page -> Technical validation -> Inquiry | Qualified inquiry rate |
+| **Training Enrollment** | Academies, courses, certifications | Course page -> Schedule -> Instructor/proof -> Enrollment/contact | Enrollment completion rate |
 
 ### 1.2 Map Every Funnel Step
 
@@ -32,7 +36,7 @@ For each page in the funnel, document:
 ```
 STEP [#]: [Page Name]
   URL: [url]
-  Page Type: [landing/product/pricing/cart/checkout/form/thank-you]
+  Page Type: [landing/product/pricing/catalog/solution/datasheet/RFQ/cart/checkout/form/enrollment/thank-you]
   Primary Action: [what the user should do on this page]
   Next Step: [where the user should go next]
   Exit Points: [where users might leave instead]
@@ -111,6 +115,21 @@ For each page in the funnel, score these dimensions:
 | No social proof | No testimonials near pricing | Add customer quotes near each plan |
 | Missing FAQ | Common questions unanswered | Add pricing FAQ addressing top 5 objections |
 
+**RFQ / Inquiry Page:**
+| Drop-Off Cause | Detection Signal | Fix |
+|----------------|-----------------|-----|
+| Unclear next step | Generic "Contact" page with no process | Explain response time, required inputs, and what happens after submission |
+| Missing technical fields | Buyer cannot specify material, standard, pressure, dimensions, quantity | Add optional technical fields or file upload |
+| No trust near form | Certifications and expert proof absent near CTA | Add standards, certifications, named expert, and privacy note beside the form |
+| Full account gate too early | Datasheets or quote flow hidden before value is shown | Allow preview/download samples before registration |
+
+**Technical Product / Catalog Page:**
+| Drop-Off Cause | Detection Signal | Fix |
+|----------------|-----------------|-----|
+| Product findability failure | Weak search, no filters, unclear categories | Add application, material, standard, and part-number filters |
+| Missing decision data | No datasheet, dimensions, standards, compatibility, or lead time | Add specs table, downloadable datasheet, compliance badges, stock/lead-time note |
+| No quote path | Product detail ends without inquiry/RFQ CTA | Add "Produkt anfragen" / "Datenblatt herunterladen" / "Mit Experten sprechen" |
+
 **Signup/Registration:**
 | Drop-Off Cause | Detection Signal | Fix |
 |----------------|-----------------|-----|
@@ -151,6 +170,7 @@ If the funnel includes a lead magnet, evaluate:
 5. Ebooks and guides (lower conversion but good for authority)
 6. Quizzes and assessments (interactive, high engagement)
 7. Free trials and demos (product-led, highest intent)
+8. Datasheets, selectors, calculators, standards checklists, compliance guides, and technical decision matrices (highest intent for industrial/RFQ businesses)
 
 ---
 
@@ -221,6 +241,9 @@ Use this framework to quantify the impact of every recommendation.
 | Webinar to Sale | 2-5% | 5-10% | 10-20% |
 | Cold Email Reply | 3-5% | 5-10% | 10-20% |
 | Demo to Close | 15-25% | 25-40% | 40-60% |
+| B2B RFQ Form | 1-3% | 3-6% | 6-10% |
+| Datasheet Download to Inquiry | 5-10% | 10-20% | 20-30% |
+| Course Enrollment Page | 3-8% | 8-15% | 15-25% |
 
 ---
 
@@ -250,14 +273,15 @@ Rank every recommendation using this framework:
 - Case study and testimonial pages (expected lift: 10-20%)
 - Feature comparison pages (expected lift: 5-15%)
 - Interactive product demos (expected lift: 15-30%)
+- Datasheets, calculators, selectors, configurators, technical proof, and compliance guides (expected lift: 10-30% for technical buyers)
 - Retargeting email sequences (expected lift: 10-25%)
 
-**Bottom of Funnel (Consideration to Purchase):**
-- Pricing page redesign (expected lift: 10-25%)
-- Checkout friction reduction (expected lift: 5-15%)
-- Risk reversal (guarantees, trials) (expected lift: 10-20%)
-- Urgency and scarcity elements (expected lift: 5-15%)
-- Cart abandonment recovery (expected recovery: 5-15% of abandoned carts)
+**Bottom of Funnel (Consideration to Purchase/RFQ/Enrollment):**
+- Pricing, RFQ, inquiry, enrollment, or quote-flow redesign (expected lift: 10-25%)
+- Checkout/signup/RFQ/enrollment friction reduction (expected lift: 5-15%)
+- Risk reduction (guarantees, trials, certifications, standards, delivery SLA, sample request, named expert access) (expected lift: 10-20%)
+- Authentic urgency elements (regulatory deadlines, event dates, lead times, limited course seats, capacity) (expected lift: 5-15%)
+- Cart/order/RFQ abandonment recovery (expected recovery: 5-15% of abandoned flows)
 
 **Post-Purchase (Retention and Expansion):**
 - Onboarding email sequence (expected impact: 10-20% reduction in churn)
@@ -265,11 +289,11 @@ Rank every recommendation using this framework:
 - Referral program (expected lift: 5-15% new customers)
 - NPS survey at 30 days (identifies at-risk customers)
 
-### 4.3 Pricing Page Optimization
+### 4.3 Commercial Action Page Optimization
 
-Since pricing pages are often the highest-leverage optimization point:
+Since pricing, RFQ, inquiry, quote, and enrollment pages are often the highest-leverage optimization point:
 
-**Pricing Page Audit Checklist:**
+**Pricing Page Audit Checklist (when public pricing exists):**
 - [ ] Headline frames value, not cost ("Choose your growth plan" not "Pricing")
 - [ ] Plans are limited to 3 (or 3 + enterprise)
 - [ ] One plan is highlighted as "Most Popular" or "Best Value"
@@ -282,6 +306,14 @@ Since pricing pages are often the highest-leverage optimization point:
 - [ ] CTA buttons use action language ("Start Growing" not "Subscribe")
 - [ ] Comparison with competitors or the cost of not buying
 - [ ] "Help me choose" option or quiz for undecided visitors
+
+**RFQ / Inquiry / Enrollment Checklist (when pricing is hidden or sales-led):**
+- [ ] The primary action matches buyer intent ("Anfrage stellen", "Technische Beratung anfragen", "Kursplatz sichern")
+- [ ] The page explains what happens after submission and when the buyer will hear back
+- [ ] Required fields are minimal; optional technical fields and file upload support qualified requests
+- [ ] Certifications, standards, customer proof, and expert credentials appear near the form
+- [ ] Datasheets, course details, sample outputs, or proof assets are visible before any account gate
+- [ ] Phone/email/direct expert options exist for high-intent or urgent buyers
 
 ### 4.4 Checkout/Signup Flow Optimization
 
@@ -309,6 +341,8 @@ Funnel Stage          → Email Sequence
 Visitor (anonymous)   → None (use retargeting ads)
 Lead (opted in)       → Welcome sequence (5-7 emails)
 Engaged Lead          → Nurture sequence (6-8 emails)
+Datasheet/RFQ Lead    → Technical follow-up + sales handoff sequence
+Course Lead           → Enrollment reminder + proof sequence
 Trial User            → Onboarding sequence (5-7 emails)
 Inactive Trial        → Re-engagement sequence (3-4 emails)
 Customer              → Post-purchase / loyalty sequence
@@ -321,12 +355,13 @@ Different traffic sources need different funnel entry points:
 
 | Traffic Source | Intent Level | Best Entry Point | Recommended Funnel |
 |---------------|-------------|-----------------|-------------------|
-| Branded search | High | Pricing / signup page | Short (direct to trial/buy) |
+| Branded search | High | Pricing / signup / RFQ / contact page | Short (direct to trial/buy/inquiry) |
 | Non-branded search | Medium | Blog / landing page | Medium (educate then convert) |
 | Paid social | Low-Medium | Lead magnet / content | Long (capture, nurture, convert) |
 | Referral | Medium-High | Homepage / product page | Medium (trust is pre-built) |
 | Direct | High | Homepage | Short (they know you) |
 | Email | Medium | Specific landing page | Targeted (match email topic) |
+| Trade/directories | High | Solution page / catalog / RFQ page | Short (validate proof, then inquire) |
 
 ---
 
@@ -385,8 +420,8 @@ biggest bottleneck, top 3 recommendations with revenue impact]
 
 ---
 
-## Pricing Page Assessment
-[Detailed pricing page audit with checklist]
+## Commercial Action Page Assessment
+[Detailed pricing/RFQ/inquiry/enrollment page audit with checklist]
 
 ## Lead Magnet Assessment
 [If applicable: scoring and recommendations]
@@ -417,8 +452,8 @@ Funnel Health: [X]/100
 
 Conversion Flow:
   Visitors     → Leads:     [X]% (benchmark: [X]%)
-  Leads        → Trial:     [X]% (benchmark: [X]%)
-  Trial        → Paid:      [X]% (benchmark: [X]%)
+  Leads        → Next Step: [X]% (trial/RFQ/enrollment/opportunity benchmark: [X]%)
+  Next Step    → Customer:  [X]% (benchmark: [X]%)
   Overall:                  [X]% (benchmark: [X]%)
 
 Biggest Bottleneck: [stage] — [X]% drop-off

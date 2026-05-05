@@ -194,7 +194,7 @@ Determine the search intent behind the target keyword and evaluate if the conten
 |---|---|---|
 | Informational | Learn something | Blog post, guide, tutorial, FAQ |
 | Commercial | Compare options | Comparison page, review, list |
-| Transactional | Buy something | Product page, pricing page, checkout |
+| Transactional | Buy, request, enroll, download, or contact | Product page, pricing page, checkout, RFQ page, contact page, course page, datasheet page |
 | Navigational | Find a specific page | Homepage, login page, specific tool |
 
 **Misalignment is a ranking killer.** If the user searches "how to do X" (informational) and lands on a sales page (transactional), they bounce -- and Google notices.

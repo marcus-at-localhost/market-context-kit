@@ -73,8 +73,6 @@ Before running any analysis, detect the business type:
 - **Training/Academy** → Focus on: course pages, certification outcomes, instructor authority, schedules, enrollment CTAs
 - **Knowledge-Led B2B Brand** → Focus on: content hubs, expert attribution, white papers, webinars, newsletters, gated technical assets
 
-If multiple contexts apply, combine them instead of forcing one category.
-
 ### Context Modifiers
 
 If multiple contexts apply, combine them instead of forcing one category.

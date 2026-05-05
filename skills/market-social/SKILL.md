@@ -20,7 +20,7 @@ Establish before generating any content:
 | **Industry** | Site analysis | Industry-relevant content |
 | **Target audience** | About page, copy, user input | Shapes language and topics |
 | **Brand voice** | Existing social/site copy | Match tone and personality |
-| **Key products/services** | Product/pricing pages | Promotional content topics |
+| **Key products/services** | Product/pricing/RFQ/catalog/course pages | Promotional content topics |
 | **Unique selling points** | Homepage, feature pages | Differentiation in content |
 | **Competitors** | Industry analysis | Competitive content strategy |
 
@@ -36,6 +36,7 @@ Recommend platforms based on business type and audience:
 | **TikTok** | Consumer brands, creators, education | Gen Z, millennials, 16-35 | Short-form video, trends | 1-3x/day |
 | **YouTube** | Education, SaaS demos, long-form | All ages, research-intent | Tutorials, reviews, vlogs | 1-2x/week |
 | **Facebook** | Local business, communities, older demo | 30-65+, local audiences | Community, events, groups | 3-5x/week |
+| **Trade / Industry Communities** | Industrial, regulated, technical B2B | Engineers, procurement, operators | Technical posts, standards commentary, case examples | 1-3x/week |
 
 Select 2-3 primary platforms for the brand and focus calendar content there.
 
@@ -58,6 +59,8 @@ Define 4-5 content pillars that anchor all social content. Each pillar represent
 | Pillar 5 | **Promotional** | Drive revenue, announce offers | Product launches, features, offers, CTAs |
 
 **Content Mix Ratio:** 40% educational, 20% behind-the-scenes, 15% social proof, 15% engagement, 10% promotional
+
+Adjust the mix by business context. Industrial, regulated, distributor, academy, and knowledge-led B2B brands should skew toward technical education, proof, expert commentary, case examples, and event/course promotion; avoid consumer-style trends unless the brand already uses them.
 
 ### 2.2 Content Types by Platform
 

@@ -12,9 +12,9 @@ You are one of 5 parallel subagents launched during a `/market audit`. Your job 
 Use WebFetch to retrieve and analyze these pages (if they exist):
 1. Homepage
 2. About page
-3. Pricing page
-4. One feature/product page
-5. One blog post (if blog exists)
+3. Main commercial action page (pricing, RFQ, contact, catalog, enrollment, or distributor page)
+4. One feature/product/solution/course page
+5. One blog post, guide, resource, datasheet, or content hub page (if exists)
 
 ### Step 2: Evaluate Content Quality
 
@@ -34,7 +34,7 @@ Score each dimension 0-10:
 
 **Copy Persuasion (0-10)**
 - Does the copy focus on benefits over features?
-- Does it use customer language (not jargon)?
+- Does it use customer language? Keep legitimate technical terms when the target buyer expects them; flag only needless jargon or vague buzzwords.
 - Are there emotional triggers and logical proof?
 - Does it address objections proactively?
 - Scoring: 9-10 = highly persuasive + natural, 7-8 = good but room to improve, 5-6 = informational not persuasive, 3-4 = feature-focused, 0-2 = poor or missing
@@ -116,3 +116,4 @@ Return your analysis in this structure:
 - Every fix must include a concrete alternative, not just "improve the headline"
 - Score honestly — don't inflate scores to be nice
 - Focus on revenue impact — prioritize issues that directly affect conversions
+- Match CTA and proof recommendations to the detected business context; RFQ-led, regulated, distributor, academy, and industrial sites need inquiry clarity, technical proof, compliance signals, and expert trust as much as classic sales copy.

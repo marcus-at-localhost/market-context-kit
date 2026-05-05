@@ -19,9 +19,9 @@ Before writing any emails, establish:
 | **Business type** | Fetch URL or ask user | Determines sequence type and tone |
 | **Target audience** | Infer from site copy or ask | Shapes language, pain points, examples |
 | **Product/service** | Fetch product/pricing pages | Drives value propositions in emails |
-| **Price point** | Check pricing page | Determines sequence length (higher price = longer nurture) |
+| **Commercial model** | Check pricing, RFQ, catalog, contact, distributor, or enrollment path | Determines sequence length and CTA type |
 | **Primary CTA** | Identify main conversion action | Every email builds toward this |
-| **Lead magnet** | Check for download offers, free trials | Determines welcome sequence entry point |
+| **Lead magnet** | Check for download offers, free trials, datasheets, calculators, checklists, webinars, or course materials | Determines welcome sequence entry point |
 | **Voice and tone** | Analyze existing copy | Emails must match brand voice |
 
 ### 1.2 Sequence Type Selection
@@ -37,6 +37,11 @@ Based on context, recommend the appropriate sequence(s):
 | **Onboarding** | New trial users or new customers | 5-7 | Drive activation, reduce churn, show value |
 | **Cart Abandonment** | E-commerce abandoned checkout | 3-4 | Recover lost sales |
 | **Cold Outreach** | B2B prospecting | 3-5 | Book meetings, start conversations |
+| **RFQ Follow-Up** | Submitted inquiry, quote request, or technical form | 3-5 | Clarify requirements, accelerate sales handoff |
+| **Datasheet Download Nurture** | Technical asset download | 4-6 | Educate, prove fit, drive expert consultation |
+| **Regulatory Update Nurture** | Compliance/newsletter audience | 4-6 | Build authority, tie deadlines to assessment CTA |
+| **Trade Show / Event Follow-Up** | Booth scans, webinar attendees, conference leads | 3-5 | Convert warm conversations into meetings |
+| **Academy Enrollment** | Course interest or registration started | 3-5 | Fill seats, reduce schedule friction, prove certification value |
 
 Generate at least 2 sequence types unless the user specifies one.
 
@@ -85,6 +90,7 @@ CTA: "Start your free trial and see the difference in 24 hours."
 ```
 
 Use this for launch emails and cart abandonment.
+For industrial/RFQ contexts, replace the CTA with a lower-risk commercial next step such as "Send us your specification", "Request a technical review", "Download the checklist", or "Reserve a course seat".
 
 ### 2.3 Subject Line Optimization
 
@@ -256,6 +262,9 @@ Recommend segments based on the business type:
 | **Engagement** | Open rate, click rate, recency | Separate engaged vs dormant subscribers |
 | **Source** | Organic, paid, referral, social | Tailor welcome sequence to acquisition channel |
 | **Stage** | Lead, trial, customer, churned | Different sequences for each lifecycle stage |
+| **Technical intent** | Datasheet download, RFQ, selector use, standards page visit | Route to expert follow-up or application-specific nurture |
+| **Industry / application** | Pharma, chemical, H2, local service area, course topic | Match examples, proof, and CTA to the buyer's context |
+| **Procurement role** | Engineer, buyer, operator, executive, student | Adjust depth, proof, and commercial ask |
 | **Interest** | Topic preferences, content consumed | Personalize content recommendations |
 | **Value** | Purchase amount, plan tier, LTV | Prioritize high-value segments for personal touch |
 
@@ -293,6 +302,9 @@ Include relevant benchmarks in the output:
 | Health/Fitness | 18-22% | 2-3% | 0.5-1.5% |
 | Finance/Fintech | 20-25% | 2-4% | 1-2% |
 | Media/Publishing | 20-25% | 3-5% | 0.5-1% |
+| B2B Industrial / Manufacturing | 22-30% | 2-5% | 1-3% |
+| Regulated / Compliance B2B | 24-32% | 2-5% | 1-3% |
+| Training / Academy | 22-30% | 3-6% | 2-5% |
 
 ### 5.2 Compliance Notes
 
