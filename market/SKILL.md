@@ -67,6 +67,22 @@ Before running any analysis, detect the business type:
 - **Local Business** → Focus on: Google Business Profile, local SEO, reviews, directions
 - **Creator/Course** → Focus on: lead magnets, email capture, testimonials, community
 - **Marketplace** → Focus on: two-sided messaging, supply/demand balance, trust mechanisms
+- **B2B Industrial Manufacturer** → Focus on: RFQ paths, datasheets, certifications, compliance proof, product/category pages, inquiry CTAs
+- **Technical Supplier/Distributor** → Focus on: catalog search, stock availability, repeat orders, part-number lookup, delivery speed, cross-reference tools
+- **Regulated/Compliance-Driven Business** → Focus on: standards, audit readiness, risk reduction, trust proof, schema, industry-specific credentials
+- **Training/Academy** → Focus on: course pages, certification outcomes, instructor authority, schedules, enrollment CTAs
+- **Knowledge-Led B2B Brand** → Focus on: content hubs, expert attribution, white papers, webinars, newsletters, gated technical assets
+
+If multiple contexts apply, combine them instead of forcing one category.
+
+### Context Modifiers
+
+If multiple contexts apply, combine them instead of forcing one category.
+
+Examples:
+- **IDT** → B2B Industrial Manufacturer + Regulated/Compliance + Technical Supplier + Training/Academy + Knowledge-Led B2B Brand
+- Focus should include: RFQ conversion, inquiry CTAs, product data visibility, standards/certification proof, industry solution pages, case studies, technical content hubs, gated datasheets, schema, multilingual SEO, and expert-led trust signals.
+
 
 ## Output Standards
 
