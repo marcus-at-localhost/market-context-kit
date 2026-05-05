@@ -53,6 +53,39 @@ class MarketingPageParser(HTMLParser):
         self._canonical = ""
         self._robots_meta = ""
 
+    def _is_json_ld_script(self):
+        script_type = self._script_type.split(";", 1)[0].strip().lower()
+        return script_type == "application/ld+json"
+
+    def _extract_schema_nodes(self, schema):
+        if isinstance(schema, list):
+            nodes = []
+            for item in schema:
+                nodes.extend(self._extract_schema_nodes(item))
+            return nodes
+
+        if isinstance(schema, dict):
+            nodes = []
+            if "@type" in schema:
+                nodes.append(schema)
+
+            graph = schema.get("@graph")
+            if isinstance(graph, (list, dict)):
+                nodes.extend(self._extract_schema_nodes(graph))
+
+            return nodes or [schema]
+
+        return []
+
+    def _schema_type_name(self, schema):
+        if not isinstance(schema, dict):
+            return "Unknown"
+
+        schema_type = schema.get("@type", "Unknown")
+        if isinstance(schema_type, list):
+            return ", ".join(str(item) for item in schema_type)
+        return str(schema_type)
+
     def handle_starttag(self, tag, attrs):
         attrs_dict = dict(attrs)
         self._current_tag = tag
@@ -211,13 +244,10 @@ class MarketingPageParser(HTMLParser):
                 if "Meta Pixel" not in self.tracking_scripts:
                     self.tracking_scripts.append("Meta Pixel (inline)")
             # Check for JSON-LD schema
-            if self._script_type == "application/ld+json":
+            if self._is_json_ld_script():
                 try:
                     schema = json.loads(script_content)
-                    if isinstance(schema, list):
-                        self.schema_data.extend(schema)
-                    else:
-                        self.schema_data.append(schema)
+                    self.schema_data.extend(self._extract_schema_nodes(schema))
                 except (json.JSONDecodeError, ValueError):
                     pass
 
@@ -289,7 +319,7 @@ class MarketingPageParser(HTMLParser):
             "tracking": {
                 "tools_detected": tracking,
                 "tools_count": len(tracking),
-                "schema_types": [s.get("@type", "Unknown") for s in self.schema_data],
+                "schema_types": [self._schema_type_name(s) for s in self.schema_data],
                 "schema_count": len(self.schema_data)
             },
             "technical": {
