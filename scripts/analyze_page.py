@@ -186,7 +186,9 @@ class MarketingPageParser(HTMLParser):
                     "crisp": "Crisp Chat",
                     "drift": "Drift",
                     "tiktok": "TikTok Pixel",
-                    "clarity": "Microsoft Clarity"
+                    "clarity": "Microsoft Clarity",
+                    "matomo": "Matomo",
+                    "piwik": "Matomo (Piwik)"
                 }
                 src_lower = src.lower()
                 for indicator, name in tracking_indicators.items():
@@ -243,6 +245,12 @@ class MarketingPageParser(HTMLParser):
             if "fbq" in script_content:
                 if "Meta Pixel" not in self.tracking_scripts:
                     self.tracking_scripts.append("Meta Pixel (inline)")
+            if "_mtm" in script_content:
+                if "Matomo Tag Manager" not in self.tracking_scripts:
+                    self.tracking_scripts.append("Matomo Tag Manager (inline)")
+            elif "_paq" in script_content:
+                if "Matomo" not in self.tracking_scripts and "Matomo Tag Manager" not in self.tracking_scripts:
+                    self.tracking_scripts.append("Matomo (inline)")
             # Check for JSON-LD schema
             if self._is_json_ld_script():
                 try:
