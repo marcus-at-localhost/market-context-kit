@@ -165,8 +165,8 @@ fi
 
 # Install Python dependencies
 echo -e "\n${BLUE}Checking Python dependencies...${NC}"
-if command -v python3 &>/dev/null; then
-    PYTHON_VERSION=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')" 2>/dev/null)
+PYTHON_VERSION=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')" 2>/dev/null || true)
+if [ -n "$PYTHON_VERSION" ]; then
     echo -e "  ${GREEN}✓${NC} Python $PYTHON_VERSION detected"
 
     # Check for reportlab (needed for PDF reports)
