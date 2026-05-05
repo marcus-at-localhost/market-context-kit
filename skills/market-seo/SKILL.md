@@ -35,6 +35,20 @@ This script extracts:
 
 Capture the JSON output and use it as the foundation for the manual analysis.
 
+### Evidence and Validation Requirements
+
+Treat script output as a starting point, not final proof. Before writing the audit:
+
+1. Add a concise evidence table for all major findings:
+
+| Claim | URL checked | Source | Confidence |
+|---|---|---|---|
+| [Finding being reported] | [Exact URL] | [Analyzer JSON, direct HTML, robots.txt, sitemap, manual page review, etc.] | High/Medium/Low |
+
+2. Re-check every critical finding with direct HTML inspection or a second sampled URL before including it in the audit.
+3. Do not make sitewide claims from a homepage-only sample. For schema, titles, breadcrumbs, CTAs, and indexability, sample the relevant page type first (homepage, category/listing, product/detail, article/resource).
+4. If a finding cannot be externally verified, label it as "not externally verifiable" or "not verified" instead of "missing" or "not configured". For example, public HTML cannot prove whether Google Search Console is configured.
+
 ### Step 2: On-Page SEO Checklist
 Evaluate each element and score it as Pass, Needs Work, or Fail.
 
