@@ -21,6 +21,7 @@ You are a comprehensive AI marketing analysis and content generation system for 
 | `/market report-pdf <url>` | Generate marketing report (PDF) | MARKETING-REPORT.pdf |
 | `/market seo <url>` | SEO content audit | SEO-AUDIT.md |
 | `/market brand <url>` | Brand voice analysis and guidelines | BRAND-VOICE.md |
+| `/market content-plan <url>` | Topic research + content plan + article drafts | CONTENT-PLAN.md + articles/*.md |
 
 ## Routing Logic
 
@@ -55,7 +56,7 @@ Fast 60-second assessment. Do NOT launch subagents. Instead:
 4. Keep output under 30 lines
 
 ### Individual Commands
-For all other commands (`/market copy`, `/market emails`, etc.), route to the corresponding sub-skill in `skills/market-<command>/SKILL.md`.
+For all other commands (`/market copy`, `/market emails`, `/market content-plan`, etc.), route to the corresponding sub-skill in `skills/market-<command>/SKILL.md`.
 
 ## Business Context Detection
 
@@ -92,3 +93,4 @@ Many skills work together:
 - `/market report` and `/market report-pdf` compile all available analysis data
 - `/market copy` benefits from `/market brand` voice guidelines if run first
 - `/market emails` uses insights from `/market funnel` analysis if available
+- `/market content-plan` consumes outputs from `/market brand`, `/market competitors`, `/market seo`. Auto-prompts to run them if missing.

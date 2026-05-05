@@ -75,6 +75,7 @@ pip install reportlab
 | `/market report-pdf <url>` | Professional marketing report (PDF) |
 | `/market seo <url>` | SEO content audit |
 | `/market brand <url>` | Brand voice analysis and guidelines |
+| `/market content-plan <url>` | Topic research + content plan + article drafts |
 
 ---
 
@@ -84,7 +85,7 @@ pip install reportlab
 ai-marketing-claude/
 ├── market/SKILL.md                     # Main orchestrator (routes all /market commands)
 │
-├── skills/                             # 14 sub-skills
+├── skills/                             # 15 sub-skills
 │   ├── market-audit/SKILL.md           # Full audit orchestration
 │   ├── market-copy/SKILL.md            # Copywriting analysis & generation
 │   ├── market-emails/SKILL.md          # Email sequence generation
@@ -98,7 +99,8 @@ ai-marketing-claude/
 │   ├── market-report/SKILL.md          # Marketing report (Markdown)
 │   ├── market-report-pdf/SKILL.md      # Marketing report (PDF)
 │   ├── market-seo/SKILL.md             # SEO content audit
-│   └── market-brand/SKILL.md           # Brand voice analysis
+│   ├── market-brand/SKILL.md           # Brand voice analysis
+│   └── market-content-plan/SKILL.md    # Topic research & content planning
 │
 ├── agents/                             # 5 parallel subagents
 │   ├── market-content.md               # Content & messaging analysis
@@ -119,7 +121,9 @@ ai-marketing-claude/
 │   ├── email-launch.md                 # Product launch sequence (8 emails)
 │   ├── proposal-template.md            # Client proposal template
 │   ├── content-calendar.md             # 30-day content calendar
-│   └── launch-checklist.md             # Launch checklist
+│   ├── launch-checklist.md             # Launch checklist
+│   ├── content-brief.md                # Per-article content brief template
+│   └── content-plan.md                 # Content plan table template
 │
 ├── install.sh                          # One-command installer
 ├── uninstall.sh                        # Clean uninstaller
