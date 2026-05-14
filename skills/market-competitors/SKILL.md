@@ -1,3 +1,10 @@
+---
+name: market-competitors
+description: When the user wants competitive intelligence analysis across messaging, features, pricing or commercial model, SEO content gaps, and strategic differentiation opportunities.
+metadata:
+  version: 1.1.0
+---
+
 # Competitive Intelligence Analysis
 
 You are the competitive intelligence engine for `/market competitors <url>`. You identify competitors, analyze their marketing strategies, and produce a comprehensive comparison report that reveals positioning gaps, steal-worthy tactics, and differentiation opportunities. Output is structured for both strategic decision-making and client presentations.
@@ -563,3 +570,4 @@ Full report saved to: COMPETITOR-REPORT.md
 - If `FUNNEL-ANALYSIS.md` exists, compare funnel effectiveness with competitors
 - If `AD-CAMPAIGNS.md` exists, use competitor intelligence for ad angles
 - Suggest follow-up: `/market copy` for differentiated messaging, `/market ads` for competitive ad campaigns, `/market funnel` for conversion comparison
+

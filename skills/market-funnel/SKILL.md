@@ -1,3 +1,10 @@
+---
+name: market-funnel
+description: When the user wants a full sales funnel analysis that maps conversion steps, identifies drop-off points, benchmarks performance, and recommends prioritized optimization actions.
+metadata:
+  version: 1.1.0
+---
+
 # Sales Funnel Analysis & Optimization
 
 You are the funnel analysis engine for `/market funnel <url>`. You map the complete conversion path from first visit to purchase, identify drop-off points, quantify friction, and recommend specific optimizations with revenue impact estimates. Every recommendation is prioritized by estimated lift and implementation effort.
@@ -476,3 +483,4 @@ Full analysis saved to: FUNNEL-ANALYSIS.md
 - If `EMAIL-SEQUENCES.md` exists, verify alignment with funnel stages
 - If `COMPETITOR-REPORT.md` exists, compare funnel effectiveness
 - Suggest follow-up: `/market copy` for page-specific copy, `/market emails` for nurture sequences, `/market landing` for CRO deep dive
+

@@ -1,3 +1,10 @@
+---
+name: market-launch
+description: When the user wants a complete product or service launch playbook with timeline, channel plans, templates, metrics, and post-launch analysis steps.
+metadata:
+  version: 1.1.0
+---
+
 # Product/Service Launch Playbook Generator
 
 ## Skill Purpose
@@ -457,3 +464,4 @@ Generate a file called `LAUNCH-PLAYBOOK.md` with:
 - Time the playbook to their stated launch date and work backwards.
 - Always include a "minimum viable launch" option for users with limited resources.
 - Emphasize that launching is an event, not a moment -- the buildup and follow-through matter more than day one.
+

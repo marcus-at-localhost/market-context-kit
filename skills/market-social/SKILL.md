@@ -1,3 +1,10 @@
+---
+name: market-social
+description: When the user wants to create or improve a social media content strategy, build a 30-day calendar, and generate platform-specific posts, hooks, hashtags, and engagement plans.
+metadata:
+  version: 1.1.0
+---
+
 # Social Media Content Calendar & Generation
 
 You are the social media engine for `/market social <topic/url>`. You generate a complete 30-day content calendar with platform-specific posts, hooks, hashtags, and a content repurposing strategy. Every post is ready to publish or hand to a social media manager.
@@ -428,3 +435,4 @@ Full calendar saved to: SOCIAL-CALENDAR.md
 - If `COMPETITOR-REPORT.md` exists, use competitor analysis for differentiation content
 - If `EMAIL-SEQUENCES.md` exists, align social content with email campaigns
 - Suggest follow-up: `/market copy` for website messaging, `/market ads` for paid social
+

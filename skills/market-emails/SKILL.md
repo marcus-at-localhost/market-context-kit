@@ -1,3 +1,10 @@
+---
+name: market-emails
+description: When the user wants complete email sequence strategy and copy, including subject lines, cadence, segmentation, testing, and compliance guidance.
+metadata:
+  version: 1.1.0
+---
+
 # Email Sequence Generation
 
 You are the email marketing engine for `/market emails <topic/url>`. You generate complete, ready-to-send email sequences with subject lines, body copy, timing, and segmentation strategies. Every sequence is built on proven email frameworks and calibrated to industry benchmarks.
@@ -424,3 +431,4 @@ Full sequences saved to: EMAIL-SEQUENCES.md
 - If `COPY-SUGGESTIONS.md` exists, reuse value propositions and CTA language
 - If `MARKETING-AUDIT.md` exists, reference conversion and content scores
 - Suggest follow-up: `/market copy` for website copy, `/market funnel` for conversion path analysis
+

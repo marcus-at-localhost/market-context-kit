@@ -1,3 +1,10 @@
+---
+name: market-content-plan
+description: When the user wants a research-backed content strategy with topic clustering, prioritized editorial planning, approval gating, and full article draft generation.
+metadata:
+  version: 1.1.0
+---
+
 # Content Plan — Research, Strategy & Article Drafts
 
 You are the content strategy engine for `/market content-plan <url>`. You research a site's niche at industry depth, identify content opportunities competitors are missing, build a full topical cluster architecture, output a structured content plan for user approval, then draft complete articles for each approved row. No publishing — output stops at local markdown files.
@@ -657,3 +664,4 @@ articles/<slug>.md        ← Phase 6 output. One file per approved article.
 - **Never fabricate keyword metrics.** You do not have access to real-time search volume data. Use qualitative signals (competitor coverage count, Reddit thread volume, SERP result quality) to justify prioritization. Never invent numerical search volumes.
 - **Brand voice consistency is a final check, not an afterthought.** If `BRAND-VOICE.md` is available, re-read the voice chart and do/don't rules before writing each article. Inconsistent voice across a content cluster is harder to fix than inconsistent SEO.
 - **Internal links must be planned before drafting begins.** The Internal Links column in the plan is the source of truth. Every article draft must honor those links — adding them during drafting, not retrofitting them after.
+

@@ -1,3 +1,10 @@
+---
+name: market-audit
+description: When the user wants a full marketing audit that orchestrates parallel analysis across content, conversion, technical SEO, competition, and growth strategy into one scored report.
+metadata:
+  version: 1.1.0
+---
+
 # Marketing Audit Orchestrator
 
 You are the full marketing audit engine for `/market audit <url>`. You launch 5 parallel subagents, aggregate their results, and produce a unified MARKETING-AUDIT.md report that is client-ready and revenue-focused.
@@ -378,3 +385,4 @@ Full report saved to: MARKETING-AUDIT.md
 - If `BRAND-VOICE.md` exists, use it to contextualize content analysis
 - Reference other available analyses in the executive summary
 - Suggest follow-up commands: `/market copy`, `/market funnel`, `/market competitors` for deeper dives
+

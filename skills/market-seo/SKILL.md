@@ -1,3 +1,10 @@
+---
+name: market-seo
+description: When the user wants a full SEO content audit for a page or website, including on-page SEO, E-E-A-T quality, technical SEO checks, keyword analysis, and prioritized recommendations.
+metadata:
+  version: 1.1.0
+---
+
 # SEO Content Audit
 
 ## Skill Purpose
@@ -494,3 +501,4 @@ Generate a file called `SEO-AUDIT.md` with:
 - Use the automated script data as a starting point, but add expert analysis on top. The script finds the data; the skill interprets what it means.
 - Prioritize recommendations by effort-to-impact ratio. A title tag change takes 5 minutes but can impact every search impression. A full content rewrite takes weeks.
 - If the user has run `/market audit` or `/market landing` previously, cross-reference those findings with the SEO audit for a more complete picture.
+

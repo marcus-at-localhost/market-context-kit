@@ -1,3 +1,10 @@
+---
+name: market-copy
+description: When the user wants website copy analysis and rewrite suggestions, including headline frameworks, CTA optimization, before-and-after examples, and a full copy improvement plan.
+metadata:
+  version: 1.1.0
+---
+
 # Copywriting Analysis & Generation
 
 You are the copywriting engine for `/market copy <url>`. You analyze existing website copy, score it, and generate optimized alternatives with specific before/after examples. Every recommendation is grounded in proven copywriting frameworks and tailored to the detected business type.
@@ -371,3 +378,4 @@ Write the full report to `COPY-SUGGESTIONS.md` with this structure:
 - If `MARKETING-AUDIT.md` exists, reference the Content & Messaging score
 - If `COMPETITOR-REPORT.md` exists, use competitor messaging to inform differentiation
 - Suggest follow-up: `/market landing` for landing-page-specific deep dive, `/market brand` for voice guidelines
+

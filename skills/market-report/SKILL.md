@@ -1,3 +1,10 @@
+---
+name: market-report
+description: When the user wants a comprehensive Markdown marketing report that combines prior audit outputs into one scorecard, analysis, and prioritized revenue-focused action plan.
+metadata:
+  version: 1.1.0
+---
+
 # Marketing Report Generator (Markdown Format)
 
 ## Skill Purpose
@@ -369,3 +376,4 @@ Generate a file called `MARKETING-REPORT.md` with:
 - Use professional formatting: consistent headers, tables for data, checkboxes for action items, clear visual hierarchy.
 - If data from previous skills is available, reference specific findings. If not, be transparent about what's based on analysis vs estimation.
 - The report should tell a story: Here's where you are, here's where you could be, here's how to get there, and here's what it's worth.
+

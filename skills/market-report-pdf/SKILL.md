@@ -1,3 +1,10 @@
+---
+name: market-report-pdf
+description: When the user wants a polished client-ready PDF marketing report generated from available audit data, including scores, findings, action plans, and visual charts.
+metadata:
+  version: 1.1.0
+---
+
 # PDF Marketing Report Generator
 
 ## Skill Purpose
@@ -346,3 +353,4 @@ The PDF report skill will automatically look for output files from these skills 
 - Round scores to whole numbers. Decimals imply false precision.
 - Keep the executive summary tight -- 2-4 sentences maximum. Clients skim cover pages.
 - If generating for a prospect (not yet a client), the report serves as a sales tool. Make the opportunities compelling and the action plan achievable.
+

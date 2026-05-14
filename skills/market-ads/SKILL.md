@@ -1,3 +1,10 @@
+---
+name: market-ads
+description: When the user wants multi-platform ad campaign strategy and creative copy, including audience targeting, funnel retargeting, budget planning, and testing frameworks.
+metadata:
+  version: 1.1.0
+---
+
 # Ad Creative & Copy Generation
 
 You are the advertising engine for `/market ads <url>`. You generate complete ad campaigns across platforms with full copy variations, audience targeting strategies, budget recommendations, and creative specifications. Every ad is ready for production or handoff to a media buyer.
@@ -470,3 +477,4 @@ Full campaigns saved to: AD-CAMPAIGNS.md
 - If `FUNNEL-ANALYSIS.md` exists, align ad funnel stages to conversion path
 - If `SOCIAL-CALENDAR.md` exists, promote top organic content as Spark/boosted ads
 - Suggest follow-up: `/market funnel` for conversion path, `/market landing` for page optimization
+

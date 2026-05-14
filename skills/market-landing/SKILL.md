@@ -1,3 +1,10 @@
+---
+name: market-landing
+description: When the user wants a landing page CRO audit with section-by-section scoring, copy and CTA feedback, form and mobile checks, and A-B test recommendations.
+metadata:
+  version: 1.1.0
+---
+
 # Landing Page CRO Analysis
 
 ## Skill Purpose
@@ -337,3 +344,4 @@ Generate a file called `LANDING-CRO.md` in the project root or output directory 
 - Reference industry benchmarks so the client understands where they stand.
 - If you have access to the page via browser tools, take screenshots and reference specific elements.
 - If the user has run `/market audit` previously, incorporate those findings into the CRO analysis for a more complete picture.
+

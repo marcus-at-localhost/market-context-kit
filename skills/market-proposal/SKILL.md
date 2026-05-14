@@ -1,3 +1,10 @@
+---
+name: market-proposal
+description: When the user wants a client-ready marketing services proposal with discovery framing, strategy, scope, pricing tiers, ROI projections, and next steps.
+metadata:
+  version: 1.1.0
+---
+
 # Client Proposal Generator for Marketing Services
 
 ## Skill Purpose
@@ -379,3 +386,4 @@ Generate a file called `CLIENT-PROPOSAL.md` with:
 - If audit data is available from previous skills, use it extensively -- data-backed proposals close at 2-3x the rate of generic proposals.
 - Keep it concise. Executives skim. Use bold, headers, and tables to make key information scannable.
 - Always include a specific, time-bound next step. Ambiguity kills deals.
+
