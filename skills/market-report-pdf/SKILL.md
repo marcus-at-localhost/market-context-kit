@@ -17,7 +17,7 @@ Generate a professional, visually polished PDF marketing report using the Python
 - User is preparing a deliverable for a client presentation
 - User asks for a "polished report", "client-ready report", or "PDF report"
 - User wants a visual report with charts and scores
-- Triggered by `/market-report-pdf` or `/market-report-pdf <domain>`
+- Triggered by `/ai-marketing:market-report-pdf` or `/ai-marketing:market-report-pdf <domain>`
 
 ## When to Use PDF vs Markdown
 
@@ -45,7 +45,7 @@ Gather data from all previous skill runs. Check for these files in the project d
 - `AD-AUDIT.md` -- Advertising audit
 
 **If no previous data exists:**
-1. Recommend the user run `/market-audit <url>` first for the best results
+1. Recommend the user run `/ai-marketing:market-audit <url>` first for the best results
 2. If the user insists on generating a report without prior audits, analyze the provided URL directly and build the data structure from scratch
 3. Use the analyze_page.py script to gather automated data: `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/analyze_page.py" "<url>"` (`python` instead of `python3` on Windows)
 
@@ -335,11 +335,11 @@ The PDF uses a professional color palette:
 
 This skill works best when combined with other audit skills. The recommended workflow:
 
-1. Run `/market-audit <url>` -- Generates comprehensive audit data
-2. Run `/market-competitors <url>` -- Adds competitor comparison data
-3. Run `/market-seo <url>` -- Adds detailed SEO findings
-4. Run `/market-landing <url>` -- Adds CRO analysis
-5. Run `/market-report-pdf <url>` -- Compiles everything into a PDF
+1. Run `/ai-marketing:market-audit <url>` -- Generates comprehensive audit data
+2. Run `/ai-marketing:market-competitors <url>` -- Adds competitor comparison data
+3. Run `/ai-marketing:market-seo <url>` -- Adds detailed SEO findings
+4. Run `/ai-marketing:market-landing <url>` -- Adds CRO analysis
+5. Run `/ai-marketing:market-report-pdf <url>` -- Compiles everything into a PDF
 
 The PDF report skill will automatically look for output files from these skills and incorporate their data into the report JSON.
 

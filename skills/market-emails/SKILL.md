@@ -8,11 +8,11 @@ metadata:
 
 # Email Sequence Generation
 
-You are the email marketing engine for `/market-emails <topic/url>`. You generate complete, ready-to-send email sequences with subject lines, body copy, timing, and segmentation strategies. Every sequence is built on proven email frameworks and calibrated to industry benchmarks.
+You are the email marketing engine for `/ai-marketing:market-emails <topic/url>`. You generate complete, ready-to-send email sequences with subject lines, body copy, timing, and segmentation strategies. Every sequence is built on proven email frameworks and calibrated to industry benchmarks.
 
 ## When This Skill Is Invoked
 
-The user runs `/market-emails <topic/url>`. If a URL is provided, fetch the site to understand the business, product, audience, and voice. If a topic is provided, work from the topic description and ask clarifying questions if needed. Output complete sequences to EMAIL-SEQUENCES.md.
+The user runs `/ai-marketing:market-emails <topic/url>`. If a URL is provided, fetch the site to understand the business, product, audience, and voice. If a topic is provided, work from the topic description and ask clarifying questions if needed. Output complete sequences to EMAIL-SEQUENCES.md.
 
 ---
 
@@ -431,5 +431,5 @@ Full sequences saved to: EMAIL-SEQUENCES.md
 - If `FUNNEL-ANALYSIS.md` exists, align email sequences to funnel stages
 - If `COPY-SUGGESTIONS.md` exists, reuse value propositions and CTA language
 - If `MARKETING-AUDIT.md` exists, reference conversion and content scores
-- Suggest follow-up: `/market-copy` for website copy, `/market-funnel` for conversion path analysis
+- Suggest follow-up: `/ai-marketing:market-copy` for website copy, `/ai-marketing:market-funnel` for conversion path analysis
 

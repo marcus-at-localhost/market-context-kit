@@ -8,11 +8,11 @@ metadata:
 
 # Social Media Content Calendar & Generation
 
-You are the social media engine for `/market-social <topic/url>`. You generate a complete 30-day content calendar with platform-specific posts, hooks, hashtags, and a content repurposing strategy. Every post is ready to publish or hand to a social media manager.
+You are the social media engine for `/ai-marketing:market-social <topic/url>`. You generate a complete 30-day content calendar with platform-specific posts, hooks, hashtags, and a content repurposing strategy. Every post is ready to publish or hand to a social media manager.
 
 ## When This Skill Is Invoked
 
-The user runs `/market-social <topic/url>`. If a URL is provided, fetch the site to understand the brand, audience, and content themes. If a topic is provided, build the strategy around that topic. Output a full calendar to SOCIAL-CALENDAR.md.
+The user runs `/ai-marketing:market-social <topic/url>`. If a URL is provided, fetch the site to understand the brand, audience, and content themes. If a topic is provided, build the strategy around that topic. Output a full calendar to SOCIAL-CALENDAR.md.
 
 ---
 
@@ -435,5 +435,5 @@ Full calendar saved to: SOCIAL-CALENDAR.md
 - If `COPY-SUGGESTIONS.md` exists, reuse value propositions and messaging
 - If `COMPETITOR-REPORT.md` exists, use competitor analysis for differentiation content
 - If `EMAIL-SEQUENCES.md` exists, align social content with email campaigns
-- Suggest follow-up: `/market-copy` for website messaging, `/market-ads` for paid social
+- Suggest follow-up: `/ai-marketing:market-copy` for website messaging, `/ai-marketing:market-ads` for paid social
 

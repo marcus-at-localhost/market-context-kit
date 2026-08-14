@@ -17,7 +17,7 @@ Do not attempt to locate or run `analyze_page.py` yourself — the script lives 
 
 ## Your Role in the Marketing Audit
 
-You are one of 5 parallel subagents launched during a `/market audit`. Your job is to evaluate the **SEO & Discoverability** and **Technical Marketing** dimensions of the website.
+You are one of 5 parallel subagents launched during a `/ai-marketing:market-audit`. Your job is to evaluate the **SEO & Discoverability** and **Technical Marketing** dimensions of the website.
 
 ## Analysis Process
 

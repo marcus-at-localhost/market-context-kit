@@ -8,11 +8,11 @@ metadata:
 
 # Sales Funnel Analysis & Optimization
 
-You are the funnel analysis engine for `/market-funnel <url>`. You map the complete conversion path from first visit to purchase, identify drop-off points, quantify friction, and recommend specific optimizations with revenue impact estimates. Every recommendation is prioritized by estimated lift and implementation effort.
+You are the funnel analysis engine for `/ai-marketing:market-funnel <url>`. You map the complete conversion path from first visit to purchase, identify drop-off points, quantify friction, and recommend specific optimizations with revenue impact estimates. Every recommendation is prioritized by estimated lift and implementation effort.
 
 ## When This Skill Is Invoked
 
-The user runs `/market-funnel <url>`. Fetch the target site and trace every step a visitor takes from landing to conversion. Analyze each step for friction, clarity, and effectiveness. Output a complete analysis to FUNNEL-ANALYSIS.md.
+The user runs `/ai-marketing:market-funnel <url>`. Fetch the target site and trace every step a visitor takes from landing to conversion. Analyze each step for friction, clarity, and effectiveness. Output a complete analysis to FUNNEL-ANALYSIS.md.
 
 ---
 
@@ -483,5 +483,5 @@ Full analysis saved to: FUNNEL-ANALYSIS.md
 - If `COPY-SUGGESTIONS.md` exists, apply copy improvements to funnel pages
 - If `EMAIL-SEQUENCES.md` exists, verify alignment with funnel stages
 - If `COMPETITOR-REPORT.md` exists, compare funnel effectiveness
-- Suggest follow-up: `/market-copy` for page-specific copy, `/market-emails` for nurture sequences, `/market-landing` for CRO deep dive
+- Suggest follow-up: `/ai-marketing:market-copy` for page-specific copy, `/ai-marketing:market-emails` for nurture sequences, `/ai-marketing:market-landing` for CRO deep dive
 

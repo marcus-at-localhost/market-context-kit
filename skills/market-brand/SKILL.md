@@ -17,7 +17,7 @@ Analyze a brand's voice, tone, and messaging across all available channels and g
 - User wants to ensure consistency across marketing channels
 - User is rebranding or refining their brand identity
 - User wants to compare their brand voice to competitors
-- Triggered by `/market-brand <url>` or `/market-brand`
+- Triggered by `/ai-marketing:market-brand <url>` or `/ai-marketing:market-brand`
 
 ## How to Execute
 
@@ -475,6 +475,6 @@ Reserved                                  Bold
 - Copy samples are the most valuable part of the deliverable. People learn voice by example, not by description. Make the samples diverse (headlines, body copy, social, email, error messages) so writers have references for every context.
 - Voice and tone are different. Voice is the consistent personality. Tone shifts based on context (a customer complaint response is different from a product launch announcement, but both should be in the same voice).
 - If the brand's voice is inconsistent across channels, frame it as an opportunity to strengthen their brand, not as a failure. Consistency issues are common and fixable.
-- If the user has run `/market-competitors` previously, use that data for the competitor voice comparison section.
+- If the user has run `/ai-marketing:market-competitors` previously, use that data for the competitor voice comparison section.
 - The voice dimensions should be plotted visually (text-based spectrum) so stakeholders can quickly understand the positioning at a glance.
 

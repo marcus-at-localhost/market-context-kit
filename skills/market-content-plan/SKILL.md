@@ -9,7 +9,7 @@ metadata:
 
 # Content Plan — Research, Strategy & Article Drafts
 
-You are the content strategy engine for `/market-content-plan <url>`. You research a site's niche at industry depth, identify content opportunities competitors are missing, build a full topical cluster architecture, output a structured content plan for user approval, then draft complete articles for each approved row. No publishing — output stops at local markdown files.
+You are the content strategy engine for `/ai-marketing:market-content-plan <url>`. You research a site's niche at industry depth, identify content opportunities competitors are missing, build a full topical cluster architecture, output a structured content plan for user approval, then draft complete articles for each approved row. No publishing — output stops at local markdown files.
 
 ## Skill Purpose
 
@@ -21,7 +21,7 @@ Build a comprehensive, research-backed content plan for any website. Starting fr
 - User wants to identify content gaps relative to competitors
 - User wants to build out topical authority in their niche
 - User wants full article drafts, not just titles or outlines
-- Triggered by `/market-content-plan <url>` or `/market-content-plan`
+- Triggered by `/ai-marketing:market-content-plan <url>` or `/ai-marketing:market-content-plan`
 
 ---
 
@@ -63,7 +63,7 @@ The following prerequisite files are missing:
 - COMPETITOR-REPORT.md (provides competitor URLs for topic mining)
 
 Options:
-  [auto-run] Run /market-brand, /market-competitors, /market-seo first, then resume content plan
+  [auto-run] Run /ai-marketing:market-brand, /ai-marketing:market-competitors, /ai-marketing:market-seo first, then resume content plan
   [skip]     Continue without these files (self-research mode — higher token cost, lower precision)
 
 Which would you prefer?
@@ -318,8 +318,8 @@ If `SELF_RESEARCH_MODE=true`, add this banner immediately after the header:
 
 ```markdown
 > **Self-research mode** — This plan was built without BRAND-VOICE.md, COMPETITOR-REPORT.md, or SEO-AUDIT.md.
-> Precision is lower than when prerequisite files exist. Run `/market-brand`, `/market-competitors`,
-> `/market-seo` for a higher-confidence plan.
+> Precision is lower than when prerequisite files exist. Run `/ai-marketing:market-brand`, `/ai-marketing:market-competitors`,
+> `/ai-marketing:market-seo` for a higher-confidence plan.
 ```
 
 **Section 1: Cluster Map (ASCII topology)**
@@ -522,7 +522,7 @@ If `BRAND-VOICE.md` is available:
 If no `BRAND-VOICE.md`:
 - Default to clear, professional, direct prose
 - Match the approximate formality level inferred from Phase 2.3
-- Add a note in the article front-matter: `brand_voice: "inferred — run /market-brand for calibrated voice"`
+- Add a note in the article front-matter: `brand_voice: "inferred — run /ai-marketing:market-brand for calibrated voice"`
 
 #### 6.5 Word Count Targets by Size
 
@@ -558,8 +558,8 @@ Summary:
 Next steps:
 - Review articles/ for brand voice consistency
 - Add site-specific CTAs where placeholders were used
-- Run /market-seo on final articles before publishing
-- Run /market-brand if brand voice was not pre-calibrated
+- Run /ai-marketing:market-seo on final articles before publishing
+- Run /ai-marketing:market-brand if brand voice was not pre-calibrated
 ```
 
 ---

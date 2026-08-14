@@ -15,7 +15,7 @@ Generate a complete, week-by-week launch playbook for any product, service, or f
 - User is planning to launch a new product, service, feature, or offering
 - User asks for a launch plan, go-to-market strategy, or launch checklist
 - User wants to coordinate a multi-channel launch campaign
-- Triggered by `/market-launch` or `/market-launch <product description>`
+- Triggered by `/ai-marketing:market-launch` or `/ai-marketing:market-launch <product description>`
 
 ## How to Execute
 

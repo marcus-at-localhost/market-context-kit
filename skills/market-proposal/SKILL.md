@@ -15,7 +15,7 @@ Generate a professional, client-ready marketing services proposal. This skill pr
 - User wants to create a proposal for a prospective marketing client
 - User has completed a discovery call and needs to formalize the engagement
 - User wants a template for their marketing agency's proposals
-- Triggered by `/market-proposal` or `/market-proposal <client name>`
+- Triggered by `/ai-marketing:market-proposal` or `/ai-marketing:market-proposal <client name>`
 
 ## How to Execute
 
@@ -38,7 +38,7 @@ Collect these details from the user (ask if not provided):
 3. Proposed timeline
 4. Your relevant case studies or results
 
-**If audit data exists:** Check for any previous `/market-audit` results. If found, automatically incorporate the findings into the Situation Analysis section for a data-backed proposal.
+**If audit data exists:** Check for any previous `/ai-marketing:market-audit` results. If found, automatically incorporate the findings into the Situation Analysis section for a data-backed proposal.
 
 ### Step 2: Discovery Call Question Framework
 If the user hasn't had the discovery call yet, provide these 10 essential questions:
@@ -101,12 +101,12 @@ We recommend beginning with [first phase] to establish baselines and quick wins,
 ```
 
 #### Section 3: Situation Analysis (2-3 pages)
-Present your analysis of the client's current marketing. This is where audit data from `/market-audit` is invaluable.
+Present your analysis of the client's current marketing. This is where audit data from `/ai-marketing:market-audit` is invaluable.
 
 **Structure:**
 1. **Current State Overview** -- What they're doing now and how it's performing
 2. **Opportunities Identified** -- Specific areas where improvement is possible
-3. **Competitive Landscape** -- How they compare to competitors (from `/market-competitors` if available)
+3. **Competitive Landscape** -- How they compare to competitors (from `/ai-marketing:market-competitors` if available)
 4. **Key Challenges** -- Obstacles that need to be addressed
 5. **Market Context** -- Industry trends and benchmarks
 

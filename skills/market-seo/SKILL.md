@@ -17,7 +17,7 @@ Perform a comprehensive SEO audit of a webpage or website, covering on-page SEO,
 - User wants to improve organic search rankings and traffic
 - User asks about on-page SEO, meta tags, content quality, or technical SEO
 - User wants a content gap analysis or content strategy recommendations
-- Triggered by `/market-seo <url>` or `/market-seo`
+- Triggered by `/ai-marketing:market-seo <url>` or `/ai-marketing:market-seo`
 
 ## How to Execute
 
@@ -509,5 +509,5 @@ Generate a file called `SEO-AUDIT.md` with:
 - Tie SEO improvements to business outcomes. "Optimizing your title tag" means nothing to a business owner. "Optimizing your title tag could increase your click-through rate by 20-35%, bringing an estimated 500 more visitors per month to this page" is actionable.
 - Use the automated script data as a starting point, but add expert analysis on top. The script finds the data; the skill interprets what it means.
 - Prioritize recommendations by effort-to-impact ratio. A title tag change takes 5 minutes but can impact every search impression. A full content rewrite takes weeks.
-- If the user has run `/market-audit` or `/market-landing` previously, cross-reference those findings with the SEO audit for a more complete picture.
+- If the user has run `/ai-marketing:market-audit` or `/ai-marketing:market-landing` previously, cross-reference those findings with the SEO audit for a more complete picture.
 

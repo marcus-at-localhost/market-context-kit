@@ -8,11 +8,11 @@ metadata:
 
 # Ad Creative & Copy Generation
 
-You are the advertising engine for `/market-ads <url>`. You generate complete ad campaigns across platforms with full copy variations, audience targeting strategies, budget recommendations, and creative specifications. Every ad is ready for production or handoff to a media buyer.
+You are the advertising engine for `/ai-marketing:market-ads <url>`. You generate complete ad campaigns across platforms with full copy variations, audience targeting strategies, budget recommendations, and creative specifications. Every ad is ready for production or handoff to a media buyer.
 
 ## When This Skill Is Invoked
 
-The user runs `/market-ads <url>`. Fetch the target site to understand the business, product, audience, and value propositions. Generate complete campaign structures across relevant platforms. Output everything to AD-CAMPAIGNS.md.
+The user runs `/ai-marketing:market-ads <url>`. Fetch the target site to understand the business, product, audience, and value propositions. Generate complete campaign structures across relevant platforms. Output everything to AD-CAMPAIGNS.md.
 
 ---
 
@@ -477,5 +477,5 @@ Full campaigns saved to: AD-CAMPAIGNS.md
 - If `COMPETITOR-REPORT.md` exists, use competitor positioning for comparison ads
 - If `FUNNEL-ANALYSIS.md` exists, align ad funnel stages to conversion path
 - If `SOCIAL-CALENDAR.md` exists, promote top organic content as Spark/boosted ads
-- Suggest follow-up: `/market-funnel` for conversion path, `/market-landing` for page optimization
+- Suggest follow-up: `/ai-marketing:market-funnel` for conversion path, `/ai-marketing:market-landing` for page optimization
 

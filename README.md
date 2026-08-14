@@ -15,7 +15,7 @@ A comprehensive marketing analysis and automation skill system for [Claude Code]
 Type a command in Claude Code and get instant, actionable marketing analysis:
 
 ```
-> /market-audit https://calendly.com
+> /ai-marketing:market-audit https://calendly.com
 
 Launching 5 parallel agents...
 ✓ Content & Messaging Analysis     — Score: 72/100
@@ -60,7 +60,7 @@ Restart Claude Code, then:
 claude plugin list          # expect: ai-marketing@skills-dir
 ```
 
-Type `/market` for the command index. Updating is `git pull` in the folder.
+Type `/ai-marketing:market` for the command index. Updating is `git pull` in the folder.
 
 ### Optional: PDF Report Support
 
@@ -74,28 +74,30 @@ Everything else runs on the Python standard library. Windows, macOS, and Linux a
 
 ## Commands
 
-Each skill is its own command. There is no router — `/market` is just an index you can print. Claude also invokes these on its own when a request matches, so you rarely have to type one.
+Each skill is its own command. There is no router — `market` is just an index you can print.
+
+Because this loads as a plugin, every command is namespaced `ai-marketing:`. That prefix is part of the trigger, not an optional long form — a bare `/market-audit` does not resolve. Claude also invokes these on its own when a request matches, so you rarely have to type one.
 
 | Command | What It Does |
 |---------|-------------|
-| `/market` | Index of every command, with a "which one first" guide |
-| `/market-audit <url>` | Full marketing audit with 5 parallel agents |
-| `/market-copy <url>` | Generate optimized copy with before/after examples |
-| `/market-emails <topic>` | Generate complete email sequences |
-| `/market-social <topic>` | 30-day social media content calendar |
-| `/market-ads <url>` | Ad creative and copy for all platforms |
-| `/market-funnel <url>` | Sales funnel analysis and optimization |
-| `/market-competitors <url>` | Competitive intelligence report |
-| `/market-landing <url>` | Landing page CRO analysis |
-| `/market-launch <product>` | Product launch playbook |
-| `/market-proposal <client>` | Client proposal generator |
-| `/market-report <url>` | Full marketing report (Markdown) |
-| `/market-report-pdf <url>` | Professional marketing report (PDF) |
-| `/market-seo <url>` | SEO content audit |
-| `/market-brand <url>` | Brand voice analysis and guidelines |
-| `/market-content-plan <url>` | Topic research + content plan + article drafts |
+| `/ai-marketing:market` | Index of every command, with a "which one first" guide |
+| `/ai-marketing:market-audit <url>` | Full marketing audit with 5 parallel agents |
+| `/ai-marketing:market-copy <url>` | Generate optimized copy with before/after examples |
+| `/ai-marketing:market-emails <topic>` | Generate complete email sequences |
+| `/ai-marketing:market-social <topic>` | 30-day social media content calendar |
+| `/ai-marketing:market-ads <url>` | Ad creative and copy for all platforms |
+| `/ai-marketing:market-funnel <url>` | Sales funnel analysis and optimization |
+| `/ai-marketing:market-competitors <url>` | Competitive intelligence report |
+| `/ai-marketing:market-landing <url>` | Landing page CRO analysis |
+| `/ai-marketing:market-launch <product>` | Product launch playbook |
+| `/ai-marketing:market-proposal <client>` | Client proposal generator |
+| `/ai-marketing:market-report <url>` | Full marketing report (Markdown) |
+| `/ai-marketing:market-report-pdf <url>` | Professional marketing report (PDF) |
+| `/ai-marketing:market-seo <url>` | SEO content audit |
+| `/ai-marketing:market-brand <url>` | Brand voice analysis and guidelines |
+| `/ai-marketing:market-content-plan <url>` | Topic research + content plan + article drafts |
 
-Namespaced forms work too: `/ai-marketing:market-audit`. Use them if a bare name collides with another skill.
+`market` carries `disable-model-invocation: true`, so Claude never picks the index on its own — type it when you want the menu.
 
 ---
 
@@ -173,7 +175,7 @@ The full marketing audit scores websites across 6 dimensions:
 
 ## How It Works
 
-1. **You type a command** — e.g., `/market-audit https://example.com`
+1. **You type a command** — e.g., `/ai-marketing:market-audit https://example.com`
 2. **Claude reads the skill files** — they tell Claude exactly how to analyze the site
 3. **5 subagents launch in parallel** — each one analyzes a different dimension
 4. **Python scripts run** — automated page analysis, competitor scanning
@@ -184,20 +186,22 @@ The full marketing audit scores websites across 6 dimensions:
 
 ## Use Cases
 
+All commands below take the `ai-marketing:` prefix — shortened here for readability.
+
 ### For Agency Builders
-- Run `/market-audit` on a prospect's website before a sales call
-- Generate `/market-proposal` with specific findings and pricing
-- Deliver `/market-report-pdf` as a professional client deliverable
+- Run `market-audit` on a prospect's website before a sales call
+- Generate `market-proposal` with specific findings and pricing
+- Deliver `market-report-pdf` as a professional client deliverable
 
 ### For Solopreneurs
-- Use `/market-copy` to optimize your own landing pages
-- Generate `/market-emails` for your product launches
-- Build `/market-social` calendars for consistent posting
+- Use `market-copy` to optimize your own landing pages
+- Generate `market-emails` for your product launches
+- Build `market-social` calendars for consistent posting
 
 ### For Content Creators
-- Research competitors with `/market-competitors`
-- Plan launches with `/market-launch`
-- Analyze your funnel with `/market-funnel`
+- Research competitors with `market-competitors`
+- Plan launches with `market-launch`
+- Analyze your funnel with `market-funnel`
 
 ---
 
