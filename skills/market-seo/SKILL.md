@@ -1,8 +1,10 @@
 ---
 name: market-seo
-description: When the user wants a full SEO content audit for a page or website, including on-page SEO, E-E-A-T quality, technical SEO checks, keyword analysis, and prioritized recommendations.
+description: Use when the user asks for an SEO audit, on-page SEO review, content quality or E-E-A-T assessment, keyword analysis, or wants to know why a page is not ranking.
+argument-hint: <url>
+allowed-tools: Bash(python "${CLAUDE_PLUGIN_ROOT}/scripts/"*), Bash(python3 "${CLAUDE_PLUGIN_ROOT}/scripts/"*), Bash(curl -s *)
 metadata:
-  version: 1.1.0
+  version: 2.0.0
 ---
 
 # SEO Content Audit
@@ -15,16 +17,23 @@ Perform a comprehensive SEO audit of a webpage or website, covering on-page SEO,
 - User wants to improve organic search rankings and traffic
 - User asks about on-page SEO, meta tags, content quality, or technical SEO
 - User wants a content gap analysis or content strategy recommendations
-- Triggered by `/market seo <url>` or `/market seo`
+- Triggered by `/market-seo <url>` or `/market-seo`
 
 ## How to Execute
 
 ### Step 1: Run Automated Analysis
-Use the Python analysis script to gather baseline data:
+Use the bundled Python analysis script to gather baseline data:
 
 ```bash
-python3 scripts/analyze_page.py <url>
+# macOS / Linux
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/analyze_page.py" "<url>"
+# Windows
+python "${CLAUDE_PLUGIN_ROOT}/scripts/analyze_page.py" "<url>"
 ```
+
+`${CLAUDE_PLUGIN_ROOT}` resolves to this plugin's directory on any machine — never hardcode a path. Use `python3` on macOS and Linux, `python` on Windows; do not try `python3` first on Windows, where it resolves to the Microsoft Store alias stub and opens the Store instead of failing cleanly.
+
+If the output is a `{"usage": ...}` banner, the URL argument did not arrive — re-run with the URL quoted.
 
 This script extracts:
 - Title tag and meta description
@@ -500,5 +509,5 @@ Generate a file called `SEO-AUDIT.md` with:
 - Tie SEO improvements to business outcomes. "Optimizing your title tag" means nothing to a business owner. "Optimizing your title tag could increase your click-through rate by 20-35%, bringing an estimated 500 more visitors per month to this page" is actionable.
 - Use the automated script data as a starting point, but add expert analysis on top. The script finds the data; the skill interprets what it means.
 - Prioritize recommendations by effort-to-impact ratio. A title tag change takes 5 minutes but can impact every search impression. A full content rewrite takes weeks.
-- If the user has run `/market audit` or `/market landing` previously, cross-reference those findings with the SEO audit for a more complete picture.
+- If the user has run `/market-audit` or `/market-landing` previously, cross-reference those findings with the SEO audit for a more complete picture.
 

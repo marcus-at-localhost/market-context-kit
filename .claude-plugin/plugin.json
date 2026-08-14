@@ -1,0 +1,9 @@
+{
+  "name": "ai-marketing",
+  "displayName": "AI Marketing Suite",
+  "version": "2.0.0",
+  "description": "Marketing audits, copy, funnels, competitive intel, and client-ready reports",
+  "author": {
+    "name": "Marcus Obst"
+  }
+}

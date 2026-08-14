@@ -1,8 +1,9 @@
 ---
 name: market-landing
-description: When the user wants a landing page CRO audit with section-by-section scoring, copy and CTA feedback, form and mobile checks, and A-B test recommendations.
+description: Use when the user asks to improve a single landing page — conversion rate, section-by-section review, form friction, mobile experience, or A/B test ideas.
+argument-hint: <url>
 metadata:
-  version: 1.1.0
+  version: 2.0.0
 ---
 
 # Landing Page CRO Analysis
@@ -14,7 +15,7 @@ Perform a comprehensive Conversion Rate Optimization (CRO) analysis on any landi
 - User provides a landing page URL and asks for conversion optimization
 - User asks for landing page feedback, review, or audit
 - User wants to improve signup, lead capture, or purchase rates
-- Triggered by `/market landing <url>` or `/market cro <url>`
+- Triggered by `/market-landing <url>` or `/ai-marketing:market-landing <url>`
 
 ## How to Execute
 
@@ -343,5 +344,5 @@ Generate a file called `LANDING-CRO.md` in the project root or output directory 
 - Be specific. "Improve your headline" is useless. "Change your headline from 'Welcome to Our Platform' to 'Cut Your Reporting Time by 75% -- Automated Analytics for Growth Teams' because it adds specificity, a quantified benefit, and targets a specific audience" is actionable.
 - Reference industry benchmarks so the client understands where they stand.
 - If you have access to the page via browser tools, take screenshots and reference specific elements.
-- If the user has run `/market audit` previously, incorporate those findings into the CRO analysis for a more complete picture.
+- If the user has run `/market-audit` previously, incorporate those findings into the CRO analysis for a more complete picture.
 

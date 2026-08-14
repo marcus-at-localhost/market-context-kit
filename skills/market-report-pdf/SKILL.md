@@ -1,8 +1,10 @@
 ---
 name: market-report-pdf
-description: When the user wants a polished client-ready PDF marketing report generated from available audit data, including scores, findings, action plans, and visual charts.
+description: Use when the user asks for a PDF marketing report, a client-ready deliverable with charts and score gauges, or wants existing audit findings turned into a presentable document.
+argument-hint: <url>
+allowed-tools: Bash(python "${CLAUDE_PLUGIN_ROOT}/scripts/"*), Bash(python3 "${CLAUDE_PLUGIN_ROOT}/scripts/"*)
 metadata:
-  version: 1.1.0
+  version: 2.0.0
 ---
 
 # PDF Marketing Report Generator
@@ -15,7 +17,7 @@ Generate a professional, visually polished PDF marketing report using the Python
 - User is preparing a deliverable for a client presentation
 - User asks for a "polished report", "client-ready report", or "PDF report"
 - User wants a visual report with charts and scores
-- Triggered by `/market report-pdf` or `/market report-pdf <domain>`
+- Triggered by `/market-report-pdf` or `/market-report-pdf <domain>`
 
 ## When to Use PDF vs Markdown
 
@@ -43,9 +45,9 @@ Gather data from all previous skill runs. Check for these files in the project d
 - `AD-AUDIT.md` -- Advertising audit
 
 **If no previous data exists:**
-1. Recommend the user run `/market audit <url>` first for the best results
+1. Recommend the user run `/market-audit <url>` first for the best results
 2. If the user insists on generating a report without prior audits, analyze the provided URL directly and build the data structure from scratch
-3. Use the analyze_page.py script to gather automated data: `python scripts/analyze_page.py <url>`
+3. Use the analyze_page.py script to gather automated data: `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/analyze_page.py" "<url>"` (`python` instead of `python3` on Windows)
 
 ### Step 2: Build the JSON Data Structure
 The `scripts/generate_pdf_report.py` script expects a JSON file as input with this exact structure:
@@ -207,29 +209,31 @@ Aim for 5-10 findings. Order from most to least severe.
 Up to 3 competitor objects for the comparison table. If no competitor data is available, omit this field -- the script will skip the competitor section.
 
 ### Step 4: Write the JSON File
-Save the assembled data as a temporary JSON file:
 
-```bash
-# Write the JSON data to a temporary file
-cat > /tmp/report_data.json << 'JSONEOF'
-{
-  ... assembled JSON data ...
-}
-JSONEOF
-```
+Use the **Write tool** to save the assembled data to `./market-report-data.json` in the working directory.
+
+Do not build this file with a shell heredoc or `echo` redirect. Heredoc quoting differs between shells and breaks on Windows, and JSON containing quotes, `$`, or backticks gets corrupted. The Write tool behaves identically on every platform. For the same reason, do not use `/tmp` — it does not exist on Windows.
 
 ### Step 5: Invoke the PDF Generator Script
 
 **Prerequisites check:**
 First, verify that `reportlab` is installed:
 ```bash
-python3 -c "import reportlab" 2>/dev/null || pip3 install reportlab
+# macOS / Linux
+python3 -c "import reportlab" || pip3 install reportlab
+# Windows
+python -c "import reportlab" || pip install reportlab
 ```
 
 **Generate the report:**
 ```bash
-python3 scripts/generate_pdf_report.py /tmp/report_data.json "MARKETING-REPORT-<domain>.pdf"
+# macOS / Linux
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py" ./market-report-data.json "MARKETING-REPORT-<domain>.pdf"
+# Windows
+python "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py" ./market-report-data.json "MARKETING-REPORT-<domain>.pdf"
 ```
+
+`${CLAUDE_PLUGIN_ROOT}` resolves to this plugin's directory on any machine — never hardcode a path. Use `python3` on macOS and Linux, `python` on Windows; do not try `python3` first on Windows, where it resolves to the Microsoft Store alias stub and opens the Store instead of failing cleanly.
 
 Replace `<domain>` with the target website's domain name (without protocol or www), using hyphens instead of dots. For example:
 - `example.com` becomes `MARKETING-REPORT-example-com.pdf`
@@ -238,7 +242,7 @@ Replace `<domain>` with the target website's domain name (without protocol or ww
 **Demo mode (no arguments):**
 Running the script without arguments generates a sample report with placeholder data:
 ```bash
-python3 scripts/generate_pdf_report.py
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py"
 # Creates: MARKETING-REPORT-sample.pdf
 ```
 
@@ -253,7 +257,7 @@ Report the file path and size to the user.
 ### Step 7: Clean Up
 Remove the temporary JSON file:
 ```bash
-rm /tmp/report_data.json
+rm -f ./market-report-data.json
 ```
 
 ## PDF Report Contents
@@ -324,18 +328,18 @@ The PDF uses a professional color palette:
 | Script produces empty PDF | Check that JSON data has all required fields |
 | Score gauge not rendering | Ensure `overall_score` is a number 0-100 |
 | Competitor table missing | Ensure `competitors` array has objects with `name`, `positioning`, `pricing`, `social_proof`, `content` fields |
-| PDF is only 1 page | Check for JSON parsing errors -- run `python3 -c "import json; json.load(open('/tmp/report_data.json'))"` |
+| PDF is only 1 page | Check for JSON parsing errors -- run `python3 -c "import json; json.load(open('market-report-data.json'))"` |
 | Fonts look wrong | The script uses Helvetica (built into reportlab). No custom fonts needed. |
 
 ## Integration with Other Skills
 
 This skill works best when combined with other audit skills. The recommended workflow:
 
-1. Run `/market audit <url>` -- Generates comprehensive audit data
-2. Run `/market competitors <url>` -- Adds competitor comparison data
-3. Run `/market seo <url>` -- Adds detailed SEO findings
-4. Run `/market landing <url>` -- Adds CRO analysis
-5. Run `/market report-pdf <url>` -- Compiles everything into a PDF
+1. Run `/market-audit <url>` -- Generates comprehensive audit data
+2. Run `/market-competitors <url>` -- Adds competitor comparison data
+3. Run `/market-seo <url>` -- Adds detailed SEO findings
+4. Run `/market-landing <url>` -- Adds CRO analysis
+5. Run `/market-report-pdf <url>` -- Compiles everything into a PDF
 
 The PDF report skill will automatically look for output files from these skills and incorporate their data into the report JSON.
 

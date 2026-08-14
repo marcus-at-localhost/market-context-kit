@@ -15,7 +15,7 @@ A comprehensive marketing analysis and automation skill system for [Claude Code]
 Type a command in Claude Code and get instant, actionable marketing analysis:
 
 ```
-> /market audit https://calendly.com
+> /market-audit https://calendly.com
 
 Launching 5 parallel agents...
 ✓ Content & Messaging Analysis     — Score: 72/100
@@ -34,19 +34,33 @@ Full report saved to MARKETING-AUDIT.md
 
 ## Installation
 
-### One-Command Install
+This is a Claude Code **skills-directory plugin**: clone it into a skills directory and it loads itself. There is no installer, nothing is copied anywhere, and there is nothing to uninstall — delete the folder and it is gone.
+
+### One project only (recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/zubair-trabzada/ai-marketing-claude/main/install.sh | bash
+git clone https://github.com/marcus-at-localhost/ai-marketing-claude.git .claude/skills/ai-marketing
 ```
 
-### Manual Install
+Run that from the project root. Accept the workspace trust dialog when Claude Code asks — project-scope plugins do not load until you do.
+
+### Every project on this machine
 
 ```bash
-git clone https://github.com/zubair-trabzada/ai-marketing-claude.git
-cd ai-marketing-claude
-./install.sh
+git clone https://github.com/marcus-at-localhost/ai-marketing-claude.git ~/.claude/skills/ai-marketing
 ```
+
+No trust dialog needed for this one.
+
+### Verify
+
+Restart Claude Code, then:
+
+```bash
+claude plugin list          # expect: ai-marketing@skills-dir
+```
+
+Type `/market` for the command index. Updating is `git pull` in the folder.
 
 ### Optional: PDF Report Support
 
@@ -54,38 +68,45 @@ cd ai-marketing-claude
 pip install reportlab
 ```
 
+Everything else runs on the Python standard library. Windows, macOS, and Linux are all supported.
+
 ---
 
 ## Commands
 
+Each skill is its own command. There is no router — `/market` is just an index you can print. Claude also invokes these on its own when a request matches, so you rarely have to type one.
+
 | Command | What It Does |
 |---------|-------------|
-| `/market audit <url>` | Full marketing audit with 5 parallel agents |
-| `/market quick <url>` | 60-second marketing snapshot |
-| `/market copy <url>` | Generate optimized copy with before/after examples |
-| `/market emails <topic>` | Generate complete email sequences |
-| `/market social <topic>` | 30-day social media content calendar |
-| `/market ads <url>` | Ad creative and copy for all platforms |
-| `/market funnel <url>` | Sales funnel analysis and optimization |
-| `/market competitors <url>` | Competitive intelligence report |
-| `/market landing <url>` | Landing page CRO analysis |
-| `/market launch <product>` | Product launch playbook |
-| `/market proposal <client>` | Client proposal generator |
-| `/market report <url>` | Full marketing report (Markdown) |
-| `/market report-pdf <url>` | Professional marketing report (PDF) |
-| `/market seo <url>` | SEO content audit |
-| `/market brand <url>` | Brand voice analysis and guidelines |
-| `/market content-plan <url>` | Topic research + content plan + article drafts |
+| `/market` | Index of every command, with a "which one first" guide |
+| `/market-audit <url>` | Full marketing audit with 5 parallel agents |
+| `/market-copy <url>` | Generate optimized copy with before/after examples |
+| `/market-emails <topic>` | Generate complete email sequences |
+| `/market-social <topic>` | 30-day social media content calendar |
+| `/market-ads <url>` | Ad creative and copy for all platforms |
+| `/market-funnel <url>` | Sales funnel analysis and optimization |
+| `/market-competitors <url>` | Competitive intelligence report |
+| `/market-landing <url>` | Landing page CRO analysis |
+| `/market-launch <product>` | Product launch playbook |
+| `/market-proposal <client>` | Client proposal generator |
+| `/market-report <url>` | Full marketing report (Markdown) |
+| `/market-report-pdf <url>` | Professional marketing report (PDF) |
+| `/market-seo <url>` | SEO content audit |
+| `/market-brand <url>` | Brand voice analysis and guidelines |
+| `/market-content-plan <url>` | Topic research + content plan + article drafts |
+
+Namespaced forms work too: `/ai-marketing:market-audit`. Use them if a bare name collides with another skill.
 
 ---
 
 ## Architecture
 
 ```
-ai-marketing-claude/
-├── market/SKILL.md                     # Main orchestrator (routes all /market commands)
+ai-marketing/                           # clone target: .claude/skills/ai-marketing
+├── .claude-plugin/plugin.json          # Makes the folder load as a plugin
 │
-├── skills/                             # 15 sub-skills
+├── skills/                             # 15 skills + index
+│   ├── market/SKILL.md                 # Command index (manual invocation only)
 │   ├── market-audit/SKILL.md           # Full audit orchestration
 │   ├── market-copy/SKILL.md            # Copywriting analysis & generation
 │   ├── market-emails/SKILL.md          # Email sequence generation
@@ -125,11 +146,11 @@ ai-marketing-claude/
 │   ├── content-brief.md                # Per-article content brief template
 │   └── content-plan.md                 # Content plan table template
 │
-├── install.sh                          # One-command installer
-├── uninstall.sh                        # Clean uninstaller
-├── requirements.txt                    # Python dependencies
+├── requirements.txt                    # Python dependencies (reportlab only)
 └── LICENSE                             # MIT License
 ```
+
+Nothing here is copied anywhere at install time. Skills reference the bundled scripts through `${CLAUDE_PLUGIN_ROOT}`, which Claude Code expands to this folder's real path on any machine, so there are no absolute paths to maintain and no second copy that can drift.
 
 ---
 
@@ -152,7 +173,7 @@ The full marketing audit scores websites across 6 dimensions:
 
 ## How It Works
 
-1. **You type a command** — e.g., `/market audit https://example.com`
+1. **You type a command** — e.g., `/market-audit https://example.com`
 2. **Claude reads the skill files** — they tell Claude exactly how to analyze the site
 3. **5 subagents launch in parallel** — each one analyzes a different dimension
 4. **Python scripts run** — automated page analysis, competitor scanning
@@ -164,32 +185,34 @@ The full marketing audit scores websites across 6 dimensions:
 ## Use Cases
 
 ### For Agency Builders
-- Run `/market audit` on a prospect's website before a sales call
-- Generate `/market proposal` with specific findings and pricing
-- Deliver `/market report-pdf` as a professional client deliverable
+- Run `/market-audit` on a prospect's website before a sales call
+- Generate `/market-proposal` with specific findings and pricing
+- Deliver `/market-report-pdf` as a professional client deliverable
 
 ### For Solopreneurs
-- Use `/market copy` to optimize your own landing pages
-- Generate `/market emails` for your product launches
-- Build `/market social` calendars for consistent posting
+- Use `/market-copy` to optimize your own landing pages
+- Generate `/market-emails` for your product launches
+- Build `/market-social` calendars for consistent posting
 
 ### For Content Creators
-- Research competitors with `/market competitors`
-- Plan launches with `/market launch`
-- Analyze your funnel with `/market funnel`
+- Research competitors with `/market-competitors`
+- Plan launches with `/market-launch`
+- Analyze your funnel with `/market-funnel`
 
 ---
 
 ## Uninstall
 
+Delete the folder:
+
 ```bash
-./uninstall.sh
+rm -rf .claude/skills/ai-marketing
 ```
 
-Or manually:
+Nothing was ever copied outside it, so that is the whole uninstall. To keep the files but stop loading them:
+
 ```bash
-rm -rf ~/.claude/skills/market*
-rm -f ~/.claude/agents/market-*.md
+claude plugin disable ai-marketing@skills-dir
 ```
 
 ---

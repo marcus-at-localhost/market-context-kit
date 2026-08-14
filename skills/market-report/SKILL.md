@@ -1,8 +1,9 @@
 ---
 name: market-report
-description: When the user wants a comprehensive Markdown marketing report that combines prior audit outputs into one scorecard, analysis, and prioritized revenue-focused action plan.
+description: Use when the user wants prior audit and analysis outputs combined into one Markdown marketing report with a scorecard and prioritized action plan.
+argument-hint: <url>
 metadata:
-  version: 1.1.0
+  version: 2.0.0
 ---
 
 # Marketing Report Generator (Markdown Format)
@@ -14,7 +15,7 @@ Generate a comprehensive, professionally formatted marketing report in Markdown.
 - User wants a full marketing report for a client or their own business
 - User has completed one or more audit skills and wants a compiled report
 - User asks for a marketing assessment, scorecard, or analysis document
-- Triggered by `/market report` or `/market report <domain>`
+- Triggered by `/market-report` or `/market-report <domain>`
 
 ## How to Execute
 
@@ -22,16 +23,16 @@ Generate a comprehensive, professionally formatted marketing report in Markdown.
 Before generating the report, check for any existing audit data from previous skill runs. Look for these files in the project directory:
 
 **Possible data sources:**
-- `MARKETING-AUDIT.md` -- from `/market audit`
-- `LANDING-CRO.md` -- from `/market landing`
-- `SEO-AUDIT.md` -- from `/market seo`
-- `BRAND-VOICE.md` -- from `/market brand`
-- `COMPETITOR-ANALYSIS.md` -- from `/market competitors`
-- `FUNNEL-ANALYSIS.md` -- from `/market funnel`
+- `MARKETING-AUDIT.md` -- from `/market-audit`
+- `LANDING-CRO.md` -- from `/market-landing`
+- `SEO-AUDIT.md` -- from `/market-seo`
+- `BRAND-VOICE.md` -- from `/market-brand`
+- `COMPETITOR-ANALYSIS.md` -- from `/market-competitors`
+- `FUNNEL-ANALYSIS.md` -- from `/market-funnel`
 - `CONTENT-AUDIT.md` -- from content analysis
-- `AD-AUDIT.md` -- from `/market ads`
-- `SOCIAL-AUDIT.md` -- from `/market social`
-- `EMAIL-AUDIT.md` -- from `/market emails`
+- `AD-AUDIT.md` -- from `/market-ads`
+- `SOCIAL-AUDIT.md` -- from `/market-social`
+- `EMAIL-AUDIT.md` -- from `/market-emails`
 
 If no previous data exists, inform the user and offer to:
 1. Run a quick audit first (recommended)
@@ -150,7 +151,7 @@ Example:
 ```
 
 ### Step 4: Competitor Comparison Summary
-If competitor data is available from `/market competitors`, include:
+If competitor data is available from `/market-competitors`, include:
 
 **Competitive Positioning Matrix:**
 | Factor | Client | Competitor 1 | Competitor 2 | Competitor 3 |

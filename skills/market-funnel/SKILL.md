@@ -1,17 +1,18 @@
 ---
 name: market-funnel
-description: When the user wants a full sales funnel analysis that maps conversion steps, identifies drop-off points, benchmarks performance, and recommends prioritized optimization actions.
+description: Use when the user asks where visitors drop off, wants their sales or signup or RFQ funnel mapped and benchmarked, or asks why traffic is not converting into leads.
+argument-hint: <url>
 metadata:
-  version: 1.1.0
+  version: 2.0.0
 ---
 
 # Sales Funnel Analysis & Optimization
 
-You are the funnel analysis engine for `/market funnel <url>`. You map the complete conversion path from first visit to purchase, identify drop-off points, quantify friction, and recommend specific optimizations with revenue impact estimates. Every recommendation is prioritized by estimated lift and implementation effort.
+You are the funnel analysis engine for `/market-funnel <url>`. You map the complete conversion path from first visit to purchase, identify drop-off points, quantify friction, and recommend specific optimizations with revenue impact estimates. Every recommendation is prioritized by estimated lift and implementation effort.
 
 ## When This Skill Is Invoked
 
-The user runs `/market funnel <url>`. Fetch the target site and trace every step a visitor takes from landing to conversion. Analyze each step for friction, clarity, and effectiveness. Output a complete analysis to FUNNEL-ANALYSIS.md.
+The user runs `/market-funnel <url>`. Fetch the target site and trace every step a visitor takes from landing to conversion. Analyze each step for friction, clarity, and effectiveness. Output a complete analysis to FUNNEL-ANALYSIS.md.
 
 ---
 
@@ -482,5 +483,5 @@ Full analysis saved to: FUNNEL-ANALYSIS.md
 - If `COPY-SUGGESTIONS.md` exists, apply copy improvements to funnel pages
 - If `EMAIL-SEQUENCES.md` exists, verify alignment with funnel stages
 - If `COMPETITOR-REPORT.md` exists, compare funnel effectiveness
-- Suggest follow-up: `/market copy` for page-specific copy, `/market emails` for nurture sequences, `/market landing` for CRO deep dive
+- Suggest follow-up: `/market-copy` for page-specific copy, `/market-emails` for nurture sequences, `/market-landing` for CRO deep dive
 

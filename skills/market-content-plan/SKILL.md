@@ -1,13 +1,15 @@
 ---
 name: market-content-plan
-description: When the user wants a research-backed content strategy with topic clustering, prioritized editorial planning, approval gating, and full article draft generation.
+description: Use when the user asks what content to write, wants a content plan, editorial calendar, topic clusters, or article drafts researched from their own site and niche.
+argument-hint: <url>
+allowed-tools: Bash(python "${CLAUDE_PLUGIN_ROOT}/scripts/"*), Bash(python3 "${CLAUDE_PLUGIN_ROOT}/scripts/"*), Bash(curl -s *)
 metadata:
-  version: 1.1.0
+  version: 2.0.0
 ---
 
 # Content Plan — Research, Strategy & Article Drafts
 
-You are the content strategy engine for `/market content-plan <url>`. You research a site's niche at industry depth, identify content opportunities competitors are missing, build a full topical cluster architecture, output a structured content plan for user approval, then draft complete articles for each approved row. No publishing — output stops at local markdown files.
+You are the content strategy engine for `/market-content-plan <url>`. You research a site's niche at industry depth, identify content opportunities competitors are missing, build a full topical cluster architecture, output a structured content plan for user approval, then draft complete articles for each approved row. No publishing — output stops at local markdown files.
 
 ## Skill Purpose
 
@@ -19,7 +21,7 @@ Build a comprehensive, research-backed content plan for any website. Starting fr
 - User wants to identify content gaps relative to competitors
 - User wants to build out topical authority in their niche
 - User wants full article drafts, not just titles or outlines
-- Triggered by `/market content-plan <url>` or `/market content-plan`
+- Triggered by `/market-content-plan <url>` or `/market-content-plan`
 
 ---
 
@@ -61,7 +63,7 @@ The following prerequisite files are missing:
 - COMPETITOR-REPORT.md (provides competitor URLs for topic mining)
 
 Options:
-  [auto-run] Run /market brand, /market competitors, /market seo first, then resume content plan
+  [auto-run] Run /market-brand, /market-competitors, /market-seo first, then resume content plan
   [skip]     Continue without these files (self-research mode — higher token cost, lower precision)
 
 Which would you prefer?
@@ -75,18 +77,18 @@ Which would you prefer?
 
 ### Phase 2: Site & Niche Research
 
-**MANDATORY: Run `analyze_page.py` first, per CLAUDE.md project rules. Do not substitute WebFetch for script output.**
+**MANDATORY: Run `analyze_page.py` first. Do not substitute WebFetch for script output — WebFetch summarizes through a second model, so it cannot give you the exact tag-level data the plan depends on.**
 
 #### 2.1 Homepage Analysis (Script-First)
 
 ```bash
-python3 scripts/analyze_page.py <WEBSITE_URL>
+# macOS / Linux
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/analyze_page.py" "<WEBSITE_URL>"
+# Windows
+python "${CLAUDE_PLUGIN_ROOT}/scripts/analyze_page.py" "<WEBSITE_URL>"
 ```
 
-Fall back path if local scripts/ not found:
-```bash
-python3 "E:\WEB\GEO\.claude\skills\market\scripts\analyze_page.py" <WEBSITE_URL>
-```
+`${CLAUDE_PLUGIN_ROOT}` resolves to this plugin's directory on any machine — never hardcode a path, and never look for a `scripts/` folder relative to the working directory. Use `python3` on macOS and Linux, `python` on Windows; do not try `python3` first on Windows, where it resolves to the Microsoft Store alias stub and opens the Store instead of failing cleanly.
 
 Capture from script output:
 - Title tag → infers primary positioning
@@ -97,7 +99,7 @@ Capture from script output:
 
 #### 2.2 Sitemap Enumeration
 
-Use curl for raw sitemap content (per CLAUDE.md rule — curl, not WebFetch, for raw crawlable content):
+Use curl, not WebFetch, for raw crawlable content — WebFetch converts pages to markdown, which mangles XML and directive text:
 
 ```bash
 curl -s "<WEBSITE_URL>/sitemap.xml"
@@ -316,8 +318,8 @@ If `SELF_RESEARCH_MODE=true`, add this banner immediately after the header:
 
 ```markdown
 > **Self-research mode** — This plan was built without BRAND-VOICE.md, COMPETITOR-REPORT.md, or SEO-AUDIT.md.
-> Precision is lower than when prerequisite files exist. Run `/market brand`, `/market competitors`,
-> `/market seo` for a higher-confidence plan.
+> Precision is lower than when prerequisite files exist. Run `/market-brand`, `/market-competitors`,
+> `/market-seo` for a higher-confidence plan.
 ```
 
 **Section 1: Cluster Map (ASCII topology)**
@@ -520,7 +522,7 @@ If `BRAND-VOICE.md` is available:
 If no `BRAND-VOICE.md`:
 - Default to clear, professional, direct prose
 - Match the approximate formality level inferred from Phase 2.3
-- Add a note in the article front-matter: `brand_voice: "inferred — run /market brand for calibrated voice"`
+- Add a note in the article front-matter: `brand_voice: "inferred — run /market-brand for calibrated voice"`
 
 #### 6.5 Word Count Targets by Size
 
@@ -556,8 +558,8 @@ Summary:
 Next steps:
 - Review articles/ for brand voice consistency
 - Add site-specific CTAs where placeholders were used
-- Run /market seo on final articles before publishing
-- Run /market brand if brand voice was not pre-calibrated
+- Run /market-seo on final articles before publishing
+- Run /market-brand if brand voice was not pre-calibrated
 ```
 
 ---

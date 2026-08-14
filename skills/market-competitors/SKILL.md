@@ -1,17 +1,19 @@
 ---
 name: market-competitors
-description: When the user wants competitive intelligence analysis across messaging, features, pricing or commercial model, SEO content gaps, and strategic differentiation opportunities.
+description: Use when the user asks who their competitors are, how they compare, where the market gaps or content gaps sit, or wants a competitive intelligence report.
+argument-hint: <url>
+allowed-tools: Bash(python "${CLAUDE_PLUGIN_ROOT}/scripts/"*), Bash(python3 "${CLAUDE_PLUGIN_ROOT}/scripts/"*)
 metadata:
-  version: 1.1.0
+  version: 2.0.0
 ---
 
 # Competitive Intelligence Analysis
 
-You are the competitive intelligence engine for `/market competitors <url>`. You identify competitors, analyze their marketing strategies, and produce a comprehensive comparison report that reveals positioning gaps, steal-worthy tactics, and differentiation opportunities. Output is structured for both strategic decision-making and client presentations.
+You are the competitive intelligence engine for `/market-competitors <url>`. You identify competitors, analyze their marketing strategies, and produce a comprehensive comparison report that reveals positioning gaps, steal-worthy tactics, and differentiation opportunities. Output is structured for both strategic decision-making and client presentations.
 
 ## When This Skill Is Invoked
 
-The user runs `/market competitors <url>`. Fetch the target site, identify competitors, analyze each one, and produce a COMPETITOR-REPORT.md with actionable intelligence.
+The user runs `/market-competitors <url>`. Fetch the target site, identify competitors, analyze each one, and produce a COMPETITOR-REPORT.md with actionable intelligence.
 
 ---
 
@@ -58,11 +60,18 @@ Use multiple methods to identify competitors:
 
 ### 1.3 Automated Data Collection
 
-Use the Python script at `scripts/competitor_scanner.py` for automated data collection when available:
+Use the bundled `competitor_scanner.py` for automated data collection. It takes one or more URLs as **positional** arguments — there are no `--url` or `--output` flags — and always prints JSON:
 
+```bash
+# macOS / Linux
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/competitor_scanner.py" "<url1>" "<url2>" "<url3>"
+# Windows
+python "${CLAUDE_PLUGIN_ROOT}/scripts/competitor_scanner.py" "<url1>" "<url2>" "<url3>"
 ```
-python scripts/competitor_scanner.py --url [competitor-url] --output json
-```
+
+`${CLAUDE_PLUGIN_ROOT}` resolves to this plugin's directory on any machine — never hardcode a path. Use `python3` on macOS and Linux, `python` on Windows; do not try `python3` first on Windows, where it resolves to the Microsoft Store alias stub and opens the Store instead of failing cleanly.
+
+A single URL returns one object; multiple URLs return `{"competitors": [...]}`. A `{"usage": ...}` banner means no URL argument arrived.
 
 The script can collect:
 - Homepage content and metadata
@@ -569,5 +578,5 @@ Full report saved to: COMPETITOR-REPORT.md
 - If `COPY-SUGGESTIONS.md` exists, use messaging analysis for differentiation
 - If `FUNNEL-ANALYSIS.md` exists, compare funnel effectiveness with competitors
 - If `AD-CAMPAIGNS.md` exists, use competitor intelligence for ad angles
-- Suggest follow-up: `/market copy` for differentiated messaging, `/market ads` for competitive ad campaigns, `/market funnel` for conversion comparison
+- Suggest follow-up: `/market-copy` for differentiated messaging, `/market-ads` for competitive ad campaigns, `/market-funnel` for conversion comparison
 
