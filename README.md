@@ -1,8 +1,6 @@
-<p align="center">
-  <img src="banner.svg" alt="AI Marketing Suite for Claude Code" width="100%">
-</p>
-
 # AI Marketing Suite for Claude Code
+
+**This is 100% AI-Slop taken from YouTube Ai-Slop Bros. It neither replaces the work of an agency that would charge you thousands of money, nor does it create content that is actually useful for your business! The only thing it offers is a different perspective on your business and maybe gives you ideas for your own marketing**
 
 A comprehensive marketing analysis and automation skill system for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Audit any website's marketing, generate copy, build email sequences, create content calendars, analyze competitors, and produce client-ready PDF reports — all from your terminal.
 
