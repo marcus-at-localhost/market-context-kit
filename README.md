@@ -202,6 +202,19 @@ What this changes in practice:
 
 No grounding folder is required. Without one the suite works from site evidence alone and says so.
 
+## Multiple clients from one install
+
+The suite is not tied to a single client — one install can serve as many as you have folders for. Both the `_grounding/` lookup and every skill's output path (`MARKETING-AUDIT.md`, `MARKETING-REPORT.md`, `MARKETING-REPORT-<domain>.pdf`, …) resolve **relative to the current working directory**, not from any config file or setting. There is nothing named "output folder" to configure — CWD is the only lever.
+
+That gives you two ways to run more than one client through the same install:
+
+- **One folder per client, same project.** `clientA/_grounding/`, `clientB/_grounding/`, each with its own subfolder for working files. As long as your CWD is inside `clientA/` when you run a command, its grounding is the nearest one found walking up, and its outputs land next to it. The lookup stops at the first `_grounding/` it finds — nearest wins — but it does not stop at a client boundary you haven't drawn yourself. If CWD is the repo root, or a client subfolder that hasn't got its own `_grounding/` yet, the search keeps walking up and can pick up a *different* client's folder instead. Wrong grounding loads silently — no error.
+- **One project per client (recommended once CLAUDE.md is client-specific).** Separate repo/folder per client, each with its own `.claude/skills/` clone (or a symlink back to one shared install — the plugin keeps no state outside its own folder, so either works). This is the safer default once a top-level `CLAUDE.md` starts naming one client by name, the way this repo's does for IDT: mixing a second client into the same tree means their outputs and grounding both depend on you never running a command from the wrong directory.
+
+Either way, most output filenames are generic (`MARKETING-AUDIT.md`, `SEO-AUDIT.md`, `MARKETING-REPORT.md`) — not client- or domain-namespaced — so two clients sharing one folder will overwrite each other's files. Only the PDF report auto-namespaces (`MARKETING-REPORT-<domain>.pdf`).
+
+One thing that does hold regardless of how you lay the folders out: the five audit subagents cannot reach across a client boundary, because they cannot reach the filesystem at all. They carry no file-discovery tools and may open only the paths the orchestrator names in that run's **Data Manifest** (`skills/audit/SKILL.md`, 0.1), which excludes previous audit reports and analytics exports by rule. A second client's numbers sitting in the same tree therefore cannot surface in the wrong report. That protects the analysis; it does not protect grounding lookup or output filenames, which still depend on your CWD as described above.
+
 ## Business type and example packs
 
 The skills themselves contain no worked examples for a specific kind of business. Hooks, CTAs, objection sets, page structures and launch timelines live in `references/examples/`, and each skill loads exactly one pack after resolving the business type — from grounding if present, otherwise from site signals.
