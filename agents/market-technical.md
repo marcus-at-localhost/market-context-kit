@@ -102,6 +102,8 @@ Evaluate the site's information architecture:
 Check for presence of:
 - Google Analytics / GA4 (look for gtag or gtm scripts)
 - Google Tag Manager
+- **Tag managers other than Google's, before you conclude anything is absent.** A container loader is often the only tracking code in the page source, and the tracker itself never appears there — it is fetched at runtime. Matomo Tag Manager is the common miss: it initializes `_mtm` (not `_paq`), pushes `mtm.startTime`, and loads `container_<id>.js`, frequently from a first-party subdomain rather than a vendor host. Search for `_mtm`, `mtm.startTime`, `container_`, `gtm.js`, `dataLayer`, and any async script from a subdomain of the site itself. If you find a container, fetch it and look inside for the tags it carries (`setSiteId`, `trackPageView`, `matomo.php`, `piwik.php`, measurement IDs) before scoring tracking
+- Never report "no analytics" from the absence of classic tracker filenames alone. That claim asserts a fact about delivered code, so it needs the container check above plus a note that consent-gated injection is invisible before consent
 - Facebook Pixel / Meta Pixel
 - LinkedIn Insight Tag
 - Hotjar, FullStory, or similar session recording
