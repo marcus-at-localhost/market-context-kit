@@ -19,8 +19,17 @@ Perform a comprehensive Conversion Rate Optimization (CRO) analysis on any landi
 
 ## How to Execute
 
+### Step 0: Grounding and Business Context
+
+1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds.
+2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack.
+
+The pack supplies the objection set, the risk reducers that actually reduce risk for this buyer, and the CTA conventions. Applying the wrong set is the most common way a CRO review gets rejected by the client — a procurement buyer offered a money-back guarantee concludes the reviewer does not understand the purchase.
+
 ### Step 1: Identify the Page Type
 Determine which type of landing page you are analyzing. This affects benchmark expectations and scoring weights.
+
+Conversion-rate figures below are US-market averages published for consumer and self-serve businesses. Treat them as orientation, and say which market and business model a number came from whenever you quote one.
 
 | Page Type | Primary Goal | Good CR | Great CR |
 |---|---|---|---|
@@ -124,46 +133,34 @@ Good: "See exactly which campaigns drive revenue -- AI analyzes your data so you
 #### Section 5: Objection Handling (Weight: 10%)
 How the page addresses reasons a visitor might NOT convert.
 
-**Common Objections by Page Type:**
+**Common Objections:**
 
-| Objection | How to Address |
-|---|---|
-| "Too expensive" | ROI calculator, price comparison, money-back guarantee |
-| "Not sure it works" | Case studies, free trial, demo video |
-| "Too complicated" | Setup wizard, onboarding support, "get started in 5 minutes" |
-| "Not sure I need it" | Problem agitation, cost of inaction |
-| "What if I don't like it?" | Free trial, money-back guarantee, cancel anytime |
-| "Is my data safe?" | Security badges, compliance logos, privacy policy link |
-| "I need to ask my team" | Shareable comparison page, team trial, ROI one-pager |
-| "Will this meet our standard/audit?" | Certifications, standards references, test data, audit documentation |
-| "Can you handle my application?" | Industry use cases, technical specs, expert consultation CTA |
-| "How fast can we get it?" | Lead time, stock, delivery SLA, location/distributor proof |
+Use the objection set from the loaded example pack — `Landing pages — objections and how to answer them` in either pack. Check the page against each objection in that set and note which go unanswered.
 
 **Checklist:**
-- [ ] FAQ section addresses top 3-5 objections
-- [ ] Risk reversals present (guarantee, free trial, cancel anytime)
-- [ ] Context-specific risk reducers present (certification proof, compliance documentation, response-time promise, sample request, course schedule, delivery SLA)
-- [ ] Pricing transparency (no hidden fees or surprise costs)
-- [ ] Security and privacy indicators where relevant
+- [ ] FAQ section addresses the top 3-5 objections for this buyer
+- [ ] Risk reducers present, of the kind this buyer recognizes (see the pack — refund-style guarantees in one context, certification and test evidence in the other)
+- [ ] Commercial transparency appropriate to the model (no hidden fees; or stated lead times and response commitments where pricing is quoted)
+- [ ] Security, privacy and compliance indicators where relevant
 - [ ] Comparison with alternatives (if applicable)
 
 #### Section 6: Call-to-Action (Weight: 10%)
 The conversion mechanism itself.
 
 **CTA Button Checklist:**
-- [ ] CTA text describes the VALUE, not the action ("Get My Free Report" vs "Submit")
+- [ ] CTA text names what the visitor gets, not the mechanic ("Get My Free Report", "Download the datasheet" — not "Submit")
 - [ ] CTA button is visually dominant (size, color, whitespace)
 - [ ] CTA appears multiple times on long pages
-- [ ] Secondary CTA exists for visitors not ready to commit
-- [ ] CTA has supporting microcopy (e.g., "No credit card required")
-- [ ] Button text uses first person ("Start MY trial" vs "Start YOUR trial")
+- [ ] A lower-commitment secondary CTA exists for visitors not ready for the primary action
+- [ ] CTA has supporting microcopy that removes the next unknown (what happens after the click, and when)
 - [ ] CTA is specific to the offer (not generic)
 
 **CTA Copy Scoring:**
-- Weak: "Submit", "Click Here", "Learn More"
-- Medium: "Sign Up", "Get Started", "Download Now"
-- Strong: "Start My Free Trial", "Get My Custom Report", "Claim Your Discount"
-- Strong for B2B/RFQ: "Technische Beratung anfragen", "Datenblatt herunterladen", "Angebot anfordern", "Kursplatz reservieren"
+- Weak in any context: "Submit", "Click Here", "Learn More"
+- Medium in any context: "Sign Up", "Get Started", "Download Now"
+- Strong: take the phrasing patterns from the loaded example pack — `Landing pages — CTA phrasing` in `consumer-online.md`, `CTA phrasing` in `b2b-technical.md`. The conventions genuinely conflict: first-person button text and stated scarcity lift consumer conversion and reduce it with technical buyers.
+
+Write CTAs in the language of the page. Do not leave English CTA text on a non-English site.
 
 #### Section 7: Footer and Secondary Elements (Weight: 5%)
 The bottom of the page and supporting elements.

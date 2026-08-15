@@ -19,6 +19,15 @@ Generate a complete, week-by-week launch playbook for any product, service, or f
 
 ## How to Execute
 
+### Step 0: Grounding and Business Context
+
+Before gathering anything else:
+
+1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds.
+2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack.
+
+The pack supplies the launch channels, pre-launch calendar, announcement templates and success metrics. A consumer launch and a technical launch share only the phase structure — everything inside the phases differs, including how long the launch runs and what counts as success.
+
 ### Step 1: Gather Launch Context
 Before generating the playbook, collect these inputs from the user (ask if not provided):
 
@@ -74,25 +83,19 @@ Select the primary launch strategy based on the user's context:
 **Objective:** Build anticipation, grow waitlist, recruit beta testers.
 
 **Tasks:**
-- [ ] Begin content seeding: publish 2-3 blog posts / threads related to the problem you solve
-- [ ] Share behind-the-scenes content on social media (building in public)
-- [ ] Start engaging in target communities (provide value, don't pitch yet)
-- [ ] Reach out to beta testers with personal invitations
-- [ ] Collect early feedback and testimonials from beta users
-- [ ] Begin influencer/partner outreach (see Partner Coordination below)
-- [ ] Set up referral mechanism for waitlist (e.g., viral waitlist with rewards)
-- [ ] Create teaser content (sneak peeks, countdowns, problem-awareness posts)
-- [ ] Record demo video or product walkthrough
-- [ ] Write press release or media pitch (if relevant)
+- [ ] Begin content seeding: publish 2-3 pieces on the problem the launch solves
+- [ ] Start engaging in the communities, forums or trade channels where the buyers are
+- [ ] Recruit beta testers, pilot customers or reference installations with personal invitations
+- [ ] Collect early feedback and permission to quote results
+- [ ] Begin partner, distributor or influencer outreach (see Partner Coordination below)
+- [ ] Build the pre-launch capture mechanism (waitlist, notification list, or sales-qualified interest list)
+- [ ] Create anticipation or evidence content, whichever this audience responds to — see the loaded pack
+- [ ] Record a demo, walkthrough or technical explainer
+- [ ] Write press release or media pitch; trade press needs 4-12 weeks of lead time, so start here
 
 **Content Calendar (Weeks 3-4):**
-| Day | Content Type | Channel | Theme |
-|---|---|---|---|
-| Mon | Problem-awareness post | LinkedIn/Twitter | Why this problem matters |
-| Tue | Behind-the-scenes | Instagram/Twitter | Show what you're building |
-| Wed | Educational content | Blog/LinkedIn | Teach something related to your space |
-| Thu | Social proof | Twitter/LinkedIn | Beta tester quote or result |
-| Fri | Teaser/countdown | All channels | Build anticipation for launch |
+
+Build it from the loaded example pack — `Launch — channels, calendar and post templates` in `consumer-online.md`, `Launch — industrial / technical timeline` in `b2b-technical.md`. The consumer version runs a daily-cadence anticipation calendar; the technical version front-loads evidence and channel enablement instead, because the buyer cannot act on anticipation.
 
 **Deliverables:**
 - 4-6 content pieces published
@@ -139,7 +142,7 @@ Select the primary launch strategy based on the user's context:
 - Send main launch email to full list
 - Publish launch blog post
 - Post launch announcement on all social channels
-- Submit to Product Hunt (if applicable -- schedule for 12:01 AM PT)
+- Submit to any launch platform in use, at that platform's own cutover time in its own timezone
 - Activate partner/affiliate promotions
 - Begin paid ad campaigns (if applicable)
 - Goal: Maximum visibility and traffic
@@ -235,71 +238,14 @@ Purpose: Drive final conversions with urgency
 Content: Remind of the deadline. Recap the value. Final testimonial. Clear, single CTA.
 CTA: "Last chance to get [offer]"
 
-### Step 5: Social Media Launch Posts
+### Step 5: Announcement Posts
 
-#### Twitter/X Thread Template:
-```
-Post 1: After [X months/weeks] of building, I'm thrilled to announce [Product Name] is live.
+Take the announcement templates from the loaded example pack:
 
-[Product] helps [target audience] [achieve outcome] without [pain point].
+- `consumer-online.md` → `Launch — channels, calendar and post templates`: X thread, LinkedIn founder post, Instagram visual post.
+- `b2b-technical.md` → `Launch — industrial / technical timeline`: expert-profile post series, technical newsletter feature, trade-press pitch, distributor announcement.
 
-Here's the story of why I built it (and what it can do for you):
-
-[Thread emoji] 1/
-
-Post 2: The problem: [Describe the problem in detail. Make it relatable.]
-
-Post 3: The solution: [What your product does, in simple terms. Include screenshot or demo GIF.]
-
-Post 4: Early results: [Beta tester results, specific numbers]
-
-Post 5: What's included: [Key features as bullet points]
-
-Post 6: Special launch offer: [Pricing, early bird deal, bonus]
-
-Post 7: Try it now: [Link] [CTA]
-```
-
-#### LinkedIn Post Template:
-```
-I just launched [Product Name], and here's why it matters:
-
-[1-2 sentences about the problem]
-
-After [talking to X customers / spending Y months building / experiencing this problem myself], I realized [insight].
-
-So I built [Product Name] to [specific outcome].
-
-Early users are already seeing:
-- [Result 1]
-- [Result 2]
-- [Result 3]
-
-If you [target audience descriptor], I'd love for you to check it out:
-[Link]
-
-Special launch pricing available for the next [timeframe].
-
-#relevant #hashtags
-```
-
-#### Instagram / Visual Platform Template:
-```
-Image/Carousel: Product screenshots, before/after, or results graphic
-
-Caption:
-[Hook - first line that stops the scroll]
-
-The problem: [1-2 sentences]
-The solution: [1-2 sentences about your product]
-The results: [specific outcomes from beta users]
-
-Launch special: [offer details]
-
-Link in bio to get started.
-
-[Relevant hashtags - 15-20 for Instagram]
-```
+Whichever applies, every announcement carries the same four elements: what it is, who it is for, the evidence it works, and the single next step. What differs is the voice, the proof type, and who publishes it — a founder's personal narrative in one case, a named engineer's finding in the other.
 
 ### Step 6: Press and Media Outreach
 

@@ -11,6 +11,14 @@ metadata:
 
 You are the content strategy engine for `/ai-marketing:market-content-plan <url>`. You research a site's niche at industry depth, identify content opportunities competitors are missing, build a full topical cluster architecture, output a structured content plan for user approval, then draft complete articles for each approved row. No publishing — output stops at local markdown files.
 
+## Phase 0: Grounding
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client documentation outranks every default in this skill, and any claim rules it contains bind the output. Name the loaded files at the top of what you produce.
+
+Grounding supplies the niche, target industries, content pillars and claim rules that this plan must stay inside.
+
+---
+
 ## Skill Purpose
 
 Build a comprehensive, research-backed content plan for any website. Starting from a URL, you map what content already exists, mine every available source for topic ideas, cluster them into pillar-and-support architecture, score them by strategic value, and produce a ready-to-execute editorial calendar. After user approval of the plan, you draft each article in full — complete with front-matter, structured outlines, FAQ sections, and internal links — matching the site's brand voice and SEO requirements.
@@ -179,6 +187,8 @@ WebSearch: site:reddit.com <niche> <problem> OR <question>
 WebSearch: site:reddit.com <niche> recommendations
 WebSearch: <niche> forum question <topic>
 ```
+
+Reddit is a rich source for consumer, software and developer niches and a thin one for industrial, regulated and procurement-led ones. For those, mine specialist forums, association and standards-body publications, trade-press archives, LinkedIn discussion under expert posts, and the questions that arrive through the client's own support and sales channels — that last source is usually the best available and is often sitting unused in an inbox.
 
 Extract from results:
 - Natural language questions (verbatim phrasings are keyword goldmines)

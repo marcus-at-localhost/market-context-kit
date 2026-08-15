@@ -11,6 +11,14 @@ metadata:
 
 You are the competitive intelligence engine for `/ai-marketing:market-competitors <url>`. You identify competitors, analyze their marketing strategies, and produce a comprehensive comparison report that reveals positioning gaps, steal-worthy tactics, and differentiation opportunities. Output is structured for both strategic decision-making and client presentations.
 
+## Phase 0: Grounding
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client documentation outranks every default in this skill, and any claim rules it contains bind the output. Name the loaded files at the top of what you produce.
+
+If grounding names a competitor set, start from it rather than from search results; generic category searches miss the competitors that matter in narrow verticals.
+
+---
+
 ## When This Skill Is Invoked
 
 The user runs `/ai-marketing:market-competitors <url>`. Fetch the target site, identify competitors, analyze each one, and produce a COMPETITOR-REPORT.md with actionable intelligence.
@@ -54,9 +62,9 @@ Use multiple methods to identify competitors:
 - For B2B industrial, regulated, or local categories where software review sites are irrelevant, use trade directories, industry associations, procurement directories, trade press, certification bodies, distributor listings, and forum/community discussions instead.
 
 **Method 4: Social and Community Discovery**
-- Search Reddit for "[product category] recommendations"
-- Check Twitter/X for conversations about the product category
 - Look at LinkedIn for companies followed by the target's audience
+- For consumer, software and developer categories: search Reddit for "[category] recommendations" and check X for category conversation
+- For industrial, regulated and procurement-led categories: search industry forums, association member lists, trade-fair exhibitor directories and distributor catalogs — the buyers there do not discuss suppliers on consumer social platforms
 
 ### 1.3 Automated Data Collection
 
@@ -218,22 +226,25 @@ CONTENT GAPS (Competitors Cover, Target Does Not):
   4. [Topic] — covered by all competitors (critical gap)
 ```
 
-### 2.5 Social Media Presence Comparison
+### 2.5 Channel Presence Comparison
 
-| Platform | [Target] | Comp A | Comp B | Comp C |
+Compare only the channels that matter in this category. Rows for platforms nobody in the category uses produce a table of zeros that reads as a gap when it is a non-issue.
+
+| Channel | [Target] | Comp A | Comp B | Comp C |
 |----------|----------|--------|--------|--------|
 | LinkedIn followers | X | X | X | X |
-| Twitter/X followers | X | X | X | X |
-| Instagram followers | X | X | X | X |
+| [Other social channels in use] | X | X | X | X |
 | YouTube subscribers | X | X | X | X |
-| TikTok followers | X | X | X | X |
+| Newsletter / owned list (if visible) | X | X | X | X |
+| Trade press / association presence | X | X | X | X |
+| Trade fair presence | X | X | X | X |
 | Posting frequency | X/week | X/week | X/week | X/week |
 | Engagement rate | X% | X% | X% | X% |
 | Top content type | [type] | [type] | [type] | [type] |
 
 ### 2.6 Review Mining
 
-Analyze reviews on third-party platforms (G2, Capterra, Trustpilot, Reddit):
+Analyze reviews and discussion on the platforms this category actually uses — G2, Capterra and Trustpilot for software and services; industry forums, association channels, distributor listings and trade press for technical and industrial categories. Reddit is a strong source for consumer and developer categories and a weak one for regulated procurement:
 
 **For each competitor, extract:**
 - Overall rating (stars)

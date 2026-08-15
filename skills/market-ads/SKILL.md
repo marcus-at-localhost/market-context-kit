@@ -16,6 +16,15 @@ The user runs `/ai-marketing:market-ads <url>`. Fetch the target site to underst
 
 ---
 
+## Phase 0: Grounding and Business Context
+
+1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Claim rules bind ad copy especially hard — ad platforms reject unsupported superlatives, and regulated industries police them.
+2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack. It supplies the retargeting creative angles and the channels worth funding.
+
+Write ad copy in the language of the market being targeted, and price every recommendation in that market's currency.
+
+---
+
 ## Phase 1: Campaign Foundation
 
 ### 1.1 Business and Offer Analysis
@@ -54,6 +63,10 @@ Map the business goal to the right campaign objective:
 ---
 
 ## Phase 2: Platform-Specific Ad Generation
+
+These are platform mechanics — formats, character limits, specs — for every platform the suite covers. Generate ads only for the platforms the business should actually be on. The budget allocation table in Phase 4.1 sets that: it puts consumer-video platforms at 0% for industrial, distributor and regulated businesses, whose spend belongs on search, LinkedIn and trade media instead.
+
+Creative angles and voice come from the example pack loaded in Phase 0, not from the sample copy in this section.
 
 ### 2.1 Google Ads
 
@@ -217,7 +230,7 @@ Angle 10: HOW-TO
 [3-10 sec] PROBLEM: Show the frustration / pain point visually
 [10-20 sec] SOLUTION: Introduce product with quick demo
 [20-25 sec] PROOF: Flash testimonial, number, or result
-[25-30 sec] CTA: "Link in bio" or "Click to try free"
+[25-30 sec] CTA: the next step, in the platform's own idiom
 ```
 
 ### 2.5 Twitter/X Ads
@@ -271,28 +284,9 @@ STAGE 3: CONVERSION (Hot Audience)
 
 ### 3.2 Retargeting Ad Sequences
 
-For each stage, generate 3-5 ad variations:
+For each stage, generate 3-5 ad variations. The creative angles per stage are in the loaded example pack — `Ads — retargeting creative` in either pack.
 
-```
-Stage 1 Ads (Awareness):
-  Ad 1A: Educational — "[Topic] explained in 60 seconds"
-  Ad 1B: Pain point — "If [frustration], you need to see this"
-  Ad 1C: Social proof — "[Number] [audience] trust [product]"
-
-Stage 2 Ads (Consideration):
-  Ad 2A: Case study — "How [customer] achieved [result]"
-  Ad 2B: Demo — "See [product] in action (2-min walkthrough)"
-  Ad 2C: Comparison — "[Product] vs [alternative]: honest breakdown"
-  Ad 2D: FAQ — "Your top 3 questions about [product], answered"
-
-Stage 3 Ads (Conversion):
-  Ad 3A: Offer — "[Discount/trial] — limited to [number/time]"
-  Ad 3B: Urgency — "Your free trial starts now (no credit card)"
-  Ad 3C: Guarantee — "Try [product] risk-free for [period]"
-  Ad 3D: Testimonial — "'[Quote about specific result]' — Start yours"
-  Ad 3E: RFQ — "Send your specification — get a technical response in [timeframe]"
-  Ad 3F: Compliance — "[Standard] documentation available for [application]"
-```
+The stage logic is shared; the angles are not. Discount, trial and countdown angles convert one audience and disqualify the advertiser with the other, where the equivalent closing angles are specification response time, documentation availability, sample dispatch and stock.
 
 ---
 
@@ -332,7 +326,7 @@ Stage 3 Ads (Conversion):
 | Industrial B2B Lead Gen | 2:1 (pipeline value) | 4:1 | 6:1+ |
 | Regulated B2B | 2:1 (pipeline value) | 3:1 | 5:1+ |
 
-**CPA Benchmarks (approximate):**
+**CPA Benchmarks — US market, USD, approximate:**
 
 | Platform | B2B Lead | B2C Lead | E-commerce Purchase | SaaS Trial |
 |----------|----------|----------|-------------------|------------|
@@ -341,6 +335,13 @@ Stage 3 Ads (Conversion):
 | LinkedIn | $50-150 | N/A | N/A | $40-100 |
 | TikTok | $15-40 | $3-15 | $8-25 | $10-35 |
 | Trade Media / Directories | $80-250 | N/A | N/A | N/A |
+
+Convert and caveat before quoting these:
+
+- **Market.** Auction density differs by country. German-language B2B search in narrow industrial verticals often runs lower CPC than the US equivalent but with a fraction of the volume; broad EU consumer auctions frequently run cheaper than US ones. Never present a US figure as the client's expected cost.
+- **Currency.** Quote in the client's currency and say which market the source figure came from.
+- **Buying model.** Trade media, industry portals and directories are usually sold per insertion, per issue or per period, not per click. A CPA figure for those is derived after the fact, not bid.
+- **Lead value.** High CPA is not automatically bad. A €400 industrial lead that closes a five-year supply relationship outperforms a €15 consumer lead. Judge against lead value and pipeline, and say so instead of scoring the number alone.
 
 ### 4.3 Landing Page Alignment
 
@@ -462,8 +463,8 @@ Campaign Structure:
   Meta Ads: [X] ad sets, [X] variations
   LinkedIn: [X] campaigns, [X] variations
 
-Budget Recommendation: $[X,XXX]/month
-Expected CPA: $[XX]-$[XX]
+Budget Recommendation: [X,XXX]/month
+Expected CPA: [XX]-[XX]
 Target ROAS: [X]:1
 
 Full campaigns saved to: AD-CAMPAIGNS.md

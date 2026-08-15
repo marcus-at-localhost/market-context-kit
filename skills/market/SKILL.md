@@ -50,6 +50,12 @@ These skills read each other's output files from the working directory when pres
 - `/ai-marketing:market-content-plan` — consumes `/ai-marketing:market-brand`, `/ai-marketing:market-competitors`, `/ai-marketing:market-seo`; offers to run them if missing
 - `/ai-marketing:market-report` and `/ai-marketing:market-report-pdf` — compile everything available
 
+## Grounding and business context
+
+Every command starts by looking for a `_grounding/` folder in the working directory or its parents. If one exists, the client's own positioning, target industries, competitor set and claim rules override the suite's defaults, and each output names the files it loaded. See `${CLAUDE_PLUGIN_ROOT}/references/grounding.md`.
+
+Each command then resolves the business type and loads exactly one example pack — `consumer-online` or `b2b-technical` — so hooks, CTAs, objections and launch plans match how the business actually sells. See `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`. When the type is unclear, no pack is loaded and examples are derived from the site's own copy.
+
 ## Requirements
 
 Python 3 for the bundled scripts (`analyze_page.py`, `competitor_scanner.py`, `social_calendar.py`, `generate_pdf_report.py`) — stdlib only, no install needed. `/ai-marketing:market-report-pdf` additionally needs `reportlab`:

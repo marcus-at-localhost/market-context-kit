@@ -301,11 +301,14 @@ def generate_report(data, output_path):
 
     # Quick Wins
     elements.append(Paragraph("Quick Wins (This Week)", subheading_style))
+    # Fallbacks are business-type-neutral on purpose: they ship into a client PDF
+    # whenever the caller omits the data, and a wrong recommendation there is worse
+    # than a generic one.
     quick_wins = data.get("quick_wins", [
-        "Rewrite homepage headline to be specific and benefit-driven",
-        "Add 3-5 client logos or trust badges above the fold",
-        "Change primary CTA to value-driven text (e.g., 'Start Free Trial — No Credit Card')",
-        "Add meta descriptions to top 5 landing pages",
+        "Rewrite homepage headline to name the specific outcome for a specific buyer",
+        "Add proof above the fold — client logos, certifications, or named references",
+        "Make the primary CTA state what the visitor gets and what happens next",
+        "Add meta descriptions to the top 5 entry pages",
     ])
     for i, win in enumerate(quick_wins, 1):
         elements.append(Paragraph(f"{i}. {win}", body_style))
@@ -315,10 +318,10 @@ def generate_report(data, output_path):
     # Medium-Term
     elements.append(Paragraph("Medium-Term (1-3 Months)", subheading_style))
     medium_term = data.get("medium_term", [
-        "Build email capture funnel with lead magnet",
-        "Create comparison pages for top 3 competitors",
+        "Build a lead capture path around the asset this audience actually wants",
+        "Create comparison content for the top 3 alternatives buyers evaluate",
         "Develop 3 case studies with measurable results",
-        "Implement blog content strategy targeting high-intent keywords",
+        "Implement a content strategy targeting high-intent search terms",
     ])
     for i, action in enumerate(medium_term, 1):
         elements.append(Paragraph(f"{i}. {action}", body_style))
@@ -328,10 +331,10 @@ def generate_report(data, output_path):
     # Strategic
     elements.append(Paragraph("Strategic (3-6 Months)", subheading_style))
     strategic = data.get("strategic", [
-        "Launch referral program with incentive structure",
-        "Build content authority hub with pillar content",
-        "Implement full-funnel retargeting campaign",
-        "Develop pricing optimization based on value metrics",
+        "Build a referral or reference programme suited to how this market buys",
+        "Build a content authority hub around the pillar topics",
+        "Implement full-funnel retargeting on the channels this audience uses",
+        "Review the commercial model and how clearly the site communicates it",
     ])
     for i, action in enumerate(strategic, 1):
         elements.append(Paragraph(f"{i}. {action}", body_style))

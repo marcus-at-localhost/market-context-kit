@@ -8,6 +8,14 @@ metadata:
 
 # Marketing Report Generator (Markdown Format)
 
+## Phase 0: Grounding
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client documentation outranks every default in this skill, and any claim rules it contains bind the output. Name the loaded files at the top of what you produce.
+
+State which grounding files informed the report, and flag any benchmark you quote as market-specific rather than universal.
+
+---
+
 ## Skill Purpose
 Generate a comprehensive, professionally formatted marketing report in Markdown. This skill compiles data from all previous audit and analysis results into a single, client-ready document with scores, findings, recommendations, and a prioritized action plan with revenue impact estimates.
 

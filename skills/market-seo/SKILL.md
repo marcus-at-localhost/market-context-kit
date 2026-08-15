@@ -9,6 +9,14 @@ metadata:
 
 # SEO Content Audit
 
+## Phase 0: Grounding
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client documentation outranks every default in this skill, and any claim rules it contains bind the output. Name the loaded files at the top of what you produce.
+
+Grounding supplies target markets and languages, which decide whether hreflang and localized metadata are findings or non-issues.
+
+---
+
 ## Skill Purpose
 Perform a comprehensive SEO audit of a webpage or website, covering on-page SEO, content quality (E-E-A-T), keyword analysis, technical SEO, and content strategy. This skill combines automated analysis via `scripts/analyze_page.py` with expert-level manual review to produce an actionable SEO audit document.
 

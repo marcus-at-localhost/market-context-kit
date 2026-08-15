@@ -16,6 +16,17 @@ The user runs `/ai-marketing:market-social <topic/url>`. If a URL is provided, f
 
 ---
 
+## Phase 0: Grounding and Business Context
+
+Do this before anything else.
+
+1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client truth overrides every default in this skill.
+2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the one example pack it points to.
+
+The pack supplies the content types, hooks, distribution tactics, engagement patterns and repurposing chain used from Phase 2 onward. Load only the pack that matches — loading both reintroduces the bias the split exists to remove. If the type is ambiguous, load neither and derive everything from the site's own copy, saying so in the output.
+
+---
+
 ## Phase 1: Brand and Audience Discovery
 
 ### 1.1 Brand Context
@@ -72,198 +83,42 @@ Adjust the mix by business context. Industrial, regulated, distributor, academy,
 
 ### 2.2 Content Types by Platform
 
-**LinkedIn Content Types:**
-- Text posts (opinion/insight) — 40% of content
-- Carousel documents (PDF slideshows) — 25%
-- Image + caption — 15%
-- Video (native, under 3 min) — 10%
-- Polls — 5%
-- Articles (long-form) — 5%
+Use the content-type mix from the loaded example pack (`Social — content types by platform` in `consumer-online.md`, `Channels` in `b2b-technical.md`). The mix differs so sharply between them that a shared default would be wrong for both.
 
-**Twitter/X Content Types:**
-- Text tweets (opinions, observations) — 40%
-- Threads (3-10 tweets) — 25%
-- Image + caption — 15%
-- Quote tweets with commentary — 10%
-- Polls — 5%
-- Video clips — 5%
-
-**Instagram Content Types:**
-- Carousel posts (educational, storytelling) — 35%
-- Reels (short-form video, 15-60 sec) — 30%
-- Single image + caption — 15%
-- Stories (daily, interactive) — 15%
-- Live — 5%
-
-**TikTok Content Types:**
-- Trending format adaptation — 30%
-- Educational/how-to — 30%
-- Behind-the-scenes — 20%
-- Storytelling — 15%
-- Duets and stitches — 5%
-
-**YouTube Content Types:**
-- Tutorial/how-to (8-15 min) — 35%
-- Listicle/compilation — 20%
-- Review/comparison — 15%
-- Shorts (under 60 sec) — 20%
-- Interview/conversation — 10%
+If no pack was loaded, derive the mix from what the brand already publishes and what its audience demonstrably consumes.
 
 ---
 
 ## Phase 3: Hook Formulas
 
-### 3.1 Platform-Specific Hooks
+The first line (or first 3 seconds for video) decides whether someone reads or scrolls past. Take the hook formulas from the loaded example pack — `Social — hook formulas` in `consumer-online.md`, `Hooks and post openers` in `b2b-technical.md`.
 
-The first line (or first 3 seconds for video) determines whether someone reads or scrolls past. Use these formulas:
+Two rules apply regardless of pack:
 
-**LinkedIn Hooks:**
-```
-"I [did/learned/lost/gained] [specific thing] and here's what happened:"
-"Unpopular opinion: [contrarian take about the industry]"
-"[Number] years in [industry]. Here's what nobody tells you:"
-"Stop [common practice]. Start [better alternative]. Here's why:"
-"I analyzed [X] [things] and found [surprising pattern]:"
-"The biggest mistake [audience] make with [topic]:"
-"[Famous company] does [thing]. Here's what we can learn:"
-"3 things I'd do differently if I started [X] today:"
-```
-
-**Twitter/X Hooks:**
-```
-"Here's a thread on [topic] that nobody is talking about:"
-"[Contrarian statement]. Let me explain."
-"[Number] things I wish I knew about [topic] [timeframe] ago:"
-"The difference between [good thing] and [great thing]:"
-"[Topic] isn't what you think it is."
-"Hot take: [bold claim]"
-"I spent [time] studying [topic]. Here's what I found:"
-"[Audience]: You need to stop [mistake]. Here's why."
-```
-
-**Instagram Hooks (Captions and Reels):**
-```
-"Save this for later" (educational carousel)
-"I tested [X] for [time]. Results inside."
-"The [topic] nobody talks about:"
-"POV: You just discovered [benefit]"
-"[Number] signs you're [problem] (and how to fix it)"
-"My exact [framework/process/system] for [result]:"
-"Before vs after [transformation]"
-"What [audience] gets wrong about [topic]:"
-```
-
-**TikTok Hooks (First 3 Seconds):**
-```
-"Wait, you're still doing [old way]?"
-"Here's the [topic] hack nobody showed you"
-"I need to talk about [trending topic]"
-"If you're a [audience], watch this"
-"The #1 reason your [thing] isn't working"
-"Story time: [intriguing setup]"
-"Replying to @[comment]: [answer]"
-"[Industry] secrets they don't want you to know"
-```
+- A hook makes a specific promise the post then keeps. Curiosity without payoff costs trust once.
+- Match the credibility currency of the audience. Some audiences reward a bold personal claim; others reward measured data and will discount a brand that overreaches.
 
 ---
 
-## Phase 4: Hashtag Strategy
+## Phase 4: Distribution and Discovery
 
-### 4.1 Hashtag Framework
+How a post gets found differs completely by business type: hashtag tiering for consumer platforms, named terminology plus expert profiles plus trade channels for technical B2B. Use the loaded pack — `Social — hashtag strategy` in `consumer-online.md`, `Distribution instead of hashtags` in `b2b-technical.md`.
 
-Use a tiered approach for every post:
-
-| Tier | Follower Range of Tag | Count | Purpose |
-|------|----------------------|-------|---------|
-| **Niche** | Under 100K posts | 3-5 | Highly targeted, easier to rank |
-| **Medium** | 100K-1M posts | 3-5 | Moderate competition, relevant audience |
-| **Broad** | 1M+ posts | 2-3 | Discovery potential, lower engagement rate |
-| **Branded** | Custom | 1 | Brand recognition, UGC collection |
-
-**Platform-Specific Hashtag Counts:**
-- Instagram: 5-15 hashtags (in caption or first comment)
-- LinkedIn: 3-5 hashtags (at bottom of post)
-- Twitter/X: 1-2 hashtags (inline or at end)
-- TikTok: 3-5 hashtags (in caption)
-
-### 4.2 Hashtag Research Process
-
-For each content pillar, research and document:
-- 5 niche hashtags specific to the brand's sub-industry
-- 5 medium hashtags for the broader industry
-- 3 broad hashtags for general discovery
-- 1 branded hashtag (e.g., #BrandNameTips)
+Document the chosen discovery mechanism per pillar so the calendar can apply it consistently.
 
 ---
 
 ## Phase 5: Engagement Tactics
 
-### 5.1 Engagement Boosters
+Take these from the loaded pack — `Social — engagement tactics` in `consumer-online.md`, `Engagement tactics` in `b2b-technical.md`.
 
-Include these in the content calendar:
-
-**Questions:** End 30% of posts with an open-ended question to prompt comments
-```
-"What's your biggest challenge with [topic]? Drop it below."
-"Agree or disagree? [Statement]"
-"Which one are you? A) [option] B) [option] C) [option]"
-```
-
-**Polls:** Use platform-native polls 1-2x per week
-```
-"What matters most to you in [category]?"
-"How often do you [behavior]?"
-"Which would you choose: [A] or [B]?"
-```
-
-**Controversial/Debate Posts:** 1-2x per week to drive high engagement
-```
-"[Common advice] is terrible advice. Here's why..."
-"[Industry practice] is dead. Change my mind."
-"The industry won't tell you this, but [honest truth]."
-```
-
-**Storytelling Posts:** 1-2x per week for connection
-```
-"3 years ago, I [starting point]. Today, [result]. Here's the journey:"
-"The worst [professional situation] I ever had taught me [lesson]."
-"A client told me [surprising thing] — it changed how I think about [topic]."
-```
+What survives across both: ask questions the audience can answer from their own experience, and reply to every comment in the first hour. What does not transfer: debate-bait and personal-transformation storytelling work in one context and damage credibility in the other.
 
 ---
 
 ## Phase 6: Content Repurposing Strategy
 
-### 6.1 The 1-to-10 Repurposing Framework
-
-Take ONE long-form piece of content and turn it into 10+ social posts:
-
-```
-SOURCE: 1 Blog Post / Podcast Episode / YouTube Video / Newsletter
-
-OUTPUT:
-  1. LinkedIn text post — Key insight from the piece
-  2. Twitter thread — 5-7 key takeaways
-  3. Instagram carousel — Main framework or steps visualized
-  4. Instagram Reel — 30-second summary of the key point
-  5. TikTok — Quick tip format of the #1 takeaway
-  6. LinkedIn carousel — PDF slideshow of the framework
-  7. Twitter single tweet — The most quotable line
-  8. Instagram Story — Behind-the-scenes of creating the content
-  9. YouTube Short — Condensed video version
-  10. Facebook post — Discussion question based on the topic
-```
-
-### 6.2 Repurposing Schedule
-
-For each piece of pillar content, schedule repurposed posts over 2 weeks:
-- Day 1: Publish the original content
-- Day 1-2: Share the key insight on LinkedIn and Twitter
-- Day 3: Create an Instagram carousel and Reel
-- Day 5: Post TikTok and YouTube Short
-- Day 7: Share a different angle or takeaway
-- Day 10: Post engagement question related to the topic
-- Day 14: Reshare with "In case you missed it" framing
+One substantial piece of source content should produce ten or more downstream posts. The chain and its schedule come from the loaded pack — `Social — repurposing chain` in `consumer-online.md` (2-week cycle), `Repurposing chain` in `b2b-technical.md` (6-12 week cycle, longer asset half-life).
 
 ---
 
@@ -271,33 +126,21 @@ For each piece of pillar content, schedule repurposed posts over 2 weeks:
 
 ### 7.1 Calendar Structure
 
-Generate a complete 30-day calendar with this format:
+Generate a complete 30-day calendar. One entry per post, on the platforms selected in Phase 1.2:
 
 ```
 DAY 1 (Monday):
-  LinkedIn: [Pillar 1 - Educational]
-    Hook: "[Hook text]"
-    Post: [Full post text, 150-300 words]
-    Hashtags: #tag1 #tag2 #tag3
-    Time: 9:00 AM
-    Type: Text post
-
-  Twitter/X: [Pillar 4 - Engagement]
-    Tweet: "[Full tweet text, under 280 chars]"
-    Hashtags: #tag1 #tag2
-    Time: 12:00 PM
-    Type: Single tweet
-
-  Instagram: [Pillar 2 - Behind the Scenes]
-    Caption: "[Full caption, 100-200 words]"
-    Visual: [Description of what the image/carousel should contain]
-    Hashtags: [10-15 hashtags]
-    Time: 6:00 PM
-    Type: Carousel (5 slides)
-    Slide 1: [Content]
-    Slide 2: [Content]
-    ...
+  [Platform]: [Pillar N - Type]
+    Hook: "[Hook text, from the loaded pack's formulas]"
+    Post: [Full post text at this platform's working length]
+    Discovery: [hashtags, topic terms, expert profile, or channel — per Phase 4]
+    Time: [posting time in the audience's timezone]
+    Format: [text / carousel / video / poll / article]
+    Visual: [what the image, carousel or video should show, if applicable]
+    Slides: [slide-by-slide content for carousels]
 ```
+
+Write the posts in the language of the target audience, and set posting times in that audience's timezone rather than the agency's.
 
 ### 7.2 Calendar Distribution
 
@@ -311,33 +154,13 @@ Ensure the 30-day calendar follows:
 
 ---
 
-## Phase 8: Trending Format Detection
+## Phase 8: Recurring Formats
 
-### 8.1 Evergreen Trending Formats
+Proven repeatable formats come from the loaded pack — `Social — evergreen trending formats` in `consumer-online.md`, `Repurposing chain` and `Hooks and post openers` in `b2b-technical.md`.
 
-Include these proven formats that consistently perform:
+Trend-chasing is a consumer-platform mechanic with a 24-48 hour window. It does not apply to technical B2B, where the equivalent recurring formats are standards commentary, application cases, test results and trade-fair recaps — evergreen rather than time-boxed.
 
-| Format | Platform | Description |
-|--------|----------|-------------|
-| **Listicle Thread** | Twitter, LinkedIn | "7 things I learned from [X]" |
-| **This vs That** | All platforms | Side-by-side comparison |
-| **Day in the Life** | TikTok, Instagram | Show daily routine |
-| **Tutorial Reel** | Instagram, TikTok | Step-by-step how-to |
-| **Hot Take** | Twitter, LinkedIn | Contrarian opinion + reasoning |
-| **Before/After** | Instagram, TikTok | Transformation content |
-| **Myth vs Reality** | All platforms | Debunk common misconceptions |
-| **Fill in the Blank** | LinkedIn, Twitter | Community engagement |
-| **POV** | TikTok, Instagram | Point-of-view storytelling |
-| **Reaction** | TikTok | React to industry news or competitor content |
-
-### 8.2 Trend Adaptation Framework
-
-When a new trend emerges, adapt it to the brand using this process:
-1. Identify the trend format (audio, visual style, caption structure)
-2. Find the brand angle (how does this connect to the brand's pillars?)
-3. Adapt the trend within 24-48 hours (speed matters)
-4. Add brand-specific value (don't just copy — add unique insight)
-5. Tag the trend appropriately (hashtags, sounds, formats)
+When a format is adopted, adapt it rather than copy it: find the brand angle, add something only this brand knows, and drop it if the audience does not respond within a few cycles.
 
 ---
 
@@ -366,8 +189,8 @@ Write the full output to `SOCIAL-CALENDAR.md`:
 4. [Pillar 4]: [description] — [X]% of content
 5. [Pillar 5]: [description] — [X]% of content
 
-## Hashtag Strategy
-[Tier breakdown with specific hashtags for each pillar]
+## Discovery Strategy
+[Per pillar: hashtags, topic terminology, expert profiles, or trade channels — whichever Phase 4 selected]
 
 ## 30-Day Calendar
 

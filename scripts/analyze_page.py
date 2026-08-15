@@ -15,6 +15,62 @@ from html.parser import HTMLParser
 from urllib.parse import urlparse, urljoin
 
 
+# CTA vocabularies per language. The page's <html lang> selects the list; when the
+# language is missing or unknown every list is used, because missing a CTA scores the
+# page as having none, which is worse than a false positive.
+CTA_WORDS = {
+    "en": ["sign up", "get started", "try free", "start free", "buy now",
+           "subscribe", "join", "register", "download", "book", "schedule",
+           "request demo", "request a quote", "get a quote", "contact us",
+           "learn more", "see pricing", "start trial", "create account",
+           "claim", "unlock", "request sample", "datasheet", "data sheet",
+           "enquire", "inquire", "send request"],
+    "de": ["jetzt anfragen", "anfrage", "anfragen", "angebot anfordern",
+           "angebot", "kontakt", "kontaktieren", "kontaktieren sie uns",
+           "mehr erfahren", "weiterlesen", "jetzt kaufen", "in den warenkorb",
+           "registrieren", "anmelden", "herunterladen", "download",
+           "datenblatt", "katalog", "termin vereinbaren", "beratung",
+           "beratung anfragen", "demo anfordern", "muster anfordern",
+           "jetzt starten", "kostenlos testen", "newsletter abonnieren",
+           "zum produkt", "zur produktseite", "platz reservieren", "buchen"],
+    "es": ["solicitar presupuesto", "presupuesto", "solicitar",
+           "contactar", "contacto", "contáctenos", "más información",
+           "saber más", "leer más", "comprar ahora", "añadir al carrito",
+           "registrarse", "suscribirse", "descargar", "ficha técnica",
+           "catálogo", "pedir cita", "solicitar demo", "solicitar muestra",
+           "empezar", "prueba gratis", "reservar plaza"],
+    "fr": ["demander un devis", "devis", "nous contacter", "contact",
+           "en savoir plus", "acheter", "ajouter au panier", "s'inscrire",
+           "télécharger", "fiche technique", "catalogue", "demander une démo",
+           "demander un échantillon", "commencer", "essai gratuit", "réserver"],
+    "it": ["richiedi preventivo", "preventivo", "contattaci", "contatti",
+           "scopri di più", "acquista ora", "aggiungi al carrello",
+           "registrati", "iscriviti", "scarica", "scheda tecnica", "catalogo",
+           "richiedi demo", "richiedi campione", "inizia", "prova gratuita"],
+    "nl": ["offerte aanvragen", "offerte", "contact", "neem contact op",
+           "meer informatie", "lees meer", "nu kopen", "in winkelwagen",
+           "registreren", "aanmelden", "downloaden", "datasheet",
+           "demo aanvragen", "monster aanvragen", "gratis proberen"],
+}
+
+
+def cta_words_for(lang):
+    """Return the CTA vocabulary for a page language.
+
+    Falls back to the union of every vocabulary when the language is unknown,
+    so a page is never reported as having zero CTAs merely because it is not
+    in English.
+    """
+    if lang:
+        primary = lang.split("-", 1)[0].strip().lower()
+        if primary in CTA_WORDS:
+            return CTA_WORDS[primary], primary
+    merged = []
+    for words in CTA_WORDS.values():
+        merged.extend(words)
+    return merged, None
+
+
 class MarketingPageParser(HTMLParser):
     """Parse HTML and extract marketing-relevant elements."""
 
@@ -34,6 +90,10 @@ class MarketingPageParser(HTMLParser):
         self.ctas = []
         self.social_links = []
         self.tracking_scripts = []
+        self.lang = ""
+
+        # CTA vocabulary — replaced once <html lang> is seen
+        self._cta_words, self.cta_lang = cta_words_for(None)
 
         # State tracking
         self._current_tag = None
@@ -92,7 +152,11 @@ class MarketingPageParser(HTMLParser):
         self._current_tag = tag
         self._current_attrs = attrs_dict
 
-        if tag == "head":
+        if tag == "html":
+            self.lang = attrs_dict.get("lang", "") or attrs_dict.get("xml:lang", "")
+            self._cta_words, self.cta_lang = cta_words_for(self.lang)
+
+        elif tag == "head":
             self._in_head = True
 
         elif tag == "title" and self._in_head and not self.title:
@@ -219,13 +283,9 @@ class MarketingPageParser(HTMLParser):
             text = self._current_text.strip()
             if self.links:
                 self.links[-1]["text"] = text
-            # Detect CTAs
-            cta_words = ["sign up", "get started", "try free", "start free", "buy now",
-                         "subscribe", "join", "register", "download", "book", "schedule",
-                         "request demo", "contact us", "learn more", "see pricing",
-                         "start trial", "create account", "claim", "unlock"]
+            # Detect CTAs using the vocabulary for this page's language
             text_lower = text.lower()
-            for cta in cta_words:
+            for cta in self._cta_words:
                 if cta in text_lower:
                     self.ctas.append({"text": text, "href": self.links[-1]["href"], "type": "link"})
                     break
@@ -299,6 +359,7 @@ class MarketingPageParser(HTMLParser):
 
         return {
             "seo": {
+                "lang": self.lang,
                 "title": self.title,
                 "title_length": len(self.title),
                 "title_ok": 30 <= len(self.title) <= 60,
@@ -324,6 +385,7 @@ class MarketingPageParser(HTMLParser):
             "conversion": {
                 "ctas": self.ctas[:20],
                 "cta_count": len(self.ctas),
+                "cta_language": self.cta_lang or "unknown (all vocabularies used)",
                 "forms": self.forms,
                 "form_count": len(self.forms),
                 "buttons": self.buttons[:20]
@@ -356,7 +418,10 @@ def fetch_page(url):
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
+        # No language preference: an en-US header makes multilingual sites serve
+        # their English variant, so the audit would analyze a page the target
+        # audience never sees.
+        "Accept-Language": "*",
     }
 
     req = urllib.request.Request(url, headers=headers)

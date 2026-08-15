@@ -17,6 +17,14 @@ The user runs `/ai-marketing:market-audit <url>`. This is the flagship command o
 
 ---
 
+## Phase 0: Grounding
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. If one exists, build a **grounding digest** now — the list of loaded files plus a condensed extract covering positioning, target industries and buyers, competitors, claim rules and tone. You will paste that digest into all five subagent prompts in Phase 2; they share none of your context and cannot rediscover it.
+
+Then read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`. The classification in Phase 1.2 below feeds the same pack-selection logic, and grounding overrides it where the two disagree.
+
+---
+
 ## Phase 1: Discovery (Pre-Analysis)
 
 Before launching subagents, perform these discovery steps:
@@ -54,7 +62,7 @@ Classify the business into one of these categories. This classification shapes e
 | **Training/Academy** | Course pages, schedules, instructor bios, certifications, enrollment CTAs | Course clarity, certification outcomes, enrollment friction, Course schema, post-training nurture |
 | **Knowledge-Led B2B Brand** | White papers, webinars, newsletter, podcast, content hub, expert authors | Authority building, gated assets, expert attribution, nurture flows, sales enablement |
 
-If multiple contexts apply, combine them instead of forcing one category. For example, IDT should be treated as B2B Industrial Manufacturer + Regulated/Compliance + Technical Supplier + Training/Academy + Knowledge-Led B2B Brand.
+If multiple contexts apply, combine them instead of forcing one category. A manufacturer that is also a distributor, runs a training academy and publishes technical guides is all four at once, and an audit that picks one label will miss three quarters of the conversion paths.
 
 ### 1.3 Identify Key Pages
 
@@ -94,6 +102,7 @@ Subagents share none of your conversation. Every prompt must therefore carry, in
 - the target URL
 - the detected business type (including combined contexts)
 - the page map from Phase 1.3
+- **the grounding digest from Phase 0** — loaded file names plus the condensed extract. Omitting it is the single most common failure of this command: the orchestrator knows the client and the five subagents do not, so they analyze against generic defaults and the merged report contradicts itself. If no grounding folder was found, say that explicitly in the prompt rather than leaving it out.
 - for `market-technical` only: the `analyze_page.py` JSON from Phase 1.1
 
 ### Subagent 1: market-content

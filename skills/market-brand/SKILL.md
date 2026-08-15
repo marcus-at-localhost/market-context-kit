@@ -8,6 +8,14 @@ metadata:
 
 # Brand Voice Analysis and Guidelines Generation
 
+## Phase 0: Grounding
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client documentation outranks every default in this skill, and any claim rules it contains bind the output. Name the loaded files at the top of what you produce.
+
+Resolve the business type via `${CLAUDE_PLUGIN_ROOT}/references/business-context.md` before assigning an archetype — the same voice reads as confident to one audience and unreliable to another.
+
+---
+
 ## Skill Purpose
 Analyze a brand's voice, tone, and messaging across all available channels and generate a comprehensive brand voice guidelines document. This skill examines how a brand communicates, identifies patterns and inconsistencies, and produces actionable guidelines that any writer or marketer can follow to maintain brand consistency.
 
@@ -130,21 +138,21 @@ Map the brand to one of five core personality archetypes (brands may blend 1-2):
 **1. The Authority**
 - Characteristics: Expert, trustworthy, data-driven, established
 - Voice: Confident but not arrogant, educational, precise
-- Industries: Finance, healthcare, B2B enterprise, legal, consulting
-- Example brands: McKinsey, IBM, Mayo Clinic
-- Key phrases: "Research shows...", "Our experts...", "Industry-leading..."
+- Industries: Finance, healthcare, B2B enterprise, legal, consulting, industrial manufacturing, standards-driven sectors
+- Example brands: McKinsey, IBM, Mayo Clinic; Freudenberg, Trelleborg, Siemens
+- Key phrases: "Research shows...", "Tested to [standard]...", "Our engineers..."
 
 **2. The Innovator**
 - Characteristics: Forward-thinking, disruptive, visionary, tech-savvy
 - Voice: Exciting, future-focused, sometimes provocative
-- Industries: Tech, SaaS, startups, renewable energy
-- Example brands: Tesla, Stripe, Notion
+- Industries: Tech, SaaS, startups, renewable energy, advanced materials, automation
+- Example brands: Tesla, Stripe, Notion; Festo, Trumpf
 - Key phrases: "Reimagine...", "The future of...", "We're building..."
 
 **3. The Friend**
 - Characteristics: Warm, approachable, helpful, relatable
 - Voice: Conversational, empathetic, inclusive, encouraging
-- Industries: Consumer products, education, community platforms
+- Industries: Consumer products, education, community platforms, local and family-owned businesses
 - Example brands: Mailchimp, Slack, Duolingo
 - Key phrases: "We get it...", "You've got this...", "Here to help..."
 
@@ -154,12 +162,13 @@ Map the brand to one of five core personality archetypes (brands may blend 1-2):
 - Industries: Lifestyle, fitness, creative industries, direct-to-consumer
 - Example brands: Nike, Oatly, Cards Against Humanity
 - Key phrases: "Stop settling for...", "The truth is...", "We're done with..."
+- Rarely viable for regulated, safety-critical or procurement-led businesses — the tone that reads as brave to a consumer reads as unreliable to an auditor
 
 **5. The Guide**
 - Characteristics: Wise, patient, methodical, trustworthy
 - Voice: Clear, instructional, supportive, knowledgeable
-- Industries: Education, professional development, tools, platforms
-- Example brands: HubSpot, Khan Academy, Ahrefs
+- Industries: Education, professional development, tools, platforms, technical distribution, training academies
+- Example brands: HubSpot, Khan Academy, Ahrefs; Würth, RS Components
 - Key phrases: "Here's how to...", "Step by step...", "The complete guide to..."
 
 **Assessment:**

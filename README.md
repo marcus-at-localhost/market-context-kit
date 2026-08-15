@@ -6,7 +6,7 @@
 
 A comprehensive marketing analysis and automation skill system for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Audit any website's marketing, generate copy, build email sequences, create content calendars, analyze competitors, and produce client-ready PDF reports — all from your terminal.
 
-**Built for entrepreneurs, agency builders, and solopreneurs who want to sell marketing services powered by AI.**
+**Built for anyone doing marketing work with Claude Code** — in-house teams, agencies, consultants, and solo operators alike. It handles consumer and self-serve businesses as well as industrial, technical and regulated B2B, and it keeps the two apart: business-type-specific playbooks live in swappable example packs rather than in the skills themselves, so an RFQ-led manufacturer never gets advice built for a DTC brand.
 
 ---
 
@@ -132,6 +132,13 @@ ai-marketing/                           # clone target: .claude/skills/ai-market
 │   ├── market-technical.md             # Technical SEO & tracking
 │   └── market-strategy.md              # Brand, pricing & growth strategy
 │
+├── references/                         # Loaded on demand by the skills
+│   ├── grounding.md                    # How to find and apply a _grounding/ folder
+│   ├── business-context.md             # Business type → example pack resolution
+│   └── examples/
+│       ├── consumer-online.md          # Creator, e-commerce, self-serve SaaS, local
+│       └── b2b-technical.md            # Industrial, distributor, regulated, academy
+│
 ├── scripts/                            # Python utility scripts
 │   ├── analyze_page.py                 # Webpage marketing analysis
 │   ├── competitor_scanner.py           # Competitor website scanner
@@ -153,6 +160,43 @@ ai-marketing/                           # clone target: .claude/skills/ai-market
 ```
 
 Nothing here is copied anywhere at install time. Skills reference the bundled scripts through `${CLAUDE_PLUGIN_ROOT}`, which Claude Code expands to this folder's real path on any machine, so there are no absolute paths to maintain and no second copy that can drift.
+
+---
+
+## Grounding: teaching the suite about your business
+
+Every command looks for a `_grounding/` folder in the working directory (and up to three parent directories). If it finds one, it loads it and treats it as the highest authority — above the site's own evidence for matters of intent, and above every default in the skills.
+
+A grounding folder is just markdown. Anything you would tell a new agency on day one belongs there:
+
+```
+_grounding/
+├── README.md                       # optional: maps tasks → which files to load
+├── 00_master_context.md            # who you are, what you sell, to whom
+├── 02_brand_positioning.md         # positioning, tone, what you never say
+├── 03_industries_and_target_groups.md
+├── 07_competitors_and_market.md    # the competitor set that actually matters
+└── 11_claims_and_evidence.md       # what may be asserted, and on what evidence
+```
+
+If `README.md` contains a task-to-files map, the skills follow it and load only what the task needs. Without one, they load `00_master_context.md` plus whatever filenames match the task.
+
+What this changes in practice:
+
+- **Claims are bounded.** A claims file stops the suite generating superlatives you cannot support — which matters when ad platforms reject them and regulated industries police them.
+- **Competitors are yours.** Competitive analysis starts from your named competitor set rather than from `"[category] alternatives"` search results.
+- **Subagents inherit it.** `market-audit` builds a grounding digest and passes it into all five parallel agents; they share no context otherwise and would otherwise analyze against generic defaults while the orchestrator does not.
+- **Every output declares it.** Reports name the grounding files they loaded, so you can tell which conclusions came from your documentation and which came from the suite's defaults.
+
+No grounding folder is required. Without one the suite works from site evidence alone and says so.
+
+## Business type and example packs
+
+The skills themselves contain no worked examples for a specific kind of business. Hooks, CTAs, objection sets, page structures and launch timelines live in `references/examples/`, and each skill loads exactly one pack after resolving the business type — from grounding if present, otherwise from site signals.
+
+This is deliberate rather than cosmetic: a labelled "for consumer brands only" example still sits in the context window and still influences the output. Keeping the wrong pack out of context is the only reliable way to keep a TikTok hook from reaching an industrial gasket manufacturer.
+
+When the business type cannot be resolved, no pack is loaded and examples are derived from the site's own vocabulary, with a note saying so.
 
 ---
 
@@ -188,20 +232,22 @@ The full marketing audit scores websites across 6 dimensions:
 
 All commands below take the `ai-marketing:` prefix — shortened here for readability.
 
-### For Agency Builders
+### For Agencies and Consultants
 - Run `market-audit` on a prospect's website before a sales call
 - Generate `market-proposal` with specific findings and pricing
 - Deliver `market-report-pdf` as a professional client deliverable
 
-### For Solopreneurs
+### For In-House B2B and Industrial Teams
+- Point the suite at a `_grounding/` folder so every command works from your own positioning, industries, competitors and claim rules
+- Audit RFQ, datasheet, catalog and course-enrollment paths — not just signup funnels
+- Generate technical content plans, trade-media angles and RFQ-stage email sequences
+- Check landing pages against the objections your buyers actually raise: standards, approvals, lead time, application fit
+
+### For Solo Operators and Creators
 - Use `market-copy` to optimize your own landing pages
 - Generate `market-emails` for your product launches
 - Build `market-social` calendars for consistent posting
-
-### For Content Creators
-- Research competitors with `market-competitors`
-- Plan launches with `market-launch`
-- Analyze your funnel with `market-funnel`
+- Plan launches with `market-launch`, analyze your funnel with `market-funnel`
 
 ---
 

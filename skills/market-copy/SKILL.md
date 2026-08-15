@@ -16,6 +16,15 @@ The user runs `/ai-marketing:market-copy <url>`. Fetch the target page(s), analy
 
 ---
 
+## Phase 0: Grounding and Business Context
+
+1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. If it contains claim or evidence rules, they bind every line of copy you generate — an unsupported claim is a defect, not a stylistic choice.
+2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack. It supplies the page copy structures and CTA conventions used in Phase 3.
+
+Write in the language of the target page, using the terminology the site and the grounding files already use.
+
+---
+
 ## Phase 1: Copy Discovery
 
 ### 1.1 Fetch and Parse
@@ -52,7 +61,7 @@ Identify what kind of page this is, because each type has different copy priorit
 | **Compliance/Regulatory Page** | Build trust for regulated buyers | Standards, audit language, risk reduction, expert attribution |
 | **Course/Certification Page** | Drive enrollment or schedule inquiry | Outcomes, certification value, instructor proof, schedule CTA |
 
-Also detect business context before rewriting. Do not force SaaS language ("trial", "pricing tiers", "book a demo") onto RFQ-led, regulated, distributor, academy, local, or industrial businesses.
+The page types available depend on the business — a site with no public pricing has no pricing page to fix, and its equivalent leverage point is the inquiry page.
 
 ### 1.3 Voice and Tone Analysis
 
@@ -180,80 +189,19 @@ If any element is missing or weak in the current copy, flag it.
 8. Objection handling: FAQ or guarantee section
 9. Final CTA: Urgency-driven repeat of the offer
 
-**Pricing Page Copy Structure:**
-1. Headline: Frame the investment, not the cost ("Choose your growth plan")
-2. Plan names: Aspirational or audience-based, not "Basic/Pro/Enterprise"
-3. Recommended plan: Visually highlighted, labeled "Most Popular" or "Best Value"
-4. Feature descriptions: Benefit-oriented, not feature lists
-5. Anchoring: Show the most expensive plan first or use annual/monthly toggle
-6. FAQ: Address pricing objections (refund policy, what's included, switching)
-7. Guarantee: Risk reversal (free trial, money-back, cancel anytime)
-
-**About Page Copy Structure:**
-1. Mission statement: Why this company exists (not what it does)
-2. Origin story: The founder's journey from problem to solution
-3. Values: 3-5 values with real examples, not generic platitudes
-4. Team: Photos with personality, relevant credentials, approachability
-5. Social proof: Press mentions, awards, milestones
-6. CTA: Connect the mission to the reader's journey
-
-**Product Page Copy Structure (E-commerce):**
-1. Product title: Descriptive and benefit-oriented
-2. Price: Clear, with any savings highlighted
-3. Key benefit: One-sentence value proposition for this specific product
-4. Description: 3-5 benefit-driven paragraphs
-5. Specifications: Clean, scannable table
-6. Reviews: Star rating + written reviews with photos
-7. Cross-sells: "Frequently bought together" or "You might also like"
-
-**Feature Page Copy Structure (SaaS):**
-1. Feature name: Clear and descriptive
-2. Problem it solves: Start with the pain point, not the feature
-3. How it works: Visual + 2-3 step explanation
-4. Use cases: 2-3 specific scenarios where this feature shines
-5. Comparison: How this is different from alternatives
-6. CTA: "Try [feature] free" or "See it in action"
-
-**Industrial Product Page Copy Structure:**
-1. Product/category name: Clear technical descriptor plus application context
-2. Qualification statement: Material, standards, temperature/pressure range, industries served
-3. Use cases: Where this product is specified and where it should not be used
-4. Specifications: Scannable table, datasheet link, standards/certifications, compatibility notes
-5. Proof: Test data, approvals, case examples, expert attribution
-6. CTA: "Datenblatt herunterladen", "Produkt anfragen", or "Technische Beratung anfragen"
-
-**Industry/Solution Page Copy Structure:**
-1. Audience and application: Name the industry and operational problem
-2. Stakes: Downtime, compliance risk, safety, audit failure, cost of inaction
-3. Solution architecture: Product/service combination that solves the application
-4. Proof: Standards, certifications, case study, named expert, process
-5. Conversion block: Expert contact, RFQ, datasheet, checklist, or assessment
-
-**Technical Service / Academy Page Copy Structure:**
-1. Outcome: What the service/course enables the buyer to do
-2. Credentials: Instructor/expert authority, certifications, standards, partner bodies
-3. Format and process: Duration, location, schedule, deliverables, prerequisites
-4. Proof: Participants, customer examples, audit/compliance relevance
-5. CTA: "Kursplatz reservieren", "Termin anfragen", or "Mit Experten sprechen"
-
-**Compliance / Regulatory Page Copy Structure:**
-1. Regulation or standard: Name it explicitly
-2. Practical implication: What the buyer must decide, document, or change
-3. Technical interpretation: Clear guidance with caveats and evidence
-4. Brand role: Where the company helps, without unsupported legal claims
-5. CTA: Checklist, consultation, technical assessment, or documentation download
+**Other page types** — pricing, about, product, feature, industrial product, industry/solution, technical service, academy, compliance — have structures that only make sense for one kind of business. Take them from the loaded example pack: `Page copy structures` in `consumer-online.md` or in `b2b-technical.md`.
 
 ### 3.2 CTA Optimization
 
 Analyze every CTA on the page:
 
-**CTA Button Text Best Practices:**
-- Use first person: "Start My Free Trial" not "Start Your Free Trial"
-- Include the value: "Get My Report" not "Submit"
-- Reduce risk in context: "Try Free for 14 Days", "Antwort innerhalb von 1 Werktag", "Datenblatt ohne Registrierung", or "Kostenfreie Erstprüfung"
+**CTA Button Text Best Practices (any business type):**
+- Name the value, not the mechanic: "Get My Report" not "Submit"
 - Be specific: "Download the 2026 Marketing Guide" not "Download"
-- Add urgency when appropriate: "Claim My Spot (12 Left)" not "Register"
-- For RFQ-led businesses, prefer direct buyer-language CTAs: "Angebot anfordern", "Technische Beratung anfragen", "Produkt spezifizieren", "Datenblatt herunterladen"
+- Remove the next unknown: say what happens after the click and by when
+- Offer a lower-commitment alternative alongside the primary action
+
+Phrasing patterns, urgency conventions and first-person usage differ by business type and are in the loaded example pack (`Landing pages — CTA phrasing` / `CTA phrasing`). Write every CTA in the page's own language.
 
 **CTA Placement Analysis:**
 - Is there a CTA above the fold? (Required)
@@ -261,12 +209,9 @@ Analyze every CTA on the page:
 - Is there a sticky/floating CTA on long pages? (Recommended for long-form)
 - Is the CTA repeated at the bottom? (Required)
 
-**CTA Color Psychology:**
-- Green: Growth, go, positive action (good for free trials)
-- Orange: Urgency, enthusiasm, confidence (good for limited offers)
-- Blue: Trust, security, calm (good for financial/enterprise)
-- Red: Urgency, excitement, passion (use sparingly)
-- The CTA color should contrast with the page background and surrounding elements
+**CTA Contrast:**
+- The CTA must contrast with the page background and surrounding elements. That is the part with evidence behind it.
+- Colour-meaning conventions ("green means go") are consumer-marketing folklore and are in `consumer-online.md` if the business type calls for them. Do not spend a recommendation slot on hue when contrast, placement and wording are unresolved.
 
 ### 3.3 Before/After Examples
 

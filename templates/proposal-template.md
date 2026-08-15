@@ -77,26 +77,26 @@ Based on our marketing audit of [website], here are the key findings:
 
 ## Investment
 
-### Option 1: [Package Name] — $[X,XXX]/month
+### Option 1: [Package Name] — [amount] [currency]/month
 - [What's included]
 - [What's included]
 - [What's included]
 - Best for: [who this is for]
 
-### Option 2: [Package Name] — $[X,XXX]/month (Recommended)
+### Option 2: [Package Name] — [amount] [currency]/month (Recommended)
 - Everything in Option 1, plus:
 - [Additional deliverable]
 - [Additional deliverable]
 - Best for: [who this is for]
 
-### Option 3: [Package Name] — $[X,XXX]/month
+### Option 3: [Package Name] — [amount] [currency]/month
 - Everything in Option 2, plus:
 - [Additional deliverable]
 - [Additional deliverable]
 - Best for: [who this is for]
 
 **Minimum engagement:** [3 months]
-**Payment terms:** Monthly, due on the 1st
+**Payment terms:** [invoicing interval and payment period — e.g. monthly, net 14/30; state whether amounts are net of VAT]
 
 ---
 
@@ -107,8 +107,10 @@ Based on our marketing audit of [website], here are the key findings:
 | Monthly website visitors | [X] | [Y] | — |
 | Conversion rate | [X%] | [Y%] | — |
 | Monthly leads | [X] | [Y] | — |
-| Customer acquisition cost | $[X] | $[Y] | $[savings] |
-| Monthly revenue impact | — | — | $[estimate] |
+| Customer acquisition cost | [X] | [Y] | [savings] |
+| Monthly revenue impact | — | — | [estimate] |
+
+*All amounts in [currency].*
 
 **Projected ROI:** [X]x return on investment within [timeframe]
 

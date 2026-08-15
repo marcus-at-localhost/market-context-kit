@@ -16,6 +16,15 @@ The user runs `/ai-marketing:market-emails <topic/url>`. If a URL is provided, f
 
 ---
 
+## Phase 0: Grounding and Business Context
+
+1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Claim rules there bind every email you write.
+2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack. It supplies the CTA ladder, subject-line angles and urgency conventions.
+
+Write the emails in the recipient's language, and check the compliance section in Phase 5 for the regime that actually applies to that market before drafting.
+
+---
+
 ## Phase 1: Context Gathering
 
 ### 1.1 Business Understanding
@@ -92,13 +101,12 @@ Use this for nurture emails and any sequence targeting a sophisticated audience.
 **Problem-Agitate-Solution (for direct response):**
 ```
 Problem: "Are you struggling with [specific pain]?"
-Agitate: "Every day you wait, [consequence]. Your competitors are already..."
+Agitate: "Every day you wait, [consequence]."
 Solution: "[Product] solves this by [mechanism]. Here's how..."
-CTA: "Start your free trial and see the difference in 24 hours."
+CTA: [the next commercial step — see the loaded example pack]
 ```
 
-Use this for launch emails and cart abandonment.
-For industrial/RFQ contexts, replace the CTA with a lower-risk commercial next step such as "Send us your specification", "Request a technical review", "Download the checklist", or "Reserve a course seat".
+Use this for launch emails and abandoned-conversion follow-ups. Take the closing CTA from the pack (`Email — worked CTAs and framings`): a trial or purchase in one context, a specification review or sample request in the other. Agitation also has a ceiling — with a technical buyer, overstating consequence reads as sales pressure and costs the reply.
 
 ### 2.3 Subject Line Optimization
 
@@ -159,10 +167,10 @@ Email 1 (Immediate): DELIVER + INTRODUCE
         Ask one engaging question to prompt a reply (boosts deliverability).
   CTA: Download/access the lead magnet
 
-Email 2 (Day 1): STORY + VALUE
-  Subject: "Why I built [product] (the honest version)"
-  Body: Founder story or origin story. Connect to the reader's problem.
-        Demonstrate empathy and shared experience.
+Email 2 (Day 1): CREDIBILITY
+  Subject: "Why [brand] exists" / "[Standard or problem]: how we approach it"
+  Body: Origin story for consumer and founder-led brands; capability, lab,
+        certifications and named experts for technical ones.
   CTA: Read the full story / reply with your biggest challenge
 
 Email 3 (Day 3): EDUCATE + AUTHORITY
@@ -171,23 +179,26 @@ Email 3 (Day 3): EDUCATE + AUTHORITY
         Solve a real problem without requiring the product.
   CTA: Read the full guide / watch the video
 
-Email 4 (Day 5): SOCIAL PROOF + SOFT PITCH
-  Subject: "How [customer name] achieved [specific result]"
+Email 4 (Day 5): PROOF + SOFT PITCH
+  Subject: "How [customer] achieved [specific result]"
   Body: Case study or testimonial. Specific numbers and timeline.
         Natural transition to how the product helped.
-  CTA: See more customer stories / start your trial
+  CTA: [proof-stage CTA from the loaded pack]
 
 Email 5 (Day 7): DIRECT PITCH + OBJECTION HANDLING
   Subject: "Is [product] right for you? (honest assessment)"
-  Body: Direct pitch. Address the top 3 objections.
-        Include risk reversal (guarantee, trial, refund).
-  CTA: Start your free trial / book a demo
+  Body: Direct pitch. Address the top 3 objections for this buyer.
+        Include the risk reducer this buyer recognizes — refund-style
+        guarantee, or certification, test data and response commitment.
+  CTA: [primary commercial CTA from the loaded pack]
 
-Email 6 (Day 10, optional): URGENCY + FINAL PUSH
-  Subject: "Your exclusive offer expires in 48 hours"
-  Body: Limited-time incentive for welcome subscribers.
-        Recap the key benefits and social proof.
-  CTA: Claim your offer before it expires
+Email 6 (Day 10, optional): DEADLINE
+  Subject: [only if a real deadline exists]
+  Body: Send this only when something genuinely expires — an offer window,
+        a course date, a standards transition, a lead-time window.
+        Manufactured urgency costs more trust than it converts, and costs
+        most with technical buyers.
+  CTA: [deadline-linked action]
 
 Email 7 (Day 14, optional): TRANSITION
   Subject: "What's next for you and [brand]"
@@ -299,7 +310,7 @@ For each sequence, suggest tests:
 
 ### 5.1 Industry Benchmarks
 
-Include relevant benchmarks in the output:
+Include relevant benchmarks in the output. These are US-market averages; open rates in particular are inflated by Apple Mail Privacy Protection and vary by market and list age. Quote them as orientation and name the caveat — never score a client as "underperforming" on this table alone.
 
 | Industry | Avg Open Rate | Avg Click Rate | Avg Conversion Rate |
 |----------|-------------|----------------|-------------------|
@@ -318,24 +329,33 @@ Include relevant benchmarks in the output:
 
 Include a compliance section in every output:
 
-**CAN-SPAM (US):**
-- Physical mailing address required in every email
-- Clear unsubscribe link required (must work within 10 business days)
-- "From" name and email must be accurate
-- Subject line must not be deceptive
+Lead with the regime that governs the recipients, not the one you know best. Determine it from the audience's location, which is usually the site's market — not the sender's.
 
-**GDPR (EU):**
-- Requires explicit opt-in consent (no pre-checked boxes)
-- Must document consent (when, how, what they agreed to)
-- Right to be forgotten — must delete on request
-- Data processing agreement needed with ESP
+**GDPR (EU/EEA) — the strictest of the three, and the default for any European list:**
+- Explicit opt-in consent required; no pre-checked boxes, no consent bundled into terms
+- Consent must be documented: when, how, and exactly what was agreed to
+- Right to erasure — delete on request
+- Data processing agreement required with the email service provider
+- Legitimate-interest B2B sending is narrow and contested; do not present it as a safe default
+
+**Germany, Austria, Switzerland — stricter still in practice:**
+- **Double opt-in is the de-facto requirement.** Single opt-in is not defensible under German case law: the confirmation click, with timestamp and IP, is the evidence. Recommend it without qualification for any DE/AT/CH list.
+- **Impressum** — a complete legal imprint (company, legal form, register number, VAT ID, managing director, contact) belongs in the email footer, not only on the website
+- Advertising to business addresses still requires consent; there is no blanket B2B exemption
+- Unsubscribe must be one click and free of charge
 
 **CASL (Canada):**
 - Express consent required for commercial messages
-- Implied consent allowed for existing business relationships (24 months)
+- Implied consent for existing business relationships, 24 months
 - Sender identification required
 
-**Note:** Always recommend the user verify compliance with their legal counsel.
+**CAN-SPAM (US) — the most permissive; do not apply its standards to a European list:**
+- Physical mailing address required in every email
+- Working unsubscribe, honored within 10 business days
+- Accurate "From" name and address, non-deceptive subject line
+- Opt-out rather than opt-in — this is the key divergence from GDPR
+
+**Note:** Always recommend the user verify compliance with their legal counsel. This is orientation, not legal advice.
 
 ---
 
@@ -392,7 +412,7 @@ Write the full output to `EMAIL-SEQUENCES.md`:
 [KPIs with industry benchmarks]
 
 ## Compliance Checklist
-[CAN-SPAM, GDPR, CASL requirements]
+[The regime governing this list, leading with the recipients' jurisdiction — GDPR and double opt-in for EU/D-A-CH, CASL for Canada, CAN-SPAM for the US]
 
 ## Implementation Notes
 [ESP recommendations, automation setup, tagging strategy]

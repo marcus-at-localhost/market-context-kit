@@ -16,6 +16,15 @@ The user runs `/ai-marketing:market-funnel <url>`. Fetch the target site and tra
 
 ---
 
+## Phase 0: Grounding and Business Context
+
+1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds.
+2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack. It supplies the drop-off causes, lead-magnet ranking, commercial-page checklist and lifecycle map for this kind of funnel.
+
+The conversion event itself differs: a signup or checkout in one context, a qualified request in the other. Everything downstream of that difference — what friction means, what a good lead magnet is, what the last step should promise — follows from the pack, not from this file.
+
+---
+
 ## Phase 1: Funnel Discovery and Mapping
 
 ### 1.1 Identify the Funnel Type
@@ -114,47 +123,9 @@ For each page in the funnel, score these dimensions:
 | Slow load time | Heavy images, excessive scripts | Optimize images, defer non-critical JS |
 | Poor mobile experience | Text too small, buttons too close | Mobile-first responsive redesign |
 
-**Pricing Page:**
-| Drop-Off Cause | Detection Signal | Fix |
-|----------------|-----------------|-----|
-| Price shock | No context before showing price | Add value framing before prices |
-| Too many options | 4+ plans, feature overload | Reduce to 3 plans, highlight recommended |
-| Hidden costs | Fees revealed later in flow | Transparent pricing upfront |
-| No social proof | No testimonials near pricing | Add customer quotes near each plan |
-| Missing FAQ | Common questions unanswered | Add pricing FAQ addressing top 5 objections |
+**Conversion-step drop-off** — pricing, signup and checkout for self-serve businesses; RFQ, inquiry and catalog pages for request-led ones. The cause-signal-fix tables are in the loaded example pack: `Funnel — drop-off causes and fixes` in `consumer-online.md` or `Funnel — friction causes and fixes` in `b2b-technical.md`.
 
-**RFQ / Inquiry Page:**
-| Drop-Off Cause | Detection Signal | Fix |
-|----------------|-----------------|-----|
-| Unclear next step | Generic "Contact" page with no process | Explain response time, required inputs, and what happens after submission |
-| Missing technical fields | Buyer cannot specify material, standard, pressure, dimensions, quantity | Add optional technical fields or file upload |
-| No trust near form | Certifications and expert proof absent near CTA | Add standards, certifications, named expert, and privacy note beside the form |
-| Full account gate too early | Datasheets or quote flow hidden before value is shown | Allow preview/download samples before registration |
-
-**Technical Product / Catalog Page:**
-| Drop-Off Cause | Detection Signal | Fix |
-|----------------|-----------------|-----|
-| Product findability failure | Weak search, no filters, unclear categories | Add application, material, standard, and part-number filters |
-| Missing decision data | No datasheet, dimensions, standards, compatibility, or lead time | Add specs table, downloadable datasheet, compliance badges, stock/lead-time note |
-| No quote path | Product detail ends without inquiry/RFQ CTA | Add "Produkt anfragen" / "Datenblatt herunterladen" / "Mit Experten sprechen" |
-
-**Signup/Registration:**
-| Drop-Off Cause | Detection Signal | Fix |
-|----------------|-----------------|-----|
-| Too many fields | 5+ required fields | Reduce to 3 or fewer (name, email, password) |
-| Account required too early | Must create account to see content | Allow preview or trial without account |
-| No progress indicator | Multi-step form without progress bar | Add step counter: "Step 1 of 3" |
-| Social login missing | Only email/password signup | Add Google/GitHub/social SSO |
-| No trust signals | No privacy note, no guarantees | Add "No spam" note, security badges |
-
-**Checkout/Purchase:**
-| Drop-Off Cause | Detection Signal | Fix |
-|----------------|-----------------|-----|
-| Surprise shipping costs | Shipping shown only at checkout | Show shipping early or offer free shipping |
-| Required account creation | Must register before purchasing | Guest checkout option |
-| Limited payment options | Only credit card | Add PayPal, Apple Pay, Google Pay |
-| No urgency | No reason to buy now | Add limited stock, countdown, or bonus |
-| No guarantee | No return policy visible | Add money-back guarantee near CTA |
+Work through every table in the pack against the actual funnel steps mapped in Phase 1, and record which causes are present with the evidence that shows it.
 
 ### 2.3 Lead Magnet Effectiveness
 
@@ -165,20 +136,12 @@ If the funnel includes a lead magnet, evaluate:
 |----------|-------------|------------|
 | **Relevance** | 0-10 | Does it directly address the target audience's main pain? |
 | **Specificity** | 0-10 | Is it a specific deliverable (not vague "free guide")? |
-| **Perceived value** | 0-10 | Would someone pay $20+ for this? |
-| **Quick win** | 0-10 | Can the user get value within 10 minutes? |
-| **Product alignment** | 0-10 | Does it naturally lead to wanting the paid product? |
-| **Opt-in friction** | 0-10 | Is the form simple? (10 = email only) |
+| **Perceived value** | 0-10 | Would the buyer trade their contact details for it? |
+| **Time to value** | 0-10 | How quickly does it help — minutes for consumer, one evaluation cycle for technical |
+| **Product alignment** | 0-10 | Does it naturally lead toward the commercial action? |
+| **Opt-in friction** | 0-10 | Is the form simple, and is anything gated that should not be? |
 
-**Lead Magnet Types Ranked by Effectiveness:**
-1. Templates and tools (highest conversion, immediate value)
-2. Checklists and cheat sheets (quick win, easy to consume)
-3. Case studies with numbers (credibility building)
-4. Video training or workshops (high perceived value)
-5. Ebooks and guides (lower conversion but good for authority)
-6. Quizzes and assessments (interactive, high engagement)
-7. Free trials and demos (product-led, highest intent)
-8. Datasheets, selectors, calculators, standards checklists, compliance guides, and technical decision matrices (highest intent for industrial/RFQ businesses)
+**Ranking by effectiveness** differs sharply by business type — see `Lead magnets` in the loaded pack. Note that gating is itself a decision: a datasheet behind a form loses more qualified technical buyers than it captures.
 
 ---
 
@@ -203,12 +166,14 @@ Conversion Metrics:
   Opportunity → Customer: [X]% (benchmark: 20-40%)
   Overall Visitor → Customer: [X]% (benchmark: 0.5-3%)
 
-Revenue Metrics:
-  Average Order Value (AOV): $[X]
-  Customer Lifetime Value (LTV): $[X]
-  Customer Acquisition Cost (CAC): $[X]
+Revenue Metrics (state the currency once, use the client's):
+  Average Order Value (AOV): [X]
+  Customer Lifetime Value (LTV): [X]
+  Customer Acquisition Cost (CAC): [X]
   LTV:CAC Ratio: [X]:1 (target: 3:1 or higher)
-  Revenue Per Visitor (RPV): $[X]
+  Revenue Per Visitor (RPV): [X]
+  For quoted-price businesses, substitute average order value with average
+  contract or annual supply value, and add inquiry-to-quote and quote-to-win rates.
 
 Engagement Metrics:
   Pages Per Session: [X]
@@ -236,6 +201,8 @@ If we improve conversion from 2% to 2.5%:
 Use this framework to quantify the impact of every recommendation.
 
 ### 3.3 Funnel Benchmarks by Type
+
+Published US-market figures. Use them for orientation and name that caveat when you quote one — long-cycle B2B, regulated procurement and non-US markets deviate enough that a "below benchmark" verdict means nothing on its own. Where the client has its own historical data, that data wins.
 
 | Funnel Type | Good Conversion | Great Conversion | Elite Conversion |
 |-------------|----------------|-----------------|-----------------|
@@ -301,27 +268,7 @@ Rank every recommendation using this framework:
 
 Since pricing, RFQ, inquiry, quote, and enrollment pages are often the highest-leverage optimization point:
 
-**Pricing Page Audit Checklist (when public pricing exists):**
-- [ ] Headline frames value, not cost ("Choose your growth plan" not "Pricing")
-- [ ] Plans are limited to 3 (or 3 + enterprise)
-- [ ] One plan is highlighted as "Most Popular" or "Best Value"
-- [ ] Annual pricing is shown first with savings highlighted
-- [ ] Features are benefit-oriented (not jargon)
-- [ ] Social proof appears near pricing (testimonials, customer count)
-- [ ] FAQ addresses top 5 pricing objections
-- [ ] Money-back guarantee or free trial is prominently displayed
-- [ ] Plan names are aspirational (not "Basic/Standard/Premium")
-- [ ] CTA buttons use action language ("Start Growing" not "Subscribe")
-- [ ] Comparison with competitors or the cost of not buying
-- [ ] "Help me choose" option or quiz for undecided visitors
-
-**RFQ / Inquiry / Enrollment Checklist (when pricing is hidden or sales-led):**
-- [ ] The primary action matches buyer intent ("Anfrage stellen", "Technische Beratung anfragen", "Kursplatz sichern")
-- [ ] The page explains what happens after submission and when the buyer will hear back
-- [ ] Required fields are minimal; optional technical fields and file upload support qualified requests
-- [ ] Certifications, standards, customer proof, and expert credentials appear near the form
-- [ ] Datasheets, course details, sample outputs, or proof assets are visible before any account gate
-- [ ] Phone/email/direct expert options exist for high-intent or urgent buyers
+Use the checklist from the loaded example pack — `Pricing page checklist` in `consumer-online.md` when public pricing exists, `RFQ / inquiry / enrollment page checklist` in `b2b-technical.md` when pricing is quoted or sales-led. A site can have both; audit each against its own checklist.
 
 ### 4.4 Checkout/Signup Flow Optimization
 
@@ -341,21 +288,9 @@ Since pricing, RFQ, inquiry, quote, and enrollment pages are often the highest-l
 
 ### 5.1 Funnel-to-Email Mapping
 
-For each funnel stage, recommend the appropriate email sequence:
+For each funnel stage, recommend the appropriate follow-up sequence. The stage-to-sequence map is in the loaded example pack — `Lifecycle → email sequence` in `consumer-online.md`, `Lifecycle → sequence` in `b2b-technical.md`.
 
-```
-Funnel Stage          → Email Sequence
-------------------------------------------
-Visitor (anonymous)   → None (use retargeting ads)
-Lead (opted in)       → Welcome sequence (5-7 emails)
-Engaged Lead          → Nurture sequence (6-8 emails)
-Datasheet/RFQ Lead    → Technical follow-up + sales handoff sequence
-Course Lead           → Enrollment reminder + proof sequence
-Trial User            → Onboarding sequence (5-7 emails)
-Inactive Trial        → Re-engagement sequence (3-4 emails)
-Customer              → Post-purchase / loyalty sequence
-Churned Customer      → Win-back sequence (3-4 emails)
-```
+The stages themselves differ: there is no trial user in a quoted-price business, and no dormant-account reactivation play in a self-serve one.
 
 ### 5.2 Traffic Source Alignment
 
@@ -465,7 +400,7 @@ Conversion Flow:
   Overall:                  [X]% (benchmark: [X]%)
 
 Biggest Bottleneck: [stage] — [X]% drop-off
-Revenue Opportunity: $[X,XXX]/month with recommended fixes
+Revenue Opportunity: [X,XXX]/month with recommended fixes
 
 Top 3 Fixes:
   1. [fix] — est. [X]% lift

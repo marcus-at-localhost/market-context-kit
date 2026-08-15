@@ -9,6 +9,14 @@ metadata:
 
 # PDF Marketing Report Generator
 
+## Phase 0: Grounding
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client documentation outranks every default in this skill, and any claim rules it contains bind the output. Name the loaded files at the top of what you produce.
+
+Pass business-appropriate action items into the JSON. The script's built-in fallbacks are deliberately generic and should not reach a client PDF.
+
+---
+
 ## Skill Purpose
 Generate a professional, visually polished PDF marketing report using the Python script `scripts/generate_pdf_report.py`. This skill collects all available audit and analysis data, structures it into the expected JSON format, invokes the script, and produces a branded PDF with score gauges, bar charts, comparison tables, findings, and a prioritized action plan.
 

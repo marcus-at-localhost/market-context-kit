@@ -8,6 +8,14 @@ metadata:
 
 # Client Proposal Generator for Marketing Services
 
+## Phase 0: Grounding
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client documentation outranks every default in this skill, and any claim rules it contains bind the output. Name the loaded files at the top of what you produce.
+
+Quote pricing in the client's currency, and set payment terms and VAT handling to their market's norms rather than to a US default.
+
+---
+
 ## Skill Purpose
 Generate a professional, client-ready marketing services proposal. This skill produces a complete proposal document that positions the agency/consultant as the clear choice, frames pricing with anchoring and tiered options, and includes ROI projections to justify the investment.
 
@@ -216,19 +224,21 @@ Current State:
 - Current conversion rate: [X%]
 - Current leads/month: [X]
 - Close rate: [X%]
-- Average deal value: $[X]
-- Current monthly revenue from marketing: $[X]
+- Average deal value: [X]
+- Current monthly revenue from marketing: [X]
 
 Projected State (6 months):
 - Projected traffic increase: [X%] -> [new traffic]
 - Projected conversion rate: [X%] -> [new leads/month]
 - Projected leads increase: [X%]
-- Projected revenue increase: $[X]/month
+- Projected revenue increase: [X]/month
 - 6-month projected ROI: [X]x
 
-Investment: $[total 6-month cost]
-Projected Return: $[projected revenue increase]
+Investment: [total 6-month cost]
+Projected Return: [projected revenue increase]
 ROI: [X]x return
+
+All monetary figures in the client's currency; state whether amounts are net of VAT.
 ```
 
 **Important:** Be conservative with projections. Under-promise and over-deliver. Use ranges rather than specific numbers. Add disclaimers that results depend on multiple factors.
