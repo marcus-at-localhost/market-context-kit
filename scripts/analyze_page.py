@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Marketing Page Analyzer — Utility script for AI Marketing Claude Code Skills
+Marketing Page Analyzer — Utility script for Market Context Kit
 Analyzes a webpage for marketing effectiveness: SEO elements, content structure,
 trust signals, CTAs, social proof, and conversion optimization indicators.
 """

@@ -1,7 +1,7 @@
 # Content Plan
 
 <!--
-USAGE: Skeleton for CONTENT-PLAN.md output produced by the market-content-plan skill.
+USAGE: Skeleton for CONTENT-PLAN.md output produced by the content-plan skill.
 Claude fills in the rows and sections below based on niche research.
 Do not delete section headers — the skill references them by name.
 -->
@@ -14,7 +14,7 @@ Do not delete section headers — the skill references them by name.
 |-------|-------|
 | **URL / Domain** | [https://example.com] |
 | **Date Generated** | [YYYY-MM-DD] |
-| **Skill Version** | market-content-plan v[X.X] |
+| **Skill Version** | content-plan v[X.X] |
 | **Niche** | [niche label, e.g., "Residential Solar Installation — Germany"] |
 | **Prereq files used** | [BRAND-VOICE.md · ICP.md · COMPETITORS.md — list whichever exist] |
 

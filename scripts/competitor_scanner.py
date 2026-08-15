@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Competitor Scanner — Utility script for AI Marketing Claude Code Skills
+Competitor Scanner — Utility script for Market Context Kit
 Scans competitor websites to extract positioning, pricing, features, and trust signals
 for competitive analysis.
 

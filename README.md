@@ -1,8 +1,8 @@
-# AI Marketing Suite for Claude Code
+# Market Context Kit
 
 **This is 100% AI-Slop taken from YouTube Ai-Slop Bros. It neither replaces the work of an agency that would charge you thousands of money, nor does it create content that is actually useful for your business! The only thing it offers is a different perspective on your business and maybe gives you ideas for your own marketing**
 
-A comprehensive marketing analysis and automation skill system for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Audit any website's marketing, generate copy, build email sequences, create content calendars, analyze competitors, and produce client-ready PDF reports — all from your terminal.
+A context-aware marketing skill kit for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Audit websites, generate copy and campaigns, build content plans, analyze competitors, and produce client-ready reports — all from your terminal.
 
 **Built for anyone doing marketing work with Claude Code** — in-house teams, agencies, consultants, and solo operators alike. It handles consumer and self-serve businesses as well as industrial, technical and regulated B2B, and it keeps the two apart: business-type-specific playbooks live in swappable example packs rather than in the skills themselves, so an RFQ-led manufacturer never gets advice built for a DTC brand.
 
@@ -13,7 +13,7 @@ A comprehensive marketing analysis and automation skill system for [Claude Code]
 Type a command in Claude Code and get instant, actionable marketing analysis:
 
 ```
-> /ai-marketing:market-audit https://calendly.com
+> /marketkit:audit https://calendly.com
 
 Launching 5 parallel agents...
 ✓ Content & Messaging Analysis     — Score: 72/100
@@ -37,7 +37,7 @@ This is a Claude Code **skills-directory plugin**: clone it into a skills direct
 ### One project only (recommended)
 
 ```bash
-git clone https://github.com/marcus-at-localhost/ai-marketing-claude.git .claude/skills/ai-marketing
+git clone https://github.com/marcus-at-localhost/market-context-kit.git .claude/skills/market-context-kit
 ```
 
 Run that from the project root. Accept the workspace trust dialog when Claude Code asks — project-scope plugins do not load until you do.
@@ -45,7 +45,7 @@ Run that from the project root. Accept the workspace trust dialog when Claude Co
 ### Every project on this machine
 
 ```bash
-git clone https://github.com/marcus-at-localhost/ai-marketing-claude.git ~/.claude/skills/ai-marketing
+git clone https://github.com/marcus-at-localhost/market-context-kit.git ~/.claude/skills/market-context-kit
 ```
 
 No trust dialog needed for this one.
@@ -55,10 +55,21 @@ No trust dialog needed for this one.
 Restart Claude Code, then:
 
 ```bash
-claude plugin list          # expect: ai-marketing@skills-dir
+claude plugin list          # expect: marketkit@skills-dir
 ```
 
-Type `/ai-marketing:market` for the command index. Updating is `git pull` in the folder.
+Type `/marketkit:help` for the command index. Updating is `git pull` in the folder.
+
+### Updating an existing `ai-marketing` clone
+
+The local folder may stay at `.claude/skills/ai-marketing`; the manifest controls the plugin namespace. Point the clone at the new repository, pull, and restart Claude Code:
+
+```bash
+git remote set-url origin https://github.com/marcus-at-localhost/market-context-kit.git
+git pull
+```
+
+The v3 command namespace is intentionally shorter: for example, `/ai-marketing:market-audit` becomes `/marketkit:audit` and `/ai-marketing:market-content-plan` becomes `/marketkit:content-plan`.
 
 ### Optional: PDF Report Support
 
@@ -72,56 +83,56 @@ Everything else runs on the Python standard library. Windows, macOS, and Linux a
 
 ## Commands
 
-Each skill is its own command. There is no router — `market` is just an index you can print.
+Each skill is its own command. There is no router — `help` is just an index you can print.
 
-Because this loads as a plugin, every command is namespaced `ai-marketing:`. That prefix is part of the trigger, not an optional long form — a bare `/market-audit` does not resolve. Claude also invokes these on its own when a request matches, so you rarely have to type one.
+Because this loads as a plugin, every command is namespaced `marketkit:`. That prefix is part of the trigger, not an optional long form — a bare `/audit` does not resolve. Claude also invokes these on its own when a request matches, so you rarely have to type one.
 
 | Command | What It Does |
 |---------|-------------|
-| `/ai-marketing:market` | Index of every command, with a "which one first" guide |
-| `/ai-marketing:market-audit <url>` | Full marketing audit with 5 parallel agents |
-| `/ai-marketing:market-copy <url>` | Generate optimized copy with before/after examples |
-| `/ai-marketing:market-emails <topic>` | Generate complete email sequences |
-| `/ai-marketing:market-social <topic>` | 30-day social media content calendar |
-| `/ai-marketing:market-ads <url>` | Ad creative and copy for all platforms |
-| `/ai-marketing:market-funnel <url>` | Sales funnel analysis and optimization |
-| `/ai-marketing:market-competitors <url>` | Competitive intelligence report |
-| `/ai-marketing:market-landing <url>` | Landing page CRO analysis |
-| `/ai-marketing:market-launch <product>` | Product launch playbook |
-| `/ai-marketing:market-proposal <client>` | Client proposal generator |
-| `/ai-marketing:market-report <url>` | Full marketing report (Markdown) |
-| `/ai-marketing:market-report-pdf <url>` | Professional marketing report (PDF) |
-| `/ai-marketing:market-seo <url>` | SEO content audit |
-| `/ai-marketing:market-brand <url>` | Brand voice analysis and guidelines |
-| `/ai-marketing:market-content-plan <url>` | Topic research + content plan + article drafts |
+| `/marketkit:help` | Index of every command, with a "which one first" guide |
+| `/marketkit:audit <url>` | Full marketing audit with 5 parallel agents |
+| `/marketkit:copy <url>` | Generate optimized copy with before/after examples |
+| `/marketkit:emails <topic>` | Generate complete email sequences |
+| `/marketkit:social <topic>` | 30-day social media content calendar |
+| `/marketkit:ads <url>` | Ad creative and copy for all platforms |
+| `/marketkit:funnel <url>` | Sales funnel analysis and optimization |
+| `/marketkit:competitors <url>` | Competitive intelligence report |
+| `/marketkit:landing <url>` | Landing page CRO analysis |
+| `/marketkit:launch <product>` | Product launch playbook |
+| `/marketkit:proposal <client>` | Client proposal generator |
+| `/marketkit:report <url>` | Full marketing report (Markdown) |
+| `/marketkit:report-pdf <url>` | Professional marketing report (PDF) |
+| `/marketkit:seo <url>` | SEO content audit |
+| `/marketkit:brand <url>` | Brand voice analysis and guidelines |
+| `/marketkit:content-plan <url>` | Topic research + content plan + article drafts |
 
-`market` carries `disable-model-invocation: true`, so Claude never picks the index on its own — type it when you want the menu.
+`help` carries `disable-model-invocation: true`, so Claude never picks the index on its own — type it when you want the menu.
 
 ---
 
 ## Architecture
 
 ```
-ai-marketing/                           # clone target: .claude/skills/ai-marketing
+market-context-kit/                     # clone target: .claude/skills/market-context-kit
 ├── .claude-plugin/plugin.json          # Makes the folder load as a plugin
 │
 ├── skills/                             # 15 skills + index
-│   ├── market/SKILL.md                 # Command index (manual invocation only)
-│   ├── market-audit/SKILL.md           # Full audit orchestration
-│   ├── market-copy/SKILL.md            # Copywriting analysis & generation
-│   ├── market-emails/SKILL.md          # Email sequence generation
-│   ├── market-social/SKILL.md          # Social media content calendar
-│   ├── market-ads/SKILL.md             # Ad creative & copy
-│   ├── market-funnel/SKILL.md          # Funnel analysis & optimization
-│   ├── market-competitors/SKILL.md     # Competitive intelligence
-│   ├── market-landing/SKILL.md         # Landing page CRO
-│   ├── market-launch/SKILL.md          # Launch playbook generation
-│   ├── market-proposal/SKILL.md        # Client proposal generator
-│   ├── market-report/SKILL.md          # Marketing report (Markdown)
-│   ├── market-report-pdf/SKILL.md      # Marketing report (PDF)
-│   ├── market-seo/SKILL.md             # SEO content audit
-│   ├── market-brand/SKILL.md           # Brand voice analysis
-│   └── market-content-plan/SKILL.md    # Topic research & content planning
+│   ├── help/SKILL.md                   # Command index (manual invocation only)
+│   ├── audit/SKILL.md                  # Full audit orchestration
+│   ├── copy/SKILL.md                   # Copywriting analysis & generation
+│   ├── emails/SKILL.md                 # Email sequence generation
+│   ├── social/SKILL.md                 # Social media content calendar
+│   ├── ads/SKILL.md                    # Ad creative & copy
+│   ├── funnel/SKILL.md                 # Funnel analysis & optimization
+│   ├── competitors/SKILL.md            # Competitive intelligence
+│   ├── landing/SKILL.md                # Landing page CRO
+│   ├── launch/SKILL.md                 # Launch playbook generation
+│   ├── proposal/SKILL.md               # Client proposal generator
+│   ├── report/SKILL.md                 # Marketing report (Markdown)
+│   ├── report-pdf/SKILL.md             # Marketing report (PDF)
+│   ├── seo/SKILL.md                    # SEO content audit
+│   ├── brand/SKILL.md                  # Brand voice analysis
+│   └── content-plan/SKILL.md           # Topic research & content planning
 │
 ├── agents/                             # 5 parallel subagents
 │   ├── market-content.md               # Content & messaging analysis
@@ -186,7 +197,7 @@ What this changes in practice:
 
 - **Claims are bounded.** A claims file stops the suite generating superlatives you cannot support — which matters when ad platforms reject them and regulated industries police them.
 - **Competitors are yours.** Competitive analysis starts from your named competitor set rather than from `"[category] alternatives"` search results.
-- **Subagents inherit it.** `market-audit` builds a grounding digest and passes it into all five parallel agents; they share no context otherwise and would otherwise analyze against generic defaults while the orchestrator does not.
+- **Subagents inherit it.** `audit` builds a grounding digest and passes it into all five parallel agents; they share no context otherwise and would otherwise analyze against generic defaults while the orchestrator does not.
 - **Every output declares it.** Reports name the grounding files they loaded, so you can tell which conclusions came from your documentation and which came from the suite's defaults.
 
 No grounding folder is required. Without one the suite works from site evidence alone and says so.
@@ -238,19 +249,19 @@ External Research Cited above.
 
 | Framework | Used in | Reference |
 |---|---|---|
-| AIDA (Attention-Interest-Desire-Action) | `market-copy` | [Wikipedia](https://en.wikipedia.org/wiki/AIDA_(marketing)) |
-| PAS (Problem-Agitate-Solve) | `market-copy` | [Copywrite Matters](https://www.copywritematters.com/pas-classic-copywriting-formula/) |
-| Before-After-Bridge | `market-copy` | [Blak Sheep Creative](https://blaksheepcreative.com/digital-marketing/content-marketing/copywriting/before-after-bridge/) |
-| 4U Formula (Useful/Ultra-specific/Unique/Urgent) | `market-copy`, `market-landing` | [AWAI](https://www.awai.com/2001/06/a-review-of-the-4-us/) (originating org) |
-| Value Proposition Canvas | `market-copy` | [Strategyzer](https://www.strategyzer.com/library/mastering-value-propositions) (Osterwalder's own) |
-| E-E-A-T | `market-seo`, `market-technical` | [Google Search Central](https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t) |
-| SWOT Analysis | `market-competitors` | [Wikipedia](https://en.wikipedia.org/wiki/SWOT_analysis) |
+| AIDA (Attention-Interest-Desire-Action) | `copy` | [Wikipedia](https://en.wikipedia.org/wiki/AIDA_(marketing)) |
+| PAS (Problem-Agitate-Solve) | `copy` | [Copywrite Matters](https://www.copywritematters.com/pas-classic-copywriting-formula/) |
+| Before-After-Bridge | `copy` | [Blak Sheep Creative](https://blaksheepcreative.com/digital-marketing/content-marketing/copywriting/before-after-bridge/) |
+| 4U Formula (Useful/Ultra-specific/Unique/Urgent) | `copy`, `landing` | [AWAI](https://www.awai.com/2001/06/a-review-of-the-4-us/) (originating org) |
+| Value Proposition Canvas | `copy` | [Strategyzer](https://www.strategyzer.com/library/mastering-value-propositions) (Osterwalder's own) |
+| E-E-A-T | `seo`, `market-technical` | [Google Search Central](https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t) |
+| SWOT Analysis | `competitors` | [Wikipedia](https://en.wikipedia.org/wiki/SWOT_analysis) |
 
 ---
 
 ## How It Works
 
-1. **You type a command** — e.g., `/ai-marketing:market-audit https://example.com`
+1. **You type a command** — e.g., `/marketkit:audit https://example.com`
 2. **Claude reads the skill files** — they tell Claude exactly how to analyze the site
 3. **5 subagents launch in parallel** — each one analyzes a different dimension
 4. **Python scripts run** — automated page analysis, competitor scanning
@@ -261,12 +272,12 @@ External Research Cited above.
 
 ## Use Cases
 
-All commands below take the `ai-marketing:` prefix — shortened here for readability.
+All commands below take the `marketkit:` prefix — shortened here for readability.
 
 ### For Agencies and Consultants
-- Run `market-audit` on a prospect's website before a sales call
-- Generate `market-proposal` with specific findings and pricing
-- Deliver `market-report-pdf` as a professional client deliverable
+- Run `audit` on a prospect's website before a sales call
+- Generate `proposal` with specific findings and pricing
+- Deliver `report-pdf` as a professional client deliverable
 
 ### For In-House B2B and Industrial Teams
 - Point the suite at a `_grounding/` folder so every command works from your own positioning, industries, competitors and claim rules
@@ -275,10 +286,10 @@ All commands below take the `ai-marketing:` prefix — shortened here for readab
 - Check landing pages against the objections your buyers actually raise: standards, approvals, lead time, application fit
 
 ### For Solo Operators and Creators
-- Use `market-copy` to optimize your own landing pages
-- Generate `market-emails` for your product launches
-- Build `market-social` calendars for consistent posting
-- Plan launches with `market-launch`, analyze your funnel with `market-funnel`
+- Use `copy` to optimize your own landing pages
+- Generate `emails` for your product launches
+- Build `social` calendars for consistent posting
+- Plan launches with `launch`, analyze your funnel with `funnel`
 
 ---
 
@@ -295,22 +306,22 @@ should land, how to cite it, and how to keep pack files independent.
 Delete the folder:
 
 ```bash
-rm -rf .claude/skills/ai-marketing
+rm -rf .claude/skills/market-context-kit
 ```
 
 Nothing was ever copied outside it, so that is the whole uninstall. To keep the files but stop loading them:
 
 ```bash
-claude plugin disable ai-marketing@skills-dir
+claude plugin disable marketkit@skills-dir
 ```
 
 ---
 
-## Learn More
+## Origin and attribution
 
-Want to learn how to build a marketing agency powered by AI tools like this?
+Market Context Kit began as a fork of Zubair Trabzada's [AI Marketing Suite for Claude Code](https://github.com/zubair-trabzada/ai-marketing-claude). It has since added a skills-directory plugin architecture, project grounding, context-specific example packs, B2B and regulated-industry workflows, and broader regional guidance.
 
-**[Join the AI Workshop Community](https://www.skool.com/aiworkshop)** — Learn AI automations, vibe coding, and how to build AI-powered services for clients.
+The complete Git history is retained. The original MIT copyright notice remains in [LICENSE](LICENSE), alongside the copyright notice for subsequent work.
 
 ---
 

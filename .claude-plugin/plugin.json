@@ -1,8 +1,11 @@
 {
-  "name": "ai-marketing",
-  "displayName": "AI Marketing Suite",
-  "version": "2.0.0",
-  "description": "Marketing audits, copy, funnels, competitive intel, and client-ready reports",
+  "name": "marketkit",
+  "displayName": "Market Context Kit",
+  "version": "3.0.0",
+  "description": "Context-aware marketing skills for B2B, industrial, regulated, and consumer businesses",
+  "homepage": "https://github.com/marcus-at-localhost/market-context-kit",
+  "repository": "https://github.com/marcus-at-localhost/market-context-kit",
+  "license": "MIT",
   "author": {
     "name": "Marcus Obst"
   }

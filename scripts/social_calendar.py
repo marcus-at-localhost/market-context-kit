@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Social Media Calendar Generator — Utility script for AI Marketing Claude Code Skills
+Social Media Calendar Generator — Utility script for Market Context Kit
 Generates a structured 30-day content calendar with channel-specific guidance.
 
 Two business types are supported, because the channel mix and the voice differ

@@ -3,7 +3,7 @@
 This is a process doc, not a skill — nothing loads it automatically. Read it when
 you (or an agent working with you) want to add an external concept, framework,
 or piece of research to the suite. It's not a marketing deliverable, so it
-doesn't get a `/ai-marketing:` command of its own.
+doesn't get a `/marketkit:` command of its own.
 
 ## 1. Extract the mechanism, not the case study
 
