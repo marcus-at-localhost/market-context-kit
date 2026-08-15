@@ -1,6 +1,6 @@
 # Market Context Kit
 
-**This is 100% AI-Slop taken from YouTube Ai-Slop Bros. It neither replaces the work of an agency that would charge you thousands of money, nor does it create content that is actually useful for your business! The only thing it offers is a different perspective on your business and maybe gives you ideas for your own marketing**
+**This is 100% AI slop copied from AI-slop bros on YouTube. It is no substitute for an agency that would charge you thousands of money, and it won’t produce content your business can use as-is. At best, it gives you a fresh perspective and a few rough ideas to develop yourself.**
 
 A context-aware marketing skill kit for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Audit websites, generate copy and campaigns, build content plans, analyze competitors, and produce client-ready reports — all from your terminal.
 
