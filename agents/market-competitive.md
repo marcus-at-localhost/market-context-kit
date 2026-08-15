@@ -36,7 +36,7 @@ Two categories stay off limits even if a path to them appears on the manifest:
 
 This also rules out an earlier `COMPETITOR-REPORT.md`: your competitor set comes from the grounding digest and your own `WebSearch`/`WebFetch` work, never from a report sitting in the workspace. If a previous scan is worth reusing, the orchestrator names it on the manifest.
 
-Material that looks relevant but is not on the manifest: do not open it, do not use it, do not infer from its filename. List it under `Out-of-Scope Material Noticed` in your output and carry on with site and search evidence.
+Material that looks relevant but is not on the manifest: do not open it, do not use it, do not infer from its filename. This covers paths you learn about without searching — a git status block in your environment context, a folder name in an error message, a path mentioned in passing. Knowing a file exists is not the same as it being on the manifest, and noticing it is not permission. List it under `Out-of-Scope Material Noticed` in your output and carry on with site and search evidence.
 
 Paths written as `${CLAUDE_PLUGIN_ROOT}/…` anywhere in this file are provenance pointers for the orchestrator, not files for you — that variable does not resolve in your context.
 

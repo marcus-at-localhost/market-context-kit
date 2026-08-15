@@ -35,7 +35,7 @@ Never on the manifest, whatever else is in the workspace:
 
 | Excluded | Why |
 |---|---|
-| Any `MARKETING-AUDIT.md`, in any folder, from any run | Score anchoring. A subagent that sees last month's 52 calibrates to it instead of scoring the site, and the five dimensions stop being independent. Run-over-run comparison is yours to do in Phase 3. |
+| Any `MARKETING-AUDIT.md`, in any folder, from any run | Score anchoring. A subagent that sees a previous score calibrates to it instead of scoring the site, and the five dimensions stop being independent. Run-over-run comparison is yours to do in Phase 3. Do not quote a prior score into a subagent prompt either — not as context, not as an example. |
 | Analytics, traffic, and performance exports (`*Analytics*`, GA4/Matomo/GSC dumps, KPI sheets) | Cross-client contamination. In a multi-client workspace a subagent cannot tell whose figures these are, and a foreign number reaches the report looking like a measurement of this client. |
 | Any other client's folder or deliverable | Same. |
 | `COMPETITOR-REPORT.md`, `BRAND-VOICE.md`, and other sibling-skill output | Orchestrator-only inputs — see Cross-Skill Integration. Feeding them to a subagent pre-loads its conclusions. |

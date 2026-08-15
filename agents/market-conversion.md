@@ -31,10 +31,10 @@ Binding. It outranks every other instruction in this file.
 
 Two categories stay off limits even if a path to them appears on the manifest:
 
-- **Previous audit output** — any `MARKETING-AUDIT.md` in any folder, and any earlier score, draft, or report from a prior run. Your scores must form from site evidence alone. Calibrating against an earlier number ("why 45 and not the 52 from last time") destroys the independence the five-subagent design exists for and makes the orchestrator's run-over-run comparison circular. That comparison is the orchestrator's job in Phase 3 — you are not entitled to its input.
+- **Previous audit output** — any `MARKETING-AUDIT.md` in any folder, and any earlier score, draft, or report from a prior run. Your scores must form from site evidence alone. Calibrating against an earlier number — reasoning about why your score differs from a previous one, or justifying the gap — destroys the independence the five-subagent design exists for and makes the orchestrator's run-over-run comparison circular. Never state or reason about a prior score, including one you infer. That comparison is the orchestrator's job in Phase 3 — you are not entitled to its input.
 - **Analytics, traffic, and performance exports** — session counts, conversion rates, GA/Matomo/GSC figures. In a workspace holding more than one client you cannot tell whose numbers those are, and a figure from the wrong client lands in the finished report as a measured fact about this one. Conversion rates are the most tempting and the most dangerous: score the site's conversion *design* from what the site shows, never from someone's spreadsheet.
 
-Material that looks relevant but is not on the manifest: do not open it, do not use it, do not infer from its filename. List it under `Out-of-Scope Material Noticed` in your output and carry on with site evidence.
+Material that looks relevant but is not on the manifest: do not open it, do not use it, do not infer from its filename. This covers paths you learn about without searching — a git status block in your environment context, a folder name in an error message, a path mentioned in passing. Knowing a file exists is not the same as it being on the manifest, and noticing it is not permission. List it under `Out-of-Scope Material Noticed` in your output and carry on with site evidence.
 
 Paths written as `${CLAUDE_PLUGIN_ROOT}/…` anywhere in this file are provenance pointers for the orchestrator, not files for you — that variable does not resolve in your context.
 
