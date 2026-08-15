@@ -229,6 +229,22 @@ here so its origin and vintage stay traceable — the pack files carry only a sh
 
 Add an entry here whenever a new externally-sourced stat or framework goes into the suite.
 
+### Frameworks Referenced
+
+Named frameworks the skills apply, for background reading — these are established
+methods, not claims that need checking, so they sit here rather than in
+External Research Cited above.
+
+| Framework | Used in | Reference |
+|---|---|---|
+| AIDA (Attention-Interest-Desire-Action) | `market-copy` | [Wikipedia](https://en.wikipedia.org/wiki/AIDA_(marketing)) |
+| PAS (Problem-Agitate-Solve) | `market-copy` | [Copywrite Matters](https://www.copywritematters.com/pas-classic-copywriting-formula/) |
+| Before-After-Bridge | `market-copy` | [Blak Sheep Creative](https://blaksheepcreative.com/digital-marketing/content-marketing/copywriting/before-after-bridge/) |
+| 4U Formula (Useful/Ultra-specific/Unique/Urgent) | `market-copy`, `market-landing` | [AWAI](https://www.awai.com/2001/06/a-review-of-the-4-us/) (originating org) |
+| Value Proposition Canvas | `market-copy` | [Strategyzer](https://www.strategyzer.com/library/mastering-value-propositions) (Osterwalder's own) |
+| E-E-A-T | `market-seo`, `market-technical` | [Google Search Central](https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t) |
+| SWOT Analysis | `market-competitors` | [Wikipedia](https://en.wikipedia.org/wiki/SWOT_analysis) |
+
 ---
 
 ## How It Works

@@ -52,6 +52,8 @@ Every externally-sourced stat or framework gets two things, not one:
 Generic named frameworks that aren't proprietary research (AIDA, PAS, E-E-A-T)
 don't need this — they're industry-standard terms, not a specific party's data
 point. The bar is for claims someone could ask "says who, and when?" about.
+Add the framework to README's "Frameworks Referenced" table instead, so
+there's still a link for background reading.
 
 ## 4. Fetching linked sources
 
