@@ -2,7 +2,9 @@
 
 **This is 100% AI slop copied from AI-slop bros on YouTube. It is no substitute for an agency that would charge you thousands of money, and it won’t produce content your business can use as-is. At best, it gives you a fresh perspective and a few rough ideas to develop yourself.**
 
-**ACHTUNG** I haven't tested some of the skills like funnel or ads, because I don't need it. And the pdf is probably crap. Also I'm  not a 100% certain how to deal with multiple clients and reports. All in one folder, folders with dates. No clue. Yet. Maybe in the future. But since you can tell the LLM "Do it like this Mr Robot Sir please" you'll end up with something workable. I believe in you, so called Human-in-the-loop.
+**ACHTUNG** I haven’t tested some of the skills, such as funnel or ads, because I don’t need them myself. Yet. The PDF creator is probably crap, too.
+I’m also not 100% sure how to handle multiple clients and reports. Everything in one folder? Separate folders by date? No clue. Yet. Maybe I’ll figure it out eventually.
+But since you can tell the LLM, “Do it like this, Mr. Robot Sir, please,” you’ll probably end up with something workable. I believe in you, alleged human-in-the-loop.
 
 A context-aware marketing skill kit for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Audit websites, generate copy and campaigns, build content plans, analyze competitors, and produce client-ready reports — all from your terminal.
 
