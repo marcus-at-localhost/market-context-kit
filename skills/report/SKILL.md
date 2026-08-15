@@ -14,6 +14,8 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 State which grounding files informed the report, and flag any benchmark you quote as market-specific rather than universal.
 
+Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — Step 1 below reads prior skill output from it, and the final `MARKETING-REPORT.md` is written there too.
+
 ---
 
 ## Skill Purpose
@@ -28,7 +30,7 @@ Generate a comprehensive, professionally formatted marketing report in Markdown.
 ## How to Execute
 
 ### Step 1: Collect All Available Data
-Before generating the report, check for any existing audit data from previous skill runs. Look for these files in the project directory:
+Before generating the report, check for any existing audit data from previous skill runs. Look for these files in the output folder resolved in Phase 0 (falling back to the flat working directory per `output-location.md`'s "Reading prior output" rule):
 
 **Possible data sources:**
 - `MARKETING-AUDIT.md` -- from `/marketkit:audit`
@@ -271,7 +273,7 @@ Include methodology notes so the client understands how scores were derived:
 
 ## Output Format
 
-Generate a file called `MARKETING-REPORT.md` with:
+Generate a file called `MARKETING-REPORT.md` inside the folder resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with:
 
 ```markdown
 # Marketing Report

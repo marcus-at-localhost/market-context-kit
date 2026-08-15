@@ -15,6 +15,8 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 Pass business-appropriate action items into the JSON. The script's built-in fallbacks are deliberately generic and should not reach a client PDF.
 
+Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — Step 1 below reads prior skill output from it, and both the intermediate JSON and the final PDF are written there too.
+
 ---
 
 ## Skill Purpose
@@ -39,7 +41,7 @@ Generate a professional, visually polished PDF marketing report using the Python
 ## How to Execute
 
 ### Step 1: Collect All Available Data
-Gather data from all previous skill runs. Check for these files in the project directory:
+Gather data from all previous skill runs. Check for these files in the output folder resolved in Phase 0 (falling back to the flat working directory per `output-location.md`'s "Reading prior output" rule):
 
 **Primary data sources:**
 - `MARKETING-AUDIT.md` -- Overall audit results
@@ -218,7 +220,7 @@ Up to 3 competitor objects for the comparison table. If no competitor data is av
 
 ### Step 4: Write the JSON File
 
-Use the **Write tool** to save the assembled data to `./market-report-data.json` in the working directory.
+Use the **Write tool** to save the assembled data to `market-report-data.json` inside the folder resolved in Phase 0. The Write tool creates the folder if it doesn't exist yet — do not `mkdir` separately.
 
 Do not build this file with a shell heredoc or `echo` redirect. Heredoc quoting differs between shells and breaks on Windows, and JSON containing quotes, `$`, or backticks gets corrupted. The Write tool behaves identically on every platform. For the same reason, do not use `/tmp` — it does not exist on Windows.
 
@@ -236,12 +238,12 @@ python -c "import reportlab" || pip install reportlab
 **Generate the report:**
 ```bash
 # macOS / Linux
-python3 "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py" ./market-report-data.json "MARKETING-REPORT-<domain>.pdf"
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py" "<resolved-folder>/market-report-data.json" "<resolved-folder>/MARKETING-REPORT-<domain>.pdf"
 # Windows
-python "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py" ./market-report-data.json "MARKETING-REPORT-<domain>.pdf"
+python "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py" "<resolved-folder>/market-report-data.json" "<resolved-folder>/MARKETING-REPORT-<domain>.pdf"
 ```
 
-`${CLAUDE_PLUGIN_ROOT}` resolves to this plugin's directory on any machine — never hardcode a path. Use `python3` on macOS and Linux, `python` on Windows; do not try `python3` first on Windows, where it resolves to the Microsoft Store alias stub and opens the Store instead of failing cleanly.
+`${CLAUDE_PLUGIN_ROOT}` resolves to this plugin's directory on any machine — never hardcode a path. Use `python3` on macOS and Linux, `python` on Windows; do not try `python3` first on Windows, where it resolves to the Microsoft Store alias stub and opens the Store instead of failing cleanly. `<resolved-folder>` is the dated folder from Phase 0 (e.g. `2026-08-15 - Marketing Audit`) — it already exists at this point because Step 4 just wrote the JSON into it.
 
 Replace `<domain>` with the target website's domain name (without protocol or www), using hyphens instead of dots. For example:
 - `example.com` becomes `MARKETING-REPORT-example-com.pdf`
@@ -257,7 +259,7 @@ python3 "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py"
 ### Step 6: Verify the Output
 After generation, verify the PDF was created:
 ```bash
-ls -la "MARKETING-REPORT-<domain>.pdf"
+ls -la "<resolved-folder>/MARKETING-REPORT-<domain>.pdf"
 ```
 
 Report the file path and size to the user.
@@ -265,7 +267,7 @@ Report the file path and size to the user.
 ### Step 7: Clean Up
 Remove the temporary JSON file:
 ```bash
-rm -f ./market-report-data.json
+rm -f "<resolved-folder>/market-report-data.json"
 ```
 
 ## PDF Report Contents
@@ -353,7 +355,7 @@ The PDF report skill will automatically look for output files from these skills 
 
 ## Output
 - **File:** `MARKETING-REPORT-<domain>.pdf`
-- **Location:** Project root directory
+- **Location:** Today's dated output folder, resolved per `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` (e.g. `2026-08-15 - Marketing Audit/`)
 - **Size:** Typically 200KB-500KB depending on content volume
 - **Pages:** 5-7 pages depending on whether competitor data and additional sections are included
 

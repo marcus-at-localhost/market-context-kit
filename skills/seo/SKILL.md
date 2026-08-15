@@ -15,6 +15,8 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 Grounding supplies target markets and languages, which decide whether hreflang and localized metadata are findings or non-issues.
 
+Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — the Output Format section below writes `SEO-AUDIT.md` there, not into the bare working directory.
+
 ---
 
 ## Skill Purpose
@@ -403,7 +405,7 @@ Scoring: High volume + Low competition + High business value = Highest priority
 
 ## Output Format
 
-Generate a file called `SEO-AUDIT.md` with:
+Generate a file called `SEO-AUDIT.md` inside the folder resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with:
 
 ```markdown
 # SEO Content Audit

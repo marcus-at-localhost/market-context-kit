@@ -17,6 +17,8 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 If grounding names a competitor set, start from it rather than from search results; generic category searches miss the competitors that matter in narrow verticals.
 
+Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — the Output Format section below writes `COMPETITOR-REPORT.md` there, not into the bare working directory.
+
 ---
 
 ## When This Skill Is Invoked
@@ -450,7 +452,7 @@ Provide guidance on how to respond to competitor moves:
 
 ## Output Format: COMPETITOR-REPORT.md
 
-Write the full output to `COMPETITOR-REPORT.md`:
+Write the full output to `COMPETITOR-REPORT.md` inside the folder resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`):
 
 ```markdown
 # Competitive Intelligence Report: [Target Brand]
@@ -581,7 +583,7 @@ Top 3 Actions:
   2. [action]
   3. [action]
 
-Full report saved to: COMPETITOR-REPORT.md
+Full report saved to: [resolved path]/COMPETITOR-REPORT.md
 ```
 
 ---

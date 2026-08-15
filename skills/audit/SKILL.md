@@ -23,6 +23,8 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 Then read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`. The classification in Phase 1.2 below feeds the same pack-selection logic, and grounding overrides it where the two disagree.
 
+Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — Phase 3 writes `MARKETING-AUDIT.md` there, not into the bare working directory.
+
 ### 0.1 Build the Data Manifest
 
 The five subagents have no file-discovery tools and are instructed to open nothing you have not named. Decide now what that list is: the **Data Manifest** is the complete set of file paths any subagent may `Read` on this run, and you paste it verbatim into all five prompts.
@@ -378,7 +380,7 @@ If the competitive subagent identified competitors, include a comparison:
 
 ## Output Format: MARKETING-AUDIT.md
 
-Write the final report to `MARKETING-AUDIT.md` in the current directory with this structure:
+Write the final report to `MARKETING-AUDIT.md` inside the folder resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with this structure:
 
 ```markdown
 # Marketing Audit: [Business Name]
@@ -511,7 +513,7 @@ Top 3 Strategic Moves:
 
 Estimated Revenue Impact: $X,XXX-$XX,XXX/month
 
-Full report saved to: MARKETING-AUDIT.md
+Full report saved to: [resolved path]/MARKETING-AUDIT.md
 ```
 
 ---
@@ -529,9 +531,9 @@ Full report saved to: MARKETING-AUDIT.md
 
 **Everything in this section is yours alone.** These files are orchestrator context, they are read by you in Phase 3, and they never go on the Data Manifest. A subagent that sees a sibling skill's output inherits its conclusions instead of reaching its own, which is the whole reason the five run independently.
 
-- If `COMPETITOR-REPORT.md` exists in the current directory, incorporate its findings during Phase 3 synthesis — after `market-competitive` has returned its own, independently derived competitor set. Where the two disagree, say so in the report rather than quietly preferring one.
-- If `BRAND-VOICE.md` exists, use it to contextualize the content analysis in Phase 3. It does not go into the `market-content` prompt; the grounding digest is what carries client voice to the subagents.
-- A previous `MARKETING-AUDIT.md` may be compared against this run — again, in Phase 3, by you. If you report a delta, name both dates and state that the new scores were produced without sight of the old ones. That sentence is what makes the comparison worth anything.
+- If `COMPETITOR-REPORT.md` exists in today's resolved output folder, incorporate its findings during Phase 3 synthesis — after `market-competitive` has returned its own, independently derived competitor set. Where the two disagree, say so in the report rather than quietly preferring one.
+- If `BRAND-VOICE.md` exists (today's folder, per the same lookup), use it to contextualize the content analysis in Phase 3. It does not go into the `market-content` prompt; the grounding digest is what carries client voice to the subagents.
+- A previous `MARKETING-AUDIT.md` may be compared against this run — look for one in an earlier dated folder (`YYYY-MM-DD - Marketing Audit/` for a prior date) in the same working directory, not today's. If you report a delta, name both dates and state that the new scores were produced without sight of the old ones. That sentence is what makes the comparison worth anything.
 - Reference other available analyses in the executive summary
 - Suggest follow-up commands: `/marketkit:copy`, `/marketkit:funnel`, `/marketkit:competitors` for deeper dives
 
