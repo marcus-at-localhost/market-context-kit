@@ -292,6 +292,8 @@ For each funnel stage, recommend the appropriate follow-up sequence. The stage-t
 
 The stages themselves differ: there is no trial user in a quoted-price business, and no dormant-account reactivation play in a self-serve one.
 
+For B2B/technical business types, sequence intensity should account for archetype mix — see `Buyer archetypes` in `b2b-technical.md`. An Adapter-heavy funnel needs a human step before automation; a Seeker-heavy funnel needs every stage automation-ready with no gaps.
+
 ### 5.2 Traffic Source Alignment
 
 Different traffic sources need different funnel entry points:

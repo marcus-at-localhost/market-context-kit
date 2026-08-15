@@ -79,6 +79,13 @@ Score each dimension 0-10:
 - Regulatory, compliance, deadline, procurement-cycle, event, stock/lead-time, or limited-capacity urgency where authentic
 - Scoring: 9-10 = effective + authentic, 7-8 = some urgency elements, 5-6 = no urgency but could benefit, 3-4 = missed opportunities, 0-2 = no urgency at all
 
+**Channel/Path Coverage (0-10)**
+- Digital self-serve path present (calculator, configurator, RFQ form, e-commerce/catalog, chatbot)
+- Remote-human path present (video call booking, phone number, live chat with a person, scheduled call)
+- In-person path present where relevant (rep contact, trade fair presence, site visit, showroom, local branch)
+- McKinsey's B2B Pulse Survey finds buyers split roughly evenly across these three path types regardless of industry or deal size; a site strong in one and silent on the other two is invisible to a third of its market
+- Scoring: 9-10 = all three paths clear and easy to find, 7-8 = two strong, one present but weak, 5-6 = one path dominant, others token or missing, 3-4 = effectively single-channel, 0-2 = no alternative path to the default channel at all
+
 ### Step 3: Funnel Leak Detection
 
 Identify where potential customers likely drop off:
@@ -117,6 +124,7 @@ Write the proposed CTA wording in the site's own language.
 | Friction (low = bad) | X/10 | [one-line finding] |
 | Trust Signals | X/10 | [one-line finding] |
 | Urgency & Scarcity | X/10 | [one-line finding] |
+| Channel/Path Coverage | X/10 | [one-line finding] |
 
 ### Conversion Path Map
 [Step-by-step description of the primary conversion path]

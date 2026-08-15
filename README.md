@@ -215,6 +215,20 @@ The full marketing audit scores websites across 6 dimensions:
 
 **Overall Marketing Score** = Weighted average of all categories (0-100)
 
+### External Research Cited
+
+Most scoring dimensions and reference content are the suite's own synthesis of established
+practice. Where a specific stat or framework instead comes from a named third party, it's listed
+here so its origin and vintage stay traceable — the pack files carry only a short inline mention.
+
+- **Buyer archetypes** (Adapter / Innovator / Seeker, `references/examples/b2b-technical.md`) and
+  **Channel/Path Coverage** scoring (`agents/market-conversion.md`) — McKinsey, [Five fundamental
+  truths: How B2B winners keep growing](https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/five-fundamental-truths-how-b2b-winners-keep-growing)
+  (2024 B2B Pulse Survey, ~4,000 respondents). Percentages are global-survey directional, not any
+  specific client's measured mix.
+
+Add an entry here whenever a new externally-sourced stat or framework goes into the suite.
+
 ---
 
 ## How It Works

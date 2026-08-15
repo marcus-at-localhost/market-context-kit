@@ -27,6 +27,24 @@ terminology from `_grounding/`, not by translating these strings literally.
 
 ---
 
+## Buyer archetypes
+
+McKinsey's B2B Pulse Survey (2024, ~4,000 decision makers) finds three recurring buyer types.
+Figures are global-survey directional, not this client's actual mix — grounding buyer research
+overrides if present.
+
+| Archetype | Share | Behavior | Implication |
+|---|---|---|---|
+| **Adapter** | 44% | Relationship-oriented, sticks with familiar channels and suppliers even when unsatisfied, slow to try new ones | Weight toward the human-default items in `Channels` — trade fairs, named rep, association contact. Don't force self-serve as the only path. |
+| **Innovator** | 20% | Digital-first, comfortable using gen-AI tools to research suppliers, wants self-serve and technical depth | Prioritize selector/calculator tools and lead magnets from `Funnel — friction causes and fixes`, structured technical content from `Hooks and post openers`, ungated datasheets. |
+| **Seeker** | 36% | Demands a seamless omnichannel experience; switches supplier fast on a broken touchpoint | Check every commitment level in `CTA phrasing` actually works — this archetype punishes the weakest link, not the average. |
+
+All three coexist on any site; none is safe to ignore. If grounding names a dominant buyer type,
+or site evidence points to one (a distributor-heavy funnel skews Adapter, a self-serve configurator
+skews Innovator), lead with that implication — but keep the other two paths open.
+
+---
+
 ## 1. Channels
 
 | Channel | Role | Cadence |

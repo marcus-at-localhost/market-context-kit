@@ -203,6 +203,8 @@ Analyze every CTA on the page:
 
 Phrasing patterns, urgency conventions and first-person usage differ by business type and are in the loaded example pack (`Landing pages — CTA phrasing` / `CTA phrasing`). Write every CTA in the page's own language.
 
+For B2B/technical business types, weight headline and CTA framing toward the buyer archetype the grounding or site evidence suggests dominates — see `Buyer archetypes` in `b2b-technical.md`. Default to covering all three if no signal points to one.
+
 **CTA Placement Analysis:**
 - Is there a CTA above the fold? (Required)
 - Is there a CTA after each major content section? (Recommended)
