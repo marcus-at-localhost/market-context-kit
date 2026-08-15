@@ -29,7 +29,7 @@
            "monster aanvragen"]
   },
   "pricing_indicator_patterns": {
-    "en": ["\\brfq\\b", "request a quote", "get pricing", "contact for pricing", "custom quote",
+    "en": ["request a quote", "get pricing", "contact for pricing", "custom quote",
            "made to order", "price on request", "quote request"],
     "de": ["auf anfrage", "preis auf anfrage", "individuelles angebot", "anfrage stellen"],
     "es": ["bajo presupuesto", "precio a consultar", "presupuesto personalizado", "consultar precio"],
