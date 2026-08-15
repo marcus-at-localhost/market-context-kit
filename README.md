@@ -133,13 +133,16 @@ ai-marketing/                           # clone target: .claude/skills/ai-market
 ├── references/                         # Loaded on demand by the skills
 │   ├── grounding.md                    # How to find and apply a _grounding/ folder
 │   ├── business-context.md             # Business type → example pack resolution
-│   └── examples/
-│       ├── consumer-online.md          # Creator, e-commerce, self-serve SaaS, local
-│       └── b2b-technical.md            # Industrial, distributor, regulated, academy
+│   ├── examples/
+│   │   ├── consumer-online.md          # Creator, e-commerce, self-serve SaaS, local
+│   │   └── b2b-technical.md            # Industrial, distributor, regulated, academy
+│   └── fingerprints/                   # competitor_scanner.py rule packs (same ids as examples/)
+│       ├── consumer-online.json        # CTA/pricing/trust vocab, en/de/es/fr/it/nl
+│       └── b2b-technical.json          # RFQ/cert/distributor vocab, en/de/es/fr/it/nl
 │
 ├── scripts/                            # Python utility scripts
 │   ├── analyze_page.py                 # Webpage marketing analysis
-│   ├── competitor_scanner.py           # Competitor website scanner
+│   ├── competitor_scanner.py           # Competitor scanner — business-type-aware (see fingerprints/)
 │   ├── social_calendar.py              # Social content calendar generator
 │   └── generate_pdf_report.py          # PDF report generator
 │

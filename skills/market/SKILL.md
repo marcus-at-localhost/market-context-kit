@@ -58,8 +58,9 @@ Each command then resolves the business type and loads exactly one example pack 
 
 ## Requirements
 
-Python 3 for the bundled scripts (`analyze_page.py`, `competitor_scanner.py`, `social_calendar.py`, `generate_pdf_report.py`) — stdlib only, no install needed. `/ai-marketing:market-report-pdf` additionally needs `reportlab`:
+Python 3 for the bundled scripts (`analyze_page.py`, `competitor_scanner.py`, `social_calendar.py`, `generate_pdf_report.py`) — stdlib only, no install needed. `/ai-marketing:market-report-pdf` additionally needs `reportlab`; `competitor_scanner.py` optionally uses `trafilatura` for cleaner content extraction if present, and falls back to its stdlib parser if not:
 
 ```bash
 pip install reportlab
+pip install trafilatura   # optional
 ```

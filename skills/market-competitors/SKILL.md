@@ -68,27 +68,30 @@ Use multiple methods to identify competitors:
 
 ### 1.3 Automated Data Collection
 
-Use the bundled `competitor_scanner.py` for automated data collection. It takes one or more URLs as **positional** arguments — there are no `--url` or `--output` flags — and always prints JSON:
+Use the bundled `competitor_scanner.py` for automated data collection. It takes one or more URLs as **positional** arguments, plus an optional `--type consumer-online|b2b-technical` flag, and always prints JSON:
 
 ```bash
 # macOS / Linux
 python3 "${CLAUDE_PLUGIN_ROOT}/scripts/competitor_scanner.py" "<url1>" "<url2>" "<url3>"
 # Windows
 python "${CLAUDE_PLUGIN_ROOT}/scripts/competitor_scanner.py" "<url1>" "<url2>" "<url3>"
+# Force the business-type pack instead of auto-detecting (both platforms)
+python "${CLAUDE_PLUGIN_ROOT}/scripts/competitor_scanner.py" --type b2b-technical "<url1>"
 ```
 
 `${CLAUDE_PLUGIN_ROOT}` resolves to this plugin's directory on any machine — never hardcode a path. Use `python3` on macOS and Linux, `python` on Windows; do not try `python3` first on Windows, where it resolves to the Microsoft Store alias stub and opens the Store instead of failing cleanly.
 
 A single URL returns one object; multiple URLs return `{"competitors": [...]}`. A `{"usage": ...}` banner means no URL argument arrived.
 
-The script can collect:
-- Homepage content and metadata
-- Pricing page data (if public)
-- RFQ/contact/catalog/datasheet/distributor data (if pricing is not public)
-- Blog post count and recent topics
-- Social media profile links and follower counts
-- Technology stack detection
-- Page speed metrics
+The script auto-detects business type (`consumer-online` or `b2b-technical`, same ids as `references/business-context.md`) from on-page signals unless `--type` forces one, and scores CTAs/pricing-signals/trust-signals against that type's fingerprint pack in `references/fingerprints/` — a SaaS pricing page and an industrial RFQ page are read on their own terms. Vocabulary is per-language (en/de/es/fr/it/nl), selected from `<html lang>`.
+
+The script collects:
+- Homepage content and metadata (title, meta description, OG tags, H1/H2)
+- Business type and detected language
+- CTAs, pricing/quote-signal mentions, and trust signals (cert badges, testimonials, social links) scored against the resolved pack
+- The conversion page — pricing/plans for `consumer-online`, RFQ/quote for `b2b-technical` — guessed by URL path and fetched if public
+
+It does not collect blog post counts, social follower counts, technology-stack fingerprints, or page-speed metrics — none of those are implemented. Gather those manually with `WebFetch` or a dedicated tool if the audit needs them.
 
 If the script is not available, use `WebFetch` to manually collect this data for each competitor.
 

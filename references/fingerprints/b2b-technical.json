@@ -1,0 +1,64 @@
+{
+  "id": "b2b-technical",
+  "description": "Industrial manufacturer, technical supplier/distributor, regulated/compliance, training/academy, knowledge-led B2B, enterprise sales-led software. See references/business-context.md.",
+  "detection_signals": {
+    "en": ["request a quote", "rfq", "datasheet", "iso 9001", "certified", "distributor", "dealer locator",
+           "technical data sheet", "safety data sheet"],
+    "de": ["angebot anfordern", "anfrage", "datenblatt", "zertifiziert", "händler", "vertriebspartner",
+           "sicherheitsdatenblatt"],
+    "es": ["solicitar presupuesto", "ficha técnica", "certificado", "distribuidor", "hoja de datos de seguridad"],
+    "fr": ["demander un devis", "fiche technique", "certifié", "distributeur", "fiche de données de sécurité"],
+    "it": ["richiedi preventivo", "scheda tecnica", "certificato", "distributore", "scheda di sicurezza"],
+    "nl": ["offerte aanvragen", "datasheet", "gecertificeerd", "distributeur", "veiligheidsinformatieblad"]
+  },
+  "cta_words": {
+    "en": ["request a quote", "get a quote", "request quote", "download datasheet", "contact sales",
+           "request sample", "book a site visit", "find a distributor", "request pricing",
+           "speak to an engineer", "request catalog", "enquire", "inquire", "send request",
+           "book", "schedule", "download"],
+    "de": ["jetzt anfragen", "anfrage", "anfragen", "angebot anfordern", "angebot", "kontakt",
+           "kontaktieren", "kontaktieren sie uns", "datenblatt", "katalog", "termin vereinbaren",
+           "beratung anfragen", "muster anfordern", "herunterladen"],
+    "es": ["solicitar presupuesto", "presupuesto", "solicitar", "contactar", "contacto",
+           "contáctenos", "ficha técnica", "catálogo", "pedir cita", "solicitar muestra"],
+    "fr": ["demander un devis", "devis", "nous contacter", "contact", "fiche technique",
+           "catalogue", "demander un échantillon"],
+    "it": ["richiedi preventivo", "preventivo", "contattaci", "contatti", "scheda tecnica",
+           "catalogo", "richiedi campione"],
+    "nl": ["offerte aanvragen", "offerte", "contact", "neem contact op", "datasheet",
+           "monster aanvragen"]
+  },
+  "pricing_indicator_patterns": {
+    "en": ["\\brfq\\b", "request a quote", "get pricing", "contact for pricing", "custom quote",
+           "made to order", "price on request", "quote request"],
+    "de": ["auf anfrage", "preis auf anfrage", "individuelles angebot", "anfrage stellen"],
+    "es": ["bajo presupuesto", "precio a consultar", "presupuesto personalizado", "consultar precio"],
+    "fr": ["sur demande", "prix sur demande", "devis personnalisé"],
+    "it": ["su richiesta", "prezzo su richiesta", "preventivo personalizzato"],
+    "nl": ["op aanvraag", "prijs op aanvraag", "offerte op maat"]
+  },
+  "testimonial_words": {
+    "en": ["case study", "reference installation", "customer story", "success story", "client testimonial"],
+    "de": ["referenzprojekt", "anwenderbericht", "erfolgsgeschichte", "referenzen"],
+    "es": ["caso de éxito", "proyecto de referencia", "testimonio de cliente"],
+    "fr": ["étude de cas", "projet de référence", "témoignage client"],
+    "it": ["caso di successo", "progetto di riferimento", "testimonianza cliente"],
+    "nl": ["referentieproject", "klantcase", "succesverhaal"]
+  },
+  "trust_badge_alt_keywords": {
+    "en": ["iso", "certified", "certification", "compliance", "quality management", "ce mark", "rohs", "reach"],
+    "de": ["zertifiziert", "zertifikat", "qualitätsmanagement", "geprüft"],
+    "es": ["certificado", "certificación", "calidad"],
+    "fr": ["certifié", "certification", "qualité"],
+    "it": ["certificato", "certificazione", "qualità"],
+    "nl": ["gecertificeerd", "certificering", "kwaliteit"]
+  },
+  "conversion_paths": {
+    "en": ["/request-quote", "/rfq", "/get-a-quote", "/contact-sales", "/quote"],
+    "de": ["/anfrage", "/angebot", "/kontakt"],
+    "es": ["/solicitar-presupuesto", "/contacto", "/presupuesto"],
+    "fr": ["/devis", "/demande-de-devis", "/contact"],
+    "it": ["/preventivo", "/richiedi-preventivo", "/contatti"],
+    "nl": ["/offerte", "/offerte-aanvragen", "/contact"]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "id": "consumer-online",
+  "description": "Self-serve SaaS, e-commerce/DTC, creator/course, agency, marketplace, local business. See references/business-context.md.",
+  "detection_signals": {
+    "en": ["free trial", "freemium", "/month", "sign up free", "start free trial", "add to cart", "checkout", "shipping"],
+    "de": ["kostenlos testen", "monatlich", "kostenlose testversion", "in den warenkorb", "zur kasse", "versand"],
+    "es": ["prueba gratis", "mensual", "prueba gratuita", "añadir al carrito", "pagar", "envío"],
+    "fr": ["essai gratuit", "mensuel", "ajouter au panier", "paiement", "livraison"],
+    "it": ["prova gratuita", "mensile", "aggiungi al carrello", "pagamento", "spedizione"],
+    "nl": ["gratis proberen", "maandelijks", "in winkelwagen", "afrekenen", "verzending"]
+  },
+  "cta_words": {
+    "en": ["sign up", "get started", "try free", "start free", "buy now", "subscribe", "join", "register",
+           "start trial", "create account", "claim", "unlock", "see pricing", "download"],
+    "de": ["registrieren", "anmelden", "jetzt kaufen", "in den warenkorb", "kostenlos testen",
+           "jetzt starten", "newsletter abonnieren", "zum produkt", "herunterladen"],
+    "es": ["registrarse", "suscribirse", "comprar ahora", "añadir al carrito", "prueba gratis",
+           "empezar", "descargar"],
+    "fr": ["s'inscrire", "acheter", "ajouter au panier", "essai gratuit", "commencer", "télécharger"],
+    "it": ["registrati", "iscriviti", "acquista ora", "aggiungi al carrello", "prova gratuita",
+           "inizia", "scarica"],
+    "nl": ["registreren", "aanmelden", "nu kopen", "in winkelwagen", "gratis proberen", "downloaden"]
+  },
+  "pricing_indicator_patterns": {
+    "en": ["\\$\\d+", "€\\d+", "£\\d+", "/month", "/year", "/mo", "per month", "per year",
+           "annually", "free plan", "free tier", "free trial", "enterprise"],
+    "de": ["pro monat", "pro jahr", "jährlich", "kostenloser plan", "kostenlose testversion",
+           "individuelles angebot", "enterprise"],
+    "es": ["al mes", "por mes", "al año", "anual", "plan gratuito", "prueba gratuita",
+           "presupuesto personalizado", "enterprise"],
+    "fr": ["par mois", "par an", "annuel", "plan gratuit", "essai gratuit", "sur devis", "enterprise"],
+    "it": ["al mese", "all'anno", "annuale", "piano gratuito", "prova gratuita",
+           "prezzo personalizzato", "enterprise"],
+    "nl": ["per maand", "per jaar", "jaarlijks", "gratis plan", "gratis proberen", "op maat", "enterprise"]
+  },
+  "testimonial_words": {
+    "en": ["testimonial", "review", "said about", "what our customers", "customer stories", "case study", "success story"],
+    "de": ["kundenstimme", "bewertung", "erfahrungsbericht", "das sagen unsere kunden", "kundengeschichten"],
+    "es": ["testimonio", "reseña", "opinión", "lo que dicen nuestros clientes", "casos de éxito"],
+    "fr": ["témoignage", "avis", "ce que disent nos clients", "étude de cas"],
+    "it": ["testimonianza", "recensione", "cosa dicono i nostri clienti", "caso di successo"],
+    "nl": ["getuigenis", "review", "wat onze klanten zeggen", "klantcase"]
+  },
+  "trust_badge_alt_keywords": {
+    "en": ["logo", "client", "partner", "customer", "trusted", "featured in", "as seen in"],
+    "de": ["logo", "kunde", "partner", "vertrauen"],
+    "es": ["logo", "cliente", "socio", "confianza"],
+    "fr": ["logo", "client", "partenaire", "confiance"],
+    "it": ["logo", "cliente", "partner", "fiducia"],
+    "nl": ["logo", "klant", "partner", "vertrouwd"]
+  },
+  "conversion_paths": {
+    "en": ["/pricing", "/plans", "/price"],
+    "de": ["/preise", "/preisliste"],
+    "es": ["/precios", "/planes"],
+    "fr": ["/tarifs", "/prix"],
+    "it": ["/prezzi", "/piani"],
+    "nl": ["/prijzen", "/abonnementen"]
+  }
+}
