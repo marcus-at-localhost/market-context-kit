@@ -265,6 +265,14 @@ All commands below take the `ai-marketing:` prefix — shortened here for readab
 
 ---
 
+## Extending the Suite
+
+Want to add an external concept, framework, or piece of research (a report, an
+article, a survey) to the suite? See [EXTENDING.md](EXTENDING.md) — where it
+should land, how to cite it, and how to keep pack files independent.
+
+---
+
 ## Uninstall
 
 Delete the folder:
