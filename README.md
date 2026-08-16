@@ -177,6 +177,18 @@ market-context-kit/                     # clone target: .claude/skills/market-co
 
 Nothing here is copied anywhere at install time. Skills reference the bundled scripts through `${CLAUDE_PLUGIN_ROOT}`, which Claude Code expands to this folder's real path on any machine, so there are no absolute paths to maintain and no second copy that can drift.
 
+## Optional Search Context companion
+
+[Search Context Kit](../search-context-kit/) is an optional companion that collects read-only Google Search Console, Bing Webmaster, and Matomo evidence into a versioned `SEARCH-CONTEXT.v1.json` handoff. It remains a separate plugin and Python package, so Market Context Kit does not inherit its provider packages, credentials, or MCP runtimes.
+
+Audit, report, and SEO workflows accept an explicit artifact path, for example:
+
+```text
+/marketkit:audit https://example.com and use ../2026-08-16 - Search Context/example.com/SEARCH-CONTEXT.v1.json during synthesis.
+```
+
+The artifact is used only after schema, exact-domain, reporting-period, and source-status validation. In the full audit it is orchestrator-only, never goes to the five scoring subagents, and does not change audit scores; it can only corroborate and prioritize independently derived recommendations. Missing, partial, mismatched, or stale evidence is disclosed rather than treated as zero.
+
 ---
 
 ## Grounding: teaching the suite about your business

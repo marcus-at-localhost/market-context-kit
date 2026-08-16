@@ -16,6 +16,8 @@ State which grounding files informed the report, and flag any benchmark you quot
 
 Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — Step 1 below reads prior skill output from it, and the final `MARKETING-REPORT.md` is written there too.
 
+Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. If the user supplies a `SEARCH-CONTEXT.v1.json` path, or its exact-domain discovery rule finds one, validate it before using any values. Keep the artifact optional and retain its path, reporting period, and source statuses for the data-source appendix.
+
 ---
 
 ## Skill Purpose
@@ -43,11 +45,14 @@ Before generating the report, check for any existing audit data from previous sk
 - `AD-AUDIT.md` -- from `/marketkit:ads`
 - `SOCIAL-AUDIT.md` -- from `/marketkit:social`
 - `EMAIL-AUDIT.md` -- from `/marketkit:emails`
+- Validated `SEARCH-CONTEXT.v1.json` -- optional measured query, page, engagement, and indexing evidence; apply `references/search-context-integration.md`
 
 If no previous data exists, inform the user and offer to:
 1. Run a quick audit first (recommended)
 2. Generate a report based on available information (website URL, user-provided data)
 3. Create a report template they can fill in
+
+When valid Search Context evidence is present, use measured traffic, query, landing-page, engagement, and indexing fields only in the matching deep dives. Name the artifact period and provider beside material figures. Never invent absent analytics, treat `null` or failed sources as zero, convert search estimates into revenue facts, or infer form inquiries without an explicitly supplied form dataset. Search Context may prioritize recommendations but does not replace or retroactively alter existing audit scores.
 
 ### Step 2: Calculate the Marketing Scorecard
 
@@ -266,6 +271,7 @@ Include methodology notes so the client understands how scores were derived:
 **Tools Used:**
 - List any tools or scripts used in the analysis
 - Reference to scripts/analyze_page.py if used
+- If used, name `SEARCH-CONTEXT.v1.json`, its period, source statuses, and the Search Context Kit as an optional evidence source
 
 **Glossary:**
 - Define marketing terms that a non-marketer client may not know
@@ -278,7 +284,7 @@ Generate a file called `MARKETING-REPORT.md` inside the folder resolved in Phase
 ```markdown
 # Marketing Report
 ## [Company/Domain Name]
-### Prepared by: [Agent/Agency Name]
+### Prepared by: Marcus Obst, IDT Holding GmbH
 ### Date: [Date]
 
 ---

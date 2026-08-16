@@ -17,6 +17,8 @@ Grounding supplies target markets and languages, which decide whether hreflang a
 
 Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — the Output Format section below writes `SEO-AUDIT.md` there, not into the bare working directory.
 
+Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve a `SEARCH-CONTEXT.v1.json` only from an explicit user path or the reference's exact-domain discovery rule, then validate schema, domain, reporting period, and source statuses before reading values.
+
 ---
 
 ## Skill Purpose
@@ -54,6 +56,10 @@ This script extracts:
 - Forms and CTAs
 - Schema/structured data
 - Social links
+
+### Step 1.5: Apply optional measured Search Context
+
+If a valid artifact was resolved in Phase 0, use its measured queries, landing-page paths, CTR, average position, and indexing states to prioritize recommendations. Name the artifact reporting period and providers, disclose partial sources, and reject domain mismatches. Keep live HTML and the bundled analyzer as the source for structural claims; analytics evidence cannot prove a title, heading, canonical, schema, or link exists now. Do not change the SEO health score solely because of Search Context data—use it for priority and confidence.
 - Tracking scripts
 - Viewport meta tag (mobile-friendliness indicator)
 - Canonical tag
@@ -411,6 +417,8 @@ Generate a file called `SEO-AUDIT.md` inside the folder resolved in Phase 0 (`${
 # SEO Content Audit
 ## [URL]
 ### Date: [Date]
+
+### Optional data source: [SEARCH-CONTEXT.v1.json path, reporting period, source statuses — or: not used]
 
 ---
 
