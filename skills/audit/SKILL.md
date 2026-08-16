@@ -25,6 +25,8 @@ Then read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`. The classifica
 
 Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — Phase 3 writes `MARKETING-AUDIT.md` there, not into the bare working directory.
 
+Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve and validate a `SEARCH-CONTEXT.v1.json` artifact only when the user supplies an explicit path or the reference's exact-domain discovery rule finds one. Retain a valid artifact as **orchestrator-only** evidence for Phase 3; do not use it during discovery or scoring.
+
 ### 0.1 Build the Data Manifest
 
 The five subagents have no file-discovery tools and are instructed to open nothing you have not named. Decide now what that list is: the **Data Manifest** is the complete set of file paths any subagent may `Read` on this run, and you paste it verbatim into all five prompts.
@@ -37,6 +39,7 @@ Never on the manifest, whatever else is in the workspace:
 |---|---|
 | Any `MARKETING-AUDIT.md`, in any folder, from any run | Score anchoring. A subagent that sees a previous score calibrates to it instead of scoring the site, and the five dimensions stop being independent. Run-over-run comparison is yours to do in Phase 3. Do not quote a prior score into a subagent prompt either — not as context, not as an example. |
 | Analytics, traffic, and performance exports (`*Analytics*`, GA4/Matomo/GSC dumps, KPI sheets) | Cross-client contamination. In a multi-client workspace a subagent cannot tell whose figures these are, and a foreign number reaches the report looking like a measurement of this client. |
+| `SEARCH-CONTEXT.v1.json` and its raw provider files | Orchestrator-only evidence. It never goes on the Data Manifest, even after exact-domain validation. |
 | Any other client's folder or deliverable | Same. |
 | `COMPETITOR-REPORT.md`, `BRAND-VOICE.md`, and other sibling-skill output | Orchestrator-only inputs — see Cross-Skill Integration. Feeding them to a subagent pre-loads its conclusions. |
 
@@ -530,6 +533,8 @@ Full report saved to: [resolved path]/MARKETING-AUDIT.md
 ## Cross-Skill Integration
 
 **Everything in this section is yours alone.** These files are orchestrator context, they are read by you in Phase 3, and they never go on the Data Manifest. A subagent that sees a sibling skill's output inherits its conclusions instead of reaching its own, which is the whole reason the five run independently.
+
+- If Phase 0 retained a valid `SEARCH-CONTEXT.v1.json`, apply `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md` now. Do not paste Search Context data into any subagent prompt. Use its measured period and source statuses to corroborate or prioritize independently derived recommendations, label estimates and partial sources, and cite the artifact path. It may change ordering and confidence, but **do not change the six audit scores**, any subagent score, or the weighted composite.
 
 - If `COMPETITOR-REPORT.md` exists in today's resolved output folder, incorporate its findings during Phase 3 synthesis — after `market-competitive` has returned its own, independently derived competitor set. Where the two disagree, say so in the report rather than quietly preferring one.
 - If `BRAND-VOICE.md` exists (today's folder, per the same lookup), use it to contextualize the content analysis in Phase 3. It does not go into the `market-content` prompt; the grounding digest is what carries client voice to the subagents.
