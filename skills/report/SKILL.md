@@ -284,7 +284,7 @@ Generate a file called `MARKETING-REPORT.md` inside the folder resolved in Phase
 ```markdown
 # Marketing Report
 ## [Company/Domain Name]
-### Prepared by: Marcus Obst, IDT Holding GmbH
+[Optional metadata front matter resolved in Phase 0; omit when disabled]
 ### Date: [Date]
 
 ---

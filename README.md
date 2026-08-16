@@ -231,6 +231,10 @@ That gives you two ways to run more than one client through the same install:
 
 Either way, most output filenames are generic (`MARKETING-AUDIT.md`, `SEO-AUDIT.md`, `MARKETING-REPORT.md`) — not client- or domain-namespaced. The dated folder protects same-client reruns from overwriting each other; it does not namespace by client, so two clients sharing one folder on the same day still overwrite each other's files inside it. Only the PDF report auto-namespaces beyond that (`MARKETING-REPORT-<domain>.pdf`).
 
+### Optional project report metadata
+
+The suite reads only `reporting.config.json` at the Git project root, or in the current working directory outside Git. If the file is absent, reports contain no attribution or generation metadata. If present, it must match `config/reporting.schema.json`; report workflows merge its human attribution with the exact active toolkit, host, provider, and model. No user-global configuration or environment variable is consulted. Copy `config/reporting.example.json` to the project root to enable it.
+
 One thing that does hold regardless of how you lay the folders out: the five audit subagents cannot reach across a client boundary, because they cannot reach the filesystem at all. They carry no file-discovery tools and may open only the paths the orchestrator names in that run's **Data Manifest** (`skills/audit/SKILL.md`, 0.1), which excludes previous audit reports and analytics exports by rule. A second client's numbers sitting in the same tree therefore cannot surface in the wrong report. That protects the analysis; it does not protect grounding lookup or output filenames, which still depend on your CWD as described above.
 
 ## Business type and example packs

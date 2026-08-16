@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project report metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "reporting"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "reporting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prepared_by", "document_author"],
+      "properties": {
+        "prepared_by": {"type": "string", "minLength": 1},
+        "document_author": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

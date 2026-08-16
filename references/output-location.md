@@ -55,3 +55,26 @@ against multiple clients from one install still means `cd` into each
 client's own folder first (see README's "Multiple clients from one
 install"); the dated folder nests under whichever directory you were in
 when the skill ran.
+
+## Optional report metadata
+
+Before writing any report, run the plugin's
+`scripts/resolve_report_metadata.py` from the project working directory with
+`--toolkit "Market Context Kit"` and the exact active `--host`, `--provider`,
+and `--model`. Use `python` on Windows and `python3` on macOS/Linux. Do not
+guess any runtime value.
+
+The resolver reads exactly `reporting.config.json` at the Git project root,
+or in the current working directory outside Git:
+
+- Output `null`: omit all report metadata, including toolkit and model.
+- Output JSON: reproduce those exact fields as YAML front matter in Markdown.
+  For `report-pdf`, store the object unchanged as `report_metadata` in the
+  intermediate JSON so the generator can set the visible credit and PDF
+  properties.
+- Error: stop. Report the invalid configuration or unavailable exact runtime
+  identity instead of silently dropping or inventing metadata.
+
+Never construct attribution directly from `AGENTS.md`, `CLAUDE.md`, a skill,
+or a template. The tracked `config/reporting.example.json` documents the
+schema but is never a metadata fallback.
