@@ -68,6 +68,39 @@ def test_all_report_workflows_use_the_shared_metadata_contract():
         assert "references/output-location.md" in text
 
 
+def _write_reporting(path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        '{"schema_version":1,"reporting":{"prepared_by":"A","document_author":"A"}}',
+        encoding="utf-8",
+    )
+
+
+def test_config_directory_is_primary(tmp_path):
+    _write_reporting(tmp_path / "config" / "reporting.config.json")
+    metadata = resolve_report_metadata(
+        tmp_path, toolkit="Market Context Kit", host="Codex", provider="OpenAI", model="gpt-test"
+    )
+    assert metadata["prepared_by"] == "A"
+
+
+def test_legacy_root_config_warns(tmp_path):
+    _write_reporting(tmp_path / "reporting.config.json")
+    with pytest.warns(FutureWarning, match="config/reporting.config.json"):
+        resolve_report_metadata(
+            tmp_path, toolkit="Market Context Kit", host="Codex", provider="OpenAI", model="gpt-test"
+        )
+
+
+def test_both_metadata_paths_fail(tmp_path):
+    _write_reporting(tmp_path / "config" / "reporting.config.json")
+    _write_reporting(tmp_path / "reporting.config.json")
+    with pytest.raises(ReportMetadataError, match="both"):
+        resolve_report_metadata(
+            tmp_path, toolkit="Market Context Kit", host="Codex", provider="OpenAI", model="gpt-test"
+        )
+
+
 def test_pdf_metadata_separates_human_author_from_runtime_creator():
     class Canvas:
         def __init__(self):

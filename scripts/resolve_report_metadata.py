@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import subprocess
 from typing import Mapping
+import warnings
 
 
 CONFIG_NAME = "reporting.config.json"
@@ -42,8 +43,23 @@ def resolve_report_metadata(
     model: str | None = None,
     generated_at: str | None = None,
 ) -> dict[str, str] | None:
-    config_path = find_project_root(start) / CONFIG_NAME
-    if not config_path.is_file():
+    project_root = find_project_root(start)
+    preferred = project_root / "config" / CONFIG_NAME
+    legacy = project_root / CONFIG_NAME
+    if preferred.is_file() and legacy.is_file():
+        raise ReportMetadataError(
+            f"both {preferred} and legacy {legacy} exist; keep only config/{CONFIG_NAME}"
+        )
+    if preferred.is_file():
+        config_path = preferred
+    elif legacy.is_file():
+        warnings.warn(
+            f"move {CONFIG_NAME} to config/{CONFIG_NAME}",
+            FutureWarning,
+            stacklevel=2,
+        )
+        config_path = legacy
+    else:
         return None
     config = _load_config(config_path)
     if not all(_nonempty(value) for value in (toolkit, host, provider, model)):
