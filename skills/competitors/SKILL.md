@@ -17,7 +17,13 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 If grounding names a competitor set, start from it rather than from search results; generic category searches miss the competitors that matter in narrow verticals.
 
-Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — the Output Format section below writes `COMPETITOR-REPORT.md` there, not into the bare working directory.
+Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose COMPETITOR-REPORT --scope <domain> --extension md
+```
+
+Use `python3` on macOS/Linux. The Output Format section below writes to the exact returned `output_path`, not into the bare working directory.
 
 ---
 
@@ -450,9 +456,9 @@ Provide guidance on how to respond to competitor moves:
 
 ---
 
-## Output Format: COMPETITOR-REPORT.md
+## Output Format: MARKETKIT - COMPETITOR-REPORT - <domain>.md
 
-Write the full output to `COMPETITOR-REPORT.md` inside the folder resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`):
+Write the full output to the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`):
 
 ```markdown
 # Competitive Intelligence Report: [Target Brand]
@@ -583,7 +589,7 @@ Top 3 Actions:
   2. [action]
   3. [action]
 
-Full report saved to: [resolved path]/COMPETITOR-REPORT.md
+Full report saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - COMPETITOR-REPORT - example.com.md]
 ```
 
 ---

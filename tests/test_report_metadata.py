@@ -66,6 +66,7 @@ def test_all_report_workflows_use_the_shared_metadata_contract():
     for skill in ("audit", "seo", "competitors", "report", "report-pdf"):
         text = (ROOT / "skills" / skill / "SKILL.md").read_text(encoding="utf-8")
         assert "references/output-location.md" in text
+        assert "scripts/resolve_audit_output.py" in text
 
 
 def _write_reporting(path):

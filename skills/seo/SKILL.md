@@ -15,7 +15,13 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 Grounding supplies target markets and languages, which decide whether hreflang and localized metadata are findings or non-issues.
 
-Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — the Output Format section below writes `SEO-AUDIT.md` there, not into the bare working directory.
+Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose SEO-AUDIT --scope <domain> --extension md
+```
+
+Use `python3` on macOS/Linux. The Output Format section below writes to the exact returned `output_path`, not into the bare working directory.
 
 Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve a `SEARCH-CONTEXT.v1.json` only from an explicit user path or the reference's exact-domain discovery rule, then validate schema, domain, reporting period, and source statuses before reading values.
 
@@ -409,9 +415,9 @@ Based on the audit findings, recommend:
 
 Scoring: High volume + Low competition + High business value = Highest priority
 
-## Output Format
+## Output Format: MARKETKIT - SEO-AUDIT - <domain>.md
 
-Generate a file called `SEO-AUDIT.md` inside the folder resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with:
+Write the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with:
 
 ```markdown
 # SEO Content Audit

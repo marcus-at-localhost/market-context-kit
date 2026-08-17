@@ -23,7 +23,13 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 Then read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`. The classification in Phase 1.2 below feeds the same pack-selection logic, and grounding overrides it where the two disagree.
 
-Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — Phase 3 writes `MARKETING-AUDIT.md` there, not into the bare working directory.
+Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose MARKETING-AUDIT --scope <domain> --extension md
+```
+
+Use `python3` on macOS/Linux. Retain the JSON's `output_path` (the exact `MARKETKIT - MARKETING-AUDIT - <domain>.md` path) and `audit_dir` — Phase 3 writes there, not into the bare working directory, and Cross-Skill Integration uses `audit_dir` to find same-scope sibling reports.
 
 Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve and validate a `SEARCH-CONTEXT.v1.json` artifact only when the user supplies an explicit path or the reference's exact-domain discovery rule finds one. Retain a valid artifact as **orchestrator-only** evidence for Phase 3; do not use it during discovery or scoring.
 
@@ -37,7 +43,7 @@ Never on the manifest, whatever else is in the workspace:
 
 | Excluded | Why |
 |---|---|
-| Any `MARKETING-AUDIT.md`, in any folder, from any run | Score anchoring. A subagent that sees a previous score calibrates to it instead of scoring the site, and the five dimensions stop being independent. Run-over-run comparison is yours to do in Phase 3. Do not quote a prior score into a subagent prompt either — not as context, not as an example. |
+| Any `MARKETKIT - MARKETING-AUDIT - *.md`, in any folder, from any run | Score anchoring. A subagent that sees a previous score calibrates to it instead of scoring the site, and the five dimensions stop being independent. Run-over-run comparison is yours to do in Phase 3. Do not quote a prior score into a subagent prompt either — not as context, not as an example. |
 | Analytics, traffic, and performance exports (`*Analytics*`, GA4/Matomo/GSC dumps, KPI sheets) | Cross-client contamination. In a multi-client workspace a subagent cannot tell whose figures these are, and a foreign number reaches the report looking like a measurement of this client. |
 | `SEARCH-CONTEXT.v1.json` and its raw provider files | Orchestrator-only evidence. It never goes on the Data Manifest, even after exact-domain validation. |
 | Any other client's folder or deliverable | Same. |
@@ -381,9 +387,9 @@ If the competitive subagent identified competitors, include a comparison:
 
 ---
 
-## Output Format: MARKETING-AUDIT.md
+## Output Format: MARKETKIT - MARKETING-AUDIT - <domain>.md
 
-Write the final report to `MARKETING-AUDIT.md` inside the folder resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with this structure:
+Write the final report to the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with this structure:
 
 ```markdown
 # Marketing Audit: [Business Name]
@@ -516,7 +522,7 @@ Top 3 Strategic Moves:
 
 Estimated Revenue Impact: $X,XXX-$XX,XXX/month
 
-Full report saved to: [resolved path]/MARKETING-AUDIT.md
+Full report saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - MARKETING-AUDIT - example.com.md]
 ```
 
 ---
@@ -536,9 +542,9 @@ Full report saved to: [resolved path]/MARKETING-AUDIT.md
 
 - If Phase 0 retained a valid `SEARCH-CONTEXT.v1.json`, apply `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md` now. Do not paste Search Context data into any subagent prompt. Use its measured period and source statuses to corroborate or prioritize independently derived recommendations, label estimates and partial sources, and cite the artifact path. It may change ordering and confidence, but **do not change the six audit scores**, any subagent score, or the weighted composite.
 
-- If `COMPETITOR-REPORT.md` exists in today's resolved output folder, incorporate its findings during Phase 3 synthesis — after `market-competitive` has returned its own, independently derived competitor set. Where the two disagree, say so in the report rather than quietly preferring one.
-- If `BRAND-VOICE.md` exists (today's folder, per the same lookup), use it to contextualize the content analysis in Phase 3. It does not go into the `market-content` prompt; the grounding digest is what carries client voice to the subagents.
-- A previous `MARKETING-AUDIT.md` may be compared against this run — look for one in an earlier dated folder (`YYYY-MM-DD - Marketing Audit/` for a prior date) in the same working directory, not today's. If you report a delta, name both dates and state that the new scores were produced without sight of the old ones. That sentence is what makes the comparison worth anything.
+- If `MARKETKIT - COMPETITOR-REPORT - <domain>.md` exists in the Phase 0 `audit_dir` under the same exact domain scope, incorporate its findings during Phase 3 synthesis — after `market-competitive` has returned its own, independently derived competitor set. Where the two disagree, say so in the report rather than quietly preferring one.
+- If `MARKETKIT - BRAND-VOICE - <domain>.md` exists (same `audit_dir`, same exact domain scope), use it to contextualize the content analysis in Phase 3. It does not go into the `market-content` prompt; the grounding digest is what carries client voice to the subagents.
+- Never search older audit folders automatically. A previous `MARKETKIT - MARKETING-AUDIT - <domain>.md` may be compared against this run only if the user explicitly supplies its path. If you report a delta, name both dates and state that the new scores were produced without sight of the old ones. That sentence is what makes the comparison worth anything.
 - Reference other available analyses in the executive summary
 - Suggest follow-up commands: `/marketkit:copy`, `/marketkit:funnel`, `/marketkit:competitors` for deeper dives
 

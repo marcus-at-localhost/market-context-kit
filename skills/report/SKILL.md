@@ -14,7 +14,13 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 State which grounding files informed the report, and flag any benchmark you quote as market-specific rather than universal.
 
-Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` and resolve today's output folder now — Step 1 below reads prior skill output from it, and the final `MARKETING-REPORT.md` is written there too.
+Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose MARKETING-REPORT --scope <domain> --extension md
+```
+
+Use `python3` on macOS/Linux. Retain `audit_dir` — Step 1 below reads prior skill output from it (same exact domain scope only), and the final report is written to the returned `output_path`.
 
 Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. If the user supplies a `SEARCH-CONTEXT.v1.json` path, or its exact-domain discovery rule finds one, validate it before using any values. Keep the artifact optional and retain its path, reporting period, and source statuses for the data-source appendix.
 
@@ -32,20 +38,23 @@ Generate a comprehensive, professionally formatted marketing report in Markdown.
 ## How to Execute
 
 ### Step 1: Collect All Available Data
-Before generating the report, check for any existing audit data from previous skill runs. Look for these files in the output folder resolved in Phase 0 (falling back to the flat working directory per `output-location.md`'s "Reading prior output" rule):
+Before generating the report, check for any existing audit data from previous skill runs. Look only inside the `audit_dir` resolved in Phase 0, for the exact same domain scope — never search older audit folders.
 
-**Possible data sources:**
-- `MARKETING-AUDIT.md` -- from `/marketkit:audit`
-- `LANDING-CRO.md` -- from `/marketkit:landing`
-- `SEO-AUDIT.md` -- from `/marketkit:seo`
-- `BRAND-VOICE.md` -- from `/marketkit:brand`
-- `COMPETITOR-ANALYSIS.md` -- from `/marketkit:competitors`
-- `FUNNEL-ANALYSIS.md` -- from `/marketkit:funnel`
-- `CONTENT-AUDIT.md` -- from content analysis
-- `AD-AUDIT.md` -- from `/marketkit:ads`
-- `SOCIAL-AUDIT.md` -- from `/marketkit:social`
-- `EMAIL-AUDIT.md` -- from `/marketkit:emails`
-- Validated `SEARCH-CONTEXT.v1.json` -- optional measured query, page, engagement, and indexing evidence; apply `references/search-context-integration.md`
+**Possible data sources** (`MARKETKIT - <PURPOSE> - <domain>.md` unless noted):
+- `MARKETING-AUDIT` -- from `/marketkit:audit`
+- `COMPETITOR-REPORT` -- from `/marketkit:competitors`
+- `SEO-AUDIT` -- from `/marketkit:seo`
+- `AD-CAMPAIGNS` -- from `/marketkit:ads`
+- `BRAND-VOICE` -- from `/marketkit:brand`
+- `CONTENT-PLAN` -- from `/marketkit:content-plan`
+- `COPY-SUGGESTIONS` -- from `/marketkit:copy`
+- `EMAIL-SEQUENCES` -- from `/marketkit:emails`
+- `FUNNEL-ANALYSIS` -- from `/marketkit:funnel`
+- `LANDING-CRO` -- from `/marketkit:landing`
+- `LAUNCH-PLAYBOOK` -- from `/marketkit:launch`
+- `CLIENT-PROPOSAL` -- from `/marketkit:proposal`
+- `SOCIAL-CALENDAR` -- from `/marketkit:social`
+- Validated `data/SEARCHKIT - SEARCH-CONTEXT-V1-<period> - <domain>.json` -- optional measured query, page, engagement, and indexing evidence; apply `references/search-context-integration.md`
 
 If no previous data exists, inform the user and offer to:
 1. Run a quick audit first (recommended)
@@ -277,9 +286,9 @@ Include methodology notes so the client understands how scores were derived:
 - Define marketing terms that a non-marketer client may not know
 - Keep it relevant to terms used in the report
 
-## Output Format
+## Output Format: MARKETKIT - MARKETING-REPORT - <domain>.md
 
-Generate a file called `MARKETING-REPORT.md` inside the folder resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with:
+Write the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with:
 
 ```markdown
 # Marketing Report

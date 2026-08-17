@@ -1,60 +1,111 @@
 # Output Location
 
 Every skill that writes a report file (`audit`, `seo`, `competitors`, `report`,
-`report-pdf`) resolves where it writes through this rule instead of writing
-straight into the working directory. Without it, reruns silently overwrite
-each other and there is no history of past audits.
+`report-pdf`, and every other file-writing skill in this suite) resolves where
+it writes through this rule instead of writing straight into the working
+directory or inventing its own folder. This is the same shared contract
+Search Context Kit uses, so both toolkits' outputs land side by side in one
+place per day.
 
 ## The folder
 
-Every write lands inside a dated folder, in the current working directory:
+Every write lands inside a dated audit folder, in the project's Git root (or
+the current working directory outside Git):
 
 ```
-YYYY-MM-DD - Marketing Audit/
+Audit-YYYY-MM-DD/
+Audit-YYYY-MM-DD-NN/
 ```
 
 using today's date. This is one folder for the whole day, shared by every
-skill in this suite — an audit run this morning and a competitor scan this
-afternoon land side by side in it, the way a single audit session's outputs
-belong together.
+skill in this suite and by Search Context Kit — a marketing audit run this
+morning and a search report run this afternoon land side by side in it.
 
-## Resolution steps
+## Resolving a path
 
-Run this before any Write tool call that produces one of this suite's report
-files:
+Run the resolver before any Write tool call that produces one of this suite's
+files, from the project working directory:
 
-1. List directories in the current working directory matching today's date:
-   `YYYY-MM-DD - Marketing Audit` or `YYYY-MM-DD-NN - Marketing Audit`.
-2. None exist → target is `YYYY-MM-DD - Marketing Audit`. Create it, write
-   there.
-3. One or more exist → take the highest-numbered one (bare date sorts before
-   `-01`, `-01` before `-02`, ...). Check whether it already contains a file
-   with this skill's exact target filename (e.g. `MARKETING-AUDIT.md`).
-   - Not present → reuse this folder. Different skill, same day, same
-     folder.
-   - Present → this is a rerun of the same skill, same day. Do not
-     overwrite it. Create the next unused suffix (`-01` if only the bare
-     folder exists, `-02` if `-01` is taken, ...) and write there instead.
-4. State the resolved path in the terminal output, e.g. "Full report saved
-   to: `2026-08-15 - Marketing Audit/MARKETING-AUDIT.md`".
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" ^
+  --purpose MARKETING-AUDIT ^
+  --scope example.com ^
+  --extension md
+```
 
-## Reading prior output (report, report-pdf)
+On Windows, use `python` and either PowerShell line continuation (`` ` ``) or
+one line; on macOS/Linux, use `python3`. Add `--data` for internal
+intermediates that belong flat under `data/` instead of the audit root. Add
+`--date YYYY-MM-DD` only for deterministic tests or explicit historical work
+— never to backdate a real run.
 
-Skills that read other skills' output (`report`, `report-pdf`) look for
-source files in today's resolved folder first. If several dated folders
-exist for today (from reruns), prefer the highest-numbered one — it's the
-most recent. If nothing for today exists, fall back to the flat working
-directory, for files written before this convention existed or copied in
-from elsewhere.
+The command prints one compact JSON object:
+
+```json
+{"project_root":"...","audit_dir":"...","data_dir":"...","output_path":"..."}
+```
+
+`output_path` is authoritative. Use it exactly for the Write tool call and
+state it in the terminal output, e.g. "Full report saved to:
+`Audit-2026-08-17/MARKETKIT - MARKETING-AUDIT - example.com.md`". Do not
+reconstruct the path yourself or guess a folder name.
+
+### The algorithm the resolver implements
+
+1. Find the project root (`git rev-parse --show-toplevel`, or the current
+   working directory outside Git).
+2. List directories directly under the project root matching today's date:
+   `Audit-YYYY-MM-DD` or `Audit-YYYY-MM-DD-NN` (`NN` two or more digits).
+3. None exist → target is `Audit-YYYY-MM-DD`.
+4. One or more exist → take the **highest-numbered** one (bare date is run 1,
+   `-02` outranks `-01`, ...). Check whether it (or its `data/` subfolder)
+   already contains a file with this exact target filename.
+   - Not present → reuse this folder. Different toolkit or skill, same day,
+     same audit.
+   - Present → this is a rerun that would collide; never overwrite it.
+     Create the next unused numeric suffix and write there instead.
+5. Create only the selected folder (and `data/` when `--data` is set).
+
+## Filename contract
+
+Every generated name follows:
+
+```
+<TOOLKIT> - <PURPOSE> - <SCOPE>.<extension>
+```
+
+with no underscores. `TOOLKIT` is `MARKETKIT` for every file this suite
+writes. `PURPOSE` is an uppercase-kebab token identifying the report or
+artifact (`MARKETING-AUDIT`, `COMPETITOR-REPORT`, `SEO-AUDIT`,
+`MARKETING-REPORT`, `AD-CAMPAIGNS`, `BRAND-VOICE`, `CONTENT-PLAN`,
+`COPY-SUGGESTIONS`, `EMAIL-SEQUENCES`, `FUNNEL-ANALYSIS`, `LANDING-CRO`,
+`LAUNCH-PLAYBOOK`, `CLIENT-PROPOSAL`, `SOCIAL-CALENDAR`, `REPORT-DATA`, and
+per-article `ARTICLE-<UPPERCASE-KEBAB-SLUG>`). `SCOPE` is the exact
+normalized target domain for URL-based workflows, or an explicit
+customer/topic token the user supplied for topic-only workflows — never
+invented.
+
+Reports live directly in the active audit folder. Internal intermediates
+(PDF source JSON, scratch data) live flat under its `data/` subfolder — never
+in a nested `raw/` or per-domain subfolder.
+
+## Reading prior output
+
+Skills that read sibling output (`report`, `report-pdf`, and any skill
+checking for a same-scope prerequisite) look **only inside the active audit
+folder** resolved above, using the exact same-scope filename, for example
+`MARKETKIT - COMPETITOR-REPORT - example.com.md` next to
+`MARKETKIT - MARKETING-AUDIT - example.com.md`. Never search older audit
+folders automatically — a prior day's run is out of scope unless the user
+names it explicitly.
 
 ## Scope
 
-This resolves paths within the current working directory only — it does not
-walk parent directories the way grounding lookup does. Running this suite
+The resolver walks up from the current working directory to the Git project
+root; it does not search parent directories beyond that. Running this suite
 against multiple clients from one install still means `cd` into each
-client's own folder first (see README's "Multiple clients from one
-install"); the dated folder nests under whichever directory you were in
-when the skill ran.
+client's own project first (see README's "Multiple clients from one
+install"); the audit folder lands at that project's root.
 
 ## Optional report metadata
 
@@ -64,8 +115,11 @@ Before writing any report, run the plugin's
 and `--model`. Use `python` on Windows and `python3` on macOS/Linux. Do not
 guess any runtime value.
 
-The resolver reads exactly `reporting.config.json` at the Git project root,
-or in the current working directory outside Git:
+The resolver reads `config/reporting.config.json` at the Git project root
+first. A legacy `reporting.config.json` directly at the project root still
+works but emits a `FutureWarning` asking it to move under `config/`; if both
+exist, the resolver raises an error rather than pick one silently — move the
+legacy file before continuing.
 
 - Output `null`: omit all report metadata, including toolkit and model.
 - Output JSON: reproduce those exact fields as YAML front matter in Markdown.
