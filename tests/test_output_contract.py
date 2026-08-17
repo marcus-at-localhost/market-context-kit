@@ -45,6 +45,21 @@ def test_every_file_writing_skill_uses_the_shared_resolver():
         assert f"--purpose {purpose}" in text
 
 
+def test_readme_and_help_document_new_contract():
+    for path in ("README.md", "skills/help/SKILL.md"):
+        text = read(path)
+        assert "Audit-YYYY-MM-DD" in text
+        assert "MARKETKIT - <PURPOSE> - <SCOPE>" in text
+        assert "config/reporting.config.json" in text
+    assert "2026-08-17-02" in read("README.md")
+
+
+def test_plugin_version_is_3_1_0():
+    import json
+    manifest = json.loads(read(".claude-plugin/plugin.json"))
+    assert manifest["version"] == "3.1.0"
+
+
 def test_output_reference_documents_shared_audit_algorithm():
     text = read("references/output-location.md")
     for phrase in (

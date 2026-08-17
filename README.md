@@ -3,7 +3,6 @@
 **This is 100% AI slop copied from AI-slop bros on YouTube. It is no substitute for an agency that would charge you thousands of money, and it won’t produce content your business can use as-is. At best, it gives you a fresh perspective and a few rough ideas to develop yourself.**
 
 **ACHTUNG** I haven’t tested some of the skills, such as funnel or ads, because I don’t need them myself. Yet. The PDF creator is probably crap, too.
-I’m also not 100% sure how to handle multiple clients and reports. Everything in one folder? Separate folders by date? No clue. Yet. Maybe I’ll figure it out eventually.
 But since you can tell the LLM, “Do it like this, Mr. Robot Sir, please,” you’ll probably end up with something workable. I believe in you, alleged human-in-the-loop.
 
 A context-aware marketing skill kit for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Audit websites, generate copy and campaigns, build content plans, analyze competitors, and produce client-ready reports — all from your terminal.
@@ -29,7 +28,7 @@ Launching 5 parallel agents...
 
 Overall Marketing Score: 69/100
 
-Full report saved to MARKETING-AUDIT.md
+Full report saved to Audit-2026-08-17/MARKETKIT - MARKETING-AUDIT - basf.com.md
 ```
 
 ---
@@ -179,21 +178,23 @@ Nothing here is copied anywhere at install time. Skills reference the bundled sc
 
 ## Optional Search Context companion
 
-[Search Context Kit](../search-context-kit/) is an optional companion that collects read-only Google Search Console, Bing Webmaster, and Matomo evidence into a versioned `SEARCH-CONTEXT.v1.json` handoff. It remains a separate plugin and Python package, so Market Context Kit does not inherit its provider packages, credentials, or MCP runtimes.
+[Search Context Kit](../search-context-kit/) is an optional companion that collects read-only Google Search Console, Bing Webmaster, and Matomo evidence into a versioned `SEARCH-CONTEXT.v1.json` artifact. It remains a separate plugin and Python package, so Market Context Kit does not inherit its provider packages, credentials, or MCP runtimes.
 
-Audit, report, and SEO workflows accept an explicit artifact path, for example:
+SearchKit keeps one independent profile per exact domain — `config/searchkit.<domain>.json` — never a copy of this suite's `_grounding/`. A project with three domains has three SearchKit profiles and one shared `_grounding/`.
+
+Audit, report, and SEO workflows discover the artifact automatically: exactly one `data/SEARCHKIT - SEARCH-CONTEXT-V1-<period> - <domain>.json` inside the active `Audit-YYYY-MM-DD[-NN]/` folder, for the exact target domain. An explicit path always overrides discovery, for example:
 
 ```text
-/marketkit:audit https://example.com and use ../2026-08-16 - Search Context/example.com/SEARCH-CONTEXT.v1.json during synthesis.
+/marketkit:audit https://example.com and use "Audit-2026-08-16/data/SEARCHKIT - SEARCH-CONTEXT-V1-Q2-2026 - example.com.json" during synthesis.
 ```
 
-The artifact is used only after schema, exact-domain, reporting-period, and source-status validation. In the full audit it is orchestrator-only, never goes to the five scoring subagents, and does not change audit scores; it can only corroborate and prioritize independently derived recommendations. Missing, partial, mismatched, or stale evidence is disclosed rather than treated as zero.
+The artifact is used only after schema, exact-domain, reporting-period, and source-status validation. In the full audit it is orchestrator-only, never goes to the five scoring subagents, and does not change audit scores; it can only corroborate and prioritize independently derived recommendations. Missing, partial, mismatched, or stale evidence is disclosed rather than treated as zero. Older audit folders are never searched automatically.
 
 ---
 
 ## Grounding: teaching the suite about your business
 
-Every command looks for a `_grounding/` folder in the working directory (and up to three parent directories). If it finds one, it loads it and treats it as the highest authority — above the site's own evidence for matters of intent, and above every default in the skills.
+Every command looks for a `_grounding/` folder in the working directory (and up to three parent directories). If it finds one, it loads it and treats it as the highest authority — above the site's own evidence for matters of intent, and above every default in the skills. One customer project keeps one shared, multilingual `_grounding/` regardless of how many domains that customer runs.
 
 A grounding folder is just markdown. Anything you would tell a new agency on day one belongs there:
 
@@ -218,24 +219,49 @@ What this changes in practice:
 
 No grounding folder is required. Without one the suite works from site evidence alone and says so.
 
-## Multiple clients from one install
+## Output: the shared Audit-YYYY-MM-DD workspace
 
-The suite is not tied to a single client — one install can serve as many as you have folders for. Both the `_grounding/` lookup and every skill's output path (`MARKETING-AUDIT.md`, `MARKETING-REPORT.md`, `MARKETING-REPORT-<domain>.pdf`, …) resolve **relative to the current working directory**, not from any config file or setting. There is nothing named "output folder" to configure — CWD is the only lever.
+One project holds one customer — not one project per domain. A customer with three domains still keeps one shared, multilingual `_grounding/` at the project root and one shared output workspace; only the SearchKit profile and the filename scope vary per domain.
 
-Within that CWD, output actually lands one level down, in a dated folder — `YYYY-MM-DD - Marketing Audit/`, shared by every skill run that day, versioned to `-01`, `-02`, ... on same-day reruns rather than overwritten. See `references/output-location.md` for the exact rule. This gives you history across days automatically; it does not give you history across clients — two clients run the same day from the same CWD still land in the same dated folder and still collide.
+Every command resolves its output path through `references/output-location.md` before writing, via the bundled `scripts/resolve_audit_output.py`. Output lands in a dated audit folder at the Git project root (or CWD outside Git):
 
-That gives you two ways to run more than one client through the same install:
+```
+Audit-YYYY-MM-DD/
+Audit-YYYY-MM-DD-NN/
+```
 
-- **One folder per client, same project.** `clientA/_grounding/`, `clientB/_grounding/`, each with its own subfolder for working files. As long as your CWD is inside `clientA/` when you run a command, its grounding is the nearest one found walking up, and its outputs land next to it. The lookup stops at the first `_grounding/` it finds — nearest wins — but it does not stop at a client boundary you haven't drawn yourself. If CWD is the repo root, or a client subfolder that hasn't got its own `_grounding/` yet, the search keeps walking up and can pick up a *different* client's folder instead. Wrong grounding loads silently — no error.
-- **One project per client (recommended once CLAUDE.md is client-specific).** Separate repo/folder per client, each with its own `.claude/skills/` clone (or a symlink back to one shared install — the plugin keeps no state outside its own folder, so either works). This is the safer default once a top-level `CLAUDE.md` starts naming one client by name, the way this repo's does for IDT: mixing a second client into the same tree means their outputs and grounding both depend on you never running a command from the wrong directory.
+shared by every command that runs that day — Market Context Kit and Search Context Kit alike — versioned to `-01`, `-02`, ... on a same-purpose, same-scope rerun rather than overwritten. Reports live directly in that folder; internal intermediates (PDF source JSON, SearchKit raw evidence) live flat under its `data/` subfolder. The resolver never searches an older audit folder — a prior day's run is out of scope unless you name its path explicitly.
 
-Either way, most output filenames are generic (`MARKETING-AUDIT.md`, `SEO-AUDIT.md`, `MARKETING-REPORT.md`) — not client- or domain-namespaced. The dated folder protects same-client reruns from overwriting each other; it does not namespace by client, so two clients sharing one folder on the same day still overwrite each other's files inside it. Only the PDF report auto-namespaces beyond that (`MARKETING-REPORT-<domain>.pdf`).
+Every generated filename follows one contract, with no underscores:
+
+```
+MARKETKIT - <PURPOSE> - <SCOPE>.<extension>
+```
+
+`SCOPE` is the exact normalized target domain for URL-based commands (`audit`, `competitors`, `seo`, `ads`, `brand`, `content-plan`, `copy`, `funnel`, `landing`, `report`, `report-pdf`). For topic-only commands (`emails`, `launch`, `proposal`, and topic-only `social`), the skill asks you for an explicit domain or customer scope before writing anything — it never invents one.
+
+**Worked example — MarketKit runs twice, then SearchKit runs once, same day:**
+
+```
+> /marketkit:audit https://example.com
+Full report saved to: Audit-2026-08-17/MARKETKIT - MARKETING-AUDIT - example.com.md
+
+> /marketkit:audit https://example.com                      # rerun, same day, same domain
+Full report saved to: Audit-2026-08-17-02/MARKETKIT - MARKETING-AUDIT - example.com.md
+
+> /searchkit:collect example.com Q2 2026                     # SearchKit reuses the active run
+Artifact saved to: Audit-2026-08-17-02/data/SEARCHKIT - SEARCH-CONTEXT-V1-Q2-2026 - example.com.json
+```
+
+The second `audit` collides with the first on exact filename, so it becomes `-02`. SearchKit then resolves the same day and reuses the **highest-numbered** existing folder — `-02` — so both toolkits' output for that day sits side by side, whichever one ran first.
 
 ### Optional project report metadata
 
-The suite reads only `reporting.config.json` at the Git project root, or in the current working directory outside Git. If the file is absent, reports contain no attribution or generation metadata. If present, it must match `config/reporting.schema.json`; report workflows merge its human attribution with the exact active toolkit, host, provider, and model. No user-global configuration or environment variable is consulted. Copy `config/reporting.example.json` to the project root to enable it.
+The suite reads `config/reporting.config.json` at the Git project root first (or in the current working directory outside Git). A legacy `reporting.config.json` directly at the project root still works but warns that it should move under `config/`; if both exist, the resolver stops rather than pick one silently. If no file is found, reports contain no attribution or generation metadata. If present, it must match `config/reporting.schema.json`; report workflows merge its human attribution with the exact active toolkit, host, provider, and model. No user-global configuration or environment variable is consulted. Copy `config/reporting.example.json` to `config/reporting.config.json` to enable it.
 
-One thing that does hold regardless of how you lay the folders out: the five audit subagents cannot reach across a client boundary, because they cannot reach the filesystem at all. They carry no file-discovery tools and may open only the paths the orchestrator names in that run's **Data Manifest** (`skills/audit/SKILL.md`, 0.1), which excludes previous audit reports and analytics exports by rule. A second client's numbers sitting in the same tree therefore cannot surface in the wrong report. That protects the analysis; it does not protect grounding lookup or output filenames, which still depend on your CWD as described above.
+### Client isolation
+
+The five audit subagents cannot reach across a client boundary, because they cannot reach the filesystem at all. They carry no file-discovery tools and may open only the paths the orchestrator names in that run's **Data Manifest** (`skills/audit/SKILL.md`, 0.1), which excludes previous audit reports and analytics exports by rule. Keep one repository per customer — mixing two customers into the same tree means their `_grounding/` and Search Context evidence both depend on you never running a command from the wrong project.
 
 ## Business type and example packs
 
