@@ -23,7 +23,7 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose SEO-AUD
 
 Use `python3` on macOS/Linux. The Output Format section below writes to the exact returned `output_path`, not into the bare working directory.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve a `SEARCH-CONTEXT.v1.json` only from an explicit user path or the reference's exact-domain discovery rule, then validate schema, domain, reporting period, and source statuses before reading values.
+Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve a `SEARCH-CONTEXT.v1.json` only from an explicit user path, or from exactly one match in the active audit folder's flat `data/` for the exact domain and, if requested, the exact reporting period, then validate schema, domain, reporting period, and source statuses before reading values.
 
 ---
 

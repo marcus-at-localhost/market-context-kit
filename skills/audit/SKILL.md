@@ -31,7 +31,7 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose MARKETI
 
 Use `python3` on macOS/Linux. Retain the JSON's `output_path` (the exact `MARKETKIT - MARKETING-AUDIT - <domain>.md` path) and `audit_dir` — Phase 3 writes there, not into the bare working directory, and Cross-Skill Integration uses `audit_dir` to find same-scope sibling reports.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve and validate a `SEARCH-CONTEXT.v1.json` artifact only when the user supplies an explicit path or the reference's exact-domain discovery rule finds one. Retain a valid artifact as **orchestrator-only** evidence for Phase 3; do not use it during discovery or scoring.
+Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve and validate a `SEARCH-CONTEXT.v1.json` artifact only when the user supplies an explicit path, or the reference's discovery rule finds exactly one in the active audit folder's flat `data/` for the exact domain and, if requested, the exact reporting period. Retain a valid artifact as **orchestrator-only** evidence for Phase 3; do not use it during discovery or scoring.
 
 ### 0.1 Build the Data Manifest
 

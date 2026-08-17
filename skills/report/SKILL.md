@@ -22,7 +22,7 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose MARKETI
 
 Use `python3` on macOS/Linux. Retain `audit_dir` — Step 1 below reads prior skill output from it (same exact domain scope only), and the final report is written to the returned `output_path`.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. If the user supplies a `SEARCH-CONTEXT.v1.json` path, or its exact-domain discovery rule finds one, validate it before using any values. Keep the artifact optional and retain its path, reporting period, and source statuses for the data-source appendix.
+Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. If the user supplies a `SEARCH-CONTEXT.v1.json` path, or its discovery rule finds exactly one in the active audit folder's flat `data/` for the exact domain and, if requested, the exact reporting period, validate it before using any values. Keep the artifact optional and retain its path, reporting period, and source statuses for the data-source appendix.
 
 ---
 

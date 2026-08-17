@@ -35,6 +35,22 @@ def test_report_and_seo_use_shared_reference():
         assert "SEARCH-CONTEXT.v1.json" in text
 
 
+def test_reference_uses_flat_active_audit_artifacts_only():
+    text = read("references/search-context-integration.md")
+    assert "data/SEARCHKIT - SEARCH-CONTEXT-V1-<PERIOD> - <domain>.json" in text
+    assert "active audit folder" in text
+    assert "never search older audit folders" in text
+    assert "more than one" in text and "require" in text
+
+
+def test_consumers_keep_exact_domain_and_period_selection():
+    for path in ("skills/audit/SKILL.md", "skills/report/SKILL.md", "skills/seo/SKILL.md"):
+        text = read(path)
+        assert "exact domain" in text
+        assert "reporting period" in text
+        assert "active audit" in text
+
+
 def test_readme_documents_optional_companion():
     text = read("README.md")
     assert "Search Context Kit" in text
