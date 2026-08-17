@@ -14,6 +14,14 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 Resolve the business type via `${CLAUDE_PLUGIN_ROOT}/references/business-context.md` before assigning an archetype — the same voice reads as confident to one audience and unreliable to another.
 
+Read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose BRAND-VOICE --scope <domain> --extension md
+```
+
+Use `python3` on macOS/Linux. Retain `audit_dir` (to check for a same-scope `MARKETKIT - COMPETITOR-REPORT - <domain>.md`) and the exact `output_path` for the final write.
+
 ---
 
 ## Skill Purpose
@@ -346,9 +354,9 @@ Provide 5-8 sample copy pieces written in the identified brand voice so the team
 **8. Customer Thank You Message:**
 "[Sample thank you message in the brand voice]"
 
-## Output Format
+## Output Format: MARKETKIT - BRAND-VOICE - <domain>.md
 
-Generate a file called `BRAND-VOICE.md` with:
+Write the exact `output_path` resolved in Phase 0 with:
 
 ```markdown
 # Brand Voice Guidelines
@@ -484,6 +492,6 @@ Reserved                                  Bold
 - Copy samples are the most valuable part of the deliverable. People learn voice by example, not by description. Make the samples diverse (headlines, body copy, social, email, error messages) so writers have references for every context.
 - Voice and tone are different. Voice is the consistent personality. Tone shifts based on context (a customer complaint response is different from a product launch announcement, but both should be in the same voice).
 - If the brand's voice is inconsistent across channels, frame it as an opportunity to strengthen their brand, not as a failure. Consistency issues are common and fixable.
-- If the user has run `/marketkit:competitors` previously, use that data for the competitor voice comparison section.
+- If `MARKETKIT - COMPETITOR-REPORT - <domain>.md` exists in the Phase 0 `audit_dir` (same exact domain scope), use that data for the competitor voice comparison section. Never search older audit folders.
 - The voice dimensions should be plotted visually (text-based spectrum) so stakeholders can quickly understand the positioning at a glance.
 

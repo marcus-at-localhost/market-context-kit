@@ -23,6 +23,28 @@ def test_core_writers_call_resolver_and_use_prefixed_names():
         assert "MARKETKIT -" in text
 
 
+PURPOSES = {
+    "ads": "AD-CAMPAIGNS",
+    "brand": "BRAND-VOICE",
+    "content-plan": "CONTENT-PLAN",
+    "copy": "COPY-SUGGESTIONS",
+    "emails": "EMAIL-SEQUENCES",
+    "funnel": "FUNNEL-ANALYSIS",
+    "landing": "LANDING-CRO",
+    "launch": "LAUNCH-PLAYBOOK",
+    "proposal": "CLIENT-PROPOSAL",
+    "social": "SOCIAL-CALENDAR",
+}
+
+
+def test_every_file_writing_skill_uses_the_shared_resolver():
+    expected = {**CORE, **PURPOSES}
+    for skill, purpose in expected.items():
+        text = read(f"skills/{skill}/SKILL.md")
+        assert "scripts/resolve_audit_output.py" in text
+        assert f"--purpose {purpose}" in text
+
+
 def test_output_reference_documents_shared_audit_algorithm():
     text = read("references/output-location.md")
     for phrase in (

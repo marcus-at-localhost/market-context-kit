@@ -23,6 +23,13 @@ Perform a comprehensive Conversion Rate Optimization (CRO) analysis on any landi
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds.
 2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack.
+3. Read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
+
+   ```
+   python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose LANDING-CRO --scope <domain> --extension md
+   ```
+
+   Use `python3` on macOS/Linux. Retain `audit_dir` (to check for a same-scope `MARKETKIT - MARKETING-AUDIT - <domain>.md`) and the exact `output_path` for the final write.
 
 The pack supplies the objection set, the risk reducers that actually reduce risk for this buyer, and the CTA conventions. Applying the wrong set is the most common way a CRO review gets rejected by the client — a procurement buyer offered a money-back guarantee concludes the reviewer does not understand the purchase.
 
@@ -258,9 +265,9 @@ Even without actual heat map data, provide guidance on:
 - **Rage click indicators** (elements that look clickable but aren't)
 - **Dead zones** where content may be ignored
 
-## Output Format
+## Output Format: MARKETKIT - LANDING-CRO - <domain>.md
 
-Generate a file called `LANDING-CRO.md` in the project root or output directory with:
+Write the exact `output_path` resolved in Step 0 with:
 
 ```markdown
 # Landing Page CRO Analysis
@@ -341,5 +348,5 @@ Generate a file called `LANDING-CRO.md` in the project root or output directory 
 - Be specific. "Improve your headline" is useless. "Change your headline from 'Welcome to Our Platform' to 'Cut Your Reporting Time by 75% -- Automated Analytics for Growth Teams' because it adds specificity, a quantified benefit, and targets a specific audience" is actionable.
 - Reference industry benchmarks so the client understands where they stand.
 - If you have access to the page via browser tools, take screenshots and reference specific elements.
-- If the user has run `/marketkit:audit` previously, incorporate those findings into the CRO analysis for a more complete picture.
+- If `MARKETKIT - MARKETING-AUDIT - <domain>.md` exists in the Step 0 `audit_dir` (same exact domain scope), incorporate those findings into the CRO analysis for a more complete picture. Never search older audit folders.
 

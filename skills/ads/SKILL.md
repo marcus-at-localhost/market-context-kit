@@ -20,6 +20,13 @@ The user runs `/marketkit:ads <url>`. Fetch the target site to understand the bu
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Claim rules bind ad copy especially hard — ad platforms reject unsupported superlatives, and regulated industries police them.
 2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack. It supplies the retargeting creative angles and the channels worth funding.
+3. Read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
+
+   ```
+   python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose AD-CAMPAIGNS --scope <domain> --extension md
+   ```
+
+   Use `python3` on macOS/Linux. Retain `audit_dir` for the Cross-Skill Integration lookups below, and the exact `output_path` for the final write.
 
 Write ad copy in the language of the market being targeted, and price every recommendation in that market's currency.
 
@@ -390,9 +397,9 @@ For each ad concept, generate:
 
 ---
 
-## Output Format: AD-CAMPAIGNS.md
+## Output Format: MARKETKIT - AD-CAMPAIGNS - <domain>.md
 
-Write the full output to `AD-CAMPAIGNS.md`:
+Write the full output to the exact `output_path` resolved in Phase 0:
 
 ```markdown
 # Ad Campaigns: [Business Name]
@@ -467,16 +474,18 @@ Budget Recommendation: [X,XXX]/month
 Expected CPA: [XX]-[XX]
 Target ROAS: [X]:1
 
-Full campaigns saved to: AD-CAMPAIGNS.md
+Full campaigns saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - AD-CAMPAIGNS - example.com.md]
 ```
 
 ---
 
 ## Cross-Skill Integration
 
-- If `COPY-SUGGESTIONS.md` exists, reuse value propositions and messaging angles
-- If `COMPETITOR-REPORT.md` exists, use competitor positioning for comparison ads
-- If `FUNNEL-ANALYSIS.md` exists, align ad funnel stages to conversion path
-- If `SOCIAL-CALENDAR.md` exists, promote top organic content as Spark/boosted ads
+Look only inside the Phase 0 `audit_dir`, for the exact same domain scope. Never search older audit folders.
+
+- If `MARKETKIT - COPY-SUGGESTIONS - <domain>.md` exists, reuse value propositions and messaging angles
+- If `MARKETKIT - COMPETITOR-REPORT - <domain>.md` exists, use competitor positioning for comparison ads
+- If `MARKETKIT - FUNNEL-ANALYSIS - <domain>.md` exists, align ad funnel stages to conversion path
+- If `MARKETKIT - SOCIAL-CALENDAR - <domain>.md` exists, promote top organic content as Spark/boosted ads
 - Suggest follow-up: `/marketkit:funnel` for conversion path, `/marketkit:landing` for page optimization
 

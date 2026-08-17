@@ -12,6 +12,14 @@ metadata:
 
 Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client documentation outranks every default in this skill, and any claim rules it contains bind the output. Name the loaded files at the top of what you produce.
 
+Read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Ask the user for an explicit domain or customer scope before writing any file — never invent one. The scope must contain only letters, numbers, dots, and hyphens. Resolve today's output path now:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose CLIENT-PROPOSAL --scope <scope> --extension md
+```
+
+Use `python3` on macOS/Linux. Retain the exact `output_path` for the final write.
+
 Quote pricing in the client's currency, and set payment terms and VAT handling to their market's norms rather than to a US default.
 
 ---
@@ -352,9 +360,9 @@ Include these in the proposal appendix or as a separate document:
 9. **Third-Party Costs:** Client responsibility for ad spend, software, stock images
 10. **Results Disclaimer:** Marketing results are not guaranteed, past performance context
 
-## Output Format
+## Output Format: MARKETKIT - CLIENT-PROPOSAL - <scope>.md
 
-Generate a file called `CLIENT-PROPOSAL.md` with:
+Write the exact `output_path` resolved in Phase 0 with:
 
 ```markdown
 # Marketing Services Proposal

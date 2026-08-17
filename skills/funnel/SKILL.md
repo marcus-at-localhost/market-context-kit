@@ -20,6 +20,13 @@ The user runs `/marketkit:funnel <url>`. Fetch the target site and trace every s
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds.
 2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack. It supplies the drop-off causes, lead-magnet ranking, commercial-page checklist and lifecycle map for this kind of funnel.
+3. Read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
+
+   ```
+   python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose FUNNEL-ANALYSIS --scope <domain> --extension md
+   ```
+
+   Use `python3` on macOS/Linux. Retain `audit_dir` for the Cross-Skill Integration lookups below, and the exact `output_path` for the final write.
 
 The conversion event itself differs: a signup or checkout in one context, a qualified request in the other. Everything downstream of that difference — what friction means, what a good lead magnet is, what the last step should promise — follows from the pack, not from this file.
 
@@ -310,9 +317,9 @@ Different traffic sources need different funnel entry points:
 
 ---
 
-## Output Format: FUNNEL-ANALYSIS.md
+## Output Format: MARKETKIT - FUNNEL-ANALYSIS - <domain>.md
 
-Write the full output to `FUNNEL-ANALYSIS.md`:
+Write the full output to the exact `output_path` resolved in Phase 0:
 
 ```markdown
 # Funnel Analysis: [Business Name]
@@ -409,16 +416,18 @@ Top 3 Fixes:
   2. [fix] — est. [X]% lift
   3. [fix] — est. [X]% lift
 
-Full analysis saved to: FUNNEL-ANALYSIS.md
+Full analysis saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - FUNNEL-ANALYSIS - example.com.md]
 ```
 
 ---
 
 ## Cross-Skill Integration
 
-- If `MARKETING-AUDIT.md` exists, reference conversion scores
-- If `COPY-SUGGESTIONS.md` exists, apply copy improvements to funnel pages
-- If `EMAIL-SEQUENCES.md` exists, verify alignment with funnel stages
-- If `COMPETITOR-REPORT.md` exists, compare funnel effectiveness
+Look only inside the Phase 0 `audit_dir`, for the exact same domain scope. Never search older audit folders.
+
+- If `MARKETKIT - MARKETING-AUDIT - <domain>.md` exists, reference conversion scores
+- If `MARKETKIT - COPY-SUGGESTIONS - <domain>.md` exists, apply copy improvements to funnel pages
+- If `MARKETKIT - EMAIL-SEQUENCES - <domain>.md` exists, verify alignment with funnel stages
+- If `MARKETKIT - COMPETITOR-REPORT - <domain>.md` exists, compare funnel effectiveness
 - Suggest follow-up: `/marketkit:copy` for page-specific copy, `/marketkit:emails` for nurture sequences, `/marketkit:landing` for CRO deep dive
 

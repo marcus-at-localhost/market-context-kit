@@ -20,6 +20,13 @@ The user runs `/marketkit:copy <url>`. Fetch the target page(s), analyze the exi
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. If it contains claim or evidence rules, they bind every line of copy you generate — an unsupported claim is a defect, not a stylistic choice.
 2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack. It supplies the page copy structures and CTA conventions used in Phase 3.
+3. Read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
+
+   ```
+   python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose COPY-SUGGESTIONS --scope <domain> --extension md
+   ```
+
+   Use `python3` on macOS/Linux. Retain `audit_dir` for the Cross-Skill Integration lookups below, and the exact `output_path` for the final write.
 
 Write in the language of the target page, using the terminology the site and the grounding files already use.
 
@@ -274,12 +281,12 @@ Top 3 Copy Fixes:
   2. [fix with before/after]
   3. [fix with before/after]
 
-Full report saved to: COPY-SUGGESTIONS.md
+Full report saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - COPY-SUGGESTIONS - example.com.md]
 ```
 
-### COPY-SUGGESTIONS.md
+### MARKETKIT - COPY-SUGGESTIONS - <domain>.md
 
-Write the full report to `COPY-SUGGESTIONS.md` with this structure:
+Write the exact `output_path` resolved in Phase 0 with this structure:
 
 ```markdown
 # Copy Analysis & Suggestions: [URL]
@@ -322,8 +329,10 @@ Write the full report to `COPY-SUGGESTIONS.md` with this structure:
 
 ## Cross-Skill Integration
 
-- If `BRAND-VOICE.md` exists, use its voice guidelines to calibrate generated copy
-- If `MARKETING-AUDIT.md` exists, reference the Content & Messaging score
-- If `COMPETITOR-REPORT.md` exists, use competitor messaging to inform differentiation
+Look only inside the Phase 0 `audit_dir`, for the exact same domain scope. Never search older audit folders.
+
+- If `MARKETKIT - BRAND-VOICE - <domain>.md` exists, use its voice guidelines to calibrate generated copy
+- If `MARKETKIT - MARKETING-AUDIT - <domain>.md` exists, reference the Content & Messaging score
+- If `MARKETKIT - COMPETITOR-REPORT - <domain>.md` exists, use competitor messaging to inform differentiation
 - Suggest follow-up: `/marketkit:landing` for landing-page-specific deep dive, `/marketkit:brand` for voice guidelines
 

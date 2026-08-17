@@ -25,6 +25,13 @@ Before gathering anything else:
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds.
 2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack.
+3. Read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Ask the user for an explicit domain or customer scope before writing any file — never invent one. The scope must contain only letters, numbers, dots, and hyphens. Resolve today's output path now:
+
+   ```
+   python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose LAUNCH-PLAYBOOK --scope <scope> --extension md
+   ```
+
+   Use `python3` on macOS/Linux. Retain the exact `output_path` for the final write.
 
 The pack supplies the launch channels, pre-launch calendar, announcement templates and success metrics. A consumer launch and a technical launch share only the phase structure — everything inside the phases differs, including how long the launch runs and what counts as success.
 
@@ -367,9 +374,9 @@ After the launch, generate a retrospective covering:
 8. **Unexpected Insights**: Surprises from the data
 9. **Next Steps**: Immediate actions based on learnings
 
-## Output Format
+## Output Format: MARKETKIT - LAUNCH-PLAYBOOK - <scope>.md
 
-Generate a file called `LAUNCH-PLAYBOOK.md` with:
+Write the exact `output_path` resolved in Step 0 with:
 
 ```markdown
 # Launch Playbook: [Product Name]

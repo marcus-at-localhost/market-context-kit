@@ -17,6 +17,14 @@ Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` 
 
 Grounding supplies the niche, target industries, content pillars and claim rules that this plan must stay inside.
 
+Read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose CONTENT-PLAN --scope <domain> --extension md
+```
+
+Use `python3` on macOS/Linux. Retain `audit_dir` — Phase 1's dependency check and every Phase 6 article resolve inside it too — and the exact `output_path` for the Phase 5 write.
+
 ---
 
 ## Skill Purpose
@@ -48,27 +56,27 @@ Resolve each variable using the priority order shown. Stop at the first successf
 | `WEBSITE_URL` | CLI argument (required — ask user if missing) |
 | `LANGUAGE_CODE` | `<html lang>` attribute on homepage → ask user |
 | `COUNTRY_CODE` | TLD heuristic (`.de`→`de`, `.it`→`it`, `.fr`→`fr`, `.es`→`es`, `.co.uk`→`uk`, `.com.au`→`au`) → ask user |
-| `WEBSITE_NICHE` | `BRAND-VOICE.md` "Brand Description" section → homepage meta description → ask user |
-| `BRAND_VOICE_PROFILE` | `BRAND-VOICE.md` full document if present |
-| `COMPETITORS` | `COMPETITOR-REPORT.md` direct + indirect competitor list |
-| `EXISTING_KEYWORDS` | `SEO-AUDIT.md` primary + secondary keyword tables |
-| `CONTENT_GAPS_KNOWN` | `SEO-AUDIT.md` "Content Gap Analysis" section |
-| `AUDIT_PRIORITIES` | `MARKETING-AUDIT.md` priority recommendations if present |
+| `WEBSITE_NICHE` | `MARKETKIT - BRAND-VOICE - <domain>.md` "Brand Description" section → homepage meta description → ask user |
+| `BRAND_VOICE_PROFILE` | `MARKETKIT - BRAND-VOICE - <domain>.md` full document if present |
+| `COMPETITORS` | `MARKETKIT - COMPETITOR-REPORT - <domain>.md` direct + indirect competitor list |
+| `EXISTING_KEYWORDS` | `MARKETKIT - SEO-AUDIT - <domain>.md` primary + secondary keyword tables |
+| `CONTENT_GAPS_KNOWN` | `MARKETKIT - SEO-AUDIT - <domain>.md` "Content Gap Analysis" section |
+| `AUDIT_PRIORITIES` | `MARKETKIT - MARKETING-AUDIT - <domain>.md` priority recommendations if present |
 
 #### 1.2 Dependency Detection
 
-Check for prerequisite files in this order (CWD-relative):
+Check for prerequisite files inside the Phase 0 `audit_dir`, same exact domain scope only — never search older audit folders:
 
-1. `BRAND-VOICE.md` — brand positioning, niche description, voice profile
-2. `COMPETITOR-REPORT.md` — competitor URLs for sitemap mining
-3. `SEO-AUDIT.md` — existing keyword data, known content gaps
+1. `MARKETKIT - BRAND-VOICE - <domain>.md` — brand positioning, niche description, voice profile
+2. `MARKETKIT - COMPETITOR-REPORT - <domain>.md` — competitor URLs for sitemap mining
+3. `MARKETKIT - SEO-AUDIT - <domain>.md` — existing keyword data, known content gaps
 
 **For each missing file**, present a single prompt to the user listing what is missing:
 
 ```
 The following prerequisite files are missing:
-- BRAND-VOICE.md (provides niche context and brand voice)
-- COMPETITOR-REPORT.md (provides competitor URLs for topic mining)
+- MARKETKIT - BRAND-VOICE - <domain>.md (provides niche context and brand voice)
+- MARKETKIT - COMPETITOR-REPORT - <domain>.md (provides competitor URLs for topic mining)
 
 Options:
   [auto-run] Run /marketkit:brand, /marketkit:competitors, /marketkit:seo first, then resume content plan
@@ -78,7 +86,7 @@ Which would you prefer?
 ```
 
 - If user selects `auto-run`: invoke the missing skills in dependency order (`brand` → `competitors` → `seo`), wait for each to complete, then resume Phase 2. If any auto-run sub-skill fails or errors, do not abort — present the user with the specific failure and offer to skip that dependency individually.
-- If user selects `skip`: set `SELF_RESEARCH_MODE=true` and continue. Flag this prominently at the top of `CONTENT-PLAN.md` when output is written.
+- If user selects `skip`: set `SELF_RESEARCH_MODE=true` and continue. Flag this prominently at the top of `MARKETKIT - CONTENT-PLAN - <domain>.md` when output is written.
 - **Never hard-refuse.** Always offer a path forward.
 
 ---
@@ -135,7 +143,7 @@ Use WebFetch to read 3-5 of the deepest, most content-rich interior pages (skip 
 
 - Understand: audience language, pain points, product positioning, brand voice.
 - Extract: recurring terminology, named entities (product names, certifications, brand-specific jargon), commercial intent signals.
-- If no `BRAND-VOICE.md` exists, perform a lightweight brand voice assessment here:
+- If no `MARKETKIT - BRAND-VOICE - <domain>.md` exists, perform a lightweight brand voice assessment here:
   - Formality level (1-10)
   - Persona being spoken to
   - Recurring phrases and avoided phrases
@@ -148,7 +156,7 @@ Combine multiple research sources to build the widest possible topic surface are
 
 #### 3.1 Competitor Sitemap Mining
 
-For each competitor URL from `COMPETITOR-REPORT.md` (direct tier first, then indirect):
+For each competitor URL from `MARKETKIT - COMPETITOR-REPORT - <domain>.md` (direct tier first, then indirect):
 
 ```bash
 curl -s "<competitor-url>/sitemap.xml"
@@ -158,7 +166,7 @@ curl -s "<competitor-url>/sitemap.xml"
 - Parse URL slugs to identify their topical coverage.
 - Do not read full competitor pages unless a topic title is ambiguous — slug parsing is sufficient for coverage mapping.
 
-If no `COMPETITOR-REPORT.md` exists, use WebSearch to identify the top 3 competitors:
+If no `MARKETKIT - COMPETITOR-REPORT - <domain>.md` exists, use WebSearch to identify the top 3 competitors:
 
 ```
 WebSearch: "[WEBSITE_NICHE] competitors" OR "[WEBSITE_NICHE] alternatives" OR top [WEBSITE_NICHE] companies
@@ -168,7 +176,7 @@ Then fetch their sitemaps via curl as above.
 
 #### 3.2 SERP Research
 
-For each primary keyword from `SEO-AUDIT.md` (or the 3-5 most obvious seed keywords inferred from the site if no audit exists):
+For each primary keyword from `MARKETKIT - SEO-AUDIT - <domain>.md` (or the 3-5 most obvious seed keywords inferred from the site if no audit exists):
 
 ```
 WebSearch: <primary_keyword>
@@ -311,9 +319,9 @@ Score every candidate topic on 4 dimensions (0-3 each):
 
 ### Phase 5: Content Plan Output
 
-**This phase produces `CONTENT-PLAN.md`. After writing the file, STOP and wait for user approval before proceeding to Phase 6.**
+**This phase produces `MARKETKIT - CONTENT-PLAN - <domain>.md`. After writing the file, STOP and wait for user approval before proceeding to Phase 6.**
 
-#### 5.1 Write CONTENT-PLAN.md
+#### 5.1 Write MARKETKIT - CONTENT-PLAN - <domain>.md
 
 Produce the file with the following sections in order:
 
@@ -406,7 +414,7 @@ Suggest a publishing order over 8-12 weeks (if the plan has fewer than 16 articl
 
 **Section 5: Brand Voice Notes**
 
-If `BRAND-VOICE.md` is available:
+If `MARKETKIT - BRAND-VOICE - <domain>.md` is available:
 - Excerpt the voice dimensions (formality, tone) and key vocabulary guidelines
 - Note any explicit audience language preferences to apply during drafting
 
@@ -418,10 +426,10 @@ Paste the Existing Coverage Map table built in Phase 2.2 for reference.
 
 #### 5.2 Gate: Wait for User Approval
 
-After writing `CONTENT-PLAN.md`, output this message and stop:
+After writing `MARKETKIT - CONTENT-PLAN - <domain>.md`, output this message and stop:
 
 ```
-CONTENT-PLAN.md has been written.
+[resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - CONTENT-PLAN - example.com.md] has been written.
 
 Please review the plan and confirm how to proceed:
 
@@ -440,15 +448,21 @@ Waiting for your confirmation before writing any articles.
 
 Execute only after explicit user approval from Phase 5.2. If approval was partial (e.g., `[approve 1,3,5]`), draft only the approved rows. Mark skipped rows with `status: deferred` in their front-matter and note them in a brief summary at the end of Phase 6 output: "X article(s) deferred — re-run Phase 6 to draft them."
 
-For each approved row in the content plan, write one article to `articles/<slug>.md`.
+For each approved row in the content plan, resolve and write one article:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose ARTICLE-<UPPERCASE-KEBAB-SLUG> --scope <domain> --extension md
+```
+
+Run the resolver separately for every article filename, using the exact same `<domain>` scope as Phase 0. Write the exact returned `output_path` — flat in the active audit folder next to `MARKETKIT - CONTENT-PLAN - <domain>.md`, never a nested `articles/` subfolder.
 
 #### 6.1 Slug Derivation
 
-Derive slug from the Target Keyword:
+Derive the slug from the Target Keyword, then uppercase and kebab it for the resolver's `--purpose`:
 - Lowercase, hyphen-separated
 - Remove stop words (a, the, and, for, of, to, in, on, with)
 - Maximum 6 words
-- Example: "How to Choose the Best CRM Software" → `choose-best-crm-software.md`
+- Example: "How to Choose the Best CRM Software" → slug `choose-best-crm-software` → `--purpose ARTICLE-CHOOSE-BEST-CRM-SOFTWARE` → `MARKETKIT - ARTICLE-CHOOSE-BEST-CRM-SOFTWARE - <domain>.md`
 
 #### 6.2 Article Front-Matter
 
@@ -524,12 +538,12 @@ Final section before FAQ — one specific, benefit-led call to action aligned wi
 
 #### 6.4 Voice Application
 
-If `BRAND-VOICE.md` is available:
+If `MARKETKIT - BRAND-VOICE - <domain>.md` is available:
 - Apply formality level, vocabulary preferences, and do/don't rules from the brand voice guide
 - Replicate the brand's sentence length patterns and punctuation style
 - Use vocabulary from the "Words We Use" list; avoid words from "Words We Avoid"
 
-If no `BRAND-VOICE.md`:
+If no `MARKETKIT - BRAND-VOICE - <domain>.md`:
 - Default to clear, professional, direct prose
 - Match the approximate formality level inferred from Phase 2.3
 - Add a note in the article front-matter: `brand_voice: "inferred — run /marketkit:brand for calibrated voice"`
@@ -548,25 +562,25 @@ If no `BRAND-VOICE.md`:
 After each article is written, output a one-line status:
 
 ```
-[3/8] articles/<slug>.md — written (1,842 words, lg)
+[3/8] MARKETKIT - ARTICLE-<SLUG> - <domain>.md — written (1,842 words, lg)
 ```
 
 After all articles are complete:
 
 ```
-Phase 6 complete. All N articles written to articles/.
+Phase 6 complete. All N articles written to the active audit folder.
 
 Summary:
 - Total articles: N
 - Total estimated word count: ~N,000 words
 - Clusters covered: N
 - Files written:
-  - articles/<slug1>.md
-  - articles/<slug2>.md
+  - MARKETKIT - ARTICLE-<SLUG1> - <domain>.md
+  - MARKETKIT - ARTICLE-<SLUG2> - <domain>.md
   ...
 
 Next steps:
-- Review articles/ for brand voice consistency
+- Review the drafted articles for brand voice consistency
 - Add site-specific CTAs where placeholders were used
 - Run /marketkit:seo on final articles before publishing
 - Run /marketkit:brand if brand voice was not pre-calibrated
@@ -577,11 +591,11 @@ Next steps:
 ## Output Format
 
 ```
-CONTENT-PLAN.md          ← Phase 5 output. Written to CWD.
-articles/<slug>.md        ← Phase 6 output. One file per approved article.
+MARKETKIT - CONTENT-PLAN - <domain>.md              ← Phase 5 output, exact output_path from Phase 0.
+MARKETKIT - ARTICLE-<SLUG> - <domain>.md             ← Phase 6 output. One file per approved article, flat in the same audit folder.
 ```
 
-### CONTENT-PLAN.md Structure
+### MARKETKIT - CONTENT-PLAN - <domain>.md Structure
 
 ```markdown
 # Content Plan
@@ -623,7 +637,7 @@ articles/<slug>.md        ← Phase 6 output. One file per approved article.
 [Table of current site content by URL segment]
 ```
 
-### articles/<slug>.md Structure
+### MARKETKIT - ARTICLE-<SLUG> - <domain>.md Structure
 
 ```markdown
 ---
@@ -672,8 +686,8 @@ articles/<slug>.md        ← Phase 6 output. One file per approved article.
 - **Pillar before supporters.** The editorial calendar must reflect topical dependency. A supporting article that links to a pillar that doesn't exist yet creates orphaned internal links. Publish pillars in Week 1-2.
 - **FAQ sections are mandatory, not optional.** ChatGPT, Perplexity, and other AI search engines preferentially surface FAQ-structured factual content. Skipping FAQs reduces AI citability meaningfully.
 - **Hook paragraphs must be complete sentences that stand alone.** Google's featured snippet algorithm evaluates the first 40-60 words after an H1 or H2. A vague or teaser-style hook wastes this opportunity.
-- **Self-research mode is lower precision — say so clearly.** If prerequisite files are missing and the user chose skip, the blind-spot opportunities and competitor gap analysis are based on inference, not systematic sitemap mining. The banner in CONTENT-PLAN.md must make this explicit.
+- **Self-research mode is lower precision — say so clearly.** If prerequisite files are missing and the user chose skip, the blind-spot opportunities and competitor gap analysis are based on inference, not systematic sitemap mining. The banner in `MARKETKIT - CONTENT-PLAN - <domain>.md` must make this explicit.
 - **Never fabricate keyword metrics.** You do not have access to real-time search volume data. Use qualitative signals (competitor coverage count, Reddit thread volume, SERP result quality) to justify prioritization. Never invent numerical search volumes.
-- **Brand voice consistency is a final check, not an afterthought.** If `BRAND-VOICE.md` is available, re-read the voice chart and do/don't rules before writing each article. Inconsistent voice across a content cluster is harder to fix than inconsistent SEO.
+- **Brand voice consistency is a final check, not an afterthought.** If `MARKETKIT - BRAND-VOICE - <domain>.md` is available, re-read the voice chart and do/don't rules before writing each article. Inconsistent voice across a content cluster is harder to fix than inconsistent SEO.
 - **Internal links must be planned before drafting begins.** The Internal Links column in the plan is the source of truth. Every article draft must honor those links — adding them during drafting, not retrofitting them after.
 

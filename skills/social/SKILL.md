@@ -22,6 +22,13 @@ Do this before anything else.
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client truth overrides every default in this skill.
 2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the one example pack it points to.
+3. Read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. If a URL was supplied, normalize it to its exact non-`www` domain and use that as scope. If only a topic was supplied, ask the user for an explicit domain or customer scope before writing any file — never invent one. The scope must contain only letters, numbers, dots, and hyphens. Resolve today's output path now:
+
+   ```
+   python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose SOCIAL-CALENDAR --scope <scope> --extension md
+   ```
+
+   Use `python3` on macOS/Linux. Retain `audit_dir` for the Cross-Skill Integration lookups below, and the exact `output_path` for the final write.
 
 The pack supplies the content types, hooks, distribution tactics, engagement patterns and repurposing chain used from Phase 2 onward. Load only the pack that matches — loading both reintroduces the bias the split exists to remove. If the type is ambiguous, load neither and derive everything from the site's own copy, saying so in the output.
 
@@ -164,9 +171,9 @@ When a format is adopted, adapt it rather than copy it: find the brand angle, ad
 
 ---
 
-## Output Format: SOCIAL-CALENDAR.md
+## Output Format: MARKETKIT - SOCIAL-CALENDAR - <scope>.md
 
-Write the full output to `SOCIAL-CALENDAR.md`:
+Write the full output to the exact `output_path` resolved in Phase 0:
 
 ```markdown
 # Social Media Content Calendar: [Brand/Topic]
@@ -247,16 +254,18 @@ Pillar Coverage:
   [Pillar 4]: XX posts
   [Pillar 5]: XX posts
 
-Full calendar saved to: SOCIAL-CALENDAR.md
+Full calendar saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - SOCIAL-CALENDAR - example.com.md]
 ```
 
 ---
 
 ## Cross-Skill Integration
 
-- If `BRAND-VOICE.md` exists, match all social copy to documented voice guidelines
-- If `COPY-SUGGESTIONS.md` exists, reuse value propositions and messaging
-- If `COMPETITOR-REPORT.md` exists, use competitor analysis for differentiation content
-- If `EMAIL-SEQUENCES.md` exists, align social content with email campaigns
+Look only inside the Phase 0 `audit_dir`, for the exact same scope. Never search older audit folders.
+
+- If `MARKETKIT - BRAND-VOICE - <scope>.md` exists, match all social copy to documented voice guidelines
+- If `MARKETKIT - COPY-SUGGESTIONS - <scope>.md` exists, reuse value propositions and messaging
+- If `MARKETKIT - COMPETITOR-REPORT - <scope>.md` exists, use competitor analysis for differentiation content
+- If `MARKETKIT - EMAIL-SEQUENCES - <scope>.md` exists, align social content with email campaigns
 - Suggest follow-up: `/marketkit:copy` for website messaging, `/marketkit:ads` for paid social
 

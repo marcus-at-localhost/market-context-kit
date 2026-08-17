@@ -20,6 +20,13 @@ The user runs `/marketkit:emails <topic/url>`. If a URL is provided, fetch the s
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Claim rules there bind every email you write.
 2. Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack. It supplies the CTA ladder, subject-line angles and urgency conventions.
+3. Read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. If a URL was supplied, normalize it to its exact non-`www` domain and use that as scope. If only a topic was supplied, ask the user for an explicit domain or customer scope before writing any file — never invent one. The scope must contain only letters, numbers, dots, and hyphens. Resolve today's output path now:
+
+   ```
+   python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose EMAIL-SEQUENCES --scope <scope> --extension md
+   ```
+
+   Use `python3` on macOS/Linux. Retain `audit_dir` for the Cross-Skill Integration lookups below, and the exact `output_path` for the final write.
 
 Write the emails in the recipient's language, and check the compliance section in Phase 5 for the regime that actually applies to that market before drafting.
 
@@ -359,9 +366,9 @@ Lead with the regime that governs the recipients, not the one you know best. Det
 
 ---
 
-## Output Format: EMAIL-SEQUENCES.md
+## Output Format: MARKETKIT - EMAIL-SEQUENCES - <scope>.md
 
-Write the full output to `EMAIL-SEQUENCES.md`:
+Write the full output to the exact `output_path` resolved in Phase 0:
 
 ```markdown
 # Email Sequences: [Business/Topic Name]
@@ -440,16 +447,18 @@ Key Metrics Targets:
   Click Rate: 3-4%
   Conversion Rate: 1.5-2%
 
-Full sequences saved to: EMAIL-SEQUENCES.md
+Full sequences saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - EMAIL-SEQUENCES - example.com.md]
 ```
 
 ---
 
 ## Cross-Skill Integration
 
-- If `BRAND-VOICE.md` exists, match all email copy to the documented voice
-- If `FUNNEL-ANALYSIS.md` exists, align email sequences to funnel stages
-- If `COPY-SUGGESTIONS.md` exists, reuse value propositions and CTA language
-- If `MARKETING-AUDIT.md` exists, reference conversion and content scores
+Look only inside the Phase 0 `audit_dir`, for the exact same scope. Never search older audit folders.
+
+- If `MARKETKIT - BRAND-VOICE - <scope>.md` exists, match all email copy to the documented voice
+- If `MARKETKIT - FUNNEL-ANALYSIS - <scope>.md` exists, align email sequences to funnel stages
+- If `MARKETKIT - COPY-SUGGESTIONS - <scope>.md` exists, reuse value propositions and CTA language
+- If `MARKETKIT - MARKETING-AUDIT - <scope>.md` exists, reference conversion and content scores
 - Suggest follow-up: `/marketkit:copy` for website copy, `/marketkit:funnel` for conversion path analysis
 
