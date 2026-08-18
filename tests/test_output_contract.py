@@ -136,3 +136,50 @@ def test_no_real_attribution_is_hard_coded_in_reusable_files():
                     assert value.startswith("<") and value.endswith(">"), (
                         f"{rel}:{lineno} hard-codes attribution: {line.strip()!r}"
                     )
+
+
+# Reserved placeholder domains plus third-party references the docs legitimately
+# name (platforms, public brands used as archetype illustrations, tool vendors).
+# A client domain from an evaluation run must never end up here — add a real
+# domain only when it is genuinely part of the kit's own documentation.
+ALLOWED_DOMAINS = {
+    "example.com", "example.org", "example.net",
+    "github.com", "anthropic.com", "json-schema.org", "google.com",
+    "wikipedia.org", "linkedin.com", "youtube.com", "instagram.com",
+    "facebook.com", "twitter.com", "x.com", "tiktok.com", "reddit.com",
+    "calendly.com", "acuityscheduling.com", "strategyzer.com",
+    "mckinsey.com", "basf.com",
+    "copywritematters.com", "blaksheepcreative.com", "awai.com",
+}
+
+DOMAIN_RE = __import__("re").compile(
+    r"\b[a-z0-9][a-z0-9-]*\.(?:com|de|org|net|io|es|eu|gmbh|co\.uk)\b"
+)
+
+
+def test_no_client_domains_leak_into_the_kit():
+    """The kit is evaluated against real client sites. Their domains, copy, and
+    identities stay in the consuming project and never in this repo."""
+    import subprocess
+
+    tracked = subprocess.run(
+        ["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, check=True
+    ).stdout.decode("utf-8").split("\0")
+
+    offenders = []
+    for name in filter(None, tracked):
+        path = ROOT / name
+        if path.suffix not in {".md", ".py", ".json"} or not path.is_file():
+            continue
+        rel = path.relative_to(ROOT)
+        if rel.name == "test_output_contract.py":  # the allowlist itself
+            continue
+        for lineno, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            for domain in DOMAIN_RE.findall(line.lower()):
+                if domain not in ALLOWED_DOMAINS:
+                    offenders.append(f"{rel}:{lineno} {domain}")
+    assert not offenders, (
+        "Undeclared domain(s) found. If this is a client domain from an "
+        "evaluation run, remove it; if it belongs to the kit's own docs, add "
+        "it to ALLOWED_DOMAINS:\n  " + "\n  ".join(offenders)
+    )

@@ -400,7 +400,7 @@ def main():
         print(json.dumps({
             "usage": "python3 competitor_scanner.py [--type consumer-online|b2b-technical] <url1> [url2] ...",
             "example": "python3 competitor_scanner.py calendly.com acuityscheduling.com",
-            "example_b2b": "python3 competitor_scanner.py --type b2b-technical idt-dichtungen.de",
+            "example_b2b": "python3 competitor_scanner.py --type b2b-technical example.com",
             "description": "Scans competitor websites for positioning, pricing, and trust signals. "
                             "Business type is auto-detected from on-page signals unless --type is given."
         }, indent=2))

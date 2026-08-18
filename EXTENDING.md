@@ -17,6 +17,30 @@ Then ask: does this change what a skill actually outputs or scores, or is it
 another example of something the suite already does? Only the first justifies
 new text — skills degrade as they bloat.
 
+### Client evaluation data never lands here
+
+This suite gets developed while running it against real client sites. That work
+product — domains, page copy, company names, contact people, findings, numbers —
+belongs to the consuming project and must never be committed to this repo.
+
+When a real run teaches the suite something, keep the mechanism and drop the
+identity:
+
+| Instead of | Write |
+|---|---|
+| "the 2026-08-15 `<client>.example` run" | "a 2026-08-15 run" |
+| a quoted client headline as illustration | the pattern the headline exhibits |
+| a client domain in a CLI example or test fixture | `example.com` |
+| a real name in a metadata or template example | `<resolver value>` |
+
+Attribution belongs in the consuming project's `config/reporting.config.json`,
+never in a skill, reference, or template.
+
+`tests/test_output_contract.py` enforces this: an allowlist of domains the kit's
+own docs may name, and a check that metadata examples carry placeholders only. A
+new client domain fails the suite with its file and line. If you genuinely need
+a new external domain in the docs, add it to `ALLOWED_DOMAINS` deliberately.
+
 ## 2. Decide where it lands
 
 The suite has one file type per kind of change:
@@ -87,5 +111,7 @@ through — nothing here waives it.
 3. Pick landing spot(s) per the table in §2
 4. Present scope + landing spot + a worked example → get a yes
 5. Write it — pointer lines in every consuming skill, not just the pack
-6. Add the provenance entry to README's External Research Cited
+6. Strip client identity: mechanism stays, domains/copy/names go (§1)
+7. Add the provenance entry to README's External Research Cited
+8. Run pytest — the domain and attribution guards must pass
 ```

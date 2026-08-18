@@ -30,9 +30,9 @@ cannot distinguish rendered text from source text, it is not evidence.
 - **SVG `<title>` / `aria-labelledby` text → fake H1.** An inline `<svg role="img"
   aria-labelledby="logo-title"><title id="logo-title">…</title></svg>` sits at the top of the DOM
   (often the logo) and markdown converters routinely promote it to a top-level heading. This is
-  what produced the 2026-08-15 false finding on idt-dichtungen.de: "IDT – The Sealing Technology
-  Specialist" is the logo's accessible name, reported by three subagents as an identical H1 across
-  459 pages. Verified per-page H1s were unique and page-specific.
+  what produced a 2026-08-15 false finding: a company's own name, sitting in the header logo as
+  its accessible name, was reported by three subagents as an identical H1 across all 459 pages of
+  a site. Verified per-page H1s were unique and page-specific.
 - **HTML comments → fake live content.** Markup inside `<!-- … -->` is in the source but never
   rendered. A regex that strips `<[^>]+>` cannot close a comment that contains tags, so the
   commented markup survives as ordinary-looking prose and only a stray `-->` hints at it. A

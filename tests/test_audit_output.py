@@ -15,21 +15,21 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def test_market_filename_contract():
     assert build_filename(
-        "MARKETKIT", "MARKETING-AUDIT", "idt-dichtungen.de", "md"
-    ) == "MARKETKIT - MARKETING-AUDIT - idt-dichtungen.de.md"
+        "MARKETKIT", "MARKETING-AUDIT", "example.com", "md"
+    ) == "MARKETKIT - MARKETING-AUDIT - example.com.md"
     with pytest.raises(ValueError, match="uppercase kebab"):
-        build_filename("MARKETKIT", "MARKETING_AUDIT", "idt-dichtungen.de", "md")
+        build_filename("MARKETKIT", "MARKETING_AUDIT", "example.com", "md")
 
 
 def test_duplicate_market_report_creates_second_audit_and_search_reuses_it(tmp_path):
-    name = "MARKETKIT - MARKETING-AUDIT - idt-dichtungen.de.md"
+    name = "MARKETKIT - MARKETING-AUDIT - example.com.md"
     first = resolve_audit_output(tmp_path, name, today=DAY)
     first.output_path.write_text("first", encoding="utf-8")
     second = resolve_audit_output(tmp_path, name, today=DAY)
     assert second.audit_dir.name == "Audit-2026-08-17-02"
     search = resolve_audit_output(
         tmp_path,
-        "SEARCHKIT - GSC-Q2-2026 - idt-dichtungen.de.md",
+        "SEARCHKIT - GSC-Q2-2026 - example.com.md",
         today=DAY,
     )
     assert search.audit_dir == second.audit_dir
@@ -38,7 +38,7 @@ def test_duplicate_market_report_creates_second_audit_and_search_reuses_it(tmp_p
 def test_data_output_is_flat(tmp_path):
     result = resolve_audit_output(
         tmp_path,
-        "MARKETKIT - PAGE-ANALYSIS - idt-dichtungen.de.json",
+        "MARKETKIT - PAGE-ANALYSIS - example.com.json",
         data=True,
         today=DAY,
     )
@@ -51,7 +51,7 @@ def test_cli_prints_exact_output_json(tmp_path):
             sys.executable,
             str(ROOT / "scripts" / "resolve_audit_output.py"),
             "--purpose", "COMPETITOR-REPORT",
-            "--scope", "idt-dichtungen.de",
+            "--scope", "example.com",
             "--extension", "md",
             "--date", "2026-08-17",
         ],
@@ -62,5 +62,5 @@ def test_cli_prints_exact_output_json(tmp_path):
     )
     payload = json.loads(result.stdout)
     assert Path(payload["output_path"]).name == (
-        "MARKETKIT - COMPETITOR-REPORT - idt-dichtungen.de.md"
+        "MARKETKIT - COMPETITOR-REPORT - example.com.md"
     )
