@@ -23,6 +23,23 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose SEO-AUD
 
 Use `python3` on macOS/Linux. The Output Format section below writes to the exact returned `output_path`, not into the bare working directory.
 
+Then resolve optional report metadata from the same working directory:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
+```
+
+Never guess a runtime value. Handle the three outcomes exactly as
+`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
+block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
+top of the report, and an error means stop rather than invent or drop attribution.
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
+asserting anything about a page's structure, staleness, or absence. Page text used as evidence
+must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
+HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
+attribute-only markup.
+
 Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve a `SEARCH-CONTEXT.v1.json` only from an explicit user path, or from exactly one match in the active audit folder's flat `data/` for the exact domain and, if requested, the exact reporting period, then validate schema, domain, reporting period, and source statuses before reading values.
 
 ---
@@ -420,6 +437,7 @@ Scoring: High volume + Low competition + High business value = Highest priority
 Write the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with:
 
 ```markdown
+[YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # SEO Content Audit
 ## [URL]
 ### Date: [Date]

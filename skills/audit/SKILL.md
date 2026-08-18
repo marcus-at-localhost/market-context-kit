@@ -31,6 +31,17 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose MARKETI
 
 Use `python3` on macOS/Linux. Retain the JSON's `output_path` (the exact `MARKETKIT - MARKETING-AUDIT - <domain>.md` path) and `audit_dir` — Phase 3 writes there, not into the bare working directory, and Cross-Skill Integration uses `audit_dir` to find same-scope sibling reports.
 
+Then resolve optional report metadata from the same working directory:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
+```
+
+Never guess a runtime value. Handle the three outcomes exactly as
+`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
+block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
+top of the report, and an error means stop rather than invent or drop attribution.
+
 Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve and validate a `SEARCH-CONTEXT.v1.json` artifact only when the user supplies an explicit path, or the reference's discovery rule finds exactly one in the active audit folder's flat `data/` for the exact domain and, if requested, the exact reporting period. Retain a valid artifact as **orchestrator-only** evidence for Phase 3; do not use it during discovery or scoring.
 
 ### 0.1 Build the Data Manifest
@@ -392,6 +403,7 @@ If the competitive subagent identified competitors, include a comparison:
 Write the final report to the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with this structure:
 
 ```markdown
+[YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Marketing Audit: [Business Name]
 **URL:** [url]
 **Date:** [current date]

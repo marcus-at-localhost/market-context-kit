@@ -28,6 +28,17 @@ The user runs `/marketkit:emails <topic/url>`. If a URL is provided, fetch the s
 
    Use `python3` on macOS/Linux. Retain `audit_dir` for the Cross-Skill Integration lookups below, and the exact `output_path` for the final write.
 
+Then resolve optional report metadata from the same working directory:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
+```
+
+Never guess a runtime value. Handle the three outcomes exactly as
+`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
+block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
+top of the report, and an error means stop rather than invent or drop attribution.
+
 Write the emails in the recipient's language, and check the compliance section in Phase 5 for the regime that actually applies to that market before drafting.
 
 ---
@@ -371,6 +382,7 @@ Lead with the regime that governs the recipients, not the one you know best. Det
 Write the full output to the exact `output_path` resolved in Phase 0:
 
 ```markdown
+[YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Email Sequences: [Business/Topic Name]
 **Date:** [current date]
 **Business Type:** [type]

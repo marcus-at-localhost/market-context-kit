@@ -71,3 +71,68 @@ def test_output_reference_documents_shared_audit_algorithm():
         "never overwrite",
     ):
         assert phrase in text
+
+
+MARKDOWN_REPORT_WRITERS = sorted({**CORE, **PURPOSES}.keys() - {"report-pdf"})
+
+
+def test_markdown_writers_resolve_report_metadata_in_their_own_phase_0():
+    """The rule lives in references/output-location.md, but an agent follows the
+    skill's own command list. If the call is not restated here, it gets skipped."""
+    for skill in MARKDOWN_REPORT_WRITERS:
+        text = read(f"skills/{skill}/SKILL.md")
+        assert "scripts/resolve_report_metadata.py" in text, skill
+        assert '--toolkit "Market Context Kit"' in text, skill
+
+
+def test_markdown_writers_carry_a_front_matter_slot_in_their_template():
+    """A template that opens on '# Title' reads as a complete file spec and
+    silently overrides the reference."""
+    for skill in MARKDOWN_REPORT_WRITERS:
+        text = read(f"skills/{skill}/SKILL.md")
+        assert "YAML front matter from the Phase 0 metadata resolver" in text, skill
+
+
+PAGE_READING_SKILLS = (
+    "ads", "audit", "brand", "competitors", "content-plan", "copy", "funnel",
+    "landing", "seo",
+)
+
+
+def test_page_reading_skills_point_at_the_extraction_artifact_list():
+    for skill in PAGE_READING_SKILLS:
+        text = read(f"skills/{skill}/SKILL.md")
+        assert "webfetch-artifacts.md" in text, skill
+
+
+def test_artifact_list_covers_html_comments_and_bans_regex_extraction():
+    text = read("references/webfetch-artifacts.md")
+    assert "HTML comments" in text
+    assert "Never hand-roll HTML extraction" in text
+    assert "analyze_page.py" in text
+
+
+def test_output_location_documents_the_canonical_front_matter_shape():
+    text = read("references/output-location.md")
+    assert "Canonical front-matter shape" in text
+    assert "prepared_by:" in text
+    assert "generated_at:" in text
+
+
+def test_no_real_attribution_is_hard_coded_in_reusable_files():
+    """Attribution belongs to the consuming project's config/reporting.config.json.
+    A skill, reference, or template must never name a person or organization."""
+    metadata_keys = ("prepared_by:", "document_author:")
+    for path in ROOT.rglob("*.md"):
+        if any(part in {".git", "node_modules"} for part in path.parts):
+            continue
+        rel = path.relative_to(ROOT)
+        if rel.parts[0] not in {"skills", "references", "templates", "agents", "docs"}:
+            continue
+        for lineno, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            for key in metadata_keys:
+                if key in line:
+                    value = line.split(key, 1)[1].strip()
+                    assert value.startswith("<") and value.endswith(">"), (
+                        f"{rel}:{lineno} hard-codes attribution: {line.strip()!r}"
+                    )

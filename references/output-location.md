@@ -132,3 +132,41 @@ legacy file before continuing.
 Never construct attribution directly from `AGENTS.md`, `CLAUDE.md`, a skill,
 or a template. The tracked `config/reporting.example.json` documents the
 schema but is never a metadata fallback.
+
+### Canonical front-matter shape
+
+When the resolver returns JSON, the Markdown file **begins** with the block —
+first byte of the file, before the H1, before any grounding note. Copy the
+resolver's values verbatim; do not reorder, rename, reformat, or add keys.
+
+```markdown
+---
+prepared_by: <resolver value>
+document_author: <resolver value>
+toolkit: Market Context Kit
+host: <exact active host>
+llm_provider: <exact active provider>
+llm_model: <exact active model id>
+generated_at: <resolver ISO-8601 timestamp>
+---
+# Report Title
+```
+
+Keys and order come from the resolver's JSON; every value is filled from that
+output and from nothing else. Never write a real person or organization into
+this file, a skill, or a template — attribution exists only in the consuming
+project's `config/reporting.config.json`. When the resolver returns `null`, no
+`---` block is written at all; a report with empty or placeholder metadata keys
+is a defect, not a degraded success.
+
+### Why this step gets skipped
+
+This section is the single source of truth, but a skill's own Phase 0 command
+list and Output Format template are what an agent actually follows step by
+step. If either omits metadata, it silently overrides this reference — a
+template that opens on `# Title` reads as a complete file spec.
+
+Every skill that writes a Markdown report therefore restates the resolver
+call in its own Phase 0 **and** carries a front-matter slot at the top of its
+Output Format template. `tests/test_output_contract.py` enforces both. When
+adding a report-writing skill, add it to that test.

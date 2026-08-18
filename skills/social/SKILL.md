@@ -30,6 +30,17 @@ Do this before anything else.
 
    Use `python3` on macOS/Linux. Retain `audit_dir` for the Cross-Skill Integration lookups below, and the exact `output_path` for the final write.
 
+Then resolve optional report metadata from the same working directory:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
+```
+
+Never guess a runtime value. Handle the three outcomes exactly as
+`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
+block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
+top of the report, and an error means stop rather than invent or drop attribution.
+
 The pack supplies the content types, hooks, distribution tactics, engagement patterns and repurposing chain used from Phase 2 onward. Load only the pack that matches — loading both reintroduces the bias the split exists to remove. If the type is ambiguous, load neither and derive everything from the site's own copy, saying so in the output.
 
 ---
@@ -176,6 +187,7 @@ When a format is adopted, adapt it rather than copy it: find the brand angle, ad
 Write the full output to the exact `output_path` resolved in Phase 0:
 
 ```markdown
+[YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Social Media Content Calendar: [Brand/Topic]
 **Date:** [current date]
 **Period:** [Month Year] — 30-Day Calendar

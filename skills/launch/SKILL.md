@@ -33,6 +33,17 @@ Before gathering anything else:
 
    Use `python3` on macOS/Linux. Retain the exact `output_path` for the final write.
 
+Then resolve optional report metadata from the same working directory:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
+```
+
+Never guess a runtime value. Handle the three outcomes exactly as
+`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
+block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
+top of the report, and an error means stop rather than invent or drop attribution.
+
 The pack supplies the launch channels, pre-launch calendar, announcement templates and success metrics. A consumer launch and a technical launch share only the phase structure — everything inside the phases differs, including how long the launch runs and what counts as success.
 
 ### Step 1: Gather Launch Context
@@ -379,6 +390,7 @@ After the launch, generate a retrospective covering:
 Write the exact `output_path` resolved in Step 0 with:
 
 ```markdown
+[YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Launch Playbook: [Product Name]
 ## Launch Date: [Date]
 ## Launch Type: [Type]

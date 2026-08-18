@@ -22,6 +22,17 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose MARKETI
 
 Use `python3` on macOS/Linux. Retain `audit_dir` — Step 1 below reads prior skill output from it (same exact domain scope only), and the final report is written to the returned `output_path`.
 
+Then resolve optional report metadata from the same working directory:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
+```
+
+Never guess a runtime value. Handle the three outcomes exactly as
+`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
+block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
+top of the report, and an error means stop rather than invent or drop attribution.
+
 Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. If the user supplies a `SEARCH-CONTEXT.v1.json` path, or its discovery rule finds exactly one in the active audit folder's flat `data/` for the exact domain and, if requested, the exact reporting period, validate it before using any values. Keep the artifact optional and retain its path, reporting period, and source statuses for the data-source appendix.
 
 ---
@@ -291,9 +302,9 @@ Include methodology notes so the client understands how scores were derived:
 Write the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/references/output-location.md`) with:
 
 ```markdown
+[YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Marketing Report
 ## [Company/Domain Name]
-[Optional metadata front matter resolved in Phase 0; omit when disabled]
 ### Date: [Date]
 
 ---

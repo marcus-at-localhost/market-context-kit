@@ -28,6 +28,23 @@ The user runs `/marketkit:copy <url>`. Fetch the target page(s), analyze the exi
 
    Use `python3` on macOS/Linux. Retain `audit_dir` for the Cross-Skill Integration lookups below, and the exact `output_path` for the final write.
 
+Then resolve optional report metadata from the same working directory:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
+```
+
+Never guess a runtime value. Handle the three outcomes exactly as
+`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
+block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
+top of the report, and an error means stop rather than invent or drop attribution.
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
+asserting anything about a page's structure, staleness, or absence. Page text used as evidence
+must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
+HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
+attribute-only markup.
+
 Write in the language of the target page, using the terminology the site and the grounding files already use.
 
 ---
@@ -289,6 +306,7 @@ Full report saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - C
 Write the exact `output_path` resolved in Phase 0 with this structure:
 
 ```markdown
+[YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Copy Analysis & Suggestions: [URL]
 **Date:** [current date]
 **Page Type:** [type]

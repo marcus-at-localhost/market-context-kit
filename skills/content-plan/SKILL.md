@@ -25,6 +25,23 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" --purpose CONTENT
 
 Use `python3` on macOS/Linux. Retain `audit_dir` — Phase 1's dependency check and every Phase 6 article resolve inside it too — and the exact `output_path` for the Phase 5 write.
 
+Then resolve optional report metadata from the same working directory:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
+```
+
+Never guess a runtime value. Handle the three outcomes exactly as
+`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
+block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
+top of the report, and an error means stop rather than invent or drop attribution.
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
+asserting anything about a page's structure, staleness, or absence. Page text used as evidence
+must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
+HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
+attribute-only markup.
+
 ---
 
 ## Skill Purpose
@@ -327,6 +344,7 @@ Produce the file with the following sections in order:
 
 **Header block:**
 ```markdown
+[YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Content Plan
 ## [Site Name / URL]
 ### Generated: [Date]
@@ -598,6 +616,7 @@ MARKETKIT - ARTICLE-<SLUG> - <domain>.md             ← Phase 6 output. One fil
 ### MARKETKIT - CONTENT-PLAN - <domain>.md Structure
 
 ```markdown
+[YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Content Plan
 ## [Site Name / URL]
 ### Generated: [Date]

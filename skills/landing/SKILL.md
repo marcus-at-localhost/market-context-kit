@@ -31,6 +31,23 @@ Perform a comprehensive Conversion Rate Optimization (CRO) analysis on any landi
 
    Use `python3` on macOS/Linux. Retain `audit_dir` (to check for a same-scope `MARKETKIT - MARKETING-AUDIT - <domain>.md`) and the exact `output_path` for the final write.
 
+Then resolve optional report metadata from the same working directory:
+
+```
+python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
+```
+
+Never guess a runtime value. Handle the three outcomes exactly as
+`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
+block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
+top of the report, and an error means stop rather than invent or drop attribution.
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
+asserting anything about a page's structure, staleness, or absence. Page text used as evidence
+must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
+HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
+attribute-only markup.
+
 The pack supplies the objection set, the risk reducers that actually reduce risk for this buyer, and the CTA conventions. Applying the wrong set is the most common way a CRO review gets rejected by the client — a procurement buyer offered a money-back guarantee concludes the reviewer does not understand the purchase.
 
 ### Step 1: Identify the Page Type
@@ -270,6 +287,7 @@ Even without actual heat map data, provide guidance on:
 Write the exact `output_path` resolved in Step 0 with:
 
 ```markdown
+[YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Landing Page CRO Analysis
 ## [Page URL]
 ### Analysis Date: [date]
