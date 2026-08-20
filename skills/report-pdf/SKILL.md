@@ -363,7 +363,7 @@ The PDF report skill will automatically look for output files from these skills 
 
 ## Output: MARKETKIT - MARKETING-REPORT - <domain>.pdf
 - **File:** the exact `output_path` resolved in Phase 0 for `MARKETING-REPORT`
-- **Location:** the active audit folder, resolved per `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` (e.g. `Audit-2026-08-17/`)
+- **Location:** the active audit folder, resolved per `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` (`Audit/`)
 - **Data:** `MARKETKIT - REPORT-DATA - <domain>.json`, kept flat under `data/`
 - **Size:** Typically 200KB-500KB depending on content volume
 - **Pages:** 5-7 pages depending on whether competitor data and additional sections are included

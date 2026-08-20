@@ -298,7 +298,7 @@ Top 3 Copy Fixes:
   2. [fix with before/after]
   3. [fix with before/after]
 
-Full report saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - COPY-SUGGESTIONS - example.com.md]
+Full report saved to: [resolved output_path, e.g. Audit/MARKETKIT - COPY-SUGGESTIONS - example.com.md]
 ```
 
 ### MARKETKIT - COPY-SUGGESTIONS - <domain>.md

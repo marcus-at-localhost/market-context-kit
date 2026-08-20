@@ -12,7 +12,7 @@ Fifteen marketing skills for analyzing websites, generating content, auditing fu
 
 The suite loads as a plugin, so the `marketkit:` prefix is part of every trigger. Dropping it does not resolve.
 
-Every command writes `MARKETKIT - <PURPOSE> - <SCOPE>.<extension>` into the active `Audit-YYYY-MM-DD[-NN]/` audit folder — see `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. `SCOPE` is the exact target domain for URL-based commands; topic-only commands ask for an explicit domain or customer scope first.
+Every command writes `MARKETKIT - <PURPOSE> - <SCOPE>.<extension>` into the active `Audit/` folder — see `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. `SCOPE` is the exact target domain for URL-based commands; topic-only commands ask for an explicit domain or customer scope first.
 
 | Command | What it does | Purpose |
 |---------|--------------|--------|

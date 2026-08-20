@@ -492,7 +492,7 @@ Budget Recommendation: [X,XXX]/month
 Expected CPA: [XX]-[XX]
 Target ROAS: [X]:1
 
-Full campaigns saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - AD-CAMPAIGNS - example.com.md]
+Full campaigns saved to: [resolved output_path, e.g. Audit/MARKETKIT - AD-CAMPAIGNS - example.com.md]
 ```
 
 ---

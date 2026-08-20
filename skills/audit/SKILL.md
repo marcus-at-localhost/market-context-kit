@@ -547,7 +547,7 @@ Top 3 Strategic Moves:
 
 Estimated Revenue Impact: $X,XXX-$XX,XXX/month
 
-Full report saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - MARKETING-AUDIT - example.com.md]
+Full report saved to: [resolved output_path, e.g. Audit/MARKETKIT - MARKETING-AUDIT - example.com.md]
 ```
 
 ---

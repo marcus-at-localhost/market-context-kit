@@ -447,7 +447,7 @@ Paste the Existing Coverage Map table built in Phase 2.2 for reference.
 After writing `MARKETKIT - CONTENT-PLAN - <domain>.md`, output this message and stop:
 
 ```
-[resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - CONTENT-PLAN - example.com.md] has been written.
+[resolved output_path, e.g. Audit/MARKETKIT - CONTENT-PLAN - example.com.md] has been written.
 
 Please review the plan and confirm how to proceed:
 

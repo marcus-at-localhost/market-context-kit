@@ -28,7 +28,7 @@ Launching 5 parallel agents...
 
 Overall Marketing Score: 69/100
 
-Full report saved to Audit-2026-08-17/MARKETKIT - MARKETING-AUDIT - basf.com.md
+Full report saved to Audit/MARKETKIT - MARKETING-AUDIT - basf.com.md
 ```
 
 ---
@@ -183,13 +183,13 @@ Nothing here is copied anywhere at install time. Skills reference the bundled sc
 
 SearchKit keeps one independent profile per exact domain — `config/searchkit.<domain>.json` — never a copy of this suite's `_grounding/`. A project with three domains has three SearchKit profiles and one shared `_grounding/`.
 
-Audit, report, and SEO workflows discover the artifact automatically: exactly one `data/SEARCHKIT - SEARCH-CONTEXT-V1-<period> - <domain>.json` inside the active `Audit-YYYY-MM-DD[-NN]/` folder, for the exact target domain. An explicit path always overrides discovery, for example:
+Audit, report, and SEO workflows discover the artifact automatically: exactly one `data/SEARCHKIT - SEARCH-CONTEXT-V1-<period> - <domain>.json` inside the active `Audit/` folder, for the exact target domain. An explicit path always overrides discovery, for example:
 
 ```text
-/marketkit:audit https://example.com and use "Audit-2026-08-16/data/SEARCHKIT - SEARCH-CONTEXT-V1-Q2-2026 - example.com.json" during synthesis.
+/marketkit:audit https://example.com and use "Audit/data/SEARCHKIT - SEARCH-CONTEXT-V1-Q2-2026 - example.com.json" during synthesis.
 ```
 
-The artifact is used only after schema, exact-domain, reporting-period, and source-status validation. In the full audit it is orchestrator-only, never goes to the five scoring subagents, and does not change audit scores; it can only corroborate and prioritize independently derived recommendations. Missing, partial, mismatched, or stale evidence is disclosed rather than treated as zero. Older audit folders are never searched automatically.
+The artifact is used only after schema, exact-domain, reporting-period, and source-status validation. In the full audit it is orchestrator-only, never goes to the five scoring subagents, and does not change audit scores; it can only corroborate and prioritize independently derived recommendations. Missing, partial, mismatched, or stale evidence is disclosed rather than treated as zero. Archived or renamed audit folders are never searched automatically.
 
 ---
 
@@ -220,18 +220,17 @@ What this changes in practice:
 
 No grounding folder is required. Without one the suite works from site evidence alone and says so.
 
-## Output: the shared Audit-YYYY-MM-DD workspace
+## Output: the shared Audit/ workspace
 
 One project holds one customer — not one project per domain. A customer with three domains still keeps one shared, multilingual `_grounding/` at the project root and one shared output workspace; only the SearchKit profile and the filename scope vary per domain.
 
-Every command resolves its output path through `references/output-location.md` before writing, via the bundled `scripts/resolve_audit_output.py`. Output lands in a dated audit folder at the Git project root (or CWD outside Git):
+Every command resolves its output path through `references/output-location.md` before writing, via the bundled `scripts/resolve_audit_output.py`. Output lands in the single active audit folder at the Git project root (or CWD outside Git):
 
 ```
-Audit-YYYY-MM-DD/
-Audit-YYYY-MM-DD-NN/
+Audit/
 ```
 
-shared by every command that runs that day — Market Context Kit and Search Context Kit alike — versioned to `-01`, `-02`, ... on a same-purpose, same-scope rerun rather than overwritten. Reports live directly in that folder; internal intermediates (PDF source JSON, SearchKit raw evidence) live flat under its `data/` subfolder. The resolver never searches an older audit folder — a prior day's run is out of scope unless you name its path explicitly.
+shared by every command, always — Market Context Kit and Search Context Kit alike. There is no per-day or per-run folder; a same-purpose, same-scope rerun **overwrites the existing file in place**, and git history is the version record. Reports live directly in that folder; internal intermediates (PDF source JSON, SearchKit raw evidence) live flat under its `data/` subfolder. The resolver never searches an archived or renamed folder — when a project is finished, archive it yourself by renaming `Audit/`; a prior engagement's evidence is out of scope unless you name its path explicitly.
 
 Every generated filename follows one contract, with no underscores:
 
@@ -241,20 +240,20 @@ MARKETKIT - <PURPOSE> - <SCOPE>.<extension>
 
 `SCOPE` is the exact normalized target domain for URL-based commands (`audit`, `competitors`, `seo`, `ads`, `brand`, `content-plan`, `copy`, `funnel`, `landing`, `report`, `report-pdf`). For topic-only commands (`emails`, `launch`, `proposal`, and topic-only `social`), the skill asks you for an explicit domain or customer scope before writing anything — it never invents one.
 
-**Worked example — MarketKit runs twice, then SearchKit runs once, same day:**
+**Worked example — MarketKit runs, then reruns days later, then SearchKit runs:**
 
 ```
 > /marketkit:audit https://example.com
-Full report saved to: Audit-2026-08-17/MARKETKIT - MARKETING-AUDIT - example.com.md
+Full report saved to: Audit/MARKETKIT - MARKETING-AUDIT - example.com.md
 
-> /marketkit:audit https://example.com                      # rerun, same day, same domain
-Full report saved to: Audit-2026-08-17-02/MARKETKIT - MARKETING-AUDIT - example.com.md
+> /marketkit:audit https://example.com                      # rerun days later, same domain
+Full report saved to: Audit/MARKETKIT - MARKETING-AUDIT - example.com.md   # overwritten in place
 
-> /searchkit:collect example.com Q2 2026                     # SearchKit reuses the active run
-Artifact saved to: Audit-2026-08-17-02/data/SEARCHKIT - SEARCH-CONTEXT-V1-Q2-2026 - example.com.json
+> /searchkit:collect example.com Q2 2026                     # SearchKit targets the same Audit/
+Artifact saved to: Audit/data/SEARCHKIT - SEARCH-CONTEXT-V1-Q2-2026 - example.com.json
 ```
 
-The second `audit` collides with the first on exact filename, so it becomes `-02`. SearchKit then resolves the same day and reuses the **highest-numbered** existing folder — `-02` — so both toolkits' output for that day sits side by side, whichever one ran first.
+The rerun writes to the exact same path as the first run — the file is overwritten, not forked into a numbered sibling. SearchKit resolves the same `Audit/` folder regardless of how much time has passed, so both toolkits' output for the whole engagement sits side by side.
 
 ### Optional project report metadata
 

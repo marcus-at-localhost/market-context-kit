@@ -266,7 +266,7 @@ Pillar Coverage:
   [Pillar 4]: XX posts
   [Pillar 5]: XX posts
 
-Full calendar saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - SOCIAL-CALENDAR - example.com.md]
+Full calendar saved to: [resolved output_path, e.g. Audit/MARKETKIT - SOCIAL-CALENDAR - example.com.md]
 ```
 
 ---

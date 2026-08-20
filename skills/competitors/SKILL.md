@@ -607,7 +607,7 @@ Top 3 Actions:
   2. [action]
   3. [action]
 
-Full report saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - COMPETITOR-REPORT - example.com.md]
+Full report saved to: [resolved output_path, e.g. Audit/MARKETKIT - COMPETITOR-REPORT - example.com.md]
 ```
 
 ---

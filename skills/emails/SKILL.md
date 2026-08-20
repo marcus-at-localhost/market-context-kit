@@ -459,7 +459,7 @@ Key Metrics Targets:
   Click Rate: 3-4%
   Conversion Rate: 1.5-2%
 
-Full sequences saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - EMAIL-SEQUENCES - example.com.md]
+Full sequences saved to: [resolved output_path, e.g. Audit/MARKETKIT - EMAIL-SEQUENCES - example.com.md]
 ```
 
 ---

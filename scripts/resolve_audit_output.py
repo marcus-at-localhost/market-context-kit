@@ -1,4 +1,4 @@
-"""Resolve the shared Audit-YYYY-MM-DD[-NN] output contract, standalone.
+"""Resolve the shared Audit/ output contract, standalone.
 
 Mirrors Search Context Kit's public algorithm exactly without importing it,
 so Market Context Kit stays a standalone repository.
@@ -8,14 +8,12 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
-from datetime import date
 import json
 from pathlib import Path
 import re
 import subprocess
 
 
-AUDIT_RE = re.compile(r"^Audit-(\d{4}-\d{2}-\d{2})(?:-(\d{2,}))?$")
 TOKEN_RE = re.compile(r"^[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 SCOPE_RE = re.compile(r"^[A-Za-z0-9.-]+$")
 
@@ -64,37 +62,10 @@ def _validate_filename(filename: str) -> None:
         raise ValueError("filename must contain toolkit, purpose, and scope")
 
 
-def _audit_directories(project_root: Path, day: str) -> dict[int, Path]:
-    audits: dict[int, Path] = {}
-    for path in project_root.iterdir():
-        if not path.is_dir():
-            continue
-        match = AUDIT_RE.fullmatch(path.name)
-        if not match or match.group(1) != day:
-            continue
-        suffix = match.group(2)
-        run = 1 if suffix is None else int(suffix)
-        if run >= 2:
-            audits[run] = path
-    return audits
-
-
-def resolve_audit_output(
-    start: Path, filename: str, *, data: bool = False, today: date | None = None
-) -> AuditOutput:
+def resolve_audit_output(start: Path, filename: str, *, data: bool = False) -> AuditOutput:
     _validate_filename(filename)
     project_root = find_project_root(start)
-    day = (today or date.today()).isoformat()
-    audits = _audit_directories(project_root, day)
-    active_run = max(audits, default=1)
-    audit_dir = audits.get(active_run, project_root / f"Audit-{day}")
-
-    if (audit_dir / filename).exists() or (audit_dir / "data" / filename).exists():
-        active_run += 1
-        while active_run in audits:
-            active_run += 1
-        audit_dir = project_root / f"Audit-{day}-{active_run:02d}"
-
+    audit_dir = project_root / "Audit"
     data_dir = audit_dir / "data"
     output_path = (data_dir if data else audit_dir) / filename
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -103,18 +74,16 @@ def resolve_audit_output(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Resolve the active Audit-YYYY-MM-DD[-NN] output path for a MarketKit write"
+        description="Resolve the active Audit/ output path for a MarketKit write"
     )
     parser.add_argument("--purpose", required=True)
     parser.add_argument("--scope", required=True)
     parser.add_argument("--extension", required=True)
     parser.add_argument("--data", action="store_true")
-    parser.add_argument("--date")
     args = parser.parse_args()
     try:
         filename = build_filename("MARKETKIT", args.purpose, args.scope, args.extension)
-        today = date.fromisoformat(args.date) if args.date else None
-        result = resolve_audit_output(Path.cwd(), filename, data=args.data, today=today)
+        result = resolve_audit_output(Path.cwd(), filename, data=args.data)
     except ValueError as exc:
         parser.exit(status=2, message=f"{exc}\n")
     print(

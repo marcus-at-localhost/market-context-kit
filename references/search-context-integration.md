@@ -10,7 +10,7 @@ Use this contract only when a Market Context Kit skill needs measured search or 
 4. If exactly one candidate remains, use it.
 5. If none remain, continue without Search Context and state that the optional evidence was unavailable.
 6. If more than one candidate remains (multiple periods, no period requested), require the user to select one explicitly and do not guess.
-7. Do not read older audit folders — never search older audit folders automatically. A prior day's `Audit-YYYY-MM-DD[-NN]/data/` is out of scope unless the user names its path explicitly.
+7. Do not read an archived audit folder — never search older audit folders automatically. Once `Audit/` has been renamed away for a finished engagement, its `data/` is out of scope unless the user names its path explicitly.
 8. Do not search another client's directory, infer domain ownership from a filename, or use a generic analytics export as a substitute.
 
 ## Validate before reading values

@@ -5,21 +5,27 @@ Every skill that writes a report file (`audit`, `seo`, `competitors`, `report`,
 it writes through this rule instead of writing straight into the working
 directory or inventing its own folder. This is the same shared contract
 Search Context Kit uses, so both toolkits' outputs land side by side in one
-place per day.
+place.
 
 ## The folder
 
-Every write lands inside a dated audit folder, in the project's Git root (or
-the current working directory outside Git):
+Every write lands inside the single active audit folder, in the project's
+Git root (or the current working directory outside Git):
 
 ```
-Audit-YYYY-MM-DD/
-Audit-YYYY-MM-DD-NN/
+Audit/
 ```
 
-using today's date. This is one folder for the whole day, shared by every
-skill in this suite and by Search Context Kit — a marketing audit run this
-morning and a search report run this afternoon land side by side in it.
+There is no per-day or per-run folder — `Audit/` is always the target,
+shared by every skill in this suite and by Search Context Kit. A marketing
+audit run this morning and a search report run three days later land side by
+side in the same folder.
+
+Re-running the same purpose/scope **overwrites the existing file in
+place**; git history is the version record. When a project or engagement is
+finished, archive it yourself by renaming `Audit/` to whatever you like (a
+date, a number, a client tag) — the resolver and every skill in this suite
+only ever target the live `Audit/`, never an archived or renamed sibling.
 
 ## Resolving a path
 
@@ -35,9 +41,7 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_audit_output.py" ^
 
 On Windows, use `python` and either PowerShell line continuation (`` ` ``) or
 one line; on macOS/Linux, use `python3`. Add `--data` for internal
-intermediates that belong flat under `data/` instead of the audit root. Add
-`--date YYYY-MM-DD` only for deterministic tests or explicit historical work
-— never to backdate a real run.
+intermediates that belong flat under `data/` instead of the audit root.
 
 The command prints one compact JSON object:
 
@@ -47,24 +51,18 @@ The command prints one compact JSON object:
 
 `output_path` is authoritative. Use it exactly for the Write tool call and
 state it in the terminal output, e.g. "Full report saved to:
-`Audit-2026-08-17/MARKETKIT - MARKETING-AUDIT - example.com.md`". Do not
-reconstruct the path yourself or guess a folder name.
+`Audit/MARKETKIT - MARKETING-AUDIT - example.com.md`". Do not reconstruct
+the path yourself or guess a folder name.
 
 ### The algorithm the resolver implements
 
 1. Find the project root (`git rev-parse --show-toplevel`, or the current
    working directory outside Git).
-2. List directories directly under the project root matching today's date:
-   `Audit-YYYY-MM-DD` or `Audit-YYYY-MM-DD-NN` (`NN` two or more digits).
-3. None exist → target is `Audit-YYYY-MM-DD`.
-4. One or more exist → take the **highest-numbered** one (bare date is run 1,
-   `-02` outranks `-01`, ...). Check whether it (or its `data/` subfolder)
-   already contains a file with this exact target filename.
-   - Not present → reuse this folder. Different toolkit or skill, same day,
-     same audit.
-   - Present → this is a rerun that would collide; never overwrite it.
-     Create the next unused numeric suffix and write there instead.
-5. Create only the selected folder (and `data/` when `--data` is set).
+2. Target `Audit/` at the project root, always — create it (and its `data/`
+   subfolder when `--data` is set) if it does not exist yet.
+3. Resolve `output_path` inside it. If a file with this exact target
+   filename already exists there, it gets overwritten in place — git
+   history is the version record, not a numbered sibling folder.
 
 ## Filename contract
 
@@ -92,12 +90,12 @@ in a nested `raw/` or per-domain subfolder.
 ## Reading prior output
 
 Skills that read sibling output (`report`, `report-pdf`, and any skill
-checking for a same-scope prerequisite) look **only inside the active audit
-folder** resolved above, using the exact same-scope filename, for example
-`MARKETKIT - COMPETITOR-REPORT - example.com.md` next to
-`MARKETKIT - MARKETING-AUDIT - example.com.md`. Never search older audit
-folders automatically — a prior day's run is out of scope unless the user
-names it explicitly.
+checking for a same-scope prerequisite) look **only inside the active
+`Audit/` folder** resolved above, using the exact same-scope filename, for
+example `MARKETKIT - COMPETITOR-REPORT - example.com.md` next to
+`MARKETKIT - MARKETING-AUDIT - example.com.md`. Never search an archived or
+renamed folder automatically — a prior engagement's evidence is out of
+scope unless the user names its path explicitly.
 
 ## Scope
 

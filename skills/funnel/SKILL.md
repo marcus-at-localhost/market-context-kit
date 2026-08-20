@@ -434,7 +434,7 @@ Top 3 Fixes:
   2. [fix] — est. [X]% lift
   3. [fix] — est. [X]% lift
 
-Full analysis saved to: [resolved output_path, e.g. Audit-2026-08-17/MARKETKIT - FUNNEL-ANALYSIS - example.com.md]
+Full analysis saved to: [resolved output_path, e.g. Audit/MARKETKIT - FUNNEL-ANALYSIS - example.com.md]
 ```
 
 ---
