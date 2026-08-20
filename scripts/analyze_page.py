@@ -396,15 +396,15 @@ class MarketingPageParser(HTMLParser):
             },
             "tracking": {
                 "tools_detected": tracking,
-                "tools_count": len(tracking),
-                "schema_types": [self._schema_type_name(s) for s in self.schema_data],
-                "schema_count": len(self.schema_data)
+                "tools_count": len(tracking)
             },
             "technical": {
                 "total_links": len(self.links),
                 "internal_links": 0,  # Filled after URL analysis
                 "external_links": 0,
-                "scripts_count": len(self.scripts)
+                "scripts_count": len(self.scripts),
+                "schema_types": [self._schema_type_name(s) for s in self.schema_data],
+                "schema_count": len(self.schema_data)
             }
         }
 
@@ -543,7 +543,7 @@ def analyze(url):
         trust_score += 2
     elif page_results["trust"]["social_link_count"] >= 1:
         trust_score += 1
-    if page_results["tracking"]["schema_count"] > 0:
+    if page_results["technical"]["schema_count"] > 0:
         trust_score += 1
     scores["trust"] = min(10, trust_score)
 
