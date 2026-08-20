@@ -117,12 +117,13 @@ Check for presence of:
 
 ### Step 4: Schema & Structured Data
 
-The `analyze_page.py` JSON in your prompt reports top-level types under
-`analysis.technical.schema_types`. That list is **not complete**: nested entities are omitted — an
-`Article`'s `author` Person, an `Organization`'s `subOrganization` LocalBusiness list, a
-`FAQPage`'s Question/Answer pairs. Before reporting author attribution, locations, or FAQ markup as
-absent, check the raw JSON-LD with `curl -s "<url>" | grep -o '"@type":"[^"]*"'`. Reporting "no
-author schema" from the top-level list alone is a false finding.
+The `analyze_page.py` JSON reports top-level types under `analysis.technical.schema_types` and
+everything one level down under `analysis.technical.schema_types_nested`, a `{type: count}` map.
+**Read both.** Author attribution (`Person`), locations (`LocalBusiness`, `PostalAddress`) and FAQ
+markup (`Question`, `Answer`) are almost always nested, so the top-level list alone will show them
+as absent when they are present — that is a false finding, and it has reached a delivered report
+before. Nested counts include `@id` references, so a type can be counted more often than it is
+defined; use them for presence and rough scale, not as an exact inventory.
 
 Check for JSON-LD or microdata:
 - Organization schema

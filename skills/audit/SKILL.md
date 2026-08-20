@@ -97,7 +97,7 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/analyze_page.py" "<url>"
 
 Run it once per selected URL (homepage + up to 5 interior). Use `python3` on macOS and Linux, `python` on Windows. Do not try `python3` first on Windows: it resolves to the Microsoft Store alias stub, which opens the Store instead of failing cleanly. If the script errors on a given URL, continue without that page and note the gap — do not fall back to a WebFetch read for the same page and pass that off as structural fact.
 
-Assemble the results into a table, one row per URL analyzed. `Schema types` comes from `analysis.technical.schema_types` in the JSON. That list holds **top-level `@type` values only** — nested entities such as an `Article`'s `author` Person or an `Organization`'s `subOrganization` list do not appear in it, so an empty-looking cell is not evidence that a given schema is absent.
+Assemble the results into a table, one row per URL analyzed. `Schema types` comes from `analysis.technical.schema_types` in the JSON — top-level nodes only. Entities one level down live in `analysis.technical.schema_types_nested`, a `{type: count}` map covering an `Article`'s `author` Person, an `Organization`'s `subOrganization` LocalBusiness entries, a `FAQPage`'s questions. Read both before calling a schema type absent; the counts include `@id` references, so a type may be counted more often than it is defined.
 
 ```markdown
 ### Structural Facts (raw HTML, not WebFetch — analyze_page.py)

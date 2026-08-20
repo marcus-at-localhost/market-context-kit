@@ -138,6 +138,54 @@ class MarketingPageParser(HTMLParser):
 
         return []
 
+    def _type_names(self, schema_type):
+        if schema_type is None:
+            return []
+        if isinstance(schema_type, list):
+            return [str(item) for item in schema_type]
+        return [str(schema_type)]
+
+    def _walk_schema_types(self, node, counts):
+        """Count every @type in the tree, nested objects included."""
+        if isinstance(node, list):
+            for item in node:
+                self._walk_schema_types(item, counts)
+            return
+
+        if not isinstance(node, dict):
+            return
+
+        for name in self._type_names(node.get("@type")):
+            counts[name] = counts.get(name, 0) + 1
+
+        for key, value in node.items():
+            if key != "@type":
+                self._walk_schema_types(value, counts)
+
+    def _nested_schema_type_counts(self):
+        """@type counts for entities that sit inside another node.
+
+        schema_types lists top-level nodes only, which hides an Article's author
+        Person, an Organization's subOrganization list, and a FAQPage's questions.
+        Counts include @id references, so a type may be counted more than it is
+        defined."""
+        top = {}
+        for node in self.schema_data:
+            node_type = node.get("@type") if isinstance(node, dict) else None
+            for name in self._type_names(node_type):
+                top[name] = top.get(name, 0) + 1
+
+        everything = {}
+        for node in self.schema_data:
+            self._walk_schema_types(node, everything)
+
+        nested = {}
+        for name, count in everything.items():
+            remainder = count - top.get(name, 0)
+            if remainder > 0:
+                nested[name] = remainder
+        return dict(sorted(nested.items()))
+
     def _schema_type_name(self, schema):
         if not isinstance(schema, dict):
             return "Unknown"
@@ -404,7 +452,8 @@ class MarketingPageParser(HTMLParser):
                 "external_links": 0,
                 "scripts_count": len(self.scripts),
                 "schema_types": [self._schema_type_name(s) for s in self.schema_data],
-                "schema_count": len(self.schema_data)
+                "schema_count": len(self.schema_data),
+                "schema_types_nested": self._nested_schema_type_counts()
             }
         }
 
