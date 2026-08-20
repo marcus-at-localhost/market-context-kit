@@ -44,6 +44,11 @@ Paths written as `${CLAUDE_PLUGIN_ROOT}/…` anywhere in this file are provenanc
 
 ## Analysis Process
 
+If your prompt carries a `## Myth Guardrail` block, it binds every recommendation you write — a
+matching recommendation is dropped, not downgraded. A check the grounding digest asks for anyway
+(an `llms.txt` criterion is the common case) still gets run and reported as a fact with evidence,
+never as a scored gap or a severity-rated issue.
+
 ### Step 1: Technical SEO Check
 
 Use WebFetch on the target URL and analyze:
@@ -116,10 +121,17 @@ Check for JSON-LD or microdata:
 - Organization schema
 - Website schema with SearchAction
 - Product/Service schema
-- FAQ schema
+- FAQ schema (restricted to government and health sites — detect it, never recommend it)
 - Review/Rating schema
 - Breadcrumb schema
 - Article schema (on blog posts)
+
+Score what is **present, valid, and matching visible page content** for a rich-result-eligible type
+— not coverage of the list above. Schema earns rich-result eligibility, entity clarity via
+`Organization` + `sameAs`, and Merchant Center feeds. It is not a ranking factor, and Google states
+no schema.org markup is required for generative AI search. A page type with no eligible rich-result
+type is not a gap for lacking schema, and missing schema tops out at Medium severity unless it
+breaks an existing rich result. Never write AI-visibility rationale for a schema finding.
 
 ### Step 5: SEO Content Quality
 
@@ -141,7 +153,7 @@ For the homepage and one key content page:
 | Crawlability | 20% | Robots, sitemap, indexing |
 | Performance | 15% | Speed, mobile, UX |
 | Content Architecture | 20% | Navigation, linking, organization |
-| Schema & Tracking | 20% | Structured data, analytics setup |
+| Schema & Tracking | 20% | Rich-result-eligible structured data, analytics setup |
 
 ## Output Format
 
@@ -180,12 +192,12 @@ For the homepage and one key content page:
 | Cookie Consent | ✅/❌ | [details] |
 
 ### Schema Markup
-| Schema Type | Present | Recommendation |
+| Schema Type | Present | Recommendation (only where the page is rich-result eligible) |
 |-------------|---------|----------------|
 | Organization | ✅/❌ | [action needed] |
 | Website | ✅/❌ | [action needed] |
 | Product/Service | ✅/❌ | [action needed] |
-| FAQ | ✅/❌ | [action needed] |
+| FAQ *(restricted)* | ✅/❌ | detect only — not a recommendation |
 | Review | ✅/❌ | [action needed] |
 
 ### Content Architecture Findings

@@ -42,6 +42,11 @@ Paths written as `${CLAUDE_PLUGIN_ROOT}/…` anywhere in this file are provenanc
 
 ## Analysis Process
 
+If your prompt carries a `## Myth Guardrail` block, it binds every recommendation you write — a
+matching recommendation is dropped, not downgraded. A check the grounding digest asks for anyway
+(an `llms.txt` criterion is the common case) still gets run and reported as a fact with evidence,
+never as a scored gap or a severity-rated issue.
+
 ### Step 1: Fetch Key Pages
 Use WebFetch to retrieve and analyze these pages (if they exist):
 1. Homepage
@@ -77,7 +82,9 @@ Score each dimension 0-10:
 - Is there enough content to inform purchase decisions?
 - Are features explained with context and outcomes?
 - Is there educational content (blog, guides, resources)?
-- Scoring: 9-10 = comprehensive + well-organized, 7-8 = good coverage, 5-6 = surface-level, 3-4 = thin content, 0-2 = barely any content
+- Does it carry a unique point of view, or is it commodity information available from any source?
+- Would a reader leave having learned enough to act, or do they still need another source?
+- Scoring: 9-10 = comprehensive, well-organized + non-commodity, 7-8 = good coverage, 5-6 = surface-level, 3-4 = thin content, 0-2 = barely any content
 
 **Call-to-Action Effectiveness (0-10)**
 - Are CTAs clear, specific, and action-oriented?

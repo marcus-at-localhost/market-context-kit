@@ -104,7 +104,12 @@ Evaluate based on SEO audit findings.
 | Content quality (E-E-A-T) | 25 | Excellent = 25, Good = 17, Average = 10, Poor = 3 |
 | Technical SEO | 20 | No issues = 20, Minor issues = 13, Major issues = 7, Critical = 0 |
 | Internal linking | 15 | Strategic = 15, Present = 10, Minimal = 5, None = 0 |
-| Schema markup | 15 | Comprehensive = 15, Basic = 10, Minimal = 5, None = 0 |
+| Schema markup | 15 | Eligible rich-result types covered = 15, main types only = 10, minimal = 5, none where types are eligible = 0 |
+
+Two notes on this category:
+
+- **E-E-A-T bands rest on Google's helpful-content evidence** — who produced the content, how (including disclosed automation), and why it exists. A search-engine-first red flag (mass production across topics the site has no expertise in, undisclosed AI generation at scale, dates changed without the content changing) caps this factor at Poor whatever the surface quality looks like.
+- **Schema is scored for rich-result eligibility and entity clarity**, not AI visibility. It is not a ranking factor, and Google states no schema.org markup is required for generative AI search. A page type with no eligible rich-result type is not counted against this factor.
 
 #### Category 3: Content & Messaging (Weight: 15%)
 Evaluate based on brand voice analysis and content audit.
@@ -278,6 +283,9 @@ SEO Health Snapshot:
 - HTTPS: [Yes / No]
 - Core Web Vitals: [Pass / Needs Work / Fail]
 ```
+
+`Schema Markup` reports rich-result eligibility and entity clarity, not AI visibility. If the client
+asks why it matters, that is the answer — not "so AI can understand your site".
 
 ### Step 8: Build the Prioritized Action Plan
 

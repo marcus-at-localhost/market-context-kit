@@ -44,6 +44,11 @@ top of the report, and an error means stop rather than invent or drop attributio
 
 Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve and validate a `SEARCH-CONTEXT.v1.json` artifact only when the user supplies an explicit path, or the reference's discovery rule finds exactly one in the active audit folder's flat `data/` for the exact domain and, if requested, the exact reporting period. Retain a valid artifact as **orchestrator-only** evidence for Phase 3; do not use it during discovery or scoring.
 
+Read `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`. Its `Myth Guardrail` binds every
+recommendation this command emits, `Grounding Precedence` governs what happens when a grounding
+criterion asks for a myth check anyway, and `Schema Scoring` sets how structured data is scored. You
+paste the guardrail into two subagent prompts in Phase 2 and apply the whole file yourself in Phase 3.
+
 ### 0.1 Build the Data Manifest
 
 The five subagents have no file-discovery tools and are instructed to open nothing you have not named. Decide now what that list is: the **Data Manifest** is the complete set of file paths any subagent may `Read` on this run, and you paste it verbatim into all five prompts.
@@ -180,6 +185,7 @@ Subagents share none of your conversation. Every prompt must therefore carry, in
 - **the Structural Facts block from 1.1**, in every one of the five prompts, with this instruction attached: "Any H1, heading hierarchy, meta tag, canonical, or schema claim in your output must come from this table. Do not derive it from your own WebFetch read — WebFetch reliably misreads SVG titles, aria-labels and hidden text as page structure. If a page you need isn't in this table, say so as a gap rather than asserting structure for it." This is the fix for a 2026-08-15 run in which three of five subagents reported a WebFetch-sourced SVG logo title as an identical H1 across all 459 pages of a site.
 - **the Data Manifest from 0.1**, verbatim, in every one of the five prompts — including the `Empty.` form. This is the fix for the second half of that same run, in which `market-conversion` located an unrelated analytics file and a previous audit report on its own and calibrated its score against them.
 - for `market-technical` only: the full `analyze_page.py` JSON from Phase 1.1 (not just the Structural Facts table — technical gets the whole payload)
+- **the `Myth Guardrail` table from `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`**, pasted verbatim under a `## Myth Guardrail` heading, in the `market-technical` and `market-content` prompts **only** — the other three never recommend schema or `llms.txt`, so paying those tokens five times buys nothing. Attach this sentence to the block: "These bind your recommendations. If the grounding digest asks for one of these checks anyway, run it and report the fact — never as a scored gap or a severity-rated issue."
 
 Close every prompt with the return contract, so the declaration comes back in a form you can reconcile:
 
@@ -246,7 +252,7 @@ Evaluates:
 - Image optimization (alt tags, file sizes, modern formats)
 - Mobile responsiveness
 - Page load speed indicators (DOM size, resource count, render-blocking)
-- Schema markup / structured data
+- Schema markup / structured data — scored per `Schema Scoring` in `references/google-search-guidance.md`: rich-result-eligible types that are present, valid, and matching visible page content, not coverage of a type checklist
 - Sitemap and robots.txt
 - Core Web Vitals signals (where detectable)
 - Accessibility basics (contrast, form labels, skip navigation)
@@ -337,7 +343,14 @@ Marketing Score = (
 
 ### 3.2 Aggregate Recommendations
 
-Collect all recommendations from subagents and classify them:
+Collect all recommendations from subagents. **Filter them against the `Myth Guardrail` in
+`${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md` before classifying.** A recommendation
+matching a guardrail row is dropped, not downgraded or reclassified. Say so in the report
+("`market-technical` proposed adding an llms.txt; dropped — Google Search ignores the file"), so the
+removal is legible rather than silent. A myth check the grounding digest asked for still appears as a
+reported fact in the technical section; it just never becomes a recommendation.
+
+Then classify what remains:
 
 **Quick Wins** (implement in < 1 week, low effort, high impact):
 - Copy changes to headlines and CTAs

@@ -169,6 +169,7 @@ def test_no_real_attribution_is_hard_coded_in_reusable_files():
 ALLOWED_DOMAINS = {
     "example.com", "example.org", "example.net",
     "github.com", "anthropic.com", "json-schema.org", "google.com",
+    "schema.org",  # the structured-data vocabulary the SEO rubrics score against
     "wikipedia.org", "linkedin.com", "youtube.com", "instagram.com",
     "facebook.com", "twitter.com", "x.com", "tiktok.com", "reddit.com",
     "calendly.com", "acuityscheduling.com", "strategyzer.com",

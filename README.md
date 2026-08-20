@@ -147,6 +147,7 @@ market-context-kit/                     # clone target: .claude/skills/market-co
 ├── references/                         # Loaded on demand by the skills
 │   ├── grounding.md                    # How to find and apply a _grounding/ folder
 │   ├── business-context.md             # Business type → example pack resolution
+│   ├── google-search-guidance.md       # Myth guardrail, grounding precedence, schema scoring
 │   ├── examples/
 │   │   ├── consumer-online.md          # Creator, e-commerce, self-serve SaaS, local
 │   │   └── b2b-technical.md            # Industrial, distributor, regulated, academy
@@ -316,6 +317,8 @@ External Research Cited above.
 | 4U Formula (Useful/Ultra-specific/Unique/Urgent) | `copy`, `landing` | [AWAI](https://www.awai.com/2001/06/a-review-of-the-4-us/) (originating org) |
 | Value Proposition Canvas | `copy` | [Strategyzer](https://www.strategyzer.com/library/mastering-value-propositions) (Osterwalder's own) |
 | E-E-A-T | `seo`, `market-technical` | [Google Search Central](https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t) |
+| Google helpful-content self-assessment | `seo`, `report`, `market-content` | [Google Search Central](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) |
+| Google generative-AI search guidance, incl. Mythbusting | `seo`, `audit`, `market-technical`, `market-content` | [Google Search Central](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) |
 | SWOT Analysis | `competitors` | [Wikipedia](https://en.wikipedia.org/wiki/SWOT_analysis) |
 
 ---

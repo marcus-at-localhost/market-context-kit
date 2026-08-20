@@ -40,6 +40,10 @@ must come from `scripts/analyze_page.py` or another real parser — never an ad-
 HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
 attribute-only markup.
 
+Read `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`. Its `Myth Guardrail` binds every
+recommendation this audit emits, `Grounding Precedence` governs a myth check a grounding criterion
+asks for anyway, and `Schema Scoring` sets how Step 8 is scored.
+
 Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve a `SEARCH-CONTEXT.v1.json` only from an explicit user path, or from exactly one match in the active audit folder's flat `data/` for the exact domain and, if requested, the exact reporting period, then validate schema, domain, reporting period, and source statuses before reading values.
 
 ---
@@ -234,6 +238,26 @@ Can users trust this content and this website?
 
 **Score:** Strong / Present / Weak / Missing
 
+#### Who / How / Why
+
+Google's helpful-content guidance asks three questions of every page. Score each Pass / Needs Work / Fail:
+
+| Question | What to check |
+|---|---|
+| **Who** produced it? | A byline with a real name, author background, and a reason to trust them on this topic |
+| **How** was it produced? | Method stated where it matters (testing, sourcing, review); automation or AI involvement disclosed along with the role it served |
+| **Why** does it exist? | Written to help a reader. Content that exists only to catch search traffic fails here |
+
+#### Search-engine-first red flags
+
+Each is a Fail for the page's helpfulness on its own, whatever the four dimensions above scored:
+
+- [ ] Content mass-produced across topics the site has no expertise in
+- [ ] Publication or update dates changed without the content changing
+- [ ] Automation or AI generation used at scale and left undisclosed
+- [ ] Page restates what other sources already said and adds nothing
+- [ ] Topic chosen because it trends, not because the site can cover it
+
 ### Step 4: Keyword Analysis
 
 #### Primary Keyword Assessment
@@ -364,8 +388,8 @@ Check for structured data implementation:
 | LocalBusiness | Local businesses | Present/Missing/N/A |
 | Product | Product pages | Present/Missing/N/A |
 | Article | Blog posts, news | Present/Missing/N/A |
-| FAQ | FAQ sections | Present/Missing |
-| HowTo | Tutorial content | Present/Missing/N/A |
+| FAQ *(restricted to government and health sites)* | FAQ sections | Present/Missing/N/A |
+| HowTo *(no longer produces a rich result)* | Tutorial content | Present/Missing/N/A |
 | Review/AggregateRating | Reviews, testimonials | Present/Missing/N/A |
 | BreadcrumbList | All pages with breadcrumbs | Present/Missing |
 | WebSite/SearchAction | Homepage (sitelinks search box) | Present/Missing |
@@ -376,6 +400,8 @@ Check for structured data implementation:
 - Validate with Google's Rich Results Test
 - Don't mark up content that isn't visible on the page
 - Keep schema data consistent with on-page content
+- Recommend schema for what it actually buys: rich-result eligibility, entity clarity via `Organization` + `sameAs`, Merchant Center feeds, machine-readable facts. It is not a ranking factor, and Google states no schema.org markup is required for generative AI search — never justify a schema recommendation by AI visibility
+- A page type with no eligible rich-result type is not a gap for lacking schema. Score per `Schema Scoring` in `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`, and resolve currently eligible types from Google's search gallery rather than treating the table above as complete
 
 ### Step 9: Internal Linking Opportunities
 
@@ -431,6 +457,13 @@ Based on the audit findings, recommend:
 | [Topic] | High/Med/Low | High/Med/Low | High/Med/Low | 1-10 |
 
 Scoring: High volume + Low competition + High business value = Highest priority
+
+### Step 12: Filter Myth Recommendations
+
+Before writing Prioritized Recommendations, filter every recommendation against the `Myth Guardrail`
+in `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`. A match is dropped, not downgraded.
+Where grounding asked for one of those checks, report the finding as a fact under Technical SEO with
+its evidence — never as a Critical, High, Medium, or Low recommendation.
 
 ## Output Format: MARKETKIT - SEO-AUDIT - <domain>.md
 
