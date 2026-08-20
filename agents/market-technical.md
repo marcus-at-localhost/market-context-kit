@@ -117,13 +117,28 @@ Check for presence of:
 
 ### Step 4: Schema & Structured Data
 
-The `analyze_page.py` JSON reports top-level types under `analysis.technical.schema_types` and
-everything one level down under `analysis.technical.schema_types_nested`, a `{type: count}` map.
-**Read both.** Author attribution (`Person`), locations (`LocalBusiness`, `PostalAddress`) and FAQ
-markup (`Question`, `Answer`) are almost always nested, so the top-level list alone will show them
-as absent when they are present — that is a false finding, and it has reached a delivered report
-before. Nested counts include `@id` references, so a type can be counted more often than it is
-defined; use them for presence and rough scale, not as an exact inventory.
+The `analyze_page.py` JSON carries four schema fields under `analysis.technical`. **Read all four
+before calling any type absent.**
+
+| Field | Holds |
+|---|---|
+| `schema_types` | JSON-LD types at the top level of a block |
+| `schema_types_nested` | `{type: count}` for entities one level down |
+| `schema_types_microdata` | `{type: count}` from microdata `itemtype` and RDFa `typeof` |
+| `schema_parse_errors` | one entry per JSON-LD block that failed to parse |
+
+Author attribution (`Person`), locations (`LocalBusiness`, `PostalAddress`) and FAQ markup
+(`Question`, `Answer`) are almost always **nested**, so the top-level list alone shows them as
+absent when they are present. That is a false finding and it has reached a delivered report before.
+
+**`schema_parse_errors` is not empty → never write "schema missing".** The page carries structured
+data that does not parse. That is a different finding with a different fix and its own severity:
+report it as invalid markup, quote the parser message, and name the page.
+
+Two limits to state rather than paper over: nested counts include `@id` references, so a type can
+be counted more often than it is defined — use them for presence and rough scale, not as an exact
+inventory. And JSON-LD injected by JavaScript is invisible here. That is a real finding, not a gap
+in the measurement: AI crawlers do not execute JavaScript either.
 
 Check for JSON-LD or microdata:
 - Organization schema

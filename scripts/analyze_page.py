@@ -87,6 +87,8 @@ class MarketingPageParser(HTMLParser):
         self.buttons = []
         self.scripts = []
         self.schema_data = []
+        self.schema_errors = []
+        self.microdata_types = []
         self.ctas = []
         self.social_links = []
         self.tracking_scripts = []
@@ -186,19 +188,51 @@ class MarketingPageParser(HTMLParser):
                 nested[name] = remainder
         return dict(sorted(nested.items()))
 
-    def _schema_type_name(self, schema):
-        if not isinstance(schema, dict):
-            return "Unknown"
+    def _microdata_type_names(self, itemtype):
+        """schema.org types from a microdata itemtype attribute.
 
-        schema_type = schema.get("@type", "Unknown")
-        if isinstance(schema_type, list):
-            return ", ".join(str(item) for item in schema_type)
-        return str(schema_type)
+        The attribute may carry several space-separated URLs. Other vocabularies
+        are skipped, so a Dublin Core itemtype does not enter the schema
+        inventory."""
+        names = []
+        for url in itemtype.split():
+            if "schema.org" not in url.lower():
+                continue
+            name = url.rstrip("/").rsplit("/", 1)[-1]
+            if name:
+                names.append(name)
+        return names
+
+    def _rdfa_type_names(self, typeof):
+        """Types from an RDFa typeof attribute.
+
+        Values are CURIEs or bare terms and the prefix is dropped. The vocabulary
+        sits on an ancestor's vocab attribute, which a tag-stream parser cannot
+        resolve, so a vocabulary other than schema.org can appear here."""
+        names = []
+        for term in typeof.split():
+            name = term.split(":")[-1]
+            if name:
+                names.append(name)
+        return names
+
+    def _microdata_type_counts(self):
+        counts = {}
+        for name in self.microdata_types:
+            counts[name] = counts.get(name, 0) + 1
+        return dict(sorted(counts.items()))
 
     def handle_starttag(self, tag, attrs):
         attrs_dict = dict(attrs)
         self._current_tag = tag
         self._current_attrs = attrs_dict
+
+        itemtype = attrs_dict.get("itemtype", "")
+        if itemtype:
+            self.microdata_types.extend(self._microdata_type_names(itemtype))
+        typeof = attrs_dict.get("typeof", "")
+        if typeof:
+            self.microdata_types.extend(self._rdfa_type_names(typeof))
 
         if tag == "html":
             self.lang = attrs_dict.get("lang", "") or attrs_dict.get("xml:lang", "")
@@ -372,8 +406,11 @@ class MarketingPageParser(HTMLParser):
                 try:
                     schema = json.loads(script_content)
                     self.schema_data.extend(self._extract_schema_nodes(schema))
-                except (json.JSONDecodeError, ValueError):
-                    pass
+                except (json.JSONDecodeError, ValueError) as exc:
+                    # A silently dropped block is indistinguishable from no schema
+                    # at all, and that reads downstream as "schema missing" when
+                    # the real finding is "schema present but invalid".
+                    self.schema_errors.append(f"{type(exc).__name__}: {exc}")
 
     def handle_data(self, data):
         if self._in_title or self._in_heading or self._in_a or self._in_button or self._in_script:
@@ -451,9 +488,15 @@ class MarketingPageParser(HTMLParser):
                 "internal_links": 0,  # Filled after URL analysis
                 "external_links": 0,
                 "scripts_count": len(self.scripts),
-                "schema_types": [self._schema_type_name(s) for s in self.schema_data],
+                "schema_types": [
+                    name
+                    for node in self.schema_data
+                    for name in self._type_names(node.get("@type") if isinstance(node, dict) else None)
+                ],
                 "schema_count": len(self.schema_data),
-                "schema_types_nested": self._nested_schema_type_counts()
+                "schema_types_nested": self._nested_schema_type_counts(),
+                "schema_types_microdata": self._microdata_type_counts(),
+                "schema_parse_errors": list(self.schema_errors)
             }
         }
 
