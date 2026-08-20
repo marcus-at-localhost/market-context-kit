@@ -93,6 +93,30 @@ def test_markdown_writers_carry_a_front_matter_slot_in_their_template():
         assert "YAML front matter from the Phase 0 metadata resolver" in text, skill
 
 
+SCORING_SKILLS = ("audit", "report")
+
+
+def test_scoring_skills_resolve_the_business_type():
+    """A rubric worded for one commercial model scores a different one as
+    deficient when it is merely different. The packs carry the yardsticks that
+    make the pack-relative factors measurable, so a scoring skill that never
+    resolves the business type cannot apply them."""
+    for skill in SCORING_SKILLS:
+        text = read(f"skills/{skill}/SKILL.md")
+        assert "references/business-context.md" in text, skill
+
+
+def test_report_rubric_keeps_its_pack_relative_factors_and_escape_hatch():
+    """Both halves are load-bearing. Pack-relative factors without the escape
+    hatch still force a score onto a channel serving an unmeasured purpose;
+    the escape hatch without renormalization silently rewards exclusion."""
+    text = read("skills/report/SKILL.md")
+    assert "*(pack-relative)*" in text
+    assert "Lifecycle coverage" in text
+    assert "Channel purpose the rubric does not measure" in text
+    assert "over scored categories only" in text
+
+
 PAGE_READING_SKILLS = (
     "ads", "audit", "brand", "competitors", "content-plan", "copy", "funnel",
     "landing", "seo",

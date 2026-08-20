@@ -280,6 +280,30 @@ team at stand [X]"*.
 Real urgency only: course dates, standards transition deadlines, trade-fair timing, lead-time
 windows. Never invent a countdown.
 
+**A low-frequency knowledge mail is a complete answer, not a partial one.** The owned email
+channel in this sector is usually a monthly or quarterly technical newsletter — knowledge, news
+and application notes to an audience that already knows the sender. Buying is paced by plant
+shutdowns, standards deadlines and tender cycles, not by send cadence, and the recipients are
+specifiers and maintenance leads for whom a weekly nurture track reads as noise from a supplier
+who does not understand their week.
+
+Score and advise it against that purpose:
+
+- Hitting a stated quarterly cadence is full marks. Missing cadence is the defect; low frequency
+  is not.
+- Lifecycle coverage is measured against the `Lifecycle → sequence` table above — the triggers
+  that exist in this business. Absence of a multi-step behavioural drip is not a finding here.
+- Segmentation that matters is by industry, application, material, standard, market language or
+  account role — not by engagement score.
+- Real lifecycle openings this sector does have and often misses: qualification or certificate
+  expiry with a fixed date, standards revisions affecting an installed base, approval or
+  material changes on a previously supplied part, and shutdown-season lead times. These are
+  service and compliance touchpoints with a hard date attached, and they are worth naming even
+  where a general nurture track would not be.
+
+Do not recommend increasing frequency, lead scoring, or behavioural automation for this channel
+unless the client has stated a goal that requires them.
+
 ---
 
 ## 11. Ads — retargeting creative

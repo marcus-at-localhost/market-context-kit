@@ -8,11 +8,15 @@ metadata:
 
 # Marketing Report Generator (Markdown Format)
 
-## Phase 0: Grounding
+## Phase 0: Grounding and Business Context
 
 Read `${CLAUDE_PLUGIN_ROOT}/references/grounding.md` and load any `_grounding/` folder it finds. Client documentation outranks every default in this skill, and any claim rules it contains bind the output. Name the loaded files at the top of what you produce.
 
 State which grounding files informed the report, and flag any benchmark you quote as market-specific rather than universal.
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/business-context.md`, resolve the business type, and load the single matching example pack. **The scorecard in Step 2 is not business-type-neutral** — several factors are worded for a self-serve demand-generation model and score a different model as deficient when it is merely different. The pack supplies the yardsticks that make those factors measurable for the business at hand: its `Channels` cadence column and its `Lifecycle → sequence` table. Name the resolved business type and the loaded pack in the report's methodology section.
+
+If the business type cannot be resolved, follow the fallback in `business-context.md`: load no pack, and treat every factor marked *pack-relative* in Step 2 as unscorable under "Channel purpose the rubric does not measure" below.
 
 Also read `${CLAUDE_PLUGIN_ROOT}/references/output-location.md`. Normalize the target URL to its exact non-`www` domain and resolve today's output path now:
 
@@ -121,8 +125,10 @@ Evaluate based on social media presence and engagement.
 | Platform presence | 15 | Right platforms, active = 15, Present but inactive = 8, Missing key = 3 |
 | Content quality | 25 | Engaging and on-brand = 25, Adequate = 15, Low quality = 7, Poor = 0 |
 | Engagement rate | 25 | Above benchmark = 25, At benchmark = 17, Below = 10, Negligible = 3 |
-| Posting consistency | 15 | Regular schedule = 15, Sporadic = 10, Rare = 5, Abandoned = 0 |
-| Community building | 20 | Active community = 20, Some engagement = 13, Broadcast only = 7, None = 0 |
+| Posting consistency *(pack-relative)* | 15 | Matches the cadence the pack's `Channels` table gives for that channel = 15, roughly = 10, far below = 5, abandoned = 0 |
+| Community building *(pack-relative)* | 20 | Fulfils the role the pack's `Channels` table assigns that channel = 20, partly = 13, present but off-role = 7, absent = 0 |
+
+"Right platforms" and "on-brand" are resolved from the pack's `Channels` table and from grounding, not from a general-purpose channel list. A channel the pack does not list is not a gap.
 
 #### Category 5: Email & Automation (Weight: 15%)
 Evaluate based on email marketing assessment.
@@ -131,9 +137,28 @@ Evaluate based on email marketing assessment.
 |---|---|---|
 | List building mechanism | 20 | Multiple opt-ins = 20, One opt-in = 13, No visible opt-in = 5 |
 | Email design & content | 20 | Professional and engaging = 20, Adequate = 13, Needs work = 7 |
-| Automation sequences | 25 | Comprehensive = 25, Basic = 15, Minimal = 8, None = 0 |
-| Segmentation | 20 | Advanced = 20, Basic = 13, None = 5 |
+| Lifecycle coverage *(pack-relative)* | 25 | Share of the **relevant** triggers in the pack's `Lifecycle → sequence` table that are served: most = 25, several = 15, few = 8, none = 0 |
+| Segmentation *(pack-relative)* | 20 | Segments along the dimensions that govern this business's buying decision = 20, one dimension = 13, none = 5 |
+| Sending cadence *(pack-relative)* | 15 | Matches the cadence the pack's `Channels` table gives for the owned email channel = 15, roughly = 10, erratic = 5, dormant = 0 |
 | Deliverability signals | 15 | Strong = 15, Adequate = 10, Concerning = 5, Problems = 0 |
+
+Category 5 totals 115 points; normalize to 100. Two notes that decide most of this category:
+
+- **"Lifecycle coverage" replaced "Automation sequences".** Count triggers that exist in this business, not automation for its own sake. A model whose pack lists eight lifecycle triggers and serves three scores the same as any other model serving three of eight. Absence of a multi-step drip is only a deficiency where the pack's lifecycle table implies one.
+- **Cadence is scored against the pack, never against an implied weekly ideal.** Where the pack gives a low-frequency cadence for the owned email channel, meeting it scores full marks. A low-frequency knowledge or news mail that hits its stated cadence is a complete answer, not a partial one — do not recommend increasing frequency, adding lead scoring, or adding behavioural drip sequences on the strength of this score alone.
+
+#### Channel purpose the rubric does not measure
+
+A channel sometimes serves a purpose none of the factors above measures — recruiting and employer branding are the common cases, and grounding may name others. Where **grounding or an explicit user statement** assigns a channel a purpose the rubric does not measure, that assignment outranks the rubric's assumed purpose (`references/grounding.md`, precedence rule).
+
+Do not score such a category low. Instead:
+
+1. **Exclude the category from the weighted total** and renormalize the remaining weights, exactly as for a category with no evidence at all. State the excluded weight.
+2. **Assess it qualitatively against its actual purpose** in its deep-dive section: what the channel is for, whether it achieves that, and what is genuinely broken.
+3. **Keep findings that survive the reframing.** Claim-rule violations, factual contradictions across channels, and broken mechanics are defects regardless of what a channel is for.
+4. **Say which yardstick you did not apply, and why**, so the omission is legible rather than silent.
+
+Never fill an excluded category with a midpoint score. A guessed number is indistinguishable from a measured one once it enters the weighted total.
 
 #### Category 6: Paid Advertising (Weight: 10%)
 Evaluate based on ad account audit (if applicable).
@@ -150,6 +175,23 @@ Evaluate based on ad account audit (if applicable).
 ```
 Overall Score = (Website * 0.25) + (SEO * 0.20) + (Content * 0.15) + (Social * 0.15) + (Email * 0.15) + (Paid * 0.10)
 ```
+
+**When a category is excluded** — no evidence at all, or a channel purpose the rubric does not
+measure — drop its weight from both sides instead of substituting a value:
+
+```
+Overall Score = sum(score_i * weight_i) / sum(weight_i)   over scored categories only
+```
+
+The same rule applies one level down. A **single factor** that cannot be assessed from the
+available evidence — deliverability without access to the sending system is the usual case — is
+dropped from its category's denominator rather than guessed, and the category is normalized over
+the points that remain. Name the dropped factor and what evidence would make it scorable.
+
+Report the divisor with the score (e.g. "57/100, weights normalized over 60%"), list every
+excluded category with its weight and the reason, and say plainly what the remaining number
+covers. A score built on three of six categories is a partial score and must not be presented as
+a whole-marketing verdict.
 
 **Score Interpretation:**
 | Score Range | Rating | Meaning |
