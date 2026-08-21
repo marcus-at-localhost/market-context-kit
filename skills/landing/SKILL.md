@@ -294,11 +294,11 @@ Write the exact `output_path` resolved in Step 0 with:
 
 ---
 
-## Overall CRO Score: [X/100]
+**Overall CRO Score:** [X/100]
 
-## Page Type: [identified type]
-## Current Estimated Conversion Rate: [estimate based on findings]
-## Target Conversion Rate: [realistic improvement target]
+**Page Type:** [identified type]
+**Current Estimated Conversion Rate:** [estimate based on findings]
+**Target Conversion Rate:** [realistic improvement target]
 
 ---
 

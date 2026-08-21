@@ -379,9 +379,9 @@ Write the exact `output_path` resolved in Phase 0 with:
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Marketing Services Proposal
 
-## Prepared for: [Client Name]
-## Prepared by: [Agency Name]
-## Date: [Date]
+**Prepared for:** [Client Name]
+**Prepared by:** [Agency Name]
+**Date:** [Date]
 
 ---
 

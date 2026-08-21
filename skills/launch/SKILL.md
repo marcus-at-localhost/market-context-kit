@@ -392,9 +392,9 @@ Write the exact `output_path` resolved in Step 0 with:
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
 # Launch Playbook: [Product Name]
-## Launch Date: [Date]
-## Launch Type: [Type]
-## Primary Goal: [Goal with specific target]
+**Launch Date:** [Date]
+**Launch Type:** [Type]
+**Primary Goal:** [Goal with specific target]
 
 ---
 
