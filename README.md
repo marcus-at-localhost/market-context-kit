@@ -64,17 +64,6 @@ claude plugin list          # expect: marketkit@skills-dir
 
 Type `/marketkit:help` for the command index. Updating is `git pull` in the folder.
 
-### Updating an existing `ai-marketing` clone
-
-The local folder may stay at `.claude/skills/ai-marketing`; the manifest controls the plugin namespace. Point the clone at the new repository, pull, and restart Claude Code:
-
-```bash
-git remote set-url origin https://github.com/marcus-at-localhost/market-context-kit.git
-git pull
-```
-
-The v3 command namespace is intentionally shorter: for example, `/ai-marketing:market-audit` becomes `/marketkit:audit` and `/ai-marketing:market-content-plan` becomes `/marketkit:content-plan`.
-
 ### Optional: PDF Report Support
 
 ```bash
