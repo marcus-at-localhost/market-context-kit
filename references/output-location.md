@@ -10,7 +10,7 @@ Every write lands inside the single active audit folder, in the project's Git ro
 Audit/
 ```
 
-There is no per-day or per-run folder — `Audit/` is always the target, shared by every skill in this suite and by Search Context Kit. A marketing audit run this morning and a search report run three days later land side by side in the same folder.
+`Audit/` is always the target, shared by every skill in this suite and by Search Context Kit. A marketing audit run this morning and a search report run three days later land side by side in the same folder.
 
 Re-running the same purpose/scope **overwrites the existing file in place**; git history is the version record. When a project or engagement is finished, archive it yourself by renaming `Audit/` to whatever you like (a date, a number, a client tag) — the resolver and every skill in this suite only ever target the live `Audit/`, never an archived or renamed sibling.
 
@@ -44,7 +44,7 @@ The command prints one compact JSON object:
 
 1. Find the project root (`git rev-parse --show-toplevel`, or the current working directory outside Git).
 2. Target `Audit/` at the project root, always — create it (and its `data/` subfolder when `--data` is set) if it does not exist yet.
-3. Resolve `output_path` inside it. If a file with this exact target filename already exists there, it gets overwritten in place — git history is the version record, not a numbered sibling folder.
+3. Resolve `output_path` inside it. If a file with this exact target filename already exists there, it gets overwritten in place — git history is the version record.
 
 ## Filename contract
 

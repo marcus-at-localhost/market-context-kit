@@ -220,7 +220,7 @@ Every command resolves its output path through `references/output-location.md` b
 Audit/
 ```
 
-shared by every command, always — Market Context Kit and Search Context Kit alike. There is no per-day or per-run folder; a same-purpose, same-scope rerun **overwrites the existing file in place**, and git history is the version record. Reports live directly in that folder; internal intermediates (PDF source JSON, SearchKit raw evidence) live flat under its `data/` subfolder. The resolver never searches an archived or renamed folder — when a project is finished, archive it yourself by renaming `Audit/`; a prior engagement's evidence is out of scope unless you name its path explicitly.
+shared by every command, always — Market Context Kit and Search Context Kit alike. A same-purpose, same-scope rerun **overwrites the existing file in place**, and git history is the version record. Reports live directly in that folder; internal intermediates (PDF source JSON, SearchKit raw evidence) live flat under its `data/` subfolder. The resolver never searches an archived or renamed folder — when a project is finished, archive it yourself by renaming `Audit/`; a prior engagement's evidence is out of scope unless you name its path explicitly.
 
 Every generated filename follows one contract, with no underscores:
 
@@ -243,7 +243,7 @@ Full report saved to: Audit/MARKETKIT - MARKETING-AUDIT - example.com.md   # ove
 Artifact saved to: Audit/data/SEARCHKIT - SEARCH-CONTEXT-V1-Q2-2026 - example.com.json
 ```
 
-The rerun writes to the exact same path as the first run — the file is overwritten, not forked into a numbered sibling. SearchKit resolves the same `Audit/` folder regardless of how much time has passed, so both toolkits' output for the whole engagement sits side by side.
+The rerun writes to the exact same path as the first run. SearchKit resolves the same `Audit/` folder regardless of how much time has passed, so both toolkits' output for the whole engagement sits side by side.
 
 ### Optional project report metadata
 
