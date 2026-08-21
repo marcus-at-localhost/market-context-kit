@@ -172,7 +172,7 @@ ALLOWED_DOMAINS = {
     "wikipedia.org", "linkedin.com", "youtube.com", "instagram.com",
     "facebook.com", "twitter.com", "x.com", "tiktok.com", "reddit.com",
     "calendly.com", "acuityscheduling.com", "strategyzer.com",
-    "mckinsey.com", "basf.com",
+    "mckinsey.com",
     "copywritematters.com", "blaksheepcreative.com", "awai.com",
 }
 

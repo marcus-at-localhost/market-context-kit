@@ -5,18 +5,19 @@
 **ACHTUNG** I haven’t tested some of the skills, such as funnel or ads, because I don’t need them myself. Yet. The PDF creator is probably crap, too.
 But since you can tell the LLM, “Do it like this, Mr. Robot Sir, please,” you’ll probably end up with something workable. I believe in you, alleged human-in-the-loop.
 
+---
+
 A context-aware marketing skill kit for [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Audit websites, generate copy and campaigns, build content plans, analyze competitors, and produce client-ready reports — all from your terminal.
 
 **Built for anyone doing marketing work with Claude Code** — in-house teams, agencies, consultants, and solo operators alike. It handles consumer and self-serve businesses as well as industrial, technical and regulated B2B, and it keeps the two apart: business-type-specific playbooks live in swappable example packs rather than in the skills themselves, so an RFQ-led manufacturer never gets advice built for a DTC brand.
 
 ---
-
 ## What This Does
 
 Type a command in Claude Code and get instant, actionable marketing analysis:
 
 ```
-> /marketkit:audit https://www.basf.com/
+> /marketkit:audit https://www.example.com/
 
 Launching 5 parallel agents...
 ✓ Content & Messaging Analysis     — Score: 72/100
@@ -28,7 +29,7 @@ Launching 5 parallel agents...
 
 Overall Marketing Score: 69/100
 
-Full report saved to Audit/MARKETKIT - MARKETING-AUDIT - basf.com.md
+Full report saved to Audit/MARKETKIT - MARKETING-AUDIT - example.com.md
 ```
 
 ---
