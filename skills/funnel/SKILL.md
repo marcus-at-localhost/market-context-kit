@@ -34,16 +34,9 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
-asserting anything about a page's structure, staleness, or absence. Page text used as evidence
-must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
-HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
-attribute-only markup.
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or asserting anything about a page's structure, staleness, or absence. Page text used as evidence must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or attribute-only markup.
 
 The conversion event itself differs: a signup or checkout in one context, a qualified request in the other. Everything downstream of that difference — what friction means, what a good lead magnet is, what the last step should promise — follows from the pack, not from this file.
 
@@ -56,7 +49,7 @@ The conversion event itself differs: a signup or checkout in one context, a qual
 Detect which funnel type the site uses:
 
 | Funnel Type | Business Model | Typical Steps | Key Metric |
-|-------------|---------------|---------------|------------|
+| --- | --- | --- | --- |
 | **Lead Gen** | Services, agencies, B2B | Landing page -> Form -> Thank you -> Nurture -> Sales call | Lead-to-close rate |
 | **SaaS Trial** | SaaS products | Homepage -> Pricing -> Signup -> Onboarding -> Upgrade | Trial-to-paid rate |
 | **SaaS Demo** | Enterprise SaaS | Homepage -> Features -> Demo request -> Sales call -> Close | Demo-to-close rate |
@@ -128,7 +121,7 @@ Adjust this template to match the actual funnel discovered on the site.
 For each page in the funnel, score these dimensions:
 
 | Dimension | Score (0-10) | What to Evaluate |
-|-----------|-------------|------------------|
+| --- | --- | --- |
 | **Clarity** | 0-10 | Is the purpose of this page immediately obvious? |
 | **Continuity** | 0-10 | Does it logically continue from the previous step? |
 | **Motivation** | 0-10 | Does it give enough reason to take the next action? |
@@ -140,8 +133,9 @@ For each page in the funnel, score these dimensions:
 ### 2.2 Common Drop-Off Points and Fixes
 
 **Homepage to Next Step:**
+
 | Drop-Off Cause | Detection Signal | Fix |
-|----------------|-----------------|-----|
+| --- | --- | --- |
 | Unclear value proposition | Vague headline, no specificity | Rewrite headline with specific outcome |
 | No clear CTA | Multiple equal-weight CTAs, CTA below fold | Single primary CTA above the fold |
 | Slow load time | Heavy images, excessive scripts | Optimize images, defer non-critical JS |
@@ -156,8 +150,9 @@ Work through every table in the pack against the actual funnel steps mapped in P
 If the funnel includes a lead magnet, evaluate:
 
 **Lead Magnet Scoring:**
+
 | Criteria | Score (0-10) | Evaluation |
-|----------|-------------|------------|
+| --- | --- | --- |
 | **Relevance** | 0-10 | Does it directly address the target audience's main pain? |
 | **Specificity** | 0-10 | Is it a specific deliverable (not vague "free guide")? |
 | **Perceived value** | 0-10 | Would the buyer trade their contact details for it? |
@@ -229,7 +224,7 @@ Use this framework to quantify the impact of every recommendation.
 Published US-market figures. Use them for orientation and name that caveat when you quote one — long-cycle B2B, regulated procurement and non-US markets deviate enough that a "below benchmark" verdict means nothing on its own. Where the client has its own historical data, that data wins.
 
 | Funnel Type | Good Conversion | Great Conversion | Elite Conversion |
-|-------------|----------------|-----------------|-----------------|
+| --- | --- | --- | --- |
 | Lead Gen (form) | 3-5% | 5-10% | 10-20% |
 | SaaS Free Trial | 2-5% | 5-10% | 10-15% |
 | Trial to Paid | 10-15% | 15-25% | 25-40% |
@@ -253,7 +248,7 @@ Published US-market figures. Use them for orientation and name that caveat when 
 Rank every recommendation using this framework:
 
 | Priority | Impact | Effort | When to Implement |
-|----------|--------|--------|-------------------|
+| --- | --- | --- | --- |
 | **P1 (Do Now)** | High impact (>10% lift) | Low effort (<1 day) | This week |
 | **P2 (Plan)** | High impact (>10% lift) | Medium effort (1-5 days) | This month |
 | **P3 (Schedule)** | Medium impact (5-10% lift) | Low effort (<1 day) | This month |
@@ -263,12 +258,14 @@ Rank every recommendation using this framework:
 ### 4.2 Funnel-Stage-Specific Optimizations
 
 **Top of Funnel (Awareness to Interest):**
+
 - Headline A/B testing (expected lift: 10-30%)
 - Social proof placement (expected lift: 5-15%)
 - Page speed optimization (expected lift: 5-20%)
 - Exit-intent popup with lead magnet (expected lift: 2-5% of exiting visitors)
 
 **Middle of Funnel (Interest to Consideration):**
+
 - Case study and testimonial pages (expected lift: 10-20%)
 - Feature comparison pages (expected lift: 5-15%)
 - Interactive product demos (expected lift: 15-30%)
@@ -276,6 +273,7 @@ Rank every recommendation using this framework:
 - Retargeting email sequences (expected lift: 10-25%)
 
 **Bottom of Funnel (Consideration to Purchase/RFQ/Enrollment):**
+
 - Pricing, RFQ, inquiry, enrollment, or quote-flow redesign (expected lift: 10-25%)
 - Checkout/signup/RFQ/enrollment friction reduction (expected lift: 5-15%)
 - Risk reduction (guarantees, trials, certifications, standards, delivery SLA, sample request, named expert access) (expected lift: 10-20%)
@@ -283,6 +281,7 @@ Rank every recommendation using this framework:
 - Cart/order/RFQ abandonment recovery (expected recovery: 5-15% of abandoned flows)
 
 **Post-Purchase (Retention and Expansion):**
+
 - Onboarding email sequence (expected impact: 10-20% reduction in churn)
 - Upsell/cross-sell on thank-you page (expected lift: 5-15% of AOV)
 - Referral program (expected lift: 5-15% new customers)
@@ -297,6 +296,7 @@ Use the checklist from the loaded example pack — `Pricing page checklist` in `
 ### 4.4 Checkout/Signup Flow Optimization
 
 **Friction Audit:**
+
 - Count total form fields (target: 3-5 for lead gen, 5-8 for checkout)
 - Count total steps (target: 1-3 steps maximum)
 - Check for progress indicators on multi-step forms
@@ -323,7 +323,7 @@ For B2B/technical business types, sequence intensity should account for archetyp
 Different traffic sources need different funnel entry points:
 
 | Traffic Source | Intent Level | Best Entry Point | Recommended Funnel |
-|---------------|-------------|-----------------|-------------------|
+| --- | --- | --- | --- |
 | Branded search | High | Pricing / signup / RFQ / contact page | Short (direct to trial/buy/inquiry) |
 | Non-branded search | Medium | Blog / landing page | Medium (educate then convert) |
 | Paid social | Low-Medium | Lead magnet / content | Long (capture, nurture, convert) |
@@ -340,18 +340,19 @@ Write the full output to the exact `output_path` resolved in Phase 0:
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Funnel Analysis: [Business Name]
-**URL:** [url]
-**Date:** [current date]
-**Business Type:** [type]
-**Funnel Type:** [type]
-**Overall Funnel Health: [X]/100**
+
+**URL:** [url] \
+**Date:** [current date] \
+**Business Type:** [type] \
+**Funnel Type:** [type] **Overall Funnel Health: [X]/100**
 
 ---
 
 ## Executive Summary
-[3-4 paragraphs: funnel type, current performance assessment,
-biggest bottleneck, top 3 recommendations with revenue impact]
+
+[3-4 paragraphs: funnel type, current performance assessment, biggest bottleneck, top 3 recommendations with revenue impact]
 
 ---
 
@@ -364,45 +365,57 @@ biggest bottleneck, top 3 recommendations with revenue impact]
 ## Page-by-Page Analysis
 
 ### Step 1: [Page Name]
+
 [Full analysis with scores, friction points, trust elements, recommendations]
 
 ### Step 2: [Page Name]
+
 [Continue for each step]
 
 ---
 
 ## Funnel Metrics
+
 [Current metrics vs benchmarks, with gaps highlighted]
 
 ## Revenue Impact Analysis
+
 [RPV calculations, improvement scenarios]
 
 ## Optimization Recommendations
 
 ### Priority 1 — Do Now (This Week)
+
 [Specific actions with expected lift]
 
 ### Priority 2 — Plan (This Month)
+
 [Specific actions with expected lift]
 
 ### Priority 3 — Strategic (This Quarter)
+
 [Specific actions with expected lift]
 
 ---
 
 ## Commercial Action Page Assessment
+
 [Detailed pricing/RFQ/inquiry/enrollment page audit with checklist]
 
 ## Lead Magnet Assessment
+
 [If applicable: scoring and recommendations]
 
 ## Email Nurture Integration
+
 [Funnel-to-email mapping recommendations]
 
 ## Traffic Source Alignment
+
 [Which traffic to send where]
 
 ## Next Steps
+
 1. [Most critical action]
 2. [Second priority]
 3. [Third priority]
@@ -448,4 +461,3 @@ Look only inside the Phase 0 `audit_dir`, for the exact same domain scope. Never
 - If `MARKETKIT - EMAIL-SEQUENCES - <domain>.md` exists, verify alignment with funnel stages
 - If `MARKETKIT - COMPETITOR-REPORT - <domain>.md` exists, compare funnel effectiveness
 - Suggest follow-up: `/marketkit:copy` for page-specific copy, `/marketkit:emails` for nurture sequences, `/marketkit:landing` for CRO deep dive
-

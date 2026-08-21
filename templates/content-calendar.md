@@ -1,38 +1,45 @@
 # Content Calendar Template (30 Days)
 
 ## Content Pillar Distribution
-| Pillar | Frequency | Purpose |
-|--------|-----------|---------|
-| Educational (40%) | 12 posts/month | Build authority, attract audience |
-| Engagement (20%) | 6 posts/month | Drive comments, build community |
-| Behind-the-Scenes (15%) | 5 posts/month | Build trust, show authenticity |
-| Social Proof (15%) | 5 posts/month | Build credibility, convert |
-| Promotional (10%) | 3 posts/month | Drive sales, grow revenue |
+
+| Pillar                  | Frequency      | Purpose                           |
+| ----------------------- | -------------- | --------------------------------- |
+| Educational (40%)       | 12 posts/month | Build authority, attract audience |
+| Engagement (20%)        | 6 posts/month  | Drive comments, build community   |
+| Behind-the-Scenes (15%) | 5 posts/month  | Build trust, show authenticity    |
+| Social Proof (15%)      | 5 posts/month  | Build credibility, convert        |
+| Promotional (10%)       | 3 posts/month  | Drive sales, grow revenue         |
 
 ## Weekly Structure
 
 ### Monday — Educational
+
 Start the week with value. Teach something your audience can implement today.
 
 ### Tuesday — Engagement
+
 Ask a question, share a hot take, or run a poll. Get people talking.
 
 ### Wednesday — Educational
+
 Share a framework, breakdown, or how-to.
 
 ### Thursday — Behind-the-Scenes / Social Proof
+
 Show the real work, share a win, or feature a customer result.
 
 ### Friday — Educational / Engagement
+
 End the week with something shareable — a tip list, myth-busting, or controversial take.
 
 ### Weekend — Optional
+
 Lighter content: memes, personal story, or reshare of top-performing post from the week.
 
 ## 30-Day Calendar Grid
 
 | Day | Date | Pillar | Format | Topic Idea | Platform |
-|-----|------|--------|--------|------------|----------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | Mon | Educational | How-to | [Topic] | LinkedIn, Twitter |
 | 2 | Tue | Engagement | Question | [Topic] | Twitter, Instagram |
 | 3 | Wed | Educational | Framework | [Topic] | LinkedIn, Twitter |
@@ -65,7 +72,9 @@ Lighter content: memes, personal story, or reshare of top-performing post from t
 | 30 | Tue | Engagement | AMA / Q&A | [Topic] | Twitter, Instagram |
 
 ## Repurposing Workflow
+
 1 long-form piece → 10+ social posts:
+
 1. Blog post or YouTube video (original)
 2. Twitter thread with 5-7 key insights
 3. LinkedIn article or long-form post

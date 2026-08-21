@@ -11,7 +11,7 @@ Do not delete section headers — the skill references them by name.
 ## Header
 
 | Field | Value |
-|-------|-------|
+| --- | --- |
 | **URL / Domain** | [https://example.com] |
 | **Date Generated** | [YYYY-MM-DD] |
 | **Skill Version** | content-plan v[X.X] |
@@ -53,7 +53,7 @@ Source Notes: briefly record where the keyword / topic evidence came from
 -->
 
 | # | Cluster | Pillar/Support | Target Keyword | Suggested Title | Content Type | Search Intent | Priority Score | Size | Internal Links | Schema Type | Source Notes |
-|---|---------|----------------|----------------|-----------------|--------------|---------------|----------------|------|----------------|-------------|--------------|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | [Cluster A] | Pillar | [keyword] | [Title] | [Blog / Landing / FAQ / Guide / Comparison] | [informational] | [0-12] | [sm/md/lg/xl] | [→ page A, → page B] | [Article / FAQPage / HowTo] | [source] |
 | 2 | [Cluster A] | Support | [keyword] | [Title] | [type] | [intent] | [0-12] | [size] | [→ page A] | [schema] | [source] |
 | 3 | [Cluster B] | Pillar | [keyword] | [Title] | [type] | [intent] | [0-12] | [size] | [→ page A, → page C] | [schema] | [source] |
@@ -102,7 +102,7 @@ terminology not yet indexed at scale.
 -->
 
 | Topic | Why No One Covers It | Opportunity Size | Recommended Angle |
-|-------|----------------------|-----------------|-------------------|
+| --- | --- | --- | --- |
 | [Topic 1] | [e.g., "Too technical for generalist blogs; no clear commercial intent on surface"] | [Small / Medium / Large] | [e.g., "Comprehensive how-to targeting the installer audience directly"] |
 | [Topic 2] | [reason] | [size] | [angle] |
 | [Topic 3] | [reason] | [size] | [angle] |
@@ -119,7 +119,7 @@ Adjust based on production capacity.
 -->
 
 | Week | Articles (# from plan) | Priority | Notes |
-|------|------------------------|----------|-------|
+| --- | --- | --- | --- |
 | 1 | [#1, #3] | High | [e.g., "Pillar pages first — establishes cluster authority"] |
 | 2 | [#2, #5] | High | [notes] |
 | 3 | [#4, #6] | Medium | [notes] |
@@ -170,7 +170,6 @@ Do not modify the formatting of the approval block below.
 > 3. **Blind spots** — Any opportunities in the table above you want to add to the plan?
 > 4. **Editorial calendar** — Is the [12]-week pace realistic for your team?
 >
-> Reply **"approved"** to proceed with briefs for all articles, or tell me what to adjust first.
-> You can also reply **"approved: rows 1-5 only"** to generate briefs for a subset.
+> Reply **"approved"** to proceed with briefs for all articles, or tell me what to adjust first. You can also reply **"approved: rows 1-5 only"** to generate briefs for a subset.
 
 ---

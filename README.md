@@ -12,8 +12,6 @@ A context-aware marketing skill kit for [Claude Code](https://docs.anthropic.com
 
 ---
 
-
-
 ## What This Does
 
 Type a command in Claude Code and get instant, actionable marketing analysis:
@@ -35,8 +33,6 @@ Full report saved to Audit/MARKETKIT - MARKETING-AUDIT - example.com.md
 ```
 
 ---
-
-
 
 ## Installation
 
@@ -89,40 +85,34 @@ Everything else runs on the Python standard library. Windows, macOS, and Linux a
 
 ---
 
-
-
 ## Commands
 
 Each skill is its own command. There is no router — `help` is just an index you can print.
 
 Because this loads as a plugin, every command is namespaced `marketkit:`. That prefix is part of the trigger, not an optional long form — a bare `/audit` does not resolve. Claude also invokes these on its own when a request matches, so you rarely have to type one.
 
-
-| Command                         | What It Does                                           |
-| ------------------------------- | ------------------------------------------------------ |
-| `/marketkit:help`               | Index of every command, with a "which one first" guide |
-| `/marketkit:audit <url>`        | Full marketing audit with 5 parallel agents            |
-| `/marketkit:copy <url>`         | Generate optimized copy with before/after examples     |
-| `/marketkit:emails <topic>`     | Generate complete email sequences                      |
-| `/marketkit:social <topic>`     | 30-day social media content calendar                   |
-| `/marketkit:ads <url>`          | Ad creative and copy for all platforms                 |
-| `/marketkit:funnel <url>`       | Sales funnel analysis and optimization                 |
-| `/marketkit:competitors <url>`  | Competitive intelligence report                        |
-| `/marketkit:landing <url>`      | Landing page CRO analysis                              |
-| `/marketkit:launch <product>`   | Product launch playbook                                |
-| `/marketkit:proposal <client>`  | Client proposal generator                              |
-| `/marketkit:report <url>`       | Full marketing report (Markdown)                       |
-| `/marketkit:report-pdf <url>`   | Professional marketing report (PDF)                    |
-| `/marketkit:seo <url>`          | SEO content audit                                      |
-| `/marketkit:brand <url>`        | Brand voice analysis and guidelines                    |
-| `/marketkit:content-plan <url>` | Topic research + content plan + article drafts         |
-
+| Command | What It Does |
+| --- | --- |
+| `/marketkit:help` | Index of every command, with a "which one first" guide |
+| `/marketkit:audit <url>` | Full marketing audit with 5 parallel agents |
+| `/marketkit:copy <url>` | Generate optimized copy with before/after examples |
+| `/marketkit:emails <topic>` | Generate complete email sequences |
+| `/marketkit:social <topic>` | 30-day social media content calendar |
+| `/marketkit:ads <url>` | Ad creative and copy for all platforms |
+| `/marketkit:funnel <url>` | Sales funnel analysis and optimization |
+| `/marketkit:competitors <url>` | Competitive intelligence report |
+| `/marketkit:landing <url>` | Landing page CRO analysis |
+| `/marketkit:launch <product>` | Product launch playbook |
+| `/marketkit:proposal <client>` | Client proposal generator |
+| `/marketkit:report <url>` | Full marketing report (Markdown) |
+| `/marketkit:report-pdf <url>` | Professional marketing report (PDF) |
+| `/marketkit:seo <url>` | SEO content audit |
+| `/marketkit:brand <url>` | Brand voice analysis and guidelines |
+| `/marketkit:content-plan <url>` | Topic research + content plan + article drafts |
 
 `help` carries `disable-model-invocation: true`, so Claude never picks the index on its own — type it when you want the menu.
 
 ---
-
-
 
 ## Architecture
 
@@ -204,8 +194,6 @@ The artifact is used only after schema, exact-domain, reporting-period, and sour
 
 ---
 
-
-
 ## Grounding: teaching the suite about your business
 
 Every command looks for a `_grounding/` folder in the working directory (and up to three parent directories). If it finds one, it loads it and treats it as the highest authority — above the site's own evidence for matters of intent, and above every default in the skills. One customer project keeps one shared, multilingual `_grounding/` regardless of how many domains that customer runs.
@@ -286,62 +274,46 @@ When the business type cannot be resolved, no pack is loaded and examples are de
 
 ---
 
-
-
 ## Scoring Methodology
 
 The full marketing audit scores websites across 6 dimensions:
 
-
-| Category                | Weight | What It Measures                                |
-| ----------------------- | ------ | ----------------------------------------------- |
-| Content & Messaging     | 25%    | Copy quality, value props, headlines, CTAs      |
-| Conversion Optimization | 20%    | Funnels, forms, social proof, friction, urgency |
-| SEO & Discoverability   | 20%    | On-page SEO, technical SEO, content structure   |
-| Competitive Positioning | 15%    | Differentiation, market awareness, alternatives |
-| Brand & Trust           | 10%    | Design quality, trust signals, authority        |
-| Growth & Strategy       | 10%    | Pricing, acquisition channels, retention        |
-
+| Category | Weight | What It Measures |
+| --- | --- | --- |
+| Content & Messaging | 25% | Copy quality, value props, headlines, CTAs |
+| Conversion Optimization | 20% | Funnels, forms, social proof, friction, urgency |
+| SEO & Discoverability | 20% | On-page SEO, technical SEO, content structure |
+| Competitive Positioning | 15% | Differentiation, market awareness, alternatives |
+| Brand & Trust | 10% | Design quality, trust signals, authority |
+| Growth & Strategy | 10% | Pricing, acquisition channels, retention |
 
 **Overall Marketing Score** = Weighted average of all categories (0-100)
 
 ### External Research Cited
 
-Most scoring dimensions and reference content are the suite's own synthesis of established
-practice. Where a specific stat or framework instead comes from a named third party, it's listed
-here so its origin and vintage stay traceable — the pack files carry only a short inline mention.
+Most scoring dimensions and reference content are the suite's own synthesis of established practice. Where a specific stat or framework instead comes from a named third party, it's listed here so its origin and vintage stay traceable — the pack files carry only a short inline mention.
 
-- **Buyer archetypes** (Adapter / Innovator / Seeker, `references/examples/b2b-technical.md`) and
-**Channel/Path Coverage** scoring (`agents/market-conversion.md`) — McKinsey, [Five fundamental
-truths: How B2B winners keep growing](https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/five-fundamental-truths-how-b2b-winners-keep-growing)
-(2024 B2B Pulse Survey, ~4,000 respondents). Percentages are global-survey directional, not any
-specific client's measured mix.
+- **Buyer archetypes** (Adapter / Innovator / Seeker, `references/examples/b2b-technical.md`) and **Channel/Path Coverage** scoring (`agents/market-conversion.md`) — McKinsey, [Five fundamental truths: How B2B winners keep growing](https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/five-fundamental-truths-how-b2b-winners-keep-growing) (2024 B2B Pulse Survey, ~4,000 respondents). Percentages are global-survey directional, not any specific client's measured mix.
 
 Add an entry here whenever a new externally-sourced stat or framework goes into the suite.
 
 ### Frameworks Referenced
 
-Named frameworks the skills apply, for background reading — these are established
-methods, not claims that need checking, so they sit here rather than in
-External Research Cited above.
+Named frameworks the skills apply, for background reading — these are established methods, not claims that need checking, so they sit here rather than in External Research Cited above.
 
-
-| Framework                                               | Used in                                              | Reference                                                                                                                 |
-| ------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| AIDA (Attention-Interest-Desire-Action)                 | `copy`                                               | [Wikipedia](https://en.wikipedia.org/wiki/AIDA_(marketing))                                                               |
-| PAS (Problem-Agitate-Solve)                             | `copy`                                               | [Copywrite Matters](https://www.copywritematters.com/pas-classic-copywriting-formula/)                                    |
-| Before-After-Bridge                                     | `copy`                                               | [Blak Sheep Creative](https://blaksheepcreative.com/digital-marketing/content-marketing/copywriting/before-after-bridge/) |
-| 4U Formula (Useful/Ultra-specific/Unique/Urgent)        | `copy`, `landing`                                    | [AWAI](https://www.awai.com/2001/06/a-review-of-the-4-us/) (originating org)                                              |
-| Value Proposition Canvas                                | `copy`                                               | [Strategyzer](https://www.strategyzer.com/library/mastering-value-propositions) (Osterwalder's own)                       |
-| E-E-A-T                                                 | `seo`, `market-technical`                            | [Google Search Central](https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t)               |
-| Google helpful-content self-assessment                  | `seo`, `report`, `market-content`                    | [Google Search Central](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)                  |
-| Google generative-AI search guidance, incl. Mythbusting | `seo`, `audit`, `market-technical`, `market-content` | [Google Search Central](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)                     |
-| SWOT Analysis                                           | `competitors`                                        | [Wikipedia](https://en.wikipedia.org/wiki/SWOT_analysis)                                                                  |
-
+| Framework | Used in | Reference |
+| --- | --- | --- |
+| AIDA (Attention-Interest-Desire-Action) | `copy` | [Wikipedia](<https://en.wikipedia.org/wiki/AIDA_(marketing)>) |
+| PAS (Problem-Agitate-Solve) | `copy` | [Copywrite Matters](https://www.copywritematters.com/pas-classic-copywriting-formula/) |
+| Before-After-Bridge | `copy` | [Blak Sheep Creative](https://blaksheepcreative.com/digital-marketing/content-marketing/copywriting/before-after-bridge/) |
+| 4U Formula (Useful/Ultra-specific/Unique/Urgent) | `copy`, `landing` | [AWAI](https://www.awai.com/2001/06/a-review-of-the-4-us/) (originating org) |
+| Value Proposition Canvas | `copy` | [Strategyzer](https://www.strategyzer.com/library/mastering-value-propositions) (Osterwalder's own) |
+| E-E-A-T | `seo`, `market-technical` | [Google Search Central](https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t) |
+| Google helpful-content self-assessment | `seo`, `report`, `market-content` | [Google Search Central](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) |
+| Google generative-AI search guidance, incl. Mythbusting | `seo`, `audit`, `market-technical`, `market-content` | [Google Search Central](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) |
+| SWOT Analysis | `competitors` | [Wikipedia](https://en.wikipedia.org/wiki/SWOT_analysis) |
 
 ---
-
-
 
 ## How It Works
 
@@ -354,8 +326,6 @@ External Research Cited above.
 
 ---
 
-
-
 ## Use Cases
 
 All commands below take the `marketkit:` prefix — shortened here for readability.
@@ -366,16 +336,12 @@ All commands below take the `marketkit:` prefix — shortened here for readabili
 - Generate `proposal` with specific findings and pricing
 - Deliver `report-pdf` as a professional client deliverable
 
-
-
 ### For In-House B2B and Industrial Teams
 
 - Point the suite at a `_grounding/` folder so every command works from your own positioning, industries, competitors and claim rules
 - Audit RFQ, datasheet, catalog and course-enrollment paths — not just signup funnels
 - Generate technical content plans, trade-media angles and RFQ-stage email sequences
 - Check landing pages against the objections your buyers actually raise: standards, approvals, lead time, application fit
-
-
 
 ### For Solo Operators and Creators
 
@@ -386,17 +352,11 @@ All commands below take the `marketkit:` prefix — shortened here for readabili
 
 ---
 
-
-
 ## Extending the Suite
 
-Want to add an external concept, framework, or piece of research (a report, an
-article, a survey) to the suite? See [EXTENDING.md](EXTENDING.md) — where it
-should land, how to cite it, and how to keep pack files independent.
+Want to add an external concept, framework, or piece of research (a report, an article, a survey) to the suite? See [EXTENDING.md](EXTENDING.md) — where it should land, how to cite it, and how to keep pack files independent.
 
 ---
-
-
 
 ## Uninstall
 
@@ -422,7 +382,6 @@ So if you know the website you are scanning, you can correct the mistakes the ag
 
 If you run this on a website where you don't know the ins and outs, either put in the work to check the claims of the report and argue with the agent, or put a big fat disclaimer up front that this report might be wrong because xyz and dance around the issue that no one knows what they are doing.
 
-
 ## Origin and attribution
 
 Market Context Kit began as a fork of Zubair Trabzada's [AI Marketing Suite for Claude Code](https://github.com/zubair-trabzada/ai-marketing-claude). It has since added a skills-directory plugin architecture, project grounding, context-specific example packs, B2B and regulated-industry workflows, and broader regional guidance.
@@ -430,8 +389,6 @@ Market Context Kit began as a fork of Zubair Trabzada's [AI Marketing Suite for 
 The complete Git history is retained. The original MIT copyright notice remains in [LICENSE](LICENSE), alongside the copyright notice for subsequent work.
 
 ---
-
-
 
 ## License
 

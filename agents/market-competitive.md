@@ -56,6 +56,7 @@ Paths written as `${CLAUDE_PLUGIN_ROOT}/…` anywhere in this file are provenanc
 ### Step 2: Analyze Target Website Positioning
 
 From the target website, extract:
+
 - **Core positioning statement** (how they describe themselves)
 - **Primary audience** (who they're targeting)
 - **Key differentiators** (what makes them unique)
@@ -66,6 +67,7 @@ From the target website, extract:
 ### Step 3: Competitor Quick-Scan
 
 For each of the top 3 competitors, use WebFetch on their homepage to extract:
+
 - **Positioning statement**
 - **Pricing** (if publicly available)
 - **Key features highlighted**
@@ -78,23 +80,28 @@ For each of the top 3 competitors, use WebFetch on their homepage to extract:
 Score the target website against competitors on:
 
 **Positioning Clarity (0-10)**
+
 - How clearly do they communicate their unique value?
 - Can you distinguish them from competitors in 10 seconds?
 
 **Pricing Competitiveness (0-10)**
+
 - Is pricing transparent and competitive?
 - Does the pricing structure match buyer expectations?
 
 **Feature Messaging (0-10)**
+
 - Are key features well-communicated?
 - Do they highlight differentiating features prominently?
 
 **Market Awareness (0-10)**
+
 - Do they acknowledge alternatives or competitors?
 - Do they have comparison/alternatives pages?
 - Do they address "why us" directly?
 
 **Content Authority (0-10)**
+
 - Do they have authoritative content that builds trust?
 - Blog, guides, case studies, research — how deep?
 - Are they a thought leader or just a product page?
@@ -163,6 +170,7 @@ Based on the competitive analysis, identify:
 The last two sections are mandatory — including, especially, when both are `none`. The orchestrator reconciles `Files Read` against the Data Manifest before merging anything (Phase 2.4). A missing block, or a path that was not on the manifest, voids this whole dimension: it gets dropped from the report and rerun.
 
 ## Important Rules
+
 - Actually fetch competitor websites — don't rely on assumptions
 - Be objective — acknowledge when competitors are stronger in certain areas
 - Focus on actionable positioning opportunities, not just observations

@@ -32,7 +32,7 @@ Binding. It outranks every other instruction in this file.
 Two categories stay off limits even if a path to them appears on the manifest:
 
 - **Previous audit output** — any `MARKETING-AUDIT.md` in any folder, and any earlier score, draft, or report from a prior run. Your scores must form from site evidence alone. Calibrating against an earlier number — reasoning about why your score differs from a previous one, or justifying the gap — destroys the independence the five-subagent design exists for and makes the orchestrator's run-over-run comparison circular. Never state or reason about a prior score, including one you infer. That comparison is the orchestrator's job in Phase 3 — you are not entitled to its input.
-- **Analytics, traffic, and performance exports** — session counts, conversion rates, GA/Matomo/GSC figures. In a workspace holding more than one client you cannot tell whose numbers those are, and a figure from the wrong client lands in the finished report as a measured fact about this one. Conversion rates are the most tempting and the most dangerous: score the site's conversion *design* from what the site shows, never from someone's spreadsheet.
+- **Analytics, traffic, and performance exports** — session counts, conversion rates, GA/Matomo/GSC figures. In a workspace holding more than one client you cannot tell whose numbers those are, and a figure from the wrong client lands in the finished report as a measured fact about this one. Conversion rates are the most tempting and the most dangerous: score the site's conversion _design_ from what the site shows, never from someone's spreadsheet.
 
 Material that looks relevant but is not on the manifest: do not open it, do not use it, do not infer from its filename. This covers paths you learn about without searching — a git status block in your environment context, a folder name in an error message, a path mentioned in passing. Knowing a file exists is not the same as it being on the manifest, and noticing it is not permission. List it under `Out-of-Scope Material Noticed` in your output and carry on with site evidence.
 
@@ -41,7 +41,9 @@ Paths written as `${CLAUDE_PLUGIN_ROOT}/…` anywhere in this file are provenanc
 ## Analysis Process
 
 ### Step 1: Map the Conversion Path
+
 Use WebFetch to trace the primary conversion path:
+
 1. Homepage → What's the primary CTA?
 2. Landing/Feature/Product/Solution/Course pages → Where do they drive traffic?
 3. Commercial action page → How is the next step presented? This may be pricing, RFQ, inquiry, catalog search, datasheet download, demo request, distributor lookup, or course enrollment.
@@ -53,6 +55,7 @@ Use WebFetch to trace the primary conversion path:
 Score each dimension 0-10:
 
 **CTA Strategy (0-10)**
+
 - Primary vs secondary CTA clarity
 - CTA button text (value-driven vs generic)
 - CTA placement and frequency
@@ -61,6 +64,7 @@ Score each dimension 0-10:
 - Scoring: 9-10 = compelling + strategic placement, 7-8 = clear but could optimize, 5-6 = present but generic, 3-4 = confusing or hidden, 0-2 = missing or broken
 
 **Social Proof (0-10)**
+
 - Customer testimonials (with names, photos, companies?)
 - Client logos / "trusted by" section
 - Case studies or success stories
@@ -71,6 +75,7 @@ Score each dimension 0-10:
 - Scoring: 9-10 = comprehensive + credible, 7-8 = good but could strengthen, 5-6 = minimal proof, 3-4 = weak or generic, 0-2 = no social proof
 
 **Friction Analysis (0-10 — higher = less friction)**
+
 - Number of steps to convert
 - Form field count and necessity
 - Account creation requirements
@@ -82,6 +87,7 @@ Score each dimension 0-10:
 - Scoring: 9-10 = frictionless experience, 7-8 = minor friction points, 5-6 = noticeable friction, 3-4 = significant barriers, 0-2 = severe friction
 
 **Trust Signals (0-10)**
+
 - Security badges (SSL, payment security)
 - Privacy policy and terms visibility
 - Appropriate risk reducers (money-back guarantee, free trial, certification proof, compliance documentation, delivery SLA, sample request, named expert access)
@@ -90,6 +96,7 @@ Score each dimension 0-10:
 - Scoring: 9-10 = highly trustworthy, 7-8 = good trust signals, 5-6 = basic trust elements, 3-4 = missing key trust signals, 0-2 = trust concerns
 
 **Urgency & Scarcity (0-10)**
+
 - Appropriate use of urgency (not manipulative)
 - Limited-time offers or promotions
 - Social proof urgency ("X people viewing this")
@@ -99,6 +106,7 @@ Score each dimension 0-10:
 - Scoring: 9-10 = effective + authentic, 7-8 = some urgency elements, 5-6 = no urgency but could benefit, 3-4 = missed opportunities, 0-2 = no urgency at all
 
 **Channel/Path Coverage (0-10)**
+
 - Digital self-serve path present (calculator, configurator, RFQ form, e-commerce/catalog, chatbot)
 - Remote-human path present (video call booking, phone number, live chat with a person, scheduled call)
 - In-person path present where relevant (rep contact, trade fair presence, site visit, showroom, local branch)
@@ -108,23 +116,23 @@ Score each dimension 0-10:
 ### Step 3: Funnel Leak Detection
 
 Identify where potential customers likely drop off:
+
 - **Awareness → Interest**: Is the homepage compelling enough to explore further?
 - **Interest → Consideration**: Do feature/product pages answer key questions?
 - **Consideration → Intent**: Does the pricing/RFQ/datasheet/contact/enrollment path reduce uncertainty?
 - **Intent → Conversion**: Is the signup/purchase/RFQ/inquiry/enrollment process smooth?
 
 For each leak point, estimate:
+
 - Severity: Critical / High / Medium / Low
 - Potential revenue impact if fixed
 - Specific fix recommendation
 
 ### Step 4: A/B Test Hypotheses
 
-Generate 3-5 testable hypotheses:
-Format: "If we [change], then [metric] will [improve/increase] because [reason]"
+Generate 3-5 testable hypotheses: Format: "If we [change], then [metric] will [improve/increase] because [reason]"
 
-Example: "If we replace the generic 'Get Started' CTA with one that names the outcome and states what happens next, then completion of the primary action will increase, because the visitor no longer has to guess what they are committing to."
-Request-led example: "If we replace a bare 'Contact' link with a named technical next step plus a stated response time, then qualified inquiries will increase, because the buyer knows who answers and when."
+Example: "If we replace the generic 'Get Started' CTA with one that names the outcome and states what happens next, then completion of the primary action will increase, because the visitor no longer has to guess what they are committing to." Request-led example: "If we replace a bare 'Contact' link with a named technical next step plus a stated response time, then qualified inquiries will increase, because the buyer knows who answers and when."
 
 Write the proposed CTA wording in the site's own language.
 
@@ -178,6 +186,7 @@ Write the proposed CTA wording in the site's own language.
 The last two sections are mandatory — including, especially, when both are `none`. The orchestrator reconciles `Files Read` against the Data Manifest before merging anything (Phase 2.4). A missing block, or a path that was not on the manifest, voids this whole dimension: it gets dropped from the report and rerun.
 
 ## Important Rules
+
 - Always trace the actual conversion path — don't guess
 - Match the conversion action to the detected business context; don't force SaaS trial, pricing, or checkout logic onto RFQ-led, regulated, local, academy, or distributor businesses
 - Be specific: "Change button text from 'Submit' to 'Get My Free Report'" not "improve CTA"

@@ -34,16 +34,9 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
-asserting anything about a page's structure, staleness, or absence. Page text used as evidence
-must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
-HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
-attribute-only markup.
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or asserting anything about a page's structure, staleness, or absence. Page text used as evidence must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or attribute-only markup.
 
 Write ad copy in the language of the market being targeted, and price every recommendation in that market's currency.
 
@@ -56,7 +49,7 @@ Write ad copy in the language of the market being targeted, and price every reco
 Before writing any ads, establish:
 
 | Context Element | Source | Purpose |
-|----------------|--------|---------|
+| --- | --- | --- |
 | **Product/Service** | URL analysis | Core of all ad messaging |
 | **Commercial model** | Pricing, RFQ, contact, catalog, distributor, or enrollment path | Determines funnel depth, CTA, and ad strategy |
 | **Target audience** | Site copy, user input | Audience targeting parameters |
@@ -71,7 +64,7 @@ Before writing any ads, establish:
 Map the business goal to the right campaign objective:
 
 | Business Goal | Campaign Objective | Primary Platform | Ad Format |
-|--------------|-------------------|-----------------|-----------|
+| --- | --- | --- | --- |
 | Brand awareness | Reach / Impressions | Meta, YouTube, TikTok | Video, Display |
 | Lead generation | Lead Gen / Conversions | Meta, LinkedIn, Google | Lead forms, Landing pages |
 | Trial signups | Conversions | Google, Meta, LinkedIn | Search, Landing pages |
@@ -97,11 +90,13 @@ Creative angles and voice come from the example pack loaded in Phase 0, not from
 **Search Ads (Responsive Search Ads):**
 
 Character limits:
+
 - Headlines: Up to 15 headlines, 30 characters each
 - Descriptions: Up to 4 descriptions, 90 characters each
 - Display URL path: 2 fields, 15 characters each
 
 Generate at least:
+
 - 10 headlines covering these angles:
   - Brand name + value prop
   - Pain point + solution
@@ -120,12 +115,14 @@ Generate at least:
   - Urgency + offer details
 
 **Keyword Strategy:**
+
 - 10-15 high-intent keywords per ad group
 - Match types: mix of exact, phrase, and broad match modified
 - Negative keywords list (10-20 irrelevant terms to exclude)
 - Organize into 3-5 ad groups by theme
 
 **Performance Max Campaigns:**
+
 - Asset groups organized by audience segment
 - Headline variations (15 short + 5 long)
 - Description variations (5)
@@ -138,13 +135,14 @@ Generate at least:
 **Ad Formats and Specs:**
 
 | Format | Placement | Image Spec | Video Spec | Text Limits |
-|--------|-----------|-----------|-----------|-------------|
+| --- | --- | --- | --- | --- |
 | Single Image | Feed, Stories, Reels | 1080x1080 (feed), 1080x1920 (stories) | N/A | Primary: 125 chars, Headline: 40, Description: 30 |
 | Video | Feed, Stories, Reels | N/A | 1080x1080 or 1080x1920, <240 min | Same as image |
 | Carousel | Feed, Stories | 1080x1080 per card, 2-10 cards | 1080x1080, <240 min | Same as image |
 | Collection | Feed | 1200x628 cover | 1200x628 cover | Same as image |
 
 **Generate for each ad concept:**
+
 - Primary text (3 variations: short, medium, long)
 - Headline (5 variations)
 - Description (3 variations)
@@ -198,6 +196,7 @@ Angle 10: HOW-TO
 ### 2.3 LinkedIn Ads
 
 **Ad Formats:**
+
 - Sponsored Content (single image, video, carousel)
 - Message Ads (InMail)
 - Text Ads
@@ -205,11 +204,13 @@ Angle 10: HOW-TO
 - Document Ads (PDF carousel)
 
 **Character Limits:**
+
 - Sponsored Content: Intro text 600 chars, Headline 200 chars
 - Message Ads: Subject 60 chars, Body 1,500 chars
 - Text Ads: Headline 25 chars, Description 75 chars
 
 **LinkedIn-Specific Copy Angles:**
+
 - Professional development: "Level up your [skill]"
 - Industry insight: "[Industry] is changing. Here's how to stay ahead."
 - ROI-focused: "Companies using [product] see [X]% improvement in [metric]"
@@ -217,6 +218,7 @@ Angle 10: HOW-TO
 - Thought leadership: "[Report/whitepaper] reveals [surprising finding]"
 
 **Targeting Options to Recommend:**
+
 - Job title targeting (decision makers)
 - Company size
 - Industry
@@ -228,12 +230,14 @@ Angle 10: HOW-TO
 ### 2.4 TikTok Ads
 
 **Ad Formats:**
+
 - In-Feed Ads (video)
 - TopView (full-screen takeover)
 - Branded Hashtag Challenge
 - Spark Ads (boosted organic content)
 
 **Specs:**
+
 - Video: 9:16 vertical, 5-60 seconds (9-15 seconds optimal)
 - Resolution: 720x1280 minimum
 - File size: Up to 500 MB
@@ -241,6 +245,7 @@ Angle 10: HOW-TO
 - CTA buttons: Learn More, Shop Now, Sign Up, Download, Contact Us
 
 **TikTok Creative Principles:**
+
 - First 3 seconds determine watch rate (hook immediately)
 - Native aesthetic outperforms polished ads (look organic)
 - Use trending sounds and music
@@ -249,6 +254,7 @@ Angle 10: HOW-TO
 - Keep it fast-paced with jump cuts
 
 **TikTok Script Template:**
+
 ```
 [0-3 sec] HOOK: "Wait — you're still doing [old way]?"
 [3-10 sec] PROBLEM: Show the frustration / pain point visually
@@ -260,16 +266,19 @@ Angle 10: HOW-TO
 ### 2.5 Twitter/X Ads
 
 **Ad Formats:**
+
 - Promoted Tweets (text, image, video, carousel)
 - Follower Ads
 - Amplify (video pre-roll)
 
 **Character Limits:**
+
 - Tweet text: 280 characters (but 100-150 performs best)
 - Image: 1200x675 or 1080x1080
 - Video: up to 2:20, but 6-15 seconds optimal
 
 **Twitter Ad Copy Style:**
+
 - Conversational, not corporate
 - Hot take + solution format
 - Thread-style ads (first tweet is the hook, rest is the story)
@@ -321,7 +330,7 @@ The stage logic is shared; the angles are not. Discount, trial and countdown ang
 **By Platform (adjust based on business type):**
 
 | Business Type | Google | Meta | LinkedIn | TikTok | Other |
-|--------------|--------|------|----------|--------|-------|
+| --- | --- | --- | --- | --- | --- |
 | SaaS (B2B) | 30% | 25% | 30% | 5% | 10% |
 | SaaS (B2C) | 25% | 40% | 5% | 20% | 10% |
 | E-commerce | 30% | 40% | 0% | 20% | 10% |
@@ -334,26 +343,27 @@ The stage logic is shared; the angles are not. Discount, trial and countdown ang
 | Training / Academy | 30% | 20% | 30% | 5% | 15% (industry associations) |
 
 **By Funnel Stage:**
+
 - Awareness: 40% (audience building)
 - Consideration: 35% (retargeting warm leads)
 - Conversion: 25% (driving purchases/signups)
 
 ### 4.2 ROAS Benchmarks by Industry
 
-| Industry | Acceptable ROAS | Good ROAS | Excellent ROAS |
-|----------|----------------|-----------|----------------|
-| E-commerce | 2:1 | 4:1 | 8:1+ |
-| SaaS | 3:1 | 5:1 | 10:1+ |
-| Lead Gen | 2:1 (by lead value) | 4:1 | 7:1+ |
-| Courses | 3:1 | 6:1 | 10:1+ |
-| Local Services | 2:1 | 3:1 | 5:1+ |
-| Industrial B2B Lead Gen | 2:1 (pipeline value) | 4:1 | 6:1+ |
-| Regulated B2B | 2:1 (pipeline value) | 3:1 | 5:1+ |
+| Industry                | Acceptable ROAS      | Good ROAS | Excellent ROAS |
+| ----------------------- | -------------------- | --------- | -------------- |
+| E-commerce              | 2:1                  | 4:1       | 8:1+           |
+| SaaS                    | 3:1                  | 5:1       | 10:1+          |
+| Lead Gen                | 2:1 (by lead value)  | 4:1       | 7:1+           |
+| Courses                 | 3:1                  | 6:1       | 10:1+          |
+| Local Services          | 2:1                  | 3:1       | 5:1+           |
+| Industrial B2B Lead Gen | 2:1 (pipeline value) | 4:1       | 6:1+           |
+| Regulated B2B           | 2:1 (pipeline value) | 3:1       | 5:1+           |
 
 **CPA Benchmarks — US market, USD, approximate:**
 
 | Platform | B2B Lead | B2C Lead | E-commerce Purchase | SaaS Trial |
-|----------|----------|----------|-------------------|------------|
+| --- | --- | --- | --- | --- |
 | Google Search | $30-80 | $10-30 | $15-40 | $20-60 |
 | Meta | $20-60 | $5-20 | $10-30 | $15-45 |
 | LinkedIn | $50-150 | N/A | N/A | $40-100 |
@@ -372,6 +382,7 @@ Convert and caveat before quoting these:
 For each ad campaign, verify landing page alignment:
 
 **Alignment Checklist:**
+
 - Does the landing page headline match the ad headline?
 - Does the landing page deliver on the ad's promise?
 - Is the CTA on the landing page consistent with the ad's CTA?
@@ -380,8 +391,7 @@ For each ad campaign, verify landing page alignment:
 - Does the landing page load in under 3 seconds?
 - Is there one clear conversion action (not multiple competing CTAs)?
 
-**Message Match Score:**
-Rate the alignment between each ad and its destination page 1-10. Flag any score below 7.
+**Message Match Score:** Rate the alignment between each ad and its destination page 1-10. Flag any score below 7.
 
 ---
 
@@ -390,6 +400,7 @@ Rate the alignment between each ad and its destination page 1-10. Flag any score
 ### 5.1 Variation Generation
 
 For each ad concept, generate:
+
 - 5 headline variations (different angles, lengths, emotions)
 - 3 primary text variations (short: 1-2 sentences, medium: 3-4 sentences, long: 5-7 sentences)
 - 3 CTA variations
@@ -398,6 +409,7 @@ For each ad concept, generate:
 ### 5.2 Testing Framework
 
 **Test Priority Order:**
+
 1. Audience (who you target matters most)
 2. Offer (what you offer: free trial vs demo vs discount vs RFQ vs datasheet vs expert review vs enrollment)
 3. Creative concept (the big idea and visual approach)
@@ -406,6 +418,7 @@ For each ad concept, generate:
 6. CTA (button text and color)
 
 **Testing Rules:**
+
 - Test one variable at a time
 - Run tests for at least 3-5 days or 1,000 impressions per variant
 - Statistical significance threshold: 95%
@@ -420,28 +433,35 @@ Write the full output to the exact `output_path` resolved in Phase 0:
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Ad Campaigns: [Business Name]
-**URL:** [url]
-**Date:** [current date]
-**Business Type:** [type]
-**Primary Objective:** [objective]
+
+**URL:** [url] \
+**Date:** [current date] \
+**Business Type:** [type] \
+**Primary Objective:** [objective] \
 **Recommended Platforms:** [platforms]
 
 ---
 
 ## Campaign Strategy Overview
+
 [2-3 paragraph overview of the ad strategy]
 
 ## Audience Targeting
+
 [Detailed audience definitions for each platform]
 
 ## Campaign 1: [Platform Name]
+
 ### Ad Group 1: [Theme]
-**Targeting:** [audience parameters]
-**Budget:** [recommended daily/monthly]
+
+**Targeting:** [audience parameters] \
+**Budget:** [recommended daily/monthly] \
 **Objective:** [campaign objective]
 
 #### Ad Variation 1
+
 - **Headline:** [text]
 - **Primary Text:** [text]
 - **Description:** [text]
@@ -454,21 +474,27 @@ Write the full output to the exact `output_path` resolved in Phase 0:
 [Repeat for each ad group and platform]
 
 ## Retargeting Strategy
+
 [Three-stage funnel with ad variations]
 
 ## Budget Allocation
+
 [Platform and funnel stage breakdown]
 
 ## Testing Plan
+
 [Prioritized A/B tests]
 
 ## Performance Benchmarks
+
 [ROAS and CPA targets by platform]
 
 ## Landing Page Alignment
+
 [Message match assessment and recommendations]
 
 ## Creative Brief for Designers
+
 [Visual specifications, brand guidelines, image/video requirements]
 ```
 
@@ -506,4 +532,3 @@ Look only inside the Phase 0 `audit_dir`, for the exact same domain scope. Never
 - If `MARKETKIT - FUNNEL-ANALYSIS - <domain>.md` exists, align ad funnel stages to conversion path
 - If `MARKETKIT - SOCIAL-CALENDAR - <domain>.md` exists, promote top organic content as Spark/boosted ads
 - Suggest follow-up: `/marketkit:funnel` for conversion path, `/marketkit:landing` for page optimization
-

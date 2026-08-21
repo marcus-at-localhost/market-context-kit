@@ -36,10 +36,7 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
 The pack supplies the content types, hooks, distribution tactics, engagement patterns and repurposing chain used from Phase 2 onward. Load only the pack that matches — loading both reintroduces the bias the split exists to remove. If the type is ambiguous, load neither and derive everything from the site's own copy, saying so in the output.
 
@@ -52,7 +49,7 @@ The pack supplies the content types, hooks, distribution tactics, engagement pat
 Establish before generating any content:
 
 | Context Element | Source | Purpose |
-|----------------|--------|---------|
+| --- | --- | --- |
 | **Brand name** | URL or user input | Consistent branding |
 | **Industry** | Site analysis | Industry-relevant content |
 | **Target audience** | About page, copy, user input | Shapes language and topics |
@@ -66,7 +63,7 @@ Establish before generating any content:
 Recommend platforms based on business type and audience:
 
 | Platform | Best For | Audience | Content Type | Posting Frequency |
-|----------|---------|----------|-------------|-------------------|
+| --- | --- | --- | --- | --- |
 | **LinkedIn** | B2B, SaaS, agencies, professionals | Decision makers, 25-54 | Thought leadership, case studies | 3-5x/week |
 | **Twitter/X** | Tech, media, creators, real-time | Tech-savvy, 18-45 | Hot takes, threads, engagement | 1-3x/day |
 | **Instagram** | E-commerce, lifestyle, creators, agencies | Visual buyers, 18-40 | Carousels, Reels, Stories | 4-7x/week feed, daily Stories |
@@ -88,7 +85,7 @@ Define 4-5 content pillars that anchor all social content. Each pillar represent
 **Pillar Framework:**
 
 | Pillar # | Type | Purpose | Content Mix |
-|----------|------|---------|------------|
+| --- | --- | --- | --- |
 | Pillar 1 | **Educational** | Establish authority, provide value | How-tos, tips, frameworks, mistakes to avoid |
 | Pillar 2 | **Behind-the-Scenes** | Build trust, humanize the brand | Process, team, culture, day-in-the-life |
 | Pillar 3 | **Social Proof** | Build credibility, drive conversion | Testimonials, case studies, results, milestones |
@@ -163,6 +160,7 @@ Write the posts in the language of the target audience, and set posting times in
 ### 7.2 Calendar Distribution
 
 Ensure the 30-day calendar follows:
+
 - Each content pillar appears at least 6 times across the month
 - Promotional content never appears 2 days in a row
 - Engagement posts are spread evenly (every 2-3 days)
@@ -188,20 +186,24 @@ Write the full output to the exact `output_path` resolved in Phase 0:
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Social Media Content Calendar: [Brand/Topic]
-**Date:** [current date]
-**Period:** [Month Year] — 30-Day Calendar
+
+**Date:** [current date] \
+**Period:** [Month Year] — 30-Day Calendar \
 **Platforms:** [selected platforms]
 
 ---
 
 ## Brand Context
+
 - **Brand:** [name]
 - **Audience:** [description]
 - **Voice:** [voice profile]
 - **Goal:** [primary social media goal]
 
 ## Content Pillars
+
 1. [Pillar 1]: [description] — [X]% of content
 2. [Pillar 2]: [description] — [X]% of content
 3. [Pillar 3]: [description] — [X]% of content
@@ -209,32 +211,41 @@ Write the full output to the exact `output_path` resolved in Phase 0:
 5. [Pillar 5]: [description] — [X]% of content
 
 ## Discovery Strategy
+
 [Per pillar: hashtags, topic terminology, expert profiles, or trade channels — whichever Phase 4 selected]
 
 ## 30-Day Calendar
 
 ### Week 1: [Theme]
+
 [Day-by-day content for each platform]
 
 ### Week 2: [Theme]
+
 [Day-by-day content for each platform]
 
 ### Week 3: [Theme]
+
 [Day-by-day content for each platform]
 
 ### Week 4: [Theme]
+
 [Day-by-day content for each platform]
 
 ## Repurposing Strategy
+
 [1-to-10 framework applied to the brand's content]
 
 ## Engagement Playbook
+
 [Questions, polls, and engagement tactics to use]
 
 ## Trending Format Opportunities
+
 [Evergreen formats and how to adapt trends]
 
 ## Metrics to Track
+
 [Platform-specific KPIs and benchmarks]
 ```
 
@@ -280,4 +291,3 @@ Look only inside the Phase 0 `audit_dir`, for the exact same scope. Never search
 - If `MARKETKIT - COMPETITOR-REPORT - <scope>.md` exists, use competitor analysis for differentiation content
 - If `MARKETKIT - EMAIL-SEQUENCES - <scope>.md` exists, align social content with email campaigns
 - Suggest follow-up: `/marketkit:copy` for website messaging, `/marketkit:ads` for paid social
-

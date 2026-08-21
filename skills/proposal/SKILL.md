@@ -26,19 +26,18 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
 Quote pricing in the client's currency, and set payment terms and VAT handling to their market's norms rather than to a US default.
 
 ---
 
 ## Skill Purpose
+
 Generate a professional, client-ready marketing services proposal. This skill produces a complete proposal document that positions the agency/consultant as the clear choice, frames pricing with anchoring and tiered options, and includes ROI projections to justify the investment.
 
 ## When to Use
+
 - User wants to create a proposal for a prospective marketing client
 - User has completed a discovery call and needs to formalize the engagement
 - User wants a template for their marketing agency's proposals
@@ -47,9 +46,11 @@ Generate a professional, client-ready marketing services proposal. This skill pr
 ## How to Execute
 
 ### Step 1: Gather Proposal Inputs
+
 Collect these details from the user (ask if not provided):
 
 **About the Client:**
+
 1. Client name and company
 2. Industry and business model
 3. Current marketing situation (what they're doing now)
@@ -60,6 +61,7 @@ Collect these details from the user (ask if not provided):
 8. Key stakeholders and decision-makers
 
 **About the Services:**
+
 1. What services are you proposing? (SEO, paid ads, content, social, email, full-stack)
 2. Engagement model (retainer, project, performance-based)
 3. Proposed timeline
@@ -68,27 +70,23 @@ Collect these details from the user (ask if not provided):
 **If audit data exists:** Check for any previous `/marketkit:audit` results. If found, automatically incorporate the findings into the Situation Analysis section for a data-backed proposal.
 
 ### Step 2: Discovery Call Question Framework
+
 If the user hasn't had the discovery call yet, provide these 10 essential questions:
 
 **Business Understanding:**
+
 1. "Walk me through your business model. How do you make money?"
 2. "Who is your ideal customer? Describe them in detail."
 3. "What does your sales process look like from first touch to closed deal?"
 
-**Current Marketing:**
-4. "What marketing are you doing today, and what's working or not working?"
-5. "What's your current monthly marketing spend, and what's the ROI?"
-6. "What tools and platforms are you using?"
+**Current Marketing:** 4. "What marketing are you doing today, and what's working or not working?" 5. "What's your current monthly marketing spend, and what's the ROI?" 6. "What tools and platforms are you using?"
 
-**Goals and Expectations:**
-7. "If we're wildly successful, what does that look like in 6 months? 12 months?"
-8. "What specific numbers are you trying to hit? (Revenue, leads, traffic)"
-9. "What's the lifetime value of a customer for you?"
+**Goals and Expectations:** 7. "If we're wildly successful, what does that look like in 6 months? 12 months?" 8. "What specific numbers are you trying to hit? (Revenue, leads, traffic)" 9. "What's the lifetime value of a customer for you?"
 
-**Decision and Process:**
-10. "Who else is involved in this decision, and what's your timeline for choosing a partner?"
+**Decision and Process:** 10. "Who else is involved in this decision, and what's your timeline for choosing a partner?"
 
 **Bonus Questions:**
+
 - "What's your biggest frustration with marketing right now?"
 - "Have you worked with agencies or consultants before? What went well or poorly?"
 - "Is there anything that would make you say 'no' to working together?"
@@ -96,6 +94,7 @@ If the user hasn't had the discovery call yet, provide these 10 essential questi
 ### Step 3: Build the Proposal Document
 
 #### Section 1: Cover Page
+
 ```
 [Your Company Logo]
 
@@ -109,7 +108,9 @@ CONFIDENTIAL
 ```
 
 #### Section 2: Executive Summary (1 page max)
+
 Write a concise summary that:
+
 - Acknowledges the client's situation and goals
 - States the core problem you will solve
 - Previews your recommended approach
@@ -117,6 +118,7 @@ Write a concise summary that:
 - Creates urgency to act
 
 **Template:**
+
 ```
 [Client Name] is at an inflection point. With [current situation -- e.g., strong product-market fit but inconsistent lead generation], there's a significant opportunity to [desired outcome -- e.g., scale customer acquisition to support your growth targets].
 
@@ -128,9 +130,11 @@ We recommend beginning with [first phase] to establish baselines and quick wins,
 ```
 
 #### Section 3: Situation Analysis (2-3 pages)
+
 Present your analysis of the client's current marketing. This is where audit data from `/marketkit:audit` is invaluable.
 
 **Structure:**
+
 1. **Current State Overview** -- What they're doing now and how it's performing
 2. **Opportunities Identified** -- Specific areas where improvement is possible
 3. **Competitive Landscape** -- How they compare to competitors (from `/marketkit:competitors` if available)
@@ -144,9 +148,11 @@ Good: "Your website converts at approximately 1.8%, which is below the industry 
 Bad: "Your website has a terrible conversion rate and needs a complete overhaul."
 
 #### Section 4: Strategy and Approach (2-3 pages)
+
 Present your recommended strategy. Be specific enough to demonstrate expertise but not so detailed that they could execute it without you.
 
 **Structure:**
+
 1. **Strategic Framework** -- Your overall approach and methodology
 2. **Phase 1: Foundation** (Month 1-2) -- Setup, audits, baselines, quick wins
 3. **Phase 2: Growth** (Month 3-4) -- Core campaign execution, optimization
@@ -154,14 +160,17 @@ Present your recommended strategy. Be specific enough to demonstrate expertise b
 5. **Ongoing: Optimize** -- Continuous improvement, reporting, strategy refinement
 
 For each phase, include:
+
 - Specific activities and deliverables
 - Expected outcomes
 - How success will be measured
 
 #### Section 5: Scope of Work (1-2 pages)
+
 Detail exactly what is included (and what is not).
 
 **Include:**
+
 - Specific deliverables with quantities (e.g., "8 blog posts per month, 1,500-2,000 words each")
 - Meeting cadence (e.g., "Bi-weekly strategy calls, monthly reporting")
 - Response time commitments (e.g., "24-hour response on business days")
@@ -169,12 +178,13 @@ Detail exactly what is included (and what is not).
 - Reporting format and frequency
 
 **Explicitly Exclude:**
+
 - Items outside scope to prevent scope creep
 - Additional costs (ad spend, software, stock photos)
 - Assumptions about client responsibilities
 
-**Client Responsibilities Section:**
-List what you need from the client to be successful:
+**Client Responsibilities Section:** List what you need from the client to be successful:
+
 - Timely feedback and approvals (specify SLA)
 - Access to accounts, tools, and data
 - Designated point of contact
@@ -182,6 +192,7 @@ List what you need from the client to be successful:
 - Ad budget (separate from management fees)
 
 #### Section 6: Timeline (1 page)
+
 Visual timeline showing phases, milestones, and deliverables.
 
 ```
@@ -200,12 +211,13 @@ Key Milestones:
 ```
 
 #### Section 7: Investment (1-2 pages)
+
 Present pricing using the Good-Better-Best tier structure.
 
 **Three-Tier Pricing Model:**
 
 | Component | Growth | Accelerate | Dominate |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Strategy & Planning | Quarterly review | Monthly strategy | Weekly strategy |
 | Content Creation | 4 pieces/month | 8 pieces/month | 16 pieces/month |
 | Social Media | 3 platforms | 5 platforms | All platforms |
@@ -217,6 +229,7 @@ Present pricing using the Good-Better-Best tier structure.
 | **Monthly Investment** | **$X,XXX** | **$X,XXX** | **$X,XXX** |
 
 **Pricing Psychology Tips:**
+
 - Present three options; most clients choose the middle tier
 - Name the tiers with aspirational labels (not Bronze/Silver/Gold)
 - Anchor the highest tier first to make the middle tier feel reasonable
@@ -226,7 +239,7 @@ Present pricing using the Good-Better-Best tier structure.
 **Pricing Models Reference:**
 
 | Model | When to Use | Typical Range |
-|---|---|---|
+| --- | --- | --- |
 | Monthly Retainer | Ongoing services, relationship-based | $2,000-$25,000/month |
 | Project-Based | Defined scope, one-time deliverable | $5,000-$100,000 per project |
 | Performance-Based | Client wants risk-sharing, you're confident | Base + % of revenue/leads |
@@ -234,9 +247,11 @@ Present pricing using the Good-Better-Best tier structure.
 | Hourly | Consulting, advisory, ad-hoc | $150-$500/hour |
 
 #### Section 8: ROI Projection
+
 Show the client the expected return on their investment.
 
 **ROI Calculation Framework:**
+
 ```
 Current State:
 - Monthly website traffic: [X]
@@ -263,18 +278,22 @@ All monetary figures in the client's currency; state whether amounts are net of 
 **Important:** Be conservative with projections. Under-promise and over-deliver. Use ranges rather than specific numbers. Add disclaimers that results depend on multiple factors.
 
 #### Section 9: Team (0.5-1 page)
+
 Introduce the team members who will work on this account.
 
 For each team member:
+
 - Name and title
 - Relevant experience and expertise
 - Role on this engagement
 - Brief bio (2-3 sentences max)
 
 #### Section 10: Case Studies (1-2 pages)
+
 Include 2-3 relevant case studies that demonstrate results similar to what you're promising.
 
 **Case Study Format:**
+
 ```
 Client: [Industry and company type -- anonymize if needed]
 Challenge: [1-2 sentences about their situation]
@@ -286,6 +305,7 @@ Results:
 ```
 
 #### Section 11: Next Steps (0.5 page)
+
 Make it crystal clear what happens next. Reduce friction.
 
 ```
@@ -304,6 +324,7 @@ This proposal is valid until [date -- 30 days from now].
 ### Step 4: Proposal Design and Formatting
 
 **Best Practices:**
+
 - Keep total proposal under 15 pages (excluding appendix)
 - Use consistent headers, fonts, and colors throughout
 - Include the client's logo alongside yours on the cover page
@@ -314,6 +335,7 @@ This proposal is valid until [date -- 30 days from now].
 - Save as PDF for professional presentation
 
 **Formatting in Markdown:**
+
 - Use H1 for the proposal title
 - Use H2 for major sections
 - Use H3 for subsections
@@ -323,30 +345,24 @@ This proposal is valid until [date -- 30 days from now].
 
 ### Step 5: Follow-Up Sequence After Sending
 
-**Day 0 (Send Day):**
-Send proposal via email with a brief cover note. Subject: "Your Marketing Growth Plan -- [Client Name]"
+**Day 0 (Send Day):** Send proposal via email with a brief cover note. Subject: "Your Marketing Growth Plan -- [Client Name]"
 
-**Day 2:**
-Follow-up email: "I wanted to make sure you received the proposal. Happy to hop on a quick call to walk through it if that would be helpful."
+**Day 2:** Follow-up email: "I wanted to make sure you received the proposal. Happy to hop on a quick call to walk through it if that would be helpful."
 
-**Day 5:**
-Value-add follow-up: Share a relevant article, case study, or insight related to their industry. Softly reference the proposal.
+**Day 5:** Value-add follow-up: Share a relevant article, case study, or insight related to their industry. Softly reference the proposal.
 
-**Day 7:**
-Direct follow-up: "I'd love to hear your thoughts on the proposal. Do you have any questions I can address? I'm available [specific times] this week for a call."
+**Day 7:** Direct follow-up: "I'd love to hear your thoughts on the proposal. Do you have any questions I can address? I'm available [specific times] this week for a call."
 
-**Day 14:**
-Final follow-up: "I wanted to check in one more time about the proposal. I understand timing may not be right -- if that's the case, I'm happy to reconnect when it makes sense. Otherwise, I'd love to discuss next steps."
+**Day 14:** Final follow-up: "I wanted to check in one more time about the proposal. I understand timing may not be right -- if that's the case, I'm happy to reconnect when it makes sense. Otherwise, I'd love to discuss next steps."
 
-**Day 21:**
-Breakup email: "I haven't heard back, so I'll assume the timing isn't right. I'll close out this proposal on [expiration date]. If things change, my door is always open. Wishing you and [Company] the best."
+**Day 21:** Breakup email: "I haven't heard back, so I'll assume the timing isn't right. I'll close out this proposal on [expiration date]. If things change, my door is always open. Wishing you and [Company] the best."
 
 ### Step 6: Objection Handling
 
 Prepare responses for common client pushbacks:
 
 | Objection | Response Framework |
-|---|---|
+| --- | --- |
 | "Too expensive" | Reframe as investment, show ROI math, offer smaller starting scope, compare to cost of inaction |
 | "We can do this in-house" | Highlight opportunity cost, specialized expertise, speed to results, and the real fully-loaded cost of in-house |
 | "We tried this before and it didn't work" | Ask what specifically didn't work, differentiate your approach, offer a pilot project with clear success criteria |
@@ -377,15 +393,17 @@ Write the exact `output_path` resolved in Phase 0 with:
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Marketing Services Proposal
 
-**Prepared for:** [Client Name]
-**Prepared by:** [Agency Name]
+**Prepared for:** [Client Name] \
+**Prepared by:** [Agency Name] \
 **Date:** [Date]
 
 ---
 
 ## Table of Contents
+
 1. Executive Summary
 2. Situation Analysis
 3. Strategy & Approach
@@ -404,12 +422,14 @@ Write the exact `output_path` resolved in Phase 0 with:
 ---
 
 ## Appendix
+
 - Terms & Conditions
 - Detailed Deliverable Descriptions
 - Tool Stack
 ```
 
 ## Key Principles
+
 - The proposal is a sales document, not a statement of work. It should SELL, not just describe.
 - Lead with the client's problems and goals, not your services. Make them feel understood before presenting solutions.
 - Every price should be anchored to the ROI it will generate. Never present cost without context.
@@ -417,4 +437,3 @@ Write the exact `output_path` resolved in Phase 0 with:
 - If audit data is available from previous skills, use it extensively -- data-backed proposals close at 2-3x the rate of generic proposals.
 - Keep it concise. Executives skim. Use bold, headers, and tables to make key information scannable.
 - Always include a specific, time-bound next step. Ambiguity kills deals.
-

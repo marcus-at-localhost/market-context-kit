@@ -31,16 +31,9 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
-asserting anything about a page's structure, staleness, or absence. Page text used as evidence
-must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
-HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
-attribute-only markup.
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or asserting anything about a page's structure, staleness, or absence. Page text used as evidence must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or attribute-only markup.
 
 ---
 
@@ -57,7 +50,7 @@ The user runs `/marketkit:competitors <url>`. Fetch the target site, identify co
 Identify competitors across three tiers:
 
 | Category | Definition | How to Find | Count |
-|----------|-----------|-------------|-------|
+| --- | --- | --- | --- |
 | **Direct Competitors** | Same product, same audience, same market | Search for product category keywords, check who ranks | 3-5 |
 | **Indirect Competitors** | Different product, same problem solved | Search for the problem being solved, check alternative approaches | 2-3 |
 | **Aspirational Competitors** | Market leaders the brand aspires to become | Industry leaders, category creators, well-known brands | 1-2 |
@@ -67,6 +60,7 @@ Identify competitors across three tiers:
 Use multiple methods to identify competitors:
 
 **Method 1: Keyword-Based Discovery**
+
 - Search for the target site's primary keywords
 - Note which companies rank on page 1
 - Search for "[product category] software/service/tool"
@@ -75,18 +69,21 @@ Use multiple methods to identify competitors:
 - Search for "[target brand] vs"
 
 **Method 2: Site-Based Discovery**
+
 - Look for comparison pages on the target site
 - Check footer links for industry associations
 - Look for "integrations" pages that mention similar tools
 - Check the target site's blog for competitor mentions
 
 **Method 3: Review Platform Discovery**
+
 - Search G2, Capterra, Trustpilot for the product category
 - Note top-rated competitors in the same category
 - Check "Compare" features on review sites
 - For B2B industrial, regulated, or local categories where software review sites are irrelevant, use trade directories, industry associations, procurement directories, trade press, certification bodies, distributor listings, and forum/community discussions instead.
 
 **Method 4: Social and Community Discovery**
+
 - Look at LinkedIn for companies followed by the target's audience
 - For consumer, software and developer categories: search Reddit for "[category] recommendations" and check X for category conversation
 - For industrial, regulated and procurement-led categories: search industry forums, association member lists, trade-fair exhibitor directories and distributor catalogs — the buyers there do not discuss suppliers on consumer social platforms
@@ -111,6 +108,7 @@ A single URL returns one object; multiple URLs return `{"competitors": [...]}`. 
 The script auto-detects business type (`consumer-online` or `b2b-technical`, same ids as `references/business-context.md`) from on-page signals unless `--type` forces one, and scores CTAs/pricing-signals/trust-signals against that type's fingerprint pack in `references/fingerprints/` — a SaaS pricing page and an industrial RFQ page are read on their own terms. Vocabulary is per-language (en/de/es/fr/it/nl), selected from `<html lang>`.
 
 The script collects:
+
 - Homepage content and metadata (title, meta description, OG tags, H1/H2)
 - Business type and detected language
 - CTAs, pricing/quote-signal mentions, and trust signals (cert badges, testimonials, social links) scored against the resolved pack
@@ -129,8 +127,9 @@ If the script is not available, use `WebFetch` to manually collect this data for
 For each competitor, analyze:
 
 **Messaging:**
+
 | Element | What to Capture | Why It Matters |
-|---------|----------------|----------------|
+| --- | --- | --- |
 | **Headline** | Exact H1 text | Reveals positioning and value prop |
 | **Subheadline** | Supporting text | Shows secondary messaging angle |
 | **Value proposition** | Core promise | Identifies positioning territory |
@@ -139,8 +138,8 @@ For each competitor, analyze:
 | **Tone of voice** | Casual/formal/technical | Reveals brand personality choices |
 | **Social proof** | Type and quantity | Shows credibility strategy |
 
-**Positioning Map:**
-Plot each competitor on two axes:
+**Positioning Map:** Plot each competitor on two axes:
+
 - X-axis: Perceived simplicity ←→ Perceived power
 - Y-axis: Perceived affordability ←→ Perceived premium
 
@@ -167,33 +166,34 @@ Adjust axes based on what matters most in the specific industry.
 Build the matrix that fits the business model. For SaaS and e-commerce, use pricing/plan rows. For RFQ-led, regulated, industrial, distributor, academy, or services businesses, compare commercial path and proof instead of forcing SaaS tiers.
 
 ```markdown
-| Feature/Plan | [Target] | Competitor A | Competitor B | Competitor C |
-|-------------|----------|-------------|-------------|-------------|
-| Free Plan | Yes/No | Yes/No | Yes/No | Yes/No |
-| Starter Price | $X/mo | $X/mo | $X/mo | $X/mo |
-| Pro Price | $X/mo | $X/mo | $X/mo | $X/mo |
-| Enterprise | Custom | Custom | $X/mo | Custom |
-| Free Trial | X days | X days | X days | X days |
-| Annual Discount | X% | X% | X% | X% |
-| Per-User Pricing | Yes/No | Yes/No | Yes/No | Yes/No |
-| Usage Limits | [detail] | [detail] | [detail] | [detail] |
+| Feature/Plan     | [Target] | Competitor A | Competitor B | Competitor C |
+| ---------------- | -------- | ------------ | ------------ | ------------ |
+| Free Plan        | Yes/No   | Yes/No       | Yes/No       | Yes/No       |
+| Starter Price    | $X/mo    | $X/mo        | $X/mo        | $X/mo        |
+| Pro Price        | $X/mo    | $X/mo        | $X/mo        | $X/mo        |
+| Enterprise       | Custom   | Custom       | $X/mo        | Custom       |
+| Free Trial       | X days   | X days       | X days       | X days       |
+| Annual Discount  | X%       | X%           | X%           | X%           |
+| Per-User Pricing | Yes/No   | Yes/No       | Yes/No       | Yes/No       |
+| Usage Limits     | [detail] | [detail]     | [detail]     | [detail]     |
 ```
 
 ```markdown
 | Commercial Factor | [Target] | Competitor A | Competitor B | Competitor C |
-|-------------------|----------|--------------|--------------|--------------|
-| Public Pricing | Yes/No/Partial | | | |
-| Primary Conversion | RFQ / Contact / Buy / Enroll / Distributor | | | |
-| Quote Path Clarity | Strong / Medium / Weak | | | |
-| Datasheets / Downloads | Open / Gated / Missing | | | |
-| Certifications / Standards | [list] | | | |
-| Product Finder / Selector | Yes/No/Partial | | | |
-| Stock / Lead-Time Signals | Yes/No/Partial | | | |
-| Distributor / Partner Locator | Yes/No | | | |
-| Proof Assets | Case studies / test data / testimonials / logos | | | |
+| --- | --- | --- | --- | --- |
+| Public Pricing | Yes/No/Partial |  |  |  |
+| Primary Conversion | RFQ / Contact / Buy / Enroll / Distributor |  |  |  |
+| Quote Path Clarity | Strong / Medium / Weak |  |  |  |
+| Datasheets / Downloads | Open / Gated / Missing |  |  |  |
+| Certifications / Standards | [list] |  |  |  |
+| Product Finder / Selector | Yes/No/Partial |  |  |  |
+| Stock / Lead-Time Signals | Yes/No/Partial |  |  |  |
+| Distributor / Partner Locator | Yes/No |  |  |  |
+| Proof Assets | Case studies / test data / testimonials / logos |  |  |  |
 ```
 
 **Pricing Strategy Assessment:**
+
 - Is the target priced above, below, or at market average?
 - Is pricing transparent or hidden (requiring sales calls)?
 - What pricing model is used (per-user, per-usage, flat-rate, tiered)?
@@ -207,20 +207,21 @@ Build the matrix that fits the business model. For SaaS and e-commerce, use pric
 Build a comprehensive feature comparison:
 
 ```markdown
-| Feature Category | Feature | [Target] | Comp A | Comp B | Comp C |
-|-----------------|---------|----------|--------|--------|--------|
-| Core | [Feature 1] | Full | Full | Partial | No |
-| Core | [Feature 2] | Full | Full | Full | Full |
-| Core | [Feature 3] | Partial | Full | No | Full |
-| Advanced | [Feature 4] | No | Full | No | Full |
-| Advanced | [Feature 5] | Full | No | Full | No |
-| Integration | [Feature 6] | Full | Full | No | Partial |
-| Support | [Feature 7] | Full | Partial | Full | Full |
+| Feature Category | Feature     | [Target] | Comp A  | Comp B  | Comp C  |
+| ---------------- | ----------- | -------- | ------- | ------- | ------- |
+| Core             | [Feature 1] | Full     | Full    | Partial | No      |
+| Core             | [Feature 2] | Full     | Full    | Full    | Full    |
+| Core             | [Feature 3] | Partial  | Full    | No      | Full    |
+| Advanced         | [Feature 4] | No       | Full    | No      | Full    |
+| Advanced         | [Feature 5] | Full     | No      | Full    | No      |
+| Integration      | [Feature 6] | Full     | Full    | No      | Partial |
+| Support          | [Feature 7] | Full     | Partial | Full    | Full    |
 ```
 
 Use: Full, Partial, No, or Beta to categorize.
 
 Highlight:
+
 - Features where the target has an advantage (competitive moats)
 - Features where the target has a gap (vulnerability)
 - Features unique to one competitor (potential differentiators)
@@ -230,22 +231,24 @@ Highlight:
 For each competitor, analyze:
 
 **Content Strategy:**
-| Metric | [Target] | Comp A | Comp B | Comp C |
-|--------|----------|--------|--------|--------|
-| Blog posts (estimated) | X | X | X | X |
-| Publishing frequency | X/week | X/week | X/week | X/week |
-| Content depth | Shallow/Medium/Deep | | | |
-| Content types | Blog/Video/Podcast | | | |
-| Key topics | [list] | [list] | [list] | [list] |
+
+| Metric                 | [Target]            | Comp A | Comp B | Comp C |
+| ---------------------- | ------------------- | ------ | ------ | ------ |
+| Blog posts (estimated) | X                   | X      | X      | X      |
+| Publishing frequency   | X/week              | X/week | X/week | X/week |
+| Content depth          | Shallow/Medium/Deep |        |        |        |
+| Content types          | Blog/Video/Podcast  |        |        |        |
+| Key topics             | [list]              | [list] | [list] | [list] |
 
 **Keyword Strategy:**
+
 - What keywords is each competitor clearly targeting?
 - Where do multiple competitors rank but the target does not? (content gaps)
 - Are competitors creating comparison/alternatives content?
 - What long-tail keywords are competitors ranking for?
 
-**Content Gap Analysis:**
-List topics that competitors cover but the target does not:
+**Content Gap Analysis:** List topics that competitors cover but the target does not:
+
 ```
 CONTENT GAPS (Competitors Cover, Target Does Not):
   1. [Topic] — covered by Comp A, B (high search intent)
@@ -258,23 +261,24 @@ CONTENT GAPS (Competitors Cover, Target Does Not):
 
 Compare only the channels that matter in this category. Rows for platforms nobody in the category uses produce a table of zeros that reads as a gap when it is a non-issue.
 
-| Channel | [Target] | Comp A | Comp B | Comp C |
-|----------|----------|--------|--------|--------|
-| LinkedIn followers | X | X | X | X |
-| [Other social channels in use] | X | X | X | X |
-| YouTube subscribers | X | X | X | X |
-| Newsletter / owned list (if visible) | X | X | X | X |
-| Trade press / association presence | X | X | X | X |
-| Trade fair presence | X | X | X | X |
-| Posting frequency | X/week | X/week | X/week | X/week |
-| Engagement rate | X% | X% | X% | X% |
-| Top content type | [type] | [type] | [type] | [type] |
+| Channel                              | [Target] | Comp A | Comp B | Comp C |
+| ------------------------------------ | -------- | ------ | ------ | ------ |
+| LinkedIn followers                   | X        | X      | X      | X      |
+| [Other social channels in use]       | X        | X      | X      | X      |
+| YouTube subscribers                  | X        | X      | X      | X      |
+| Newsletter / owned list (if visible) | X        | X      | X      | X      |
+| Trade press / association presence   | X        | X      | X      | X      |
+| Trade fair presence                  | X        | X      | X      | X      |
+| Posting frequency                    | X/week   | X/week | X/week | X/week |
+| Engagement rate                      | X%       | X%     | X%     | X%     |
+| Top content type                     | [type]   | [type] | [type] | [type] |
 
 ### 2.6 Review Mining
 
 Analyze reviews and discussion on the platforms this category actually uses — G2, Capterra and Trustpilot for software and services; industry forums, association channels, distributor listings and trade press for technical and industrial categories. Reddit is a strong source for consumer and developer categories and a weak one for regulated procurement:
 
 **For each competitor, extract:**
+
 - Overall rating (stars)
 - Number of reviews
 - Top 3 praised features (what customers love)
@@ -283,9 +287,10 @@ Analyze reviews and discussion on the platforms this category actually uses — 
 - Use cases mentioned most frequently
 
 **Review Intelligence Matrix:**
+
 ```markdown
 | Competitor | Rating | Reviews | Top Praise | Top Complaint | Switch Reason |
-|-----------|--------|---------|-----------|---------------|--------------|
+| --- | --- | --- | --- | --- | --- |
 | Comp A | 4.5/5 | 500+ | Easy to use | Limited integrations | Price increase |
 | Comp B | 4.2/5 | 200+ | Powerful features | Steep learning curve | Poor support |
 | Comp C | 3.8/5 | 100+ | Good value | Buggy | Better alternatives |
@@ -361,6 +366,7 @@ STEAL-WORTHY TACTICS
 ```
 
 Focus on tactics that are:
+
 - Proven (working for the competitor)
 - Adaptable (can be customized for the target)
 - Underutilized (the target is not currently doing this)
@@ -370,6 +376,7 @@ Focus on tactics that are:
 Based on the competitive analysis, recommend how the target should differentiate:
 
 **Differentiation Framework:**
+
 1. **Category:** Can the target create or own a sub-category? (e.g., "the [specific attribute] [category]")
 2. **Audience:** Can the target own a specific audience segment competitors ignore?
 3. **Feature:** Is there a unique feature or capability no competitor offers?
@@ -377,6 +384,7 @@ Based on the competitive analysis, recommend how the target should differentiate
 5. **Experience:** Can the target differentiate on customer experience, support, or community?
 
 For each viable differentiation angle, provide:
+
 - Positioning statement
 - Headline recommendation
 - Supporting evidence or proof points
@@ -387,6 +395,7 @@ For each viable differentiation angle, provide:
 Recommend creating "[Competitor] Alternative" pages:
 
 **For each major competitor, outline:**
+
 ```
 PAGE: [Target Brand] vs [Competitor Name]
 URL: /vs/[competitor-name] or /alternatives/[competitor-name]
@@ -405,6 +414,7 @@ Sections:
 ```
 
 For industrial, regulated, services, or RFQ-led categories, replace SaaS elements with relevant proof:
+
 - Quick comparison table: standards, applications, engineering access, lead time, datasheets, test data, service coverage
 - Where each competitor wins: be honest about scale, certifications, tools, geography, or product breadth
 - Switching offer: "Send us your existing specification", "Request equivalent recommendation", "Book technical review", or "Get RFQ response in [timeframe]"
@@ -463,7 +473,7 @@ Recommend ongoing monitoring activities:
 Provide guidance on how to respond to competitor moves:
 
 | Competitor Move | Response Strategy | Timeline |
-|----------------|-------------------|----------|
+| --- | --- | --- |
 | Price cut | Emphasize value and quality, not price war | 1 week |
 | New feature launch | Assess relevance, communicate roadmap to customers | 2 weeks |
 | Aggressive ad campaign | Double down on owned channels and retention | Ongoing |
@@ -479,30 +489,33 @@ Write the full output to the exact `output_path` resolved in Phase 0 (`${CLAUDE_
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Competitive Intelligence Report: [Target Brand]
-**URL:** [url]
-**Date:** [current date]
-**Competitors Analyzed:** [count]
-**Competitive Position: [Strong/Moderate/Weak]**
+
+**URL:** [url] \
+**Date:** [current date] \
+**Competitors Analyzed:** [count] **Competitive Position: [Strong/Moderate/Weak]**
 
 ---
 
 ## Executive Summary
-[3-4 paragraphs covering competitive landscape, target's position,
-biggest competitive advantage, biggest competitive threat, and
-top 3 strategic recommendations]
+
+[3-4 paragraphs covering competitive landscape, target's position, biggest competitive advantage, biggest competitive threat, and top 3 strategic recommendations]
 
 ---
 
 ## Competitor Overview
 
 ### Direct Competitors
+
 [Summary table with name, URL, positioning, pricing, key differentiator]
 
 ### Indirect Competitors
+
 [Summary table]
 
 ### Aspirational Competitors
+
 [Summary table]
 
 ---
@@ -510,9 +523,11 @@ top 3 strategic recommendations]
 ## Detailed Competitor Profiles
 
 ### [Competitor A Name]
+
 [Full analysis: messaging, pricing, features, SWOT, social presence, reviews]
 
 ### [Competitor B Name]
+
 [Full analysis]
 
 [Repeat for each competitor]
@@ -522,30 +537,37 @@ top 3 strategic recommendations]
 ## Comparison Tables
 
 ### Feature Comparison
+
 [Full feature matrix]
 
 ### Pricing Comparison
+
 [Full pricing matrix]
 
 ### Review Ratings
+
 [Review intelligence matrix]
 
 ### Social Media Presence
+
 [Platform comparison table]
 
 ---
 
 ## Positioning Map
+
 [Visual positioning map with explanation]
 
 ---
 
 ## Content & SEO Gap Analysis
+
 [Content gaps, keyword opportunities, comparison page strategy]
 
 ---
 
 ## SWOT Analysis — [Target Brand]
+
 [Aggregate SWOT based on competitive intelligence]
 
 ---
@@ -553,25 +575,31 @@ top 3 strategic recommendations]
 ## Strategic Recommendations
 
 ### Steal-Worthy Tactics
+
 [5-10 tactics with implementation guidance]
 
 ### Differentiation Strategy
+
 [Recommended positioning angles]
 
 ### Alternative Pages to Create
+
 [Competitor vs pages with outlines]
 
 ### Switching Narratives
+
 [Switching stories and offers for each major competitor]
 
 ---
 
 ## Competitive Monitoring Plan
+
 [Ongoing monitoring checklist and response playbook]
 
 ---
 
 ## Next Steps
+
 1. [Most critical competitive action]
 2. [Second priority]
 3. [Third priority]
@@ -619,4 +647,3 @@ Full report saved to: [resolved output_path, e.g. Audit/MARKETKIT - COMPETITOR-R
 - If `FUNNEL-ANALYSIS.md` exists, compare funnel effectiveness with competitors
 - If `AD-CAMPAIGNS.md` exists, use competitor intelligence for ad angles
 - Suggest follow-up: `/marketkit:copy` for differentiated messaging, `/marketkit:ads` for competitive ad campaigns, `/marketkit:funnel` for conversion comparison
-

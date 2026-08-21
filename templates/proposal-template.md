@@ -5,9 +5,10 @@
 ## [Cover Page]
 
 ### Marketing Strategy Proposal
-**Prepared for:** [Client Company Name]
-**Prepared by:** [Your Name / Agency Name]
-**Date:** [Date]
+
+**Prepared for:** [Client Company Name] \
+**Prepared by:** [Your Name / Agency Name] \
+**Date:** [Date] \
 **Valid until:** [Date + 30 days]
 
 ---
@@ -17,6 +18,7 @@
 [Client Name] has a strong [product/service] but is currently leaving significant revenue on the table due to [2-3 key marketing gaps identified in the audit]. This proposal outlines a [timeframe] engagement to address these gaps and deliver measurable growth.
 
 **Expected Outcomes:**
+
 - [Specific metric improvement, e.g., "Increase website conversion rate from 2.1% to 4-5%"]
 - [Specific metric, e.g., "Generate 150+ qualified leads per month through content + SEO"]
 - [Specific metric, e.g., "Reduce customer acquisition cost by 30% through funnel optimization"]
@@ -30,16 +32,18 @@
 Based on our marketing audit of [website], here are the key findings:
 
 **Strengths (what's working):**
+
 1. [Strength with specific example]
 2. [Strength with specific example]
 3. [Strength with specific example]
 
 **Opportunities (what's missing):**
+
 1. [Gap with revenue impact estimate]
 2. [Gap with revenue impact estimate]
 3. [Gap with revenue impact estimate]
 
-**Current Marketing Score:** [X/100]
+**Current Marketing Score:** [X/100] \
 **Target Marketing Score:** [Y/100] (after engagement)
 
 ---
@@ -47,16 +51,19 @@ Based on our marketing audit of [website], here are the key findings:
 ## Proposed Strategy
 
 ### Phase 1: Foundation (Weeks 1-4)
+
 - [Specific deliverable]
 - [Specific deliverable]
 - [Specific deliverable]
 
 ### Phase 2: Growth (Weeks 5-8)
+
 - [Specific deliverable]
 - [Specific deliverable]
 - [Specific deliverable]
 
 ### Phase 3: Scale (Weeks 9-12)
+
 - [Specific deliverable]
 - [Specific deliverable]
 - [Specific deliverable]
@@ -65,52 +72,55 @@ Based on our marketing audit of [website], here are the key findings:
 
 ## Scope of Work
 
-| Deliverable | Description | Timeline |
-|-------------|-------------|----------|
+| Deliverable     | Description         | Timeline |
+| --------------- | ------------------- | -------- |
 | [Deliverable 1] | [Brief description] | Week 1-2 |
 | [Deliverable 2] | [Brief description] | Week 2-4 |
 | [Deliverable 3] | [Brief description] | Week 4-6 |
 | [Deliverable 4] | [Brief description] | Week 6-8 |
-| [Deliverable 5] | [Brief description] | Ongoing |
+| [Deliverable 5] | [Brief description] | Ongoing  |
 
 ---
 
 ## Investment
 
 ### Option 1: [Package Name] — [amount] [currency]/month
+
 - [What's included]
 - [What's included]
 - [What's included]
 - Best for: [who this is for]
 
 ### Option 2: [Package Name] — [amount] [currency]/month (Recommended)
+
 - Everything in Option 1, plus:
 - [Additional deliverable]
 - [Additional deliverable]
 - Best for: [who this is for]
 
 ### Option 3: [Package Name] — [amount] [currency]/month
+
 - Everything in Option 2, plus:
 - [Additional deliverable]
 - [Additional deliverable]
 - Best for: [who this is for]
 
-**Minimum engagement:** [3 months]
+**Minimum engagement:** [3 months] \
 **Payment terms:** [invoicing interval and payment period — e.g. monthly, net 14/30; state whether amounts are net of VAT]
 
 ---
 
 ## ROI Projection
 
-| Metric | Current | Projected (90 days) | Value |
-|--------|---------|---------------------|-------|
-| Monthly website visitors | [X] | [Y] | — |
-| Conversion rate | [X%] | [Y%] | — |
-| Monthly leads | [X] | [Y] | — |
-| Customer acquisition cost | [X] | [Y] | [savings] |
-| Monthly revenue impact | — | — | [estimate] |
+| Metric                    | Current | Projected (90 days) | Value      |
+| ------------------------- | ------- | ------------------- | ---------- |
+| Monthly website visitors  | [X]     | [Y]                 | —          |
+| Conversion rate           | [X%]    | [Y%]                | —          |
+| Monthly leads             | [X]     | [Y]                 | —          |
+| Customer acquisition cost | [X]     | [Y]                 | [savings]  |
+| Monthly revenue impact    | —       | —                   | [estimate] |
 
-*All amounts in [currency].*
+_All amounts in [currency]._
 
 **Projected ROI:** [X]x return on investment within [timeframe]
 
@@ -123,6 +133,7 @@ Based on our marketing audit of [website], here are the key findings:
 3. **[Differentiator]** — [Brief explanation]
 
 ### Client Results
+
 - "[Specific testimonial with numbers]" — [Client Name, Title]
 - "[Specific testimonial with numbers]" — [Client Name, Title]
 
@@ -138,4 +149,4 @@ Based on our marketing audit of [website], here are the key findings:
 
 ---
 
-*This proposal is valid for 30 days from the date above.*
+_This proposal is valid for 30 days from the date above._

@@ -9,9 +9,11 @@ metadata:
 # Landing Page CRO Analysis
 
 ## Skill Purpose
+
 Perform a comprehensive Conversion Rate Optimization (CRO) analysis on any landing page. This skill produces a section-by-section teardown with prioritized, actionable fixes that directly impact conversion rates.
 
 ## When to Use
+
 - User provides a landing page URL and asks for conversion optimization
 - User asks for landing page feedback, review, or audit
 - User wants to improve signup, lead capture, or purchase rates
@@ -37,26 +39,20 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
-asserting anything about a page's structure, staleness, or absence. Page text used as evidence
-must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
-HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
-attribute-only markup.
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or asserting anything about a page's structure, staleness, or absence. Page text used as evidence must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or attribute-only markup.
 
 The pack supplies the objection set, the risk reducers that actually reduce risk for this buyer, and the CTA conventions. Applying the wrong set is the most common way a CRO review gets rejected by the client — a procurement buyer offered a money-back guarantee concludes the reviewer does not understand the purchase.
 
 ### Step 1: Identify the Page Type
+
 Determine which type of landing page you are analyzing. This affects benchmark expectations and scoring weights.
 
 Conversion-rate figures below are US-market averages published for consumer and self-serve businesses. Treat them as orientation, and say which market and business model a number came from whenever you quote one.
 
 | Page Type | Primary Goal | Good CR | Great CR |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Lead Capture | Email/form submission | 5-10% | 15%+ |
 | SaaS Signup | Free trial or freemium signup | 3-7% | 10%+ |
 | E-commerce Product | Add to cart / Purchase | 2-4% | 5%+ |
@@ -72,12 +68,15 @@ Conversion-rate figures below are US-market averages published for consumer and 
 | Course / Certification Page | Enroll, reserve seat, or request schedule | 3-8% | 10-15% |
 
 ### Step 2: Run the 7-Point CRO Framework
+
 Analyze each section in order. Score each section 1-10 and provide specific findings.
 
 #### Section 1: Hero Section (Weight: 25%)
+
 The first screen a visitor sees. This is where 80% of conversion decisions begin.
 
 **Checklist:**
+
 - [ ] Headline is visible within 2 seconds of page load
 - [ ] Headline communicates the primary benefit (not a feature)
 - [ ] Headline is under 10 words
@@ -91,6 +90,7 @@ The first screen a visitor sees. This is where 80% of conversion decisions begin
 - [ ] No navigation menu competing with the CTA on dedicated landing pages; for corporate/B2B homepages, navigation is allowed but the primary inquiry path must remain visually dominant
 
 **Scoring Criteria:**
+
 - 9-10: Headline is benefit-driven, specific, and compelling. CTA is clear and contrasting. Visual supports the message. Trust indicators present.
 - 7-8: Strong headline and CTA but missing one element (trust badges, supporting visual, or specificity).
 - 5-6: Generic headline or weak CTA. Missing multiple above-the-fold elements.
@@ -98,9 +98,11 @@ The first screen a visitor sees. This is where 80% of conversion decisions begin
 - 1-2: No clear headline or CTA. Visitor cannot understand the offer within 5 seconds.
 
 #### Section 2: Value Proposition (Weight: 20%)
+
 How clearly the page communicates WHY someone should convert.
 
 **Checklist:**
+
 - [ ] Clear statement of what the product/service does
 - [ ] Specific outcomes or results promised
 - [ ] Differentiation from alternatives (why THIS solution)
@@ -109,15 +111,18 @@ How clearly the page communicates WHY someone should convert.
 - [ ] Value proposition is scannable (not buried in paragraphs)
 
 **Evaluate Using the 4U Framework:**
+
 1. **Useful** - Does it solve a real problem the visitor has?
 2. **Urgent** - Is there a reason to act now?
 3. **Unique** - Is it different from competitors?
 4. **Ultra-specific** - Are claims concrete, not vague?
 
 #### Section 3: Social Proof (Weight: 15%)
+
 Evidence that others trust and benefit from this product/service.
 
 **Types of Social Proof (ranked by persuasion power):**
+
 1. Revenue/results metrics ("$2.4B processed", "500K users")
 2. Named customer testimonials with photos, titles, and companies
 3. Recognizable client logos
@@ -130,6 +135,7 @@ Evidence that others trust and benefit from this product/service.
 10. Social media follower counts
 
 **Checklist:**
+
 - [ ] At least 2 types of social proof present
 - [ ] Testimonials include real names and photos
 - [ ] Testimonials mention specific results or outcomes
@@ -139,9 +145,11 @@ Evidence that others trust and benefit from this product/service.
 - [ ] Social proof is recent and relevant
 
 #### Section 4: Features and Benefits (Weight: 15%)
+
 How the page presents what the product/service includes.
 
 **Checklist:**
+
 - [ ] Features are translated into benefits (what the feature DOES for the user)
 - [ ] Content is scannable (icons, bullet points, short paragraphs)
 - [ ] Visual hierarchy guides the eye through features
@@ -150,11 +158,10 @@ How the page presents what the product/service includes.
 - [ ] Screenshots, demos, or visuals accompany feature descriptions
 - [ ] Feature list is comprehensive but not overwhelming (3-7 key features)
 
-**Feature-to-Benefit Translation Check:**
-Bad: "AI-powered analytics dashboard"
-Good: "See exactly which campaigns drive revenue -- AI analyzes your data so you don't have to"
+**Feature-to-Benefit Translation Check:** Bad: "AI-powered analytics dashboard" Good: "See exactly which campaigns drive revenue -- AI analyzes your data so you don't have to"
 
 #### Section 5: Objection Handling (Weight: 10%)
+
 How the page addresses reasons a visitor might NOT convert.
 
 **Common Objections:**
@@ -162,6 +169,7 @@ How the page addresses reasons a visitor might NOT convert.
 Use the objection set from the loaded example pack — `Landing pages — objections and how to answer them` in either pack. Check the page against each objection in that set and note which go unanswered.
 
 **Checklist:**
+
 - [ ] FAQ section addresses the top 3-5 objections for this buyer
 - [ ] Risk reducers present, of the kind this buyer recognizes (see the pack — refund-style guarantees in one context, certification and test evidence in the other)
 - [ ] Commercial transparency appropriate to the model (no hidden fees; or stated lead times and response commitments where pricing is quoted)
@@ -169,9 +177,11 @@ Use the objection set from the loaded example pack — `Landing pages — object
 - [ ] Comparison with alternatives (if applicable)
 
 #### Section 6: Call-to-Action (Weight: 10%)
+
 The conversion mechanism itself.
 
 **CTA Button Checklist:**
+
 - [ ] CTA text names what the visitor gets, not the mechanic ("Get My Free Report", "Download the datasheet" — not "Submit")
 - [ ] CTA button is visually dominant (size, color, whitespace)
 - [ ] CTA appears multiple times on long pages
@@ -180,6 +190,7 @@ The conversion mechanism itself.
 - [ ] CTA is specific to the offer (not generic)
 
 **CTA Copy Scoring:**
+
 - Weak in any context: "Submit", "Click Here", "Learn More"
 - Medium in any context: "Sign Up", "Get Started", "Download Now"
 - Strong: take the phrasing patterns from the loaded example pack — `Landing pages — CTA phrasing` in `consumer-online.md`, `CTA phrasing` in `b2b-technical.md`. The conventions genuinely conflict: first-person button text and stated scarcity lift consumer conversion and reduce it with technical buyers.
@@ -187,9 +198,11 @@ The conversion mechanism itself.
 Write CTAs in the language of the page. Do not leave English CTA text on a non-English site.
 
 #### Section 7: Footer and Secondary Elements (Weight: 5%)
+
 The bottom of the page and supporting elements.
 
 **Checklist:**
+
 - [ ] Final CTA present at bottom of page
 - [ ] Contact information or support options visible
 - [ ] Privacy policy and terms of service linked
@@ -199,6 +212,7 @@ The bottom of the page and supporting elements.
 - [ ] Social media links (only if they support conversion, not distract)
 
 ### Step 3: Copy Scoring
+
 Score the overall page copy on 5 dimensions (1-10 each):
 
 1. **Clarity** - Can a visitor understand the offer in 5 seconds?
@@ -210,10 +224,11 @@ Score the overall page copy on 5 dimensions (1-10 each):
 Calculate the Copy Score: average of all 5 dimensions, multiplied by 10 for a score out of 100.
 
 ### Step 4: Form Optimization Audit
+
 If the page has a form, evaluate:
 
 | Element | Best Practice |
-|---|---|
+| --- | --- |
 | Field count | Every additional field reduces conversion. Lead capture: 3-5 fields max; RFQ and technical forms may use optional fields or multi-step progressive disclosure. |
 | Labels | Use inline labels or floating labels. Avoid placeholder-only labels. |
 | Button text | Match the value proposition. "Get My Free Guide" > "Submit". |
@@ -224,6 +239,7 @@ If the page has a form, evaluate:
 | Field types | Use appropriate input types (email, tel, url) for mobile keyboards. |
 
 ### Step 5: Mobile Responsiveness Audit
+
 Mobile accounts for 60%+ of web traffic. Check:
 
 - [ ] CTA is thumb-reachable (bottom half of screen)
@@ -236,17 +252,19 @@ Mobile accounts for 60%+ of web traffic. Check:
 - [ ] Sticky CTA bar on scroll (if applicable)
 
 ### Step 6: Page Speed Impact Assessment
+
 Reference these conversion impact benchmarks:
 
-| Load Time | Conversion Impact |
-|---|---|
-| 0-2 seconds | Baseline (optimal) |
-| 2-3 seconds | -7% conversion rate |
-| 3-5 seconds | -20% conversion rate |
-| 5-8 seconds | -35% conversion rate |
-| 8+ seconds | -50%+ conversion rate |
+| Load Time   | Conversion Impact     |
+| ----------- | --------------------- |
+| 0-2 seconds | Baseline (optimal)    |
+| 2-3 seconds | -7% conversion rate   |
+| 3-5 seconds | -20% conversion rate  |
+| 5-8 seconds | -35% conversion rate  |
+| 8+ seconds  | -50%+ conversion rate |
 
 Check for common speed issues:
+
 - Unoptimized images (use WebP, lazy loading)
 - Render-blocking JavaScript
 - Missing browser caching
@@ -255,12 +273,13 @@ Check for common speed issues:
 - Unminified CSS/JS
 
 ### Step 7: Generate A/B Test Recommendations
+
 Format each test as a hypothesis:
 
-**Template:**
-"If we [CHANGE], then [METRIC] will [IMPROVE/INCREASE] because [REASON]."
+**Template:** "If we [CHANGE], then [METRIC] will [IMPROVE/INCREASE] because [REASON]."
 
 **Example tests to consider:**
+
 1. Headline variations (benefit-focused vs outcome-focused)
 2. CTA button color and text
 3. Social proof placement (above vs below fold)
@@ -273,6 +292,7 @@ Format each test as a hypothesis:
 10. Adding a chatbot or live chat widget
 
 ### Step 8: Heat Map Interpretation Guidance
+
 Even without actual heat map data, provide guidance on:
 
 - **Expected attention zones** based on page layout
@@ -288,16 +308,19 @@ Write the exact `output_path` resolved in Step 0 with:
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Landing Page CRO Analysis
+
 ## [Page URL]
+
 ### Analysis Date: [date]
 
 ---
 
 **Overall CRO Score:** [X/100]
 
-**Page Type:** [identified type]
-**Current Estimated Conversion Rate:** [estimate based on findings]
+**Page Type:** [identified type] \
+**Current Estimated Conversion Rate:** [estimate based on findings] \
 **Target Conversion Rate:** [realistic improvement target]
 
 ---
@@ -305,10 +328,13 @@ Write the exact `output_path` resolved in Step 0 with:
 ## Section-by-Section Analysis
 
 ### 1. Hero Section [Score: X/10]
+
 **Findings:**
+
 - [specific observations]
 
 **Fixes (Priority: HIGH/MEDIUM/LOW):**
+
 - [specific, actionable recommendations]
 
 [Repeat for all 7 sections]
@@ -316,27 +342,31 @@ Write the exact `output_path` resolved in Step 0 with:
 ---
 
 ## Copy Score: [X/100]
-| Dimension | Score | Notes |
-|---|---|---|
-| Clarity | X/10 | [notes] |
-| Urgency | X/10 | [notes] |
-| Specificity | X/10 | [notes] |
-| Proof | X/10 | [notes] |
-| Action Orientation | X/10 | [notes] |
+
+| Dimension          | Score | Notes   |
+| ------------------ | ----- | ------- |
+| Clarity            | X/10  | [notes] |
+| Urgency            | X/10  | [notes] |
+| Specificity        | X/10  | [notes] |
+| Proof              | X/10  | [notes] |
+| Action Orientation | X/10  | [notes] |
 
 ---
 
 ## Form Audit
+
 [findings and recommendations]
 
 ---
 
 ## Mobile Audit
+
 [findings and recommendations]
 
 ---
 
 ## A/B Test Recommendations
+
 1. [Hypothesis format test]
 2. [Hypothesis format test]
 3. [Hypothesis format test]
@@ -346,25 +376,29 @@ Write the exact `output_path` resolved in Step 0 with:
 ## Prioritized Fix List
 
 ### Quick Wins (implement this week)
+
 1. [fix with expected impact]
 
 ### Medium-Term (implement this month)
+
 1. [fix with expected impact]
 
 ### Strategic (implement this quarter)
+
 1. [fix with expected impact]
 
 ---
 
 ## Before/After Wireframe Suggestions
+
 [Text-based wireframe descriptions of current vs recommended layout]
 ```
 
 ## Key Principles
+
 - Always tie recommendations to REVENUE IMPACT. Don't just say "change the button color" -- say "changing the CTA button to a contrasting color typically increases clicks 15-30%, which at your current traffic could mean X more conversions per month."
 - Prioritize fixes by effort-to-impact ratio. Quick wins first.
 - Be specific. "Improve your headline" is useless. "Change your headline from 'Welcome to Our Platform' to 'Cut Your Reporting Time by 75% -- Automated Analytics for Growth Teams' because it adds specificity, a quantified benefit, and targets a specific audience" is actionable.
 - Reference industry benchmarks so the client understands where they stand.
 - If you have access to the page via browser tools, take screenshots and reference specific elements.
 - If `MARKETKIT - MARKETING-AUDIT - <domain>.md` exists in the Step 0 `audit_dir` (same exact domain scope), incorporate those findings into the CRO analysis for a more complete picture. Never search older audit folders.
-

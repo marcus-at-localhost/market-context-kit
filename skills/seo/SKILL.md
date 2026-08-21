@@ -29,29 +29,22 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
-asserting anything about a page's structure, staleness, or absence. Page text used as evidence
-must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
-HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
-attribute-only markup.
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or asserting anything about a page's structure, staleness, or absence. Page text used as evidence must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or attribute-only markup.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`. Its `Myth Guardrail` binds every
-recommendation this audit emits, `Grounding Precedence` governs a myth check a grounding criterion
-asks for anyway, and `Schema Scoring` sets how Step 8 is scored.
+Read `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`. Its `Myth Guardrail` binds every recommendation this audit emits, `Grounding Precedence` governs a myth check a grounding criterion asks for anyway, and `Schema Scoring` sets how Step 8 is scored.
 
 Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve a `SEARCH-CONTEXT.v1.json` only from an explicit user path, or from exactly one match in the active audit folder's flat `data/` for the exact domain and, if requested, the exact reporting period, then validate schema, domain, reporting period, and source statuses before reading values.
 
 ---
 
 ## Skill Purpose
+
 Perform a comprehensive SEO audit of a webpage or website, covering on-page SEO, content quality (E-E-A-T), keyword analysis, technical SEO, and content strategy. This skill combines automated analysis via `scripts/analyze_page.py` with expert-level manual review to produce an actionable SEO audit document.
 
 ## When to Use
+
 - User provides a URL and asks for SEO analysis, audit, or recommendations
 - User wants to improve organic search rankings and traffic
 - User asks about on-page SEO, meta tags, content quality, or technical SEO
@@ -61,6 +54,7 @@ Perform a comprehensive SEO audit of a webpage or website, covering on-page SEO,
 ## How to Execute
 
 ### Step 1: Run Automated Analysis
+
 Use the bundled Python analysis script to gather baseline data:
 
 ```bash
@@ -75,6 +69,7 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/analyze_page.py" "<url>"
 If the output is a `{"usage": ...}` banner, the URL argument did not arrive — re-run with the URL quoted.
 
 This script extracts:
+
 - Title tag and meta description
 - Open Graph tags
 - Heading hierarchy (H1-H6)
@@ -87,6 +82,7 @@ This script extracts:
 ### Step 1.5: Apply optional measured Search Context
 
 If a valid artifact was resolved in Phase 0, use its measured queries, landing-page paths, CTR, average position, and indexing states to prioritize recommendations. Name the artifact reporting period and providers, disclose partial sources, and reject domain mismatches. Keep live HTML and the bundled analyzer as the source for structural claims; analytics evidence cannot prove a title, heading, canonical, schema, or link exists now. Do not change the SEO health score solely because of Search Context data—use it for priority and confidence.
+
 - Tracking scripts
 - Viewport meta tag (mobile-friendliness indicator)
 - Canonical tag
@@ -101,7 +97,7 @@ Treat script output as a starting point, not final proof. Before writing the aud
 1. Add a concise evidence table for all major findings:
 
 | Claim | URL checked | Source | Confidence |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | [Finding being reported] | [Exact URL] | [Analyzer JSON, direct HTML, robots.txt, sitemap, manual page review, etc.] | High/Medium/Low |
 
 2. Re-check every critical finding with direct HTML inspection or a second sampled URL before including it in the audit.
@@ -109,11 +105,13 @@ Treat script output as a starting point, not final proof. Before writing the aud
 4. If a finding cannot be externally verified, label it as "not externally verifiable" or "not verified" instead of "missing" or "not configured". For example, public HTML cannot prove whether Google Search Console is configured.
 
 ### Step 2: On-Page SEO Checklist
+
 Evaluate each element and score it as Pass, Needs Work, or Fail.
 
 #### Title Tag
+
 | Criteria | Best Practice | Check |
-|---|---|---|
+| --- | --- | --- |
 | Exists | Every page must have a unique title tag | Pass/Fail |
 | Length | 50-60 characters (displays fully in SERPs) | Pass/Needs Work/Fail |
 | Primary keyword | Contains the primary target keyword | Pass/Needs Work/Fail |
@@ -123,6 +121,7 @@ Evaluate each element and score it as Pass, Needs Work, or Fail.
 | Compelling | Would a searcher want to click this? | Pass/Needs Work/Fail |
 
 **Common title tag mistakes:**
+
 - Too long (truncated in search results)
 - Missing primary keyword
 - Keyword stuffing ("Best SEO Tool | Top SEO Tool | SEO Software | SEO Platform")
@@ -131,8 +130,9 @@ Evaluate each element and score it as Pass, Needs Work, or Fail.
 - Missing brand name
 
 #### Meta Description
+
 | Criteria | Best Practice | Check |
-|---|---|---|
+| --- | --- | --- |
 | Exists | Every page should have a meta description | Pass/Fail |
 | Length | 150-160 characters | Pass/Needs Work/Fail |
 | Primary keyword | Naturally includes the target keyword | Pass/Needs Work/Fail |
@@ -141,8 +141,9 @@ Evaluate each element and score it as Pass, Needs Work, or Fail.
 | Compelling | Acts as ad copy for the search result | Pass/Needs Work/Fail |
 
 #### Heading Hierarchy (H1-H6)
+
 | Criteria | Best Practice | Check |
-|---|---|---|
+| --- | --- | --- |
 | H1 exists | Exactly one H1 per page | Pass/Fail |
 | H1 contains keyword | Primary keyword in the H1 | Pass/Needs Work/Fail |
 | H1 differs from title | H1 and title tag are different (but related) | Pass/Needs Work/Fail |
@@ -152,8 +153,9 @@ Evaluate each element and score it as Pass, Needs Work, or Fail.
 | Not overused | Headers used for structure, not styling | Pass/Needs Work/Fail |
 
 #### Image Optimization
+
 | Criteria | Best Practice | Check |
-|---|---|---|
+| --- | --- | --- |
 | Alt text | Every image has descriptive alt text | Pass/Needs Work/Fail |
 | Alt text quality | Alt text describes the image and includes keywords naturally | Pass/Needs Work/Fail |
 | File names | Descriptive filenames (not IMG_001.jpg) | Pass/Needs Work/Fail |
@@ -163,8 +165,9 @@ Evaluate each element and score it as Pass, Needs Work, or Fail.
 | Decorative images | Decorative images have empty alt="" (not missing alt) | Pass/Needs Work/Fail |
 
 #### Internal Linking
+
 | Criteria | Best Practice | Check |
-|---|---|---|
+| --- | --- | --- |
 | Internal links present | Page links to other relevant pages on the site | Pass/Needs Work/Fail |
 | Anchor text | Internal link anchor text is descriptive (not "click here") | Pass/Needs Work/Fail |
 | Deep linking | Links go to specific pages, not just homepage | Pass/Needs Work/Fail |
@@ -173,8 +176,9 @@ Evaluate each element and score it as Pass, Needs Work, or Fail.
 | Broken links | No broken internal links (404s) | Pass/Fail |
 
 #### URL Structure
+
 | Criteria | Best Practice | Check |
-|---|---|---|
+| --- | --- | --- |
 | Readable | URL is human-readable and descriptive | Pass/Needs Work/Fail |
 | Keywords | URL contains relevant keywords | Pass/Needs Work/Fail |
 | Length | Under 75 characters (ideally under 60) | Pass/Needs Work/Fail |
@@ -188,9 +192,11 @@ Evaluate each element and score it as Pass, Needs Work, or Fail.
 Evaluate the content against Google's E-E-A-T framework:
 
 #### Experience
+
 Does the content demonstrate first-hand experience with the topic?
 
 **Check for:**
+
 - Personal anecdotes, case studies, or real-world examples
 - Screenshots, photos, or evidence of hands-on experience
 - Specific details that only someone with experience would know
@@ -199,9 +205,11 @@ Does the content demonstrate first-hand experience with the topic?
 **Score:** Strong / Present / Weak / Missing
 
 #### Expertise
+
 Does the author have demonstrated knowledge in this subject?
 
 **Check for:**
+
 - Author bio with relevant credentials
 - Depth of content (not superficial)
 - Accurate information and data
@@ -211,9 +219,11 @@ Does the author have demonstrated knowledge in this subject?
 **Score:** Strong / Present / Weak / Missing
 
 #### Authoritativeness
+
 Is the website and author recognized as an authority on this topic?
 
 **Check for:**
+
 - Author bylines with real names and bios
 - About page with company background
 - Industry awards or certifications
@@ -224,9 +234,11 @@ Is the website and author recognized as an authority on this topic?
 **Score:** Strong / Present / Weak / Missing
 
 #### Trustworthiness
+
 Can users trust this content and this website?
 
 **Check for:**
+
 - HTTPS (SSL certificate)
 - Privacy policy and terms of service
 - Physical address and contact information
@@ -243,7 +255,7 @@ Can users trust this content and this website?
 Google's helpful-content guidance asks three questions of every page. Score each Pass / Needs Work / Fail:
 
 | Question | What to check |
-|---|---|
+| --- | --- |
 | **Who** produced it? | A byline with a real name, author background, and a reason to trust them on this topic |
 | **How** was it produced? | Method stated where it matters (testing, sourcing, review); automation or AI involvement disclosed along with the role it served |
 | **Why** does it exist? | Written to help a reader. Content that exists only to catch search traffic fails here |
@@ -261,8 +273,9 @@ Each is a Fail for the page's helpfulness on its own, whatever the four dimensio
 ### Step 4: Keyword Analysis
 
 #### Primary Keyword Assessment
+
 | Element | Evaluation |
-|---|---|
+| --- | --- |
 | Primary keyword identified | What keyword is this page targeting? |
 | Search intent alignment | Does the content match what searchers expect? (informational, commercial, transactional, navigational) |
 | Keyword in title | Present, position, natural usage |
@@ -274,17 +287,20 @@ Each is a Fail for the page's helpfulness on its own, whatever the four dimensio
 | Keyword density | 1-2% is ideal. Over 3% is keyword stuffing. |
 
 #### Secondary Keywords
+
 Identify 5-10 related keywords that should be naturally included in the content:
+
 - Synonyms and variations of the primary keyword
 - Long-tail variations
 - Related questions (People Also Ask)
 - LSI (Latent Semantic Indexing) keywords
 
 #### Search Intent Analysis
+
 Determine the search intent behind the target keyword and evaluate if the content matches:
 
 | Intent Type | User Goal | Content Should Be |
-|---|---|---|
+| --- | --- | --- |
 | Informational | Learn something | Blog post, guide, tutorial, FAQ |
 | Commercial | Compare options | Comparison page, review, list |
 | Transactional | Buy, request, enroll, download, or contact | Product page, pricing page, checkout, RFQ page, contact page, course page, datasheet page |
@@ -295,18 +311,22 @@ Determine the search intent behind the target keyword and evaluate if the conten
 ### Step 5: Technical SEO Quick Check
 
 #### Robots.txt
+
 ```
 Check: Does /robots.txt exist and is it properly configured?
 ```
+
 - [ ] robots.txt is accessible
 - [ ] Not blocking important pages or resources
 - [ ] Points to sitemap.xml
 - [ ] Not blocking CSS/JS (needed for rendering)
 
 #### XML Sitemap
+
 ```
 Check: Does /sitemap.xml exist?
 ```
+
 - [ ] Sitemap exists and is accessible
 - [ ] Contains all important pages
 - [ ] No broken URLs in sitemap
@@ -314,22 +334,25 @@ Check: Does /sitemap.xml exist?
 - [ ] Last modified dates are accurate
 
 #### Canonical Tags
+
 - [ ] Canonical tag present on the page
 - [ ] Points to the correct URL (self-referencing or to the canonical version)
 - [ ] Consistent with robots.txt and sitemap
 
 #### Page Speed
+
 Reference benchmarks:
 
-| Metric | Good | Needs Work | Poor |
-|---|---|---|---|
-| Largest Contentful Paint (LCP) | Under 2.5s | 2.5-4.0s | Over 4.0s |
-| First Input Delay (FID) | Under 100ms | 100-300ms | Over 300ms |
-| Cumulative Layout Shift (CLS) | Under 0.1 | 0.1-0.25 | Over 0.25 |
-| Time to First Byte (TTFB) | Under 200ms | 200-500ms | Over 500ms |
-| First Contentful Paint (FCP) | Under 1.8s | 1.8-3.0s | Over 3.0s |
+| Metric                         | Good        | Needs Work | Poor       |
+| ------------------------------ | ----------- | ---------- | ---------- |
+| Largest Contentful Paint (LCP) | Under 2.5s  | 2.5-4.0s   | Over 4.0s  |
+| First Input Delay (FID)        | Under 100ms | 100-300ms  | Over 300ms |
+| Cumulative Layout Shift (CLS)  | Under 0.1   | 0.1-0.25   | Over 0.25  |
+| Time to First Byte (TTFB)      | Under 200ms | 200-500ms  | Over 500ms |
+| First Contentful Paint (FCP)   | Under 1.8s  | 1.8-3.0s   | Over 3.0s  |
 
 **Common speed issues to flag:**
+
 - Unoptimized images (recommend WebP format, compression)
 - Render-blocking JavaScript or CSS
 - No browser caching headers
@@ -339,6 +362,7 @@ Reference benchmarks:
 - Missing compression (gzip or brotli)
 
 #### Mobile-Friendliness
+
 - [ ] Viewport meta tag present (`<meta name="viewport" content="width=device-width, initial-scale=1">`)
 - [ ] Text readable without zooming (minimum 16px body text)
 - [ ] Tap targets adequately sized and spaced (minimum 48x48px)
@@ -357,8 +381,9 @@ Methodology for identifying content gaps:
 5. **Check related searches:** What does Google suggest at the bottom of the SERP?
 
 **Content Gap Template:**
+
 | Missing Topic | Search Volume Potential | Competition | Content Type Needed | Priority |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | [Topic] | High/Med/Low | High/Med/Low | Blog/Guide/Tool/Page | 1-5 |
 
 ### Step 7: Featured Snippet Optimization
@@ -366,12 +391,14 @@ Methodology for identifying content gaps:
 Identify opportunities to capture featured snippets:
 
 **Types of featured snippets:**
+
 1. **Paragraph snippet** -- Answer in 40-60 words. Use a clear question as H2/H3 followed by a concise answer.
 2. **List snippet** -- Use ordered or unordered lists with H2 containing the target query.
 3. **Table snippet** -- Use HTML tables with clear headers.
 4. **Video snippet** -- Include video with descriptive title and timestamps.
 
 **Optimization checklist:**
+
 - [ ] Target question-based queries ("how to", "what is", "why does")
 - [ ] Place answer immediately after the question heading
 - [ ] Keep paragraph answers between 40-60 words
@@ -383,19 +410,20 @@ Identify opportunities to capture featured snippets:
 Check for structured data implementation:
 
 | Schema Type | Applicable To | Status |
-|---|---|---|
+| --- | --- | --- |
 | Organization | Homepage, About page | Present/Missing |
 | LocalBusiness | Local businesses | Present/Missing/N/A |
 | Product | Product pages | Present/Missing/N/A |
 | Article | Blog posts, news | Present/Missing/N/A |
-| FAQ *(restricted to government and health sites)* | FAQ sections | Present/Missing/N/A |
-| HowTo *(no longer produces a rich result)* | Tutorial content | Present/Missing/N/A |
+| FAQ _(restricted to government and health sites)_ | FAQ sections | Present/Missing/N/A |
+| HowTo _(no longer produces a rich result)_ | Tutorial content | Present/Missing/N/A |
 | Review/AggregateRating | Reviews, testimonials | Present/Missing/N/A |
 | BreadcrumbList | All pages with breadcrumbs | Present/Missing |
 | WebSite/SearchAction | Homepage (sitelinks search box) | Present/Missing |
 | Event | Event pages | Present/Missing/N/A |
 
 **Implementation guidance:**
+
 - Use JSON-LD format (Google's preferred format)
 - Validate with Google's Rich Results Test
 - Don't mark up content that isn't visible on the page
@@ -414,6 +442,7 @@ Identify specific internal linking improvements:
 5. **Footer/sidebar links** -- Sitewide links to important pages
 
 **Linking Architecture Assessment:**
+
 ```
 Homepage
   |-- Category/Service Pages (Pillar Content)
@@ -428,14 +457,16 @@ Homepage
 Evaluate the revenue impact of Core Web Vitals performance:
 
 **Research-backed impacts:**
+
 - Sites passing all Core Web Vitals see 24% fewer page abandonments
 - A 100ms decrease in LCP correlates with a 1.1% increase in conversion rates
 - Reducing CLS by 0.1 corresponds to a 15% decrease in bounce rate
 - Pages loading within 2 seconds have an average bounce rate of 9%, while pages loading in 5 seconds have a 38% bounce rate
 
 **Recommendations by metric:**
+
 | Metric | If Failing | Typical Fixes |
-|---|---|---|
+| --- | --- | --- |
 | LCP | Over 2.5s | Optimize hero image, preload critical resources, use CDN, reduce server response time |
 | FID/INP | Over 100ms | Reduce JavaScript execution, defer non-critical scripts, use web workers |
 | CLS | Over 0.1 | Set image dimensions, reserve space for ads/embeds, avoid inserting content above existing content |
@@ -452,18 +483,16 @@ Based on the audit findings, recommend:
 6. **Distribution plan** -- How to promote content beyond organic search
 
 **Content Prioritization Matrix:**
+
 | Content Idea | Search Volume | Competition | Business Value | Priority Score |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | [Topic] | High/Med/Low | High/Med/Low | High/Med/Low | 1-10 |
 
 Scoring: High volume + Low competition + High business value = Highest priority
 
 ### Step 12: Filter Myth Recommendations
 
-Before writing Prioritized Recommendations, filter every recommendation against the `Myth Guardrail`
-in `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`. A match is dropped, not downgraded.
-Where grounding asked for one of those checks, report the finding as a fact under Technical SEO with
-its evidence — never as a Critical, High, Medium, or Low recommendation.
+Before writing Prioritized Recommendations, filter every recommendation against the `Myth Guardrail` in `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`. A match is dropped, not downgraded. Where grounding asked for one of those checks, report the finding as a fact under Technical SEO with its evidence — never as a Critical, High, Medium, or Low recommendation.
 
 ## Output Format: MARKETKIT - SEO-AUDIT - <domain>.md
 
@@ -471,8 +500,11 @@ Write the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/refere
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # SEO Content Audit
+
 ## [URL]
+
 ### Date: [Date]
 
 ### Optional data source: [SEARCH-CONTEXT.v1.json path, reporting period, source statuses — or: not used]
@@ -486,41 +518,49 @@ Write the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/refere
 ## On-Page SEO Checklist
 
 ### Title Tag
+
 - Status: [Pass/Needs Work/Fail]
 - Current: "[current title]"
 - Recommended: "[improved title]"
 - Issues: [list issues]
 
 ### Meta Description
+
 - Status: [Pass/Needs Work/Fail]
 - Current: "[current meta]"
 - Recommended: "[improved meta]"
 
 ### Heading Hierarchy
+
 [H1-H6 structure analysis]
 
 ### Image Optimization
+
 [Alt text audit results]
 
 ### Internal Linking
+
 [Link analysis]
 
 ### URL Structure
+
 [URL assessment]
 
 ---
 
 ## Content Quality (E-E-A-T)
-| Dimension | Score | Evidence |
-|---|---|---|
-| Experience | [Strong/Present/Weak/Missing] | [details] |
-| Expertise | [Strong/Present/Weak/Missing] | [details] |
+
+| Dimension         | Score                         | Evidence  |
+| ----------------- | ----------------------------- | --------- |
+| Experience        | [Strong/Present/Weak/Missing] | [details] |
+| Expertise         | [Strong/Present/Weak/Missing] | [details] |
 | Authoritativeness | [Strong/Present/Weak/Missing] | [details] |
-| Trustworthiness | [Strong/Present/Weak/Missing] | [details] |
+| Trustworthiness   | [Strong/Present/Weak/Missing] | [details] |
 
 ---
 
 ## Keyword Analysis
+
 - Primary Keyword: [keyword]
 - Search Intent: [type]
 - Keyword Placement: [checklist results]
@@ -529,36 +569,43 @@ Write the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/refere
 ---
 
 ## Technical SEO
+
 [Quick check results]
 
 ---
 
 ## Content Gap Analysis
+
 [Missing topics table]
 
 ---
 
 ## Featured Snippet Opportunities
+
 [Specific opportunities]
 
 ---
 
 ## Schema Markup
+
 [Current vs recommended]
 
 ---
 
 ## Internal Linking Opportunities
+
 [Specific recommendations]
 
 ---
 
 ## Core Web Vitals
+
 [Performance assessment with revenue impact]
 
 ---
 
 ## Content Strategy Recommendations
+
 [Publishing plan, content priorities]
 
 ---
@@ -566,23 +613,27 @@ Write the exact `output_path` resolved in Phase 0 (`${CLAUDE_PLUGIN_ROOT}/refere
 ## Prioritized Recommendations
 
 ### Critical (Fix Immediately)
+
 1. [recommendation with expected impact]
 
 ### High Priority (This Month)
+
 1. [recommendation]
 
 ### Medium Priority (This Quarter)
+
 1. [recommendation]
 
 ### Low Priority (When Resources Allow)
+
 1. [recommendation]
 ```
 
 ## Key Principles
+
 - SEO audits should be educational, not just diagnostic. Explain WHY each element matters so the client understands the value.
 - Always provide the "before" (current state) and "after" (recommended change) so the client can see exactly what needs to change.
 - Tie SEO improvements to business outcomes. "Optimizing your title tag" means nothing to a business owner. "Optimizing your title tag could increase your click-through rate by 20-35%, bringing an estimated 500 more visitors per month to this page" is actionable.
 - Use the automated script data as a starting point, but add expert analysis on top. The script finds the data; the skill interprets what it means.
 - Prioritize recommendations by effort-to-impact ratio. A title tag change takes 5 minutes but can impact every search impression. A full content rewrite takes weeks.
 - If the user has run `/marketkit:audit` or `/marketkit:landing` previously, cross-reference those findings with the SEO audit for a more complete picture.
-

@@ -42,13 +42,12 @@ Paths written as `${CLAUDE_PLUGIN_ROOT}/…` anywhere in this file are provenanc
 
 ## Analysis Process
 
-If your prompt carries a `## Myth Guardrail` block, it binds every recommendation you write — a
-matching recommendation is dropped, not downgraded. A check the grounding digest asks for anyway
-(an `llms.txt` criterion is the common case) still gets run and reported as a fact with evidence,
-never as a scored gap or a severity-rated issue.
+If your prompt carries a `## Myth Guardrail` block, it binds every recommendation you write — a matching recommendation is dropped, not downgraded. A check the grounding digest asks for anyway (an `llms.txt` criterion is the common case) still gets run and reported as a fact with evidence, never as a scored gap or a severity-rated issue.
 
 ### Step 1: Fetch Key Pages
+
 Use WebFetch to retrieve and analyze these pages (if they exist):
+
 1. Homepage
 2. About page
 3. Main commercial action page (pricing, RFQ, contact, catalog, enrollment, or distributor page)
@@ -60,18 +59,21 @@ Use WebFetch to retrieve and analyze these pages (if they exist):
 Score each dimension 0-10:
 
 **Headline Clarity (0-10)**
+
 - Does the homepage headline clearly communicate what the product/service does?
 - Can a first-time visitor understand the value in under 5 seconds?
 - Is it specific (not generic "We help businesses grow")?
 - Scoring: 9-10 = crystal clear + compelling, 7-8 = clear but generic, 5-6 = somewhat unclear, 3-4 = confusing, 0-2 = no clear headline
 
 **Value Proposition Strength (0-10)**
+
 - Is there a clear, differentiated value proposition?
 - Does it answer "Why should I choose you over alternatives?"
 - Is it specific with proof (numbers, outcomes, timeframes)?
 - Scoring: 9-10 = unique + proven, 7-8 = clear but unproven, 5-6 = generic, 3-4 = unclear, 0-2 = missing
 
 **Copy Persuasion (0-10)**
+
 - Does the copy focus on benefits over features?
 - Does it use customer language? Keep legitimate technical terms when the target buyer expects them; flag only needless jargon or vague buzzwords.
 - Are there emotional triggers and logical proof?
@@ -79,6 +81,7 @@ Score each dimension 0-10:
 - Scoring: 9-10 = highly persuasive + natural, 7-8 = good but room to improve, 5-6 = informational not persuasive, 3-4 = feature-focused, 0-2 = poor or missing
 
 **Content Depth (0-10)**
+
 - Is there enough content to inform purchase decisions?
 - Are features explained with context and outcomes?
 - Is there educational content (blog, guides, resources)?
@@ -87,6 +90,7 @@ Score each dimension 0-10:
 - Scoring: 9-10 = comprehensive, well-organized + non-commodity, 7-8 = good coverage, 5-6 = surface-level, 3-4 = thin content, 0-2 = barely any content
 
 **Call-to-Action Effectiveness (0-10)**
+
 - Are CTAs clear, specific, and action-oriented?
 - Do they use value-driven text (not just "Submit" or "Click Here")?
 - Are there appropriate CTAs at multiple points on the page?
@@ -96,6 +100,7 @@ Score each dimension 0-10:
 ### Step 3: Identify Specific Issues
 
 For each page analyzed, note:
+
 - **Wins** — things they're doing well (be specific, quote examples)
 - **Fixes** — things that need improvement with specific rewrite suggestions
 - **Missing** — elements that should exist but don't
@@ -103,6 +108,7 @@ For each page analyzed, note:
 ### Step 4: Generate Before/After Examples
 
 For the top 3 issues found, create:
+
 - **Before**: The current copy (quote exactly)
 - **After**: A rewritten version that fixes the issue
 - **Why**: Brief explanation of what changed and why it's better
@@ -160,6 +166,7 @@ Return your analysis in this structure:
 The last two sections are mandatory — including, especially, when both are `none`. The orchestrator reconciles `Files Read` against the Data Manifest before merging anything (Phase 2.4). A missing block, or a path that was not on the manifest, voids this whole dimension: it gets dropped from the report and rerun.
 
 ## Important Rules
+
 - Always fetch and read actual page content — never guess or assume
 - Quote specific copy from the website in your analysis
 - Every fix must include a concrete alternative, not just "improve the headline"

@@ -34,16 +34,9 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
-asserting anything about a page's structure, staleness, or absence. Page text used as evidence
-must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
-HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
-attribute-only markup.
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or asserting anything about a page's structure, staleness, or absence. Page text used as evidence must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or attribute-only markup.
 
 Write in the language of the target page, using the terminology the site and the grounding files already use.
 
@@ -54,6 +47,7 @@ Write in the language of the target page, using the terminology the site and the
 ### 1.1 Fetch and Parse
 
 Use `WebFetch` to retrieve the target URL. Extract:
+
 - Primary headline (H1)
 - Subheadline / supporting headline
 - Hero section copy
@@ -70,7 +64,7 @@ Use `WebFetch` to retrieve the target URL. Extract:
 Identify what kind of page this is, because each type has different copy priorities:
 
 | Page Type | Primary Goal | Copy Priority |
-|-----------|-------------|---------------|
+| --- | --- | --- |
 | **Homepage** | Communicate value prop, route visitors | Headline clarity, navigation clarity, CTA hierarchy |
 | **Landing Page** | Single conversion action | Headline-CTA alignment, objection handling, urgency |
 | **Pricing Page** | Drive plan selection | Plan naming, feature framing, anchoring, FAQ |
@@ -92,6 +86,7 @@ The page types available depend on the business — a site with no public pricin
 Before generating new copy, analyze the existing voice:
 
 **Voice Dimensions to Assess:**
+
 - **Formality:** Casual ←→ Formal (1-5 scale)
 - **Emotion:** Neutral ←→ Passionate (1-5 scale)
 - **Complexity:** Simple ←→ Technical (1-5 scale)
@@ -111,6 +106,7 @@ Evaluate the primary headline against these criteria:
 **The 5-Second Test:** Would a new visitor understand what this company does and who it serves within 5 seconds of reading the headline?
 
 **Headline Scoring:**
+
 - **Clarity (0-10):** Is the meaning immediately obvious? No jargon, no ambiguity.
 - **Specificity (0-10):** Does it include concrete details? Numbers, outcomes, timeframes.
 - **Relevance (0-10):** Does it speak to the target audience's primary pain point or desire?
@@ -122,6 +118,7 @@ Evaluate the primary headline against these criteria:
 Use these proven frameworks to generate alternative headlines:
 
 **PAS (Problem-Agitate-Solve):**
+
 ```
 Problem: [State the pain point]
 Agitate: [Make the pain feel urgent]
@@ -130,6 +127,7 @@ Headline: "Stop [pain]. Start [desired outcome] — with [product]."
 ```
 
 **AIDA (Attention-Interest-Desire-Action):**
+
 ```
 Attention: [Surprising fact or bold claim]
 Interest: [Why this matters to the reader]
@@ -139,6 +137,7 @@ Headline: "[Bold claim] — [specific outcome] in [timeframe]."
 ```
 
 **Before-After-Bridge:**
+
 ```
 Before: [Current painful state]
 After: [Desired future state]
@@ -147,6 +146,7 @@ Headline: "From [before state] to [after state] — [product] makes it happen."
 ```
 
 **4U Framework:**
+
 ```
 Useful: [What benefit does it provide?]
 Ultra-specific: [Can you add numbers, timeframes, percentages?]
@@ -162,7 +162,7 @@ Generate 5-10 headline alternatives using these frameworks.
 Score the entire page copy across 5 dimensions:
 
 | Dimension | Score | What It Measures |
-|-----------|-------|------------------|
+| --- | --- | --- |
 | **Clarity** | 0-10 | Can the target buyer quickly understand what you do? Avoid fluff; keep necessary technical language when the audience expects it. |
 | **Persuasion** | 0-10 | Does the copy move the reader toward action? Handles objections? |
 | **Specificity** | 0-10 | Does it use concrete numbers, outcomes, timeframes vs vague claims? |
@@ -193,6 +193,7 @@ If any element is missing or weak in the current copy, flag it.
 ### 3.1 Page-Specific Copy Guidance
 
 **Homepage Copy Structure:**
+
 1. Hero: Headline (what you do + for whom) + Subhead (how you do it) + Primary CTA
 2. Social proof bar: Logos, user count, or key metric
 3. Problem section: Articulate the pain the audience feels
@@ -203,6 +204,7 @@ If any element is missing or weak in the current copy, flag it.
 8. Final CTA: Repeat the primary call to action with urgency or guarantee
 
 **Landing Page Copy Structure:**
+
 1. Headline: Single clear promise
 2. Subhead: Supporting evidence or context
 3. Hero CTA: Above the fold, high contrast
@@ -220,6 +222,7 @@ If any element is missing or weak in the current copy, flag it.
 Analyze every CTA on the page:
 
 **CTA Button Text Best Practices (any business type):**
+
 - Name the value, not the mechanic: "Get My Report" not "Submit"
 - Be specific: "Download the 2026 Marketing Guide" not "Download"
 - Remove the next unknown: say what happens after the click and by when
@@ -230,12 +233,14 @@ Phrasing patterns, urgency conventions and first-person usage differ by business
 For B2B/technical business types, weight headline and CTA framing toward the buyer archetype the grounding or site evidence suggests dominates — see `Buyer archetypes` in `b2b-technical.md`. Default to covering all three if no signal points to one.
 
 **CTA Placement Analysis:**
+
 - Is there a CTA above the fold? (Required)
 - Is there a CTA after each major content section? (Recommended)
 - Is there a sticky/floating CTA on long pages? (Recommended for long-form)
 - Is the CTA repeated at the bottom? (Required)
 
 **CTA Contrast:**
+
 - The CTA must contrast with the page background and surrounding elements. That is the part with evidence behind it.
 - Colour-meaning conventions ("green means go") are consumer-marketing folklore and are in `consumer-online.md` if the business type calls for them. Do not spend a recommendation slot on hue when contrast, placement and wording are unresolved.
 
@@ -256,6 +261,7 @@ outcome-driven (cut tickets), and includes a proof point (under 2 minutes).
 ```
 
 Generate at least 5 before/after pairs covering:
+
 1. Primary headline
 2. Subheadline
 3. Primary CTA
@@ -265,6 +271,7 @@ Generate at least 5 before/after pairs covering:
 ### 3.4 Swipe File Generation
 
 Create a swipe file section with:
+
 - 10 headline alternatives ranked by estimated effectiveness
 - 5 subheadline alternatives
 - 5 CTA button text alternatives
@@ -307,39 +314,51 @@ Write the exact `output_path` resolved in Phase 0 with this structure:
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Copy Analysis & Suggestions: [URL]
-**Date:** [current date]
-**Page Type:** [type]
+
+**Date:** [current date] \
+**Page Type:** [type] \
 **Copy Score:** X/100
 
 ## Executive Summary
+
 [2-3 paragraphs summarizing the copy quality, key strengths, and priority fixes]
 
 ## Voice & Tone Profile
+
 [Voice analysis results with recommendations]
 
 ## Score Breakdown
+
 [Full scoring rubric with justifications]
 
 ## Value Proposition Analysis
+
 [Value proposition canvas with gaps identified]
 
 ## Headline Recommendations
+
 [Current headline, 10 alternatives with framework used, ranked]
 
 ## Section-by-Section Copy Suggestions
+
 [For each major section: current copy, issues, recommended copy, rationale]
 
 ## CTA Optimization
+
 [Every CTA analyzed with recommendations]
 
 ## Before/After Examples
+
 [At least 5 before/after pairs]
 
 ## Swipe File
+
 [All headline, subheadline, CTA, and meta alternatives]
 
 ## Implementation Priority
+
 [Ranked list of changes by impact]
 ```
 
@@ -353,4 +372,3 @@ Look only inside the Phase 0 `audit_dir`, for the exact same domain scope. Never
 - If `MARKETKIT - MARKETING-AUDIT - <domain>.md` exists, reference the Content & Messaging score
 - If `MARKETKIT - COMPETITOR-REPORT - <domain>.md` exists, use competitor messaging to inform differentiation
 - Suggest follow-up: `/marketkit:landing` for landing-page-specific deep dive, `/marketkit:brand` for voice guidelines
-

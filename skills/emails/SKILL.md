@@ -34,10 +34,7 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
 Write the emails in the recipient's language, and check the compliance section in Phase 5 for the regime that actually applies to that market before drafting.
 
@@ -50,7 +47,7 @@ Write the emails in the recipient's language, and check the compliance section i
 Before writing any emails, establish:
 
 | Context Element | How to Determine | Why It Matters |
-|----------------|-----------------|----------------|
+| --- | --- | --- |
 | **Business type** | Fetch URL or ask user | Determines sequence type and tone |
 | **Target audience** | Infer from site copy or ask | Shapes language, pain points, examples |
 | **Product/service** | Fetch product/pricing pages | Drives value propositions in emails |
@@ -64,7 +61,7 @@ Before writing any emails, establish:
 Based on context, recommend the appropriate sequence(s):
 
 | Sequence Type | When to Use | Emails | Goal |
-|--------------|-------------|--------|------|
+| --- | --- | --- | --- |
 | **Welcome** | New subscriber / lead magnet download | 5-7 | Build trust, deliver value, introduce product |
 | **Nurture** | Warm leads not yet ready to buy | 6-8 | Educate, build authority, overcome objections |
 | **Launch** | New product or feature release | 8-12 | Build anticipation, drive purchases |
@@ -87,6 +84,7 @@ Generate at least 2 sequence types unless the user specifies one.
 ### 2.1 Core Email Philosophy: One Email, One Job
 
 Every email must have exactly ONE primary purpose:
+
 - ONE main idea or story
 - ONE call-to-action (secondary CTA optional but de-emphasized)
 - ONE desired reader action
@@ -96,6 +94,7 @@ Never combine multiple asks in a single email. Violating this rule is the number
 ### 2.2 Email Structure Frameworks
 
 **Value Before Ask:**
+
 ```
 Email 1: Pure value (no ask)
 Email 2: Pure value (no ask)
@@ -107,6 +106,7 @@ Email 5: Direct ask with urgency
 Use this for welcome and nurture sequences. The ratio should be approximately 3:1 value-to-ask.
 
 **Story-Driven:**
+
 ```
 Hook: Open with a story, observation, or surprising fact (2-3 sentences)
 Bridge: Connect the story to the reader's situation (1-2 sentences)
@@ -117,6 +117,7 @@ CTA: Link the lesson to the next step (1 sentence + button/link)
 Use this for nurture emails and any sequence targeting a sophisticated audience.
 
 **Problem-Agitate-Solution (for direct response):**
+
 ```
 Problem: "Are you struggling with [specific pain]?"
 Agitate: "Every day you wait, [consequence]."
@@ -131,7 +132,7 @@ Use this for launch emails and abandoned-conversion follow-ups. Take the closing
 **Subject Line Formulas:**
 
 | Formula | Example | Best For |
-|---------|---------|----------|
+| --- | --- | --- |
 | **Number + Benefit** | "3 ways to double your conversion rate" | Educational content |
 | **Curiosity Gap** | "The pricing mistake that cost me $50K" | Story-driven emails |
 | **Direct Benefit** | "Your copy report is ready" | Delivery / welcome emails |
@@ -144,6 +145,7 @@ Use this for launch emails and abandoned-conversion follow-ups. Take the closing
 | **Negative** | "Stop wasting money on ads that don't work" | Problem-awareness |
 
 **Subject Line Rules:**
+
 - Keep under 50 characters for mobile optimization (40 is ideal)
 - Front-load the most important words
 - Use numbers when possible (odd numbers outperform even)
@@ -157,7 +159,7 @@ Use this for launch emails and abandoned-conversion follow-ups. Take the closing
 **Recommended Cadence by Sequence Type:**
 
 | Sequence | Day 1 | Day 2 | Day 3 | Day 4 | Day 5 | Day 6 | Day 7+ |
-|----------|-------|-------|-------|-------|-------|-------|--------|
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | **Welcome** | Email 1 | Email 2 | — | Email 3 | — | Email 4 | Email 5 (Day 8) |
 | **Nurture** | Email 1 | — | Email 2 | — | — | Email 3 | Every 3-4 days |
 | **Launch** | Announce | — | Teaser | — | Open Cart | Reminder | Close Cart |
@@ -167,6 +169,7 @@ Use this for launch emails and abandoned-conversion follow-ups. Take the closing
 | **Cold Outreach** | Email 1 | — | — | Email 2 | — | — | Email 3 (Day 10) |
 
 **Best Send Times (general benchmarks):**
+
 - B2B: Tuesday-Thursday, 9-11 AM recipient's local time
 - B2C: Tuesday-Thursday, 10 AM or 7-9 PM recipient's local time
 - E-commerce: Thursday-Sunday for promotional, Tuesday-Wednesday for educational
@@ -294,7 +297,7 @@ Email 4 (7 days, optional): LAST CHANCE
 Recommend segments based on the business type:
 
 | Segment Basis | Examples | How to Use |
-|--------------|---------|------------|
+| --- | --- | --- |
 | **Behavior** | Page visits, clicks, downloads, purchases | Trigger relevant follow-up sequences |
 | **Engagement** | Open rate, click rate, recency | Separate engaged vs dormant subscribers |
 | **Source** | Organic, paid, referral, social | Tailor welcome sequence to acquisition channel |
@@ -308,6 +311,7 @@ Recommend segments based on the business type:
 ### 4.2 A/B Testing Recommendations
 
 For each sequence, suggest tests:
+
 - Subject line variants (test 2 per email)
 - Send time variants
 - CTA text variants
@@ -317,6 +321,7 @@ For each sequence, suggest tests:
 - With/without personalization
 
 **Testing hierarchy** (test in this order for maximum learning):
+
 1. Subject lines (biggest impact on open rate)
 2. CTA and offer (biggest impact on click rate)
 3. Send timing
@@ -331,7 +336,7 @@ For each sequence, suggest tests:
 Include relevant benchmarks in the output. These are US-market averages; open rates in particular are inflated by Apple Mail Privacy Protection and vary by market and list age. Quote them as orientation and name the caveat — never score a client as "underperforming" on this table alone.
 
 | Industry | Avg Open Rate | Avg Click Rate | Avg Conversion Rate |
-|----------|-------------|----------------|-------------------|
+| --- | --- | --- | --- |
 | SaaS/Software | 20-25% | 2-3% | 1-2% |
 | E-commerce | 15-20% | 2-3% | 0.5-1.5% |
 | Agency/Services | 18-22% | 2-4% | 1-3% |
@@ -350,6 +355,7 @@ Include a compliance section in every output:
 Lead with the regime that governs the recipients, not the one you know best. Determine it from the audience's location, which is usually the site's market — not the sender's.
 
 **GDPR (EU/EEA) — the strictest of the three, and the default for any European list:**
+
 - Explicit opt-in consent required; no pre-checked boxes, no consent bundled into terms
 - Consent must be documented: when, how, and exactly what was agreed to
 - Right to erasure — delete on request
@@ -357,17 +363,20 @@ Lead with the regime that governs the recipients, not the one you know best. Det
 - Legitimate-interest B2B sending is narrow and contested; do not present it as a safe default
 
 **Germany, Austria, Switzerland — stricter still in practice:**
+
 - **Double opt-in is the de-facto requirement.** Single opt-in is not defensible under German case law: the confirmation click, with timestamp and IP, is the evidence. Recommend it without qualification for any DE/AT/CH list.
 - **Impressum** — a complete legal imprint (company, legal form, register number, VAT ID, managing director, contact) belongs in the email footer, not only on the website
 - Advertising to business addresses still requires consent; there is no blanket B2B exemption
 - Unsubscribe must be one click and free of charge
 
 **CASL (Canada):**
+
 - Express consent required for commercial messages
 - Implied consent for existing business relationships, 24 months
 - Sender identification required
 
 **CAN-SPAM (US) — the most permissive; do not apply its standards to a European list:**
+
 - Physical mailing address required in every email
 - Working unsubscribe, honored within 10 business days
 - Accurate "From" name and address, non-deceptive subject line
@@ -383,10 +392,12 @@ Write the full output to the exact `output_path` resolved in Phase 0:
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Email Sequences: [Business/Topic Name]
-**Date:** [current date]
-**Business Type:** [type]
-**Target Audience:** [description]
+
+**Date:** [current date] \
+**Business Type:** [type] \
+**Target Audience:** [description] \
 **Sequences Generated:** [list of sequence types]
 
 ---
@@ -394,6 +405,7 @@ Write the full output to the exact `output_path` resolved in Phase 0:
 ## Sequence 1: [Sequence Type]
 
 ### Overview
+
 - **Goal:** [primary goal]
 - **Emails:** [count]
 - **Duration:** [total days]
@@ -401,9 +413,10 @@ Write the full output to the exact `output_path` resolved in Phase 0:
 - **Expected Click Rate:** [benchmark]%
 
 ### Email 1: [Email Name]
-**Send:** [timing]
-**Subject Line:** [primary subject]
-**Subject Line B (A/B test):** [alternative subject]
+
+**Send:** [timing] \
+**Subject Line:** [primary subject] \
+**Subject Line B (A/B test):** [alternative subject] \
 **Preview Text:** [preheader text]
 
 ---
@@ -412,9 +425,9 @@ Write the full output to the exact `output_path` resolved in Phase 0:
 
 ---
 
-**CTA:** [button text]
-**CTA Link:** [where it should point]
-**Goal:** [what this email should accomplish]
+**CTA:** [button text] \
+**CTA Link:** [where it should point] \
+**Goal:** [what this email should accomplish] \
 **Segmentation Notes:** [who should receive this]
 
 [Repeat for each email in the sequence]
@@ -422,18 +435,23 @@ Write the full output to the exact `output_path` resolved in Phase 0:
 ---
 
 ## Segmentation Strategy
+
 [Recommended segments and how to use them]
 
 ## A/B Testing Plan
+
 [Prioritized tests to run]
 
 ## Metrics to Track
+
 [KPIs with industry benchmarks]
 
 ## Compliance Checklist
+
 [The regime governing this list, leading with the recipients' jurisdiction — GDPR and double opt-in for EU/D-A-CH, CASL for Canada, CAN-SPAM for the US]
 
 ## Implementation Notes
+
 [ESP recommendations, automation setup, tagging strategy]
 ```
 
@@ -473,4 +491,3 @@ Look only inside the Phase 0 `audit_dir`, for the exact same scope. Never search
 - If `MARKETKIT - COPY-SUGGESTIONS - <scope>.md` exists, reuse value propositions and CTA language
 - If `MARKETKIT - MARKETING-AUDIT - <scope>.md` exists, reference conversion and content scores
 - Suggest follow-up: `/marketkit:copy` for website copy, `/marketkit:funnel` for conversion path analysis
-

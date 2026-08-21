@@ -45,6 +45,7 @@ Paths written as `${CLAUDE_PLUGIN_ROOT}/…` anywhere in this file are provenanc
 Use WebFetch to analyze the homepage, about/trust page, and the main commercial path. Depending on business context, this may be a pricing page, RFQ/contact page, catalog, product page, solution page, distributor page, datasheet library, course page, or lead magnet.
 
 **Brand Consistency (0-10)**
+
 - Visual consistency across pages (colors, typography, imagery style)
 - Messaging consistency (same voice, same value props)
 - Professional design quality
@@ -52,6 +53,7 @@ Use WebFetch to analyze the homepage, about/trust page, and the main commercial 
 - Scoring: 9-10 = polished + consistent everywhere, 7-8 = mostly consistent, 5-6 = some inconsistencies, 3-4 = noticeably inconsistent, 0-2 = no brand identity
 
 **Trust Architecture (0-10)**
+
 - About page quality (team photos, story, mission)
 - Contact information visibility (email, phone, address, chat)
 - Social proof placement and quality
@@ -60,6 +62,7 @@ Use WebFetch to analyze the homepage, about/trust page, and the main commercial 
 - Scoring: 9-10 = highly trustworthy, 7-8 = good trust foundation, 5-6 = basic trust signals, 3-4 = trust gaps, 0-2 = low trust
 
 **Authority Signals (0-10)**
+
 - Thought leadership content (blog, podcast, newsletter)
 - Media mentions or press coverage
 - Industry awards or recognition
@@ -70,6 +73,7 @@ Use WebFetch to analyze the homepage, about/trust page, and the main commercial 
 ### Step 2: Growth Strategy Assessment
 
 **Commercial Model & Pricing Strategy (0-10)**
+
 - Is the commercial model clear for this business type: public pricing, RFQ, sales-led, distributor-led, subscription, usage, course fee, donation, or hybrid?
 - If pricing is public: is it transparent, value-framed, and easy to compare?
 - If pricing is not public: is the RFQ/inquiry process clear, low-friction, and confidence-building?
@@ -78,6 +82,7 @@ Use WebFetch to analyze the homepage, about/trust page, and the main commercial 
 - Scoring: 9-10 = strategic + optimized for the model, 7-8 = solid structure, 5-6 = functional but not optimized, 3-4 = confusing or misaligned, 0-2 = commercial path unclear or broken
 
 **Acquisition Channels (0-10)**
+
 - How many acquisition channels are they using?
 - Content marketing maturity (blog, resources, guides)
 - SEO investment (content depth, keyword targeting)
@@ -88,6 +93,7 @@ Use WebFetch to analyze the homepage, about/trust page, and the main commercial 
 - Scoring: 9-10 = diversified + mature, 7-8 = multiple channels developing, 5-6 = 1-2 channels, 3-4 = single channel dependent, 0-2 = no visible acquisition strategy
 
 **Retention & Expansion (0-10)**
+
 - Onboarding indicators (welcome flow, setup wizard)
 - Community or user engagement features
 - Upgrade paths and expansion revenue potential
@@ -120,6 +126,7 @@ Identify the top growth opportunities:
 ### Step 4: Revenue Impact Estimates
 
 For each recommendation, estimate:
+
 - **Effort**: Low / Medium / High
 - **Impact**: Low / Medium / High
 - **Timeline**: 1 week / 1 month / 3 months / 6 months
@@ -188,6 +195,7 @@ For each recommendation, estimate:
 The last two sections are mandatory — including, especially, when both are `none`. The orchestrator reconciles `Files Read` against the Data Manifest before merging anything (Phase 2.4). A missing block, or a path that was not on the manifest, voids this whole dimension: it gets dropped from the report and rerun.
 
 ## Important Rules
+
 - Always check the actual commercial path for the business type: pricing, RFQ, inquiry, catalog, datasheet, quote, distributor, contact, or enrollment
 - Be specific with revenue estimates — even rough ranges are helpful
 - Frame everything through a revenue lens, not just "best practices"

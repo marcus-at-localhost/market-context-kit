@@ -25,10 +25,12 @@
 ### Task 1: Shared artifact-consumer contract
 
 **Files:**
+
 - Create: `references/search-context-integration.md`
 - Create: `tests/test_search_context_integration.py`
 
 **Interfaces:**
+
 - Produces: one shared instruction contract for artifact discovery, validation, provenance, and synthesis.
 - Produces: static test helper `read(relative_path: str) -> str`.
 
@@ -83,10 +85,12 @@ git commit -m "docs: define search context artifact contract"
 ### Task 2: Audit orchestrator integration
 
 **Files:**
+
 - Modify: `skills/audit/SKILL.md`
 - Modify: `tests/test_search_context_integration.py`
 
 **Interfaces:**
+
 - Consumes: `references/search-context-integration.md` from Task 1.
 - Produces: optional validated Search Context evidence in Phase 3 synthesis.
 
@@ -135,12 +139,14 @@ git commit -m "feat: add search context to audit synthesis"
 ### Task 3: Report and SEO integration plus user documentation
 
 **Files:**
+
 - Modify: `skills/report/SKILL.md`
 - Modify: `skills/seo/SKILL.md`
 - Modify: `README.md`
 - Modify: `tests/test_search_context_integration.py`
 
 **Interfaces:**
+
 - Consumes: the shared reference from Task 1.
 - Produces: explicit Search Context data-source sections in reports and measured query/page evidence in SEO recommendations.
 
@@ -199,9 +205,11 @@ git commit -m "docs: integrate optional search context evidence"
 ### Task 4: Final worktree verification
 
 **Files:**
+
 - Modify only exact files implicated by a failing verification command.
 
 **Interfaces:**
+
 - Verifies the worktree branch without changing the `main` checkout.
 
 - [ ] **Step 1: Run the complete suite**

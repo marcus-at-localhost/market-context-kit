@@ -9,9 +9,11 @@ metadata:
 # Product/Service Launch Playbook Generator
 
 ## Skill Purpose
+
 Generate a complete, week-by-week launch playbook for any product, service, or feature launch. This skill produces a tactical plan with templates, checklists, email sequences, social posts, and metrics tracking -- everything needed to execute a successful launch.
 
 ## When to Use
+
 - User is planning to launch a new product, service, feature, or offering
 - User asks for a launch plan, go-to-market strategy, or launch checklist
 - User wants to coordinate a multi-channel launch campaign
@@ -39,14 +41,12 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
 The pack supplies the launch channels, pre-launch calendar, announcement templates and success metrics. A consumer launch and a technical launch share only the phase structure — everything inside the phases differs, including how long the launch runs and what counts as success.
 
 ### Step 1: Gather Launch Context
+
 Before generating the playbook, collect these inputs from the user (ask if not provided):
 
 1. **What are you launching?** (product, service, feature, course, event)
@@ -59,10 +59,11 @@ Before generating the playbook, collect these inputs from the user (ask if not p
 8. **What is the budget?** (bootstrapped, moderate, well-funded)
 
 ### Step 2: Determine Launch Type
+
 Select the primary launch strategy based on the user's context:
 
 | Launch Type | Best For | Key Channel | Timeline |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Product Hunt | SaaS, dev tools, consumer apps | Product Hunt + Twitter/X | 4-6 weeks prep |
 | Email List Launch | Course, info product, SaaS with existing list | Email | 6-8 weeks |
 | Social Media Launch | Consumer product, personal brand | Twitter/X, LinkedIn, Instagram | 4-6 weeks |
@@ -77,9 +78,11 @@ Select the primary launch strategy based on the user's context:
 ### Step 3: Generate the 8-Week Launch Timeline
 
 #### Weeks 1-2: Foundation
+
 **Objective:** Lock in positioning, build assets, set up infrastructure.
 
 **Tasks:**
+
 - [ ] Define launch positioning statement: "For [TARGET] who [PROBLEM], [PRODUCT] is a [CATEGORY] that [KEY BENEFIT]. Unlike [ALTERNATIVE], we [DIFFERENTIATOR]."
 - [ ] Create launch one-pager (internal alignment doc)
 - [ ] Set up landing page / waitlist page
@@ -92,15 +95,18 @@ Select the primary launch strategy based on the user's context:
 - [ ] Set up social media content calendar tool
 
 **Deliverables:**
+
 - Positioning statement
 - Landing page live
 - Email sequences drafted
 - Beta tester list
 
 #### Weeks 3-4: Audience Building
+
 **Objective:** Build anticipation, grow waitlist, recruit beta testers.
 
 **Tasks:**
+
 - [ ] Begin content seeding: publish 2-3 pieces on the problem the launch solves
 - [ ] Start engaging in the communities, forums or trade channels where the buyers are
 - [ ] Recruit beta testers, pilot customers or reference installations with personal invitations
@@ -116,15 +122,18 @@ Select the primary launch strategy based on the user's context:
 Build it from the loaded example pack — `Launch — channels, calendar and post templates` in `consumer-online.md`, `Launch — industrial / technical timeline` in `b2b-technical.md`. The consumer version runs a daily-cadence anticipation calendar; the technical version front-loads evidence and channel enablement instead, because the buyer cannot act on anticipation.
 
 **Deliverables:**
+
 - 4-6 content pieces published
 - Beta testers onboarded and providing feedback
 - Waitlist growing
 - Partner/influencer commitments secured
 
 #### Weeks 5-6: Pre-Launch Intensification
+
 **Objective:** Maximize anticipation, finalize assets, prep launch infrastructure.
 
 **Tasks:**
+
 - [ ] Send pre-launch email sequence to waitlist (see Email Templates)
 - [ ] Increase social media posting frequency to daily
 - [ ] Publish case study or results from beta testers
@@ -139,17 +148,20 @@ Build it from the loaded example pack — `Launch — channels, calendar and pos
 - [ ] Set up real-time dashboard for launch metrics
 
 **Deliverables:**
+
 - All launch assets finalized and scheduled
 - Partners briefed and ready
 - Checkout/signup flow tested
 - Support team prepared
 
 #### Week 7: LAUNCH WEEK
+
 **Objective:** Execute the launch with maximum impact and coordinated effort.
 
 **Day-by-Day Breakdown:**
 
 **Monday - Soft Launch / VIP Access:**
+
 - Send early access email to VIPs, beta testers, and top waitlist members
 - Post on social: "We're live for our early supporters"
 - Collect first-day feedback and testimonials
@@ -157,6 +169,7 @@ Build it from the loaded example pack — `Launch — channels, calendar and pos
 - Goal: First 50-100 users/customers
 
 **Tuesday - Public Announcement:**
+
 - Send main launch email to full list
 - Publish launch blog post
 - Post launch announcement on all social channels
@@ -166,6 +179,7 @@ Build it from the loaded example pack — `Launch — channels, calendar and pos
 - Goal: Maximum visibility and traffic
 
 **Wednesday - Social Proof Push:**
+
 - Share first customer testimonials and results
 - Repost/retweet customer reactions
 - Send "look what people are saying" email
@@ -174,6 +188,7 @@ Build it from the loaded example pack — `Launch — channels, calendar and pos
 - Goal: Build momentum through social proof
 
 **Thursday - Objection Handling:**
+
 - Publish FAQ or "everything you need to know" post
 - Send email addressing top 3 objections
 - Host live Q&A or AMA (Twitter Space, LinkedIn Live, webinar)
@@ -181,6 +196,7 @@ Build it from the loaded example pack — `Launch — channels, calendar and pos
 - Goal: Convert fence-sitters
 
 **Friday - Urgency and Scarcity:**
+
 - Send "early bird pricing ends soon" email
 - Post countdown content on social
 - Share final testimonials and case studies
@@ -188,15 +204,18 @@ Build it from the loaded example pack — `Launch — channels, calendar and pos
 - Goal: Drive final wave of conversions
 
 **Saturday/Sunday - Wrap Up:**
+
 - Send "last chance" email for any time-limited offers
 - Compile launch week results
 - Thank early customers publicly
 - Begin post-launch content planning
 
 #### Week 8: Post-Launch
+
 **Objective:** Maintain momentum, collect feedback, plan next iteration.
 
 **Tasks:**
+
 - [ ] Send post-launch survey to new customers
 - [ ] Compile and analyze launch metrics (see Metrics section)
 - [ ] Write launch retrospective (what worked, what didn't, what to change)
@@ -212,49 +231,21 @@ Build it from the loaded example pack — `Launch — channels, calendar and pos
 
 #### Pre-Launch Sequence (Weeks 5-6)
 
-**Email 1: The Teaser (2 weeks before)**
-Subject: Something big is coming...
-Purpose: Build anticipation
-Content: Hint at the product, share the problem it solves, tease the launch date. Don't reveal everything.
-CTA: "Stay tuned" or "Make sure you're on the list"
+**Email 1: The Teaser (2 weeks before)** Subject: Something big is coming... Purpose: Build anticipation Content: Hint at the product, share the problem it solves, tease the launch date. Don't reveal everything. CTA: "Stay tuned" or "Make sure you're on the list"
 
-**Email 2: The Reveal (1 week before)**
-Subject: Here's what we've been building
-Purpose: Show the product, build desire
-Content: Reveal the product with screenshots/video. Share beta tester results. Announce launch date and any early bird offer.
-CTA: "Mark your calendar" or "Get notified on launch day"
+**Email 2: The Reveal (1 week before)** Subject: Here's what we've been building Purpose: Show the product, build desire Content: Reveal the product with screenshots/video. Share beta tester results. Announce launch date and any early bird offer. CTA: "Mark your calendar" or "Get notified on launch day"
 
-**Email 3: The Social Proof (3 days before)**
-Subject: "[Beta Tester Name] got [Result] in [Timeframe]"
-Purpose: Prove it works
-Content: Feature 2-3 beta tester testimonials with specific results. Address the "does this actually work?" objection.
-CTA: "Be ready for [launch day]"
+**Email 3: The Social Proof (3 days before)** Subject: "[Beta Tester Name] got [Result] in [Timeframe]" Purpose: Prove it works Content: Feature 2-3 beta tester testimonials with specific results. Address the "does this actually work?" objection. CTA: "Be ready for [launch day]"
 
 #### Launch Sequence (Week 7)
 
-**Email 4: The Launch (Day 1)**
-Subject: It's live -- [Product Name] is here
-Purpose: Drive immediate action
-Content: Announce the launch. State the offer clearly. Include early bird pricing or bonus. Link directly to purchase/signup.
-CTA: "Get [Product] now" with primary button
+**Email 4: The Launch (Day 1)** Subject: It's live -- [Product Name] is here Purpose: Drive immediate action Content: Announce the launch. State the offer clearly. Include early bird pricing or bonus. Link directly to purchase/signup. CTA: "Get [Product] now" with primary button
 
-**Email 5: The Social Proof Follow-Up (Day 3)**
-Subject: People are already seeing results
-Purpose: Convert through social proof
-Content: Share first-customer testimonials, screenshots of reactions, usage stats. Create FOMO.
-CTA: "Join [X] others who already [outcome]"
+**Email 5: The Social Proof Follow-Up (Day 3)** Subject: People are already seeing results Purpose: Convert through social proof Content: Share first-customer testimonials, screenshots of reactions, usage stats. Create FOMO. CTA: "Join [X] others who already [outcome]"
 
-**Email 6: The Objection Handler (Day 4)**
-Subject: "But what if [common objection]?"
-Purpose: Address hesitations
-Content: List and answer top 3-5 objections. Include guarantee/risk reversal. Share FAQ.
-CTA: "Try it risk-free"
+**Email 6: The Objection Handler (Day 4)** Subject: "But what if [common objection]?" Purpose: Address hesitations Content: List and answer top 3-5 objections. Include guarantee/risk reversal. Share FAQ. CTA: "Try it risk-free"
 
-**Email 7: The Urgency Close (Day 5-7)**
-Subject: [X hours] left for [early bird / bonus / discount]
-Purpose: Drive final conversions with urgency
-Content: Remind of the deadline. Recap the value. Final testimonial. Clear, single CTA.
-CTA: "Last chance to get [offer]"
+**Email 7: The Urgency Close (Day 5-7)** Subject: [X hours] left for [early bird / bonus / discount] Purpose: Drive final conversions with urgency Content: Remind of the deadline. Recap the value. Final testimonial. Clear, single CTA. CTA: "Last chance to get [offer]"
 
 ### Step 5: Announcement Posts
 
@@ -268,6 +259,7 @@ Whichever applies, every announcement carries the same four elements: what it is
 ### Step 6: Press and Media Outreach
 
 **Press Release Structure:**
+
 1. Headline: [Company] Launches [Product] to Help [Audience] [Outcome]
 2. Subheadline: [Supporting detail with a key stat or differentiator]
 3. First paragraph: Who, what, when, where, why (the news)
@@ -280,6 +272,7 @@ Whichever applies, every announcement carries the same four elements: what it is
 10. Contact information
 
 **Media Pitch Email Template:**
+
 ```
 Subject: [Angle] -- [Product Name] launches to [outcome]
 
@@ -304,6 +297,7 @@ Best,
 ### Step 7: Influencer and Partner Coordination
 
 **Partner Outreach Timeline:**
+
 - Week 3: Initial outreach with personal message
 - Week 4: Follow up, share product details and demo
 - Week 5: Confirm participation, send swipe copy and affiliate links
@@ -312,6 +306,7 @@ Best,
 - Week 8: Share results, pay commissions, plan ongoing partnership
 
 **What to Provide Partners:**
+
 - Product access (free account or sample)
 - Swipe copy for email, social, and blog
 - Branded graphics and assets
@@ -324,12 +319,14 @@ Best,
 Track these metrics in real-time during launch week:
 
 **Awareness Metrics:**
+
 - Website traffic (total and by source)
 - Social media impressions and reach
 - Press mentions and backlinks
 - Email open rates
 
 **Engagement Metrics:**
+
 - Time on site
 - Pages per session
 - Social media engagement rate
@@ -337,6 +334,7 @@ Track these metrics in real-time during launch week:
 - Demo video completion rate
 
 **Conversion Metrics:**
+
 - Signup/purchase conversion rate
 - Revenue generated
 - Average order value
@@ -344,6 +342,7 @@ Track these metrics in real-time during launch week:
 - Email-to-conversion rate
 
 **Retention Metrics (Post-Launch):**
+
 - Day 1 / Day 7 retention
 - Feature adoption rate
 - Support ticket volume
@@ -365,7 +364,7 @@ Track these metrics in real-time during launch week:
 ### Step 10: Budget Allocation Guide
 
 | Budget Level | Allocation |
-|---|---|
+| --- | --- |
 | **Bootstrapped ($0-500)** | 100% organic: content, communities, email list, personal outreach |
 | **Moderate ($500-5,000)** | 40% paid ads, 30% influencer/partner, 20% tools/software, 10% design |
 | **Well-Funded ($5,000-25,000)** | 35% paid ads, 25% influencer/partner, 20% PR/media, 10% events, 10% tools |
@@ -391,43 +390,53 @@ Write the exact `output_path` resolved in Step 0 with:
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Launch Playbook: [Product Name]
-**Launch Date:** [Date]
-**Launch Type:** [Type]
+
+**Launch Date:** [Date] \
+**Launch Type:** [Type] \
 **Primary Goal:** [Goal with specific target]
 
 ---
 
 ## Week-by-Week Plan
+
 [Detailed week-by-week tasks with checkboxes]
 
 ## Email Sequences
+
 [Complete email templates customized for the product]
 
 ## Social Media Content
+
 [Platform-specific posts ready to customize and schedule]
 
 ## Partner/Influencer Plan
+
 [Outreach templates and coordination timeline]
 
 ## Launch Day Checklist
+
 [Hour-by-hour launch day plan]
 
 ## Metrics Dashboard
+
 [Metrics to track with target benchmarks]
 
 ## Budget Allocation
+
 [Specific dollar amounts based on stated budget]
 
 ## Post-Launch Plan
+
 [Week 8+ activities and analysis framework]
 ```
 
 ## Key Principles
+
 - Every recommendation should be tied to the user's specific product, audience, and resources. Generic advice is useless.
 - Include specific templates they can copy-paste and customize, not just frameworks.
 - If the user has run previous skills (market audit, market landing, market brand), incorporate those findings into the launch plan.
 - Time the playbook to their stated launch date and work backwards.
 - Always include a "minimum viable launch" option for users with limited resources.
 - Emphasize that launching is an event, not a moment -- the buildup and follow-through matter more than day one.
-

@@ -44,16 +44,14 @@ Paths written as `${CLAUDE_PLUGIN_ROOT}/…` anywhere in this file are provenanc
 
 ## Analysis Process
 
-If your prompt carries a `## Myth Guardrail` block, it binds every recommendation you write — a
-matching recommendation is dropped, not downgraded. A check the grounding digest asks for anyway
-(an `llms.txt` criterion is the common case) still gets run and reported as a fact with evidence,
-never as a scored gap or a severity-rated issue.
+If your prompt carries a `## Myth Guardrail` block, it binds every recommendation you write — a matching recommendation is dropped, not downgraded. A check the grounding digest asks for anyway (an `llms.txt` criterion is the common case) still gets run and reported as a fact with evidence, never as a scored gap or a severity-rated issue.
 
 ### Step 1: Technical SEO Check
 
 Use WebFetch on the target URL and analyze:
 
 **Page Structure (0-10)**
+
 - Title tag present and optimized (50-60 chars, keyword-rich)
 - Meta description present and compelling (150-160 chars, includes CTA)
 - H1 tag present and unique (only one per page)
@@ -63,6 +61,7 @@ Use WebFetch on the target URL and analyze:
 - Canonical tag present
 
 **Crawlability & Indexability (0-10)**
+
 - Check robots.txt — fetch the raw file with `curl -s "<url>/robots.txt"`, not WebFetch. WebFetch converts pages to markdown, which mangles directive text.
 - Sitemap exists — `curl -s "<url>/sitemap.xml"` (fall back to `/sitemap_index.xml`)
 - No accidental noindex tags
@@ -70,6 +69,7 @@ Use WebFetch on the target URL and analyze:
 - Orphan pages (pages with no internal links)
 
 **Site Performance Indicators (0-10)**
+
 - Page size assessment (heavy images, scripts?)
 - Render-blocking resources visible in HTML
 - Lazy loading implementation
@@ -77,6 +77,7 @@ Use WebFetch on the target URL and analyze:
 - Compression headers
 
 **Mobile Readiness (0-10)**
+
 - Viewport meta tag present
 - Responsive design indicators in HTML
 - Touch-friendly element sizing
@@ -87,17 +88,20 @@ Use WebFetch on the target URL and analyze:
 Evaluate the site's information architecture:
 
 **Navigation Structure**
+
 - Is the main navigation clear and logical?
 - Can users find key pages within 2-3 clicks?
 - Does the navigation prioritize conversion-oriented pages?
 
 **Content Organization**
+
 - Blog/resource section structure
 - Category/tag organization
 - Content freshness (are there dates? Are they recent?)
 - Content depth (word count, comprehensiveness)
 
 **Internal Linking**
+
 - Do pages link to related content?
 - Is there a logical content hierarchy?
 - Are CTAs contextually placed within content?
@@ -105,6 +109,7 @@ Evaluate the site's information architecture:
 ### Step 3: Tracking & Analytics Assessment
 
 Check for presence of:
+
 - Google Analytics / GA4 (look for gtag or gtm scripts)
 - Google Tag Manager
 - **Tag managers other than Google's, before you conclude anything is absent.** A container loader is often the only tracking code in the page source, and the tracker itself never appears there — it is fetched at runtime. Matomo Tag Manager is the common miss: it initializes `_mtm` (not `_paq`), pushes `mtm.startTime`, and loads `container_<id>.js`, frequently from a first-party subdomain rather than a vendor host. Search for `_mtm`, `mtm.startTime`, `container_`, `gtm.js`, `dataLayer`, and any async script from a subdomain of the site itself. If you find a container, fetch it and look inside for the tags it carries (`setSiteId`, `trackPageView`, `matomo.php`, `piwik.php`, measurement IDs) before scoring tracking
@@ -117,30 +122,23 @@ Check for presence of:
 
 ### Step 4: Schema & Structured Data
 
-The `analyze_page.py` JSON carries four schema fields under `analysis.technical`. **Read all four
-before calling any type absent.**
+The `analyze_page.py` JSON carries four schema fields under `analysis.technical`. **Read all four before calling any type absent.**
 
 | Field | Holds |
-|---|---|
+| --- | --- |
 | `schema_types` | JSON-LD types at the top level of a block |
 | `schema_types_nested` | `{type: count}` for entities one level down |
 | `schema_types_microdata` | `{type: count}` from microdata `itemtype` and RDFa `typeof` |
 | `schema_parse_errors` | one entry per JSON-LD block that failed to parse |
 
-Author attribution (`Person`), locations (`LocalBusiness`, `PostalAddress`) and FAQ markup
-(`Question`, `Answer`) are almost always **nested**, so the top-level list alone shows them as
-absent when they are present. That is a false finding and it has reached a delivered report before.
+Author attribution (`Person`), locations (`LocalBusiness`, `PostalAddress`) and FAQ markup (`Question`, `Answer`) are almost always **nested**, so the top-level list alone shows them as absent when they are present. That is a false finding and it has reached a delivered report before.
 
-**`schema_parse_errors` is not empty → never write "schema missing".** The page carries structured
-data that does not parse. That is a different finding with a different fix and its own severity:
-report it as invalid markup, quote the parser message, and name the page.
+**`schema_parse_errors` is not empty → never write "schema missing".** The page carries structured data that does not parse. That is a different finding with a different fix and its own severity: report it as invalid markup, quote the parser message, and name the page.
 
-Two limits to state rather than paper over: nested counts include `@id` references, so a type can
-be counted more often than it is defined — use them for presence and rough scale, not as an exact
-inventory. And JSON-LD injected by JavaScript is invisible here. That is a real finding, not a gap
-in the measurement: AI crawlers do not execute JavaScript either.
+Two limits to state rather than paper over: nested counts include `@id` references, so a type can be counted more often than it is defined — use them for presence and rough scale, not as an exact inventory. And JSON-LD injected by JavaScript is invisible here. That is a real finding, not a gap in the measurement: AI crawlers do not execute JavaScript either.
 
 Check for JSON-LD or microdata:
+
 - Organization schema
 - Website schema with SearchAction
 - Product/Service schema
@@ -149,16 +147,12 @@ Check for JSON-LD or microdata:
 - Breadcrumb schema
 - Article schema (on blog posts)
 
-Score what is **present, valid, and matching visible page content** for a rich-result-eligible type
-— not coverage of the list above. Schema earns rich-result eligibility, entity clarity via
-`Organization` + `sameAs`, and Merchant Center feeds. It is not a ranking factor, and Google states
-no schema.org markup is required for generative AI search. A page type with no eligible rich-result
-type is not a gap for lacking schema, and missing schema tops out at Medium severity unless it
-breaks an existing rich result. Never write AI-visibility rationale for a schema finding.
+Score what is **present, valid, and matching visible page content** for a rich-result-eligible type — not coverage of the list above. Schema earns rich-result eligibility, entity clarity via `Organization` + `sameAs`, and Merchant Center feeds. It is not a ranking factor, and Google states no schema.org markup is required for generative AI search. A page type with no eligible rich-result type is not a gap for lacking schema, and missing schema tops out at Medium severity unless it breaks an existing rich result. Never write AI-visibility rationale for a schema finding.
 
 ### Step 5: SEO Content Quality
 
 For the homepage and one key content page:
+
 - Keyword targeting assessment
 - Content uniqueness indicators
 - E-E-A-T signals (author bios, credentials, experience)
@@ -171,7 +165,7 @@ For the homepage and one key content page:
 **Overall SEO & Discoverability Score (0-10)**
 
 | Dimension | Weight | Measures |
-|-----------|--------|----------|
+| --- | --- | --- |
 | Page Structure | 25% | Tags, hierarchy, meta |
 | Crawlability | 20% | Robots, sitemap, indexing |
 | Performance | 15% | Speed, mobile, UX |
@@ -238,6 +232,7 @@ For the homepage and one key content page:
 The last two sections are mandatory — including, especially, when both are `none`. The orchestrator reconciles `Files Read` against the Data Manifest before merging anything (Phase 2.4). A missing block, or a path that was not on the manifest, voids this whole dimension: it gets dropped from the report and rerun.
 
 ## Important Rules
+
 - Always fetch actual page HTML — never assume what's on the page
 - Check robots.txt and sitemap.xml specifically
 - Look at the HTML source for tracking scripts, not just visible content

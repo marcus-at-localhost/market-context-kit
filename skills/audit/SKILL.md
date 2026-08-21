@@ -37,17 +37,11 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
 Read `${CLAUDE_PLUGIN_ROOT}/references/search-context-integration.md`. Resolve and validate a `SEARCH-CONTEXT.v1.json` artifact only when the user supplies an explicit path, or the reference's discovery rule finds exactly one in the active audit folder's flat `data/` for the exact domain and, if requested, the exact reporting period. Retain a valid artifact as **orchestrator-only** evidence for Phase 3; do not use it during discovery or scoring.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`. Its `Myth Guardrail` binds every
-recommendation this command emits, `Grounding Precedence` governs what happens when a grounding
-criterion asks for a myth check anyway, and `Schema Scoring` sets how structured data is scored. You
-paste the guardrail into two subagent prompts in Phase 2 and apply the whole file yourself in Phase 3.
+Read `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md`. Its `Myth Guardrail` binds every recommendation this command emits, `Grounding Precedence` governs what happens when a grounding criterion asks for a myth check anyway, and `Schema Scoring` sets how structured data is scored. You paste the guardrail into two subagent prompts in Phase 2 and apply the whole file yourself in Phase 3.
 
 ### 0.1 Build the Data Manifest
 
@@ -58,7 +52,7 @@ Default it to empty. The grounding digest, the page map, and the Structural Fact
 Never on the manifest, whatever else is in the workspace:
 
 | Excluded | Why |
-|---|---|
+| --- | --- |
 | Any `MARKETKIT - MARKETING-AUDIT - *.md`, in any folder, from any run | Score anchoring. A subagent that sees a previous score calibrates to it instead of scoring the site, and the five dimensions stop being independent. Run-over-run comparison is yours to do in Phase 3. Do not quote a prior score into a subagent prompt either — not as context, not as an example. |
 | Analytics, traffic, and performance exports (`*Analytics*`, GA4/Matomo/GSC dumps, KPI sheets) | Cross-client contamination. In a multi-client workspace a subagent cannot tell whose figures these are, and a foreign number reaches the report looking like a measurement of this client. |
 | `SEARCH-CONTEXT.v1.json` and its raw provider files | Orchestrator-only evidence. It never goes on the Data Manifest, even after exact-domain validation. |
@@ -101,8 +95,9 @@ Assemble the results into a table, one row per URL analyzed. `Schema types` come
 
 ```markdown
 ### Structural Facts (raw HTML, not WebFetch — analyze_page.py)
+
 | URL | H1 (count) | H1 text | Title | Canonical | Schema types | Heading issues |
-|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- |
 | / | 1 | "…" | "…" | https://…/ | Organization, WebSite | — |
 | /produkte/… | 1 | "…" | "…" | https://…/ | Product | — |
 ```
@@ -112,7 +107,7 @@ Assemble the results into a table, one row per URL analyzed. `Schema types` come
 Classify the business into one of these categories. This classification shapes every subagent's analysis focus:
 
 | Business Type | Detection Signals | Analysis Focus |
-|---------------|-------------------|----------------|
+| --- | --- | --- |
 | **SaaS/Software** | Free trial CTA, pricing tiers, feature pages, "login" link, API docs | Trial-to-paid conversion, onboarding, feature differentiation, churn signals |
 | **E-commerce** | Product listings, cart, checkout, product categories, reviews | Product pages, cart abandonment, upsells, reviews, AOV optimization |
 | **Agency/Services** | Case studies, portfolio, "work with us", testimonials, contact forms | Trust signals, case studies, positioning, lead qualification |
@@ -130,6 +125,7 @@ If multiple contexts apply, combine them instead of forcing one category. A manu
 ### 1.3 Identify Key Pages
 
 Map the site architecture to identify:
+
 - Homepage
 - Primary landing pages
 - Pricing page (if exists)
@@ -149,6 +145,7 @@ Store this page map for all subagents to reference.
 `WebFetch` output is a small model's summary of a markdown conversion of the page — not a measurement. Markdown converters routinely promote an SVG `<title>`, an `aria-label`, a `<figcaption>`, or visually-hidden text into what reads as a top-level heading or a structural element that isn't one. See `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` for the known list before treating any WebFetch-derived structural claim as fact.
 
 Anything you (the orchestrator) carry from a WebFetch read into a subagent prompt — as opposed to a direct quote of body copy — must be either:
+
 - confirmed against the Structural Facts block (1.1) or a raw fetch (`curl`), or
 - explicitly tagged `[unverified: WebFetch]` in the prompt, so the subagent knows not to treat it as ground truth.
 
@@ -166,13 +163,13 @@ This one is about how far a measurement generalizes across the site. It is unrel
 
 Issue **five `Agent` tool calls in a single message** — that is what makes them run in parallel. Five separate messages run them one after another and waste most of the benefit.
 
-| # | `subagent_type` | Produces |
-|---|---|---|
-| 1 | `marketkit:market-content` | Content & Messaging |
-| 2 | `marketkit:market-conversion` | Conversion Optimization |
-| 3 | `marketkit:market-competitive` | Competitive Positioning |
-| 4 | `marketkit:market-technical` | SEO & Discoverability |
-| 5 | `marketkit:market-strategy` | Brand & Trust, Growth & Strategy |
+| #   | `subagent_type`                | Produces                         |
+| --- | ------------------------------ | -------------------------------- |
+| 1   | `marketkit:market-content`     | Content & Messaging              |
+| 2   | `marketkit:market-conversion`  | Conversion Optimization          |
+| 3   | `marketkit:market-competitive` | Competitive Positioning          |
+| 4   | `marketkit:market-technical`   | SEO & Discoverability            |
+| 5   | `marketkit:market-strategy`    | Brand & Trust, Growth & Strategy |
 
 If a `subagent_type` is rejected as unknown, the plugin has not reloaded since the agent files changed — tell the user to run `/reload-plugins` or restart, then retry. Do not silently fall back to analyzing everything yourself.
 
@@ -204,6 +201,7 @@ End your output with these two sections, even if both are empty:
 **Focus:** Content quality, messaging clarity, copy effectiveness
 
 Evaluates:
+
 - Headline clarity and specificity (does it pass the 5-second test?)
 - Value proposition strength (is the unique value immediately obvious?)
 - Body copy persuasion (does it speak to pain points and desired outcomes?)
@@ -218,6 +216,7 @@ Evaluates:
 **Focus:** CRO, funnels, landing pages, signup flows
 
 Evaluates:
+
 - CTA effectiveness (clarity, placement, contrast, urgency)
 - Form friction (number of fields, progressive disclosure, inline validation)
 - Page layout and visual hierarchy (does the eye flow toward conversion?)
@@ -233,6 +232,7 @@ Evaluates:
 **Focus:** Competitive positioning, market landscape
 
 Evaluates:
+
 - Unique positioning clarity (how differentiated is the messaging?)
 - Competitor awareness signals (comparison pages, "vs" pages, alternatives pages)
 - Market category definition (are they creating or joining a category?)
@@ -247,6 +247,7 @@ Evaluates:
 **Focus:** Technical SEO, site architecture, page speed
 
 Evaluates:
+
 - Title tags, meta descriptions, header hierarchy
 - URL structure and internal linking
 - Image optimization (alt tags, file sizes, modern formats)
@@ -264,6 +265,7 @@ Evaluates:
 **Focus:** Overall strategy, commercial model, growth opportunities
 
 Evaluates:
+
 - Business model clarity
 - Pricing/commercial strategy (public pricing, RFQ, sales-led, distributor-led, subscription, usage, course fee, donation, or hybrid)
 - Growth loops (referral, viral, content, sales-led)
@@ -302,11 +304,13 @@ Before any finding reaches the report, check whether it needs raw re-verificatio
 4. **Two or more subagents disagree on a factual claim.** This is mandatory, not judgment — if content and conversion both discuss the same download and one says gated, one says open, that gets resolved here, not left for the report to inherit.
 
 **How to verify:**
+
 - Structural/DOM claim → re-run `analyze_page.py` against the specific URL named in the finding (not just the Phase 1.1 sample, if the finding is about a page outside it).
 - Asset/gating claim → `curl -sI "<asset-url>"` for status code and content-type, or `curl -s "<asset-url>" | wc -c` for a byte count if you need to confirm it isn't a redirect-to-login stub. No login flow, no cookie jar — if the asset returns 200 with the expected content-type on a bare request, it is not gated.
 - Sitewide generalization → either widen the Structural Facts sample to cover it, or downgrade the claim to state its actual scope.
 
 **Outcome:**
+
 - Verified false → drop or rewrite the finding. Note the correction in the report (e.g. "market-content flagged X; verified against raw HTML, this does not hold — see Structural Facts").
 - Verified true → keep it, and cite the raw evidence (URL + what the re-fetch showed) instead of the subagent's original wording.
 - Can't be verified (asset behind real auth, page unreachable, etc.) → downgrade to "unverified — needs manual check," never present it as settled fact.
@@ -333,26 +337,23 @@ Marketing Score = (
 ```
 
 **Score interpretation:**
-| Score Range | Grade | Meaning |
-|-------------|-------|---------|
-| 85-100 | A | Excellent — minor optimizations only |
-| 70-84 | B | Good — clear opportunities for improvement |
-| 55-69 | C | Average — significant gaps to address |
-| 40-54 | D | Below average — major overhaul needed |
-| 0-39 | F | Critical — fundamental marketing issues |
+
+| Score Range | Grade | Meaning                                    |
+| ----------- | ----- | ------------------------------------------ |
+| 85-100      | A     | Excellent — minor optimizations only       |
+| 70-84       | B     | Good — clear opportunities for improvement |
+| 55-69       | C     | Average — significant gaps to address      |
+| 40-54       | D     | Below average — major overhaul needed      |
+| 0-39        | F     | Critical — fundamental marketing issues    |
 
 ### 3.2 Aggregate Recommendations
 
-Collect all recommendations from subagents. **Filter them against the `Myth Guardrail` in
-`${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md` before classifying.** A recommendation
-matching a guardrail row is dropped, not downgraded or reclassified. Say so in the report
-("`market-technical` proposed adding an llms.txt; dropped — Google Search ignores the file"), so the
-removal is legible rather than silent. A myth check the grounding digest asked for still appears as a
-reported fact in the technical section; it just never becomes a recommendation.
+Collect all recommendations from subagents. **Filter them against the `Myth Guardrail` in `${CLAUDE_PLUGIN_ROOT}/references/google-search-guidance.md` before classifying.** A recommendation matching a guardrail row is dropped, not downgraded or reclassified. Say so in the report ("`market-technical` proposed adding an llms.txt; dropped — Google Search ignores the file"), so the removal is legible rather than silent. A myth check the grounding digest asked for still appears as a reported fact in the technical section; it just never becomes a recommendation.
 
 Then classify what remains:
 
 **Quick Wins** (implement in < 1 week, low effort, high impact):
+
 - Copy changes to headlines and CTAs
 - Adding missing meta descriptions
 - Adding trust signals near CTAs
@@ -360,6 +361,7 @@ Then classify what remains:
 - Adding urgency or social proof
 
 **Strategic Recommendations** (1-4 weeks, medium effort, high impact):
+
 - Redesigning pricing, RFQ, inquiry, quote, or enrollment flow
 - Building comparison/alternatives pages
 - Creating lead magnets, gated technical assets, calculators, selectors, or content upgrades
@@ -367,6 +369,7 @@ Then classify what remains:
 - Landing page A/B test designs
 
 **Long-Term Initiatives** (1-3 months, high effort, transformative impact):
+
 - Content marketing strategy overhaul
 - SEO content gap campaign
 - Funnel redesign
@@ -389,7 +392,7 @@ Example:
 Provide conservative, moderate, and aggressive estimates where possible. Use these qualifiers:
 
 | Impact Level | Monthly Revenue Lift | Confidence |
-|-------------|---------------------|------------|
+| --- | --- | --- |
 | High Impact | >$5,000/mo or >20% improvement | Based on clear evidence from audit |
 | Medium Impact | $1,000-$5,000/mo or 5-20% improvement | Based on industry benchmarks |
 | Low Impact | <$1,000/mo or <5% improvement | Incremental optimization |
@@ -399,14 +402,14 @@ Provide conservative, moderate, and aggressive estimates where possible. Use the
 If the competitive subagent identified competitors, include a comparison:
 
 ```markdown
-| Factor | [Target] | Competitor A | Competitor B | Competitor C |
-|--------|----------|-------------|-------------|-------------|
-| Headline Clarity | 6/10 | 8/10 | 5/10 | 7/10 |
-| Value Prop Strength | 5/10 | 7/10 | 6/10 | 8/10 |
-| Trust Signals | 7/10 | 9/10 | 4/10 | 6/10 |
-| CTA Effectiveness | 4/10 | 8/10 | 6/10 | 7/10 |
-| Pricing Clarity | 6/10 | 7/10 | 8/10 | 5/10 |
-| Content Depth | 5/10 | 9/10 | 3/10 | 6/10 |
+| Factor              | [Target] | Competitor A | Competitor B | Competitor C |
+| ------------------- | -------- | ------------ | ------------ | ------------ |
+| Headline Clarity    | 6/10     | 8/10         | 5/10         | 7/10         |
+| Value Prop Strength | 5/10     | 7/10         | 6/10         | 8/10         |
+| Trust Signals       | 7/10     | 9/10         | 4/10         | 6/10         |
+| CTA Effectiveness   | 4/10     | 8/10         | 6/10         | 7/10         |
+| Pricing Clarity     | 6/10     | 7/10         | 8/10         | 5/10         |
+| Content Depth       | 5/10     | 9/10         | 3/10         | 6/10         |
 ```
 
 ---
@@ -417,73 +420,73 @@ Write the final report to the exact `output_path` resolved in Phase 0 (`${CLAUDE
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Marketing Audit: [Business Name]
-**URL:** [url]
-**Date:** [current date]
-**Business Type:** [detected type]
-**Overall Marketing Score: [X]/100 (Grade: [letter])**
+
+**URL:** [url] \
+**Date:** [current date] \
+**Business Type:** [detected type] **Overall Marketing Score: [X]/100 (Grade: [letter])**
 
 ---
 
 ## Executive Summary
 
-[3-5 paragraph summary for a non-technical stakeholder. Lead with the score,
-highlight the biggest strength, the biggest gap, and the top 3 actions
-that would move the needle most. Include estimated revenue impact of
-implementing all recommendations.]
+[3-5 paragraph summary for a non-technical stakeholder. Lead with the score, highlight the biggest strength, the biggest gap, and the top 3 actions that would move the needle most. Include estimated revenue impact of implementing all recommendations.]
 
 ---
 
 ## Score Breakdown
 
 | Category | Score | Weight | Weighted Score | Key Finding |
-|----------|-------|--------|---------------|-------------|
+| --- | --- | --- | --- | --- |
 | Content & Messaging | X/100 | 25% | X | [one-line finding] |
 | Conversion Optimization | X/100 | 20% | X | [one-line finding] |
 | SEO & Discoverability | X/100 | 20% | X | [one-line finding] |
 | Competitive Positioning | X/100 | 15% | X | [one-line finding] |
 | Brand & Trust | X/100 | 10% | X | [one-line finding] |
 | Growth & Strategy | X/100 | 10% | X | [one-line finding] |
-| **TOTAL** | | **100%** | **X/100** | |
+| **TOTAL** |  | **100%** | **X/100** |  |
 
 ---
 
 ## Quick Wins (This Week)
 
-[Numbered list of 5-10 quick wins with specific implementation steps.
-Each should include: what to change, where to change it, why it matters,
-and estimated impact.]
+[Numbered list of 5-10 quick wins with specific implementation steps. Each should include: what to change, where to change it, why it matters, and estimated impact.]
 
 ## Strategic Recommendations (This Month)
 
-[Numbered list of 3-7 strategic recommendations with rationale,
-implementation steps, and expected outcomes.]
+[Numbered list of 3-7 strategic recommendations with rationale, implementation steps, and expected outcomes.]
 
 ## Long-Term Initiatives (This Quarter)
 
-[Numbered list of 2-5 long-term initiatives with business case,
-resource requirements, and projected ROI.]
+[Numbered list of 2-5 long-term initiatives with business case, resource requirements, and projected ROI.]
 
 ---
 
 ## Detailed Analysis by Category
 
 ### Content & Messaging Analysis
+
 [Full findings from market-content subagent]
 
 ### Conversion Optimization Analysis
+
 [Full findings from market-conversion subagent]
 
 ### SEO & Discoverability Analysis
+
 [Full findings from market-technical subagent]
 
 ### Competitive Positioning Analysis
+
 [Full findings from market-competitive subagent]
 
 ### Brand & Trust Analysis
+
 [Full findings from market-strategy subagent — brand section]
 
 ### Growth & Strategy Analysis
+
 [Full findings from market-strategy subagent — growth section]
 
 ---
@@ -496,12 +499,12 @@ resource requirements, and projected ROI.]
 
 ## Revenue Impact Summary
 
-| Recommendation | Est. Monthly Impact | Confidence | Timeline |
-|---------------|-------------------|------------|----------|
-| [recommendation 1] | $X,XXX | High/Med/Low | X weeks |
-| [recommendation 2] | $X,XXX | High/Med/Low | X weeks |
-| ... | | | |
-| **Total Potential** | **$XX,XXX/mo** | | |
+| Recommendation      | Est. Monthly Impact | Confidence   | Timeline |
+| ------------------- | ------------------- | ------------ | -------- |
+| [recommendation 1]  | $X,XXX              | High/Med/Low | X weeks  |
+| [recommendation 2]  | $X,XXX              | High/Med/Low | X weeks  |
+| ...                 |                     |              |          |
+| **Total Potential** | **$XX,XXX/mo**      |              |          |
 
 ---
 
@@ -511,7 +514,7 @@ resource requirements, and projected ROI.]
 2. [Second priority]
 3. [Third priority]
 
-*Generated by Market Context Kit — `/marketkit:audit`*
+_Generated by Market Context Kit — `/marketkit:audit`_
 ```
 
 ---
@@ -572,4 +575,3 @@ Full report saved to: [resolved output_path, e.g. Audit/MARKETKIT - MARKETING-AU
 - Never search older audit folders automatically. A previous `MARKETKIT - MARKETING-AUDIT - <domain>.md` may be compared against this run only if the user explicitly supplies its path. If you report a delta, name both dates and state that the new scores were produced without sight of the old ones. That sentence is what makes the comparison worth anything.
 - Reference other available analyses in the executive summary
 - Suggest follow-up commands: `/marketkit:copy`, `/marketkit:funnel`, `/marketkit:competitors` for deeper dives
-

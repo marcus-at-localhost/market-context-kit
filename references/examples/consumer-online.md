@@ -1,39 +1,31 @@
 # Example Pack: Consumer & Online Business
 
-Load this pack only when `references/business-context.md` resolves the business to self-serve
-SaaS, e-commerce/DTC, creator/course/info product, marketplace, local business, or agency.
+Load this pack only when `references/business-context.md` resolves the business to self-serve SaaS, e-commerce/DTC, creator/course/info product, marketplace, local business, or agency.
 
-Everything here assumes a short buying cycle, a self-serve or low-friction commercial action, an
-individual buyer spending their own money or their own budget, and consumer-social distribution.
-None of it transfers to industrial, regulated, distributor or procurement-led businesses — those
-use `b2b-technical.md`.
+Everything here assumes a short buying cycle, a self-serve or low-friction commercial action, an individual buyer spending their own money or their own budget, and consumer-social distribution. None of it transfers to industrial, regulated, distributor or procurement-led businesses — those use `b2b-technical.md`.
 
-Examples are written in English. Translate into the site's language; do not present English CTAs
-to a non-English audience.
+Examples are written in English. Translate into the site's language; do not present English CTAs to a non-English audience.
 
 ---
 
 ## 1. Social — content types by platform
 
-**LinkedIn:** text posts (opinion/insight) 40%, carousel documents 25%, image + caption 15%,
-native video under 3 min 10%, polls 5%, long-form articles 5%.
+**LinkedIn:** text posts (opinion/insight) 40%, carousel documents 25%, image + caption 15%, native video under 3 min 10%, polls 5%, long-form articles 5%.
 
-**X/Twitter:** text posts 40%, threads of 3-10 posts 25%, image + caption 15%, quote posts with
-commentary 10%, polls 5%, video clips 5%.
+**X/Twitter:** text posts 40%, threads of 3-10 posts 25%, image + caption 15%, quote posts with commentary 10%, polls 5%, video clips 5%.
 
 **Instagram:** carousels 35%, Reels 30%, single image + caption 15%, Stories 15%, Live 5%.
 
-**TikTok:** trending format adaptation 30%, educational/how-to 30%, behind-the-scenes 20%,
-storytelling 15%, duets and stitches 5%.
+**TikTok:** trending format adaptation 30%, educational/how-to 30%, behind-the-scenes 20%, storytelling 15%, duets and stitches 5%.
 
-**YouTube:** tutorial 8-15 min 35%, listicle/compilation 20%, review/comparison 15%,
-Shorts 20%, interview 10%.
+**YouTube:** tutorial 8-15 min 35%, listicle/compilation 20%, review/comparison 15%, Shorts 20%, interview 10%.
 
 **Facebook:** community posts, events, group activity — strongest for local and 30-65+ audiences.
 
 ## 2. Social — hook formulas
 
 **LinkedIn:**
+
 ```
 "I [did/learned/lost/gained] [specific thing] and here's what happened:"
 "Unpopular opinion: [contrarian take about the industry]"
@@ -45,6 +37,7 @@ Shorts 20%, interview 10%.
 ```
 
 **X/Twitter:**
+
 ```
 "Here's a thread on [topic] that nobody is talking about:"
 "[Contrarian statement]. Let me explain."
@@ -55,6 +48,7 @@ Shorts 20%, interview 10%.
 ```
 
 **Instagram (captions and Reels):**
+
 ```
 "Save this for later"
 "I tested [X] for [time]. Results inside."
@@ -65,6 +59,7 @@ Shorts 20%, interview 10%.
 ```
 
 **TikTok (first 3 seconds):**
+
 ```
 "Wait, you're still doing [old way]?"
 "Here's the [topic] hack nobody showed you"
@@ -75,12 +70,12 @@ Shorts 20%, interview 10%.
 
 ## 3. Social — hashtag strategy
 
-| Tier | Size of tag | Count | Purpose |
-|---|---|---|---|
-| Niche | under 100K posts | 3-5 | Targeted, easier to rank |
-| Medium | 100K-1M posts | 3-5 | Moderate competition, relevant audience |
-| Broad | 1M+ posts | 2-3 | Discovery, lower engagement rate |
-| Branded | custom | 1 | Recognition, UGC collection |
+| Tier    | Size of tag      | Count | Purpose                                 |
+| ------- | ---------------- | ----- | --------------------------------------- |
+| Niche   | under 100K posts | 3-5   | Targeted, easier to rank                |
+| Medium  | 100K-1M posts    | 3-5   | Moderate competition, relevant audience |
+| Broad   | 1M+ posts        | 2-3   | Discovery, lower engagement rate        |
+| Branded | custom           | 1     | Recognition, UGC collection             |
 
 Counts by platform: Instagram 5-15 (caption or first comment), LinkedIn 3-5, X 1-2, TikTok 3-5.
 
@@ -89,6 +84,7 @@ Per pillar, research 5 niche tags, 5 medium tags, 3 broad tags, 1 branded tag.
 ## 4. Social — engagement tactics
 
 **Questions** — end 30% of posts with an open question:
+
 ```
 "What's your biggest challenge with [topic]? Drop it below."
 "Agree or disagree? [Statement]"
@@ -97,12 +93,14 @@ Per pillar, research 5 niche tags, 5 medium tags, 3 broad tags, 1 branded tag.
 **Polls** — 1-2x/week, platform-native.
 
 **Debate posts** — 1-2x/week:
+
 ```
 "[Common advice] is terrible advice. Here's why..."
 "[Industry practice] is dead. Change my mind."
 ```
 
 **Storytelling** — 1-2x/week:
+
 ```
 "3 years ago, I [starting point]. Today, [result]. Here's the journey:"
 "A client told me [surprising thing] — it changed how I think about [topic]."
@@ -125,22 +123,21 @@ One long-form source (blog post, podcast, video, newsletter) becomes:
 10. Facebook post — discussion question
 ```
 
-Schedule over 2 weeks: day 1 original + LinkedIn/X, day 3 carousel + Reel, day 5 TikTok + Short,
-day 7 second angle, day 10 engagement question, day 14 "in case you missed it".
+Schedule over 2 weeks: day 1 original + LinkedIn/X, day 3 carousel + Reel, day 5 TikTok + Short, day 7 second angle, day 10 engagement question, day 14 "in case you missed it".
 
 ## 6. Social — evergreen trending formats
 
-| Format | Platform | Description |
-|---|---|---|
-| Listicle thread | X, LinkedIn | "7 things I learned from [X]" |
-| This vs that | All | Side-by-side comparison |
-| Day in the life | TikTok, Instagram | Daily routine |
-| Tutorial Reel | Instagram, TikTok | Step-by-step |
-| Hot take | X, LinkedIn | Contrarian opinion + reasoning |
-| Before/after | Instagram, TikTok | Transformation |
-| Myth vs reality | All | Debunk misconceptions |
-| POV | TikTok, Instagram | Point-of-view storytelling |
-| Reaction | TikTok | React to industry news |
+| Format          | Platform          | Description                    |
+| --------------- | ----------------- | ------------------------------ |
+| Listicle thread | X, LinkedIn       | "7 things I learned from [X]"  |
+| This vs that    | All               | Side-by-side comparison        |
+| Day in the life | TikTok, Instagram | Daily routine                  |
+| Tutorial Reel   | Instagram, TikTok | Step-by-step                   |
+| Hot take        | X, LinkedIn       | Contrarian opinion + reasoning |
+| Before/after    | Instagram, TikTok | Transformation                 |
+| Myth vs reality | All               | Debunk misconceptions          |
+| POV             | TikTok, Instagram | Point-of-view storytelling     |
+| Reaction        | TikTok            | React to industry news         |
 
 Adapt a trend within 24-48 hours, add brand-specific value, never copy the format empty.
 
@@ -149,7 +146,7 @@ Adapt a trend within 24-48 hours, add brand-specific value, never copy the forma
 ## 7. Landing pages — objections and how to answer them
 
 | Objection | How to address |
-|---|---|
+| --- | --- |
 | "Too expensive" | ROI calculator, price comparison, money-back guarantee |
 | "Not sure it works" | Case studies, free trial, demo video |
 | "Too complicated" | Setup wizard, onboarding support, "get started in 5 minutes" |
@@ -166,17 +163,16 @@ Adapt a trend within 24-48 hours, add brand-specific value, never copy the forma
 - Medium: "Sign Up", "Get Started", "Download Now"
 - Strong: "Start My Free Trial", "Get My Custom Report", "Claim Your Discount"
 
-Rules that apply here and nowhere else: first person ("Start **my** trial"), supporting microcopy
-("No credit card required"), urgency when it is real ("Claim My Spot (12 Left)").
+Rules that apply here and nowhere else: first person ("Start **my** trial"), supporting microcopy ("No credit card required"), urgency when it is real ("Claim My Spot (12 Left)").
 
-**CTA colour:** green for growth/trials, orange for limited offers, blue for financial trust, red
-sparingly. Contrast with the background matters more than the hue.
+**CTA colour:** green for growth/trials, orange for limited offers, blue for financial trust, red sparingly. Contrast with the background matters more than the hue.
 
 ---
 
 ## 9. Page copy structures
 
 **Pricing page:**
+
 1. Headline frames the investment, not the cost
 2. Plan names aspirational or audience-based, not Basic/Pro/Enterprise
 3. Recommended plan highlighted, "Most Popular" or "Best Value"
@@ -186,6 +182,7 @@ sparingly. Contrast with the background matters more than the hue.
 7. Guarantee: free trial, money-back, cancel anytime
 
 **E-commerce product page:**
+
 1. Descriptive, benefit-oriented title
 2. Price with savings highlighted
 3. One-sentence value proposition
@@ -195,6 +192,7 @@ sparingly. Contrast with the background matters more than the hue.
 7. Cross-sells: "frequently bought together"
 
 **SaaS feature page:**
+
 1. Clear feature name
 2. The problem it solves, before the feature itself
 3. How it works: visual + 2-3 steps
@@ -203,6 +201,7 @@ sparingly. Contrast with the background matters more than the hue.
 6. CTA: "Try [feature] free" or "See it in action"
 
 **About page:**
+
 1. Mission: why the company exists
 2. Origin story: founder's journey from problem to solution
 3. 3-5 values with real examples
@@ -217,7 +216,7 @@ sparingly. Contrast with the background matters more than the hue.
 **Signup/registration:**
 
 | Cause | Signal | Fix |
-|---|---|---|
+| --- | --- | --- |
 | Too many fields | 5+ required | Reduce to 3 or fewer |
 | Account required too early | Must register to see anything | Allow preview or trial first |
 | No progress indicator | Multi-step without progress bar | "Step 1 of 3" |
@@ -227,7 +226,7 @@ sparingly. Contrast with the background matters more than the hue.
 **Pricing page:**
 
 | Cause | Signal | Fix |
-|---|---|---|
+| --- | --- | --- |
 | Price shock | No context before the number | Value framing above the prices |
 | Too many options | 4+ plans, feature overload | Reduce to 3, highlight one |
 | Hidden costs | Fees revealed later | Transparent pricing upfront |
@@ -237,22 +236,19 @@ sparingly. Contrast with the background matters more than the hue.
 **Checkout/purchase:**
 
 | Cause | Signal | Fix |
-|---|---|---|
+| --- | --- | --- |
 | Surprise shipping costs | Shown only at checkout | Show early or offer free shipping |
 | Forced account creation | Register before buying | Guest checkout |
 | Limited payment options | Card only | Add PayPal, Apple Pay, Google Pay |
 | No urgency | No reason to buy now | Limited stock, countdown, bonus |
 | No guarantee | No return policy visible | Money-back guarantee near CTA |
 
-**Lead magnets, ranked by conversion:** templates and tools; checklists and cheat sheets; case
-studies with numbers; video training; ebooks and guides; quizzes and assessments; free trials and
-demos.
+**Lead magnets, ranked by conversion:** templates and tools; checklists and cheat sheets; case studies with numbers; video training; ebooks and guides; quizzes and assessments; free trials and demos.
 
-**Pricing page checklist:** value-framed headline, max 3 plans (+ enterprise), one highlighted,
-annual first with savings, benefit-oriented features, social proof near pricing, pricing FAQ,
-guarantee or trial visible, aspirational plan names, action-language CTAs, "help me choose".
+**Pricing page checklist:** value-framed headline, max 3 plans (+ enterprise), one highlighted, annual first with savings, benefit-oriented features, social proof near pricing, pricing FAQ, guarantee or trial visible, aspirational plan names, action-language CTAs, "help me choose".
 
 **Lifecycle → email sequence:**
+
 ```
 Visitor (anonymous)   → none (retargeting ads)
 Lead (opted in)       → welcome sequence (5-7)
@@ -267,13 +263,11 @@ Churned customer      → win-back sequence (3-4)
 
 ## 11. Email — worked CTAs and framings
 
-Problem-Agitate-Solution close: *"Start your free trial and see the difference in 24 hours."*
+Problem-Agitate-Solution close: _"Start your free trial and see the difference in 24 hours."_
 
-Welcome sequence CTAs: "See more customer stories / start your trial", "Start your free trial /
-book a demo", "Claim your offer before it expires".
+Welcome sequence CTAs: "See more customer stories / start your trial", "Start your free trial / book a demo", "Claim your offer before it expires".
 
-Urgency subject lines: "Your exclusive offer expires in 48 hours", "[X hours] left for [early
-bird / bonus / discount]".
+Urgency subject lines: "Your exclusive offer expires in 48 hours", "[X hours] left for [early bird / bonus / discount]".
 
 ---
 
@@ -302,25 +296,22 @@ Stage 3 (Conversion):
 
 ## 13. Launch — channels, calendar and post templates
 
-**Launch types:** Product Hunt (SaaS, dev tools, consumer apps — 4-6 weeks prep); email list
-launch (course, info product — 6-8 weeks); social launch (consumer product, personal brand —
-4-6 weeks); paid ads launch (e-commerce — 2-4 weeks); community launch (Reddit, Discord, Slack —
-6-8 weeks).
+**Launch types:** Product Hunt (SaaS, dev tools, consumer apps — 4-6 weeks prep); email list launch (course, info product — 6-8 weeks); social launch (consumer product, personal brand — 4-6 weeks); paid ads launch (e-commerce — 2-4 weeks); community launch (Reddit, Discord, Slack — 6-8 weeks).
 
-Product Hunt submissions go live at 12:01 AM Pacific; adjust to the platform's own clock, not the
-company's.
+Product Hunt submissions go live at 12:01 AM Pacific; adjust to the platform's own clock, not the company's.
 
 **Pre-launch weekly calendar:**
 
-| Day | Content | Channel | Theme |
-|---|---|---|---|
-| Mon | Problem-awareness post | LinkedIn/X | Why this problem matters |
-| Tue | Behind-the-scenes | Instagram/X | Show what you're building |
-| Wed | Educational | Blog/LinkedIn | Teach something adjacent |
-| Thu | Social proof | X/LinkedIn | Beta tester quote or result |
-| Fri | Teaser/countdown | All | Build anticipation |
+| Day | Content                | Channel       | Theme                       |
+| --- | ---------------------- | ------------- | --------------------------- |
+| Mon | Problem-awareness post | LinkedIn/X    | Why this problem matters    |
+| Tue | Behind-the-scenes      | Instagram/X   | Show what you're building   |
+| Wed | Educational            | Blog/LinkedIn | Teach something adjacent    |
+| Thu | Social proof           | X/LinkedIn    | Beta tester quote or result |
+| Fri | Teaser/countdown       | All           | Build anticipation          |
 
 **X/Twitter launch thread:**
+
 ```
 1/ After [X months] of building, [Product] is live.
    [Product] helps [audience] [outcome] without [pain point].
@@ -334,6 +325,7 @@ company's.
 ```
 
 **LinkedIn launch post:**
+
 ```
 I just launched [Product], and here's why it matters:
 [1-2 sentences on the problem]
@@ -347,6 +339,7 @@ Special launch pricing for the next [timeframe].
 ```
 
 **Instagram launch post:**
+
 ```
 Visual: product screenshots, before/after, or results graphic
 Caption:

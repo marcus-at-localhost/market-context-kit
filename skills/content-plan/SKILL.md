@@ -31,16 +31,9 @@ Then resolve optional report metadata from the same working directory:
 python "${CLAUDE_PLUGIN_ROOT}/scripts/resolve_report_metadata.py" --toolkit "Market Context Kit" --host <exact active host> --provider <exact active LLM provider> --model <exact active model id>
 ```
 
-Never guess a runtime value. Handle the three outcomes exactly as
-`${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata
-block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very
-top of the report, and an error means stop rather than invent or drop attribution.
+Never guess a runtime value. Handle the three outcomes exactly as `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` specifies: `null` means write no metadata block at all, a JSON object means reproduce its fields verbatim as YAML front matter at the very top of the report, and an error means stop rather than invent or drop attribution.
 
-Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or
-asserting anything about a page's structure, staleness, or absence. Page text used as evidence
-must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex
-HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or
-attribute-only markup.
+Read `${CLAUDE_PLUGIN_ROOT}/references/webfetch-artifacts.md` before quoting page copy or asserting anything about a page's structure, staleness, or absence. Page text used as evidence must come from `scripts/analyze_page.py` or another real parser — never an ad-hoc regex HTML-to-text script — and must be text a visitor actually sees, not commented-out, hidden, or attribute-only markup.
 
 ---
 
@@ -69,7 +62,7 @@ Before doing any research, pull existing data from prior skill runs. This dramat
 Resolve each variable using the priority order shown. Stop at the first successful source.
 
 | Variable | Source Priority |
-|----------|-----------------|
+| --- | --- |
 | `WEBSITE_URL` | CLI argument (required — ask user if missing) |
 | `LANGUAGE_CODE` | `<html lang>` attribute on homepage → ask user |
 | `COUNTRY_CODE` | TLD heuristic (`.de`→`de`, `.it`→`it`, `.fr`→`fr`, `.es`→`es`, `.co.uk`→`uk`, `.com.au`→`au`) → ask user |
@@ -124,6 +117,7 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/analyze_page.py" "<WEBSITE_URL>"
 `${CLAUDE_PLUGIN_ROOT}` resolves to this plugin's directory on any machine — never hardcode a path, and never look for a `scripts/` folder relative to the working directory. Use `python3` on macOS and Linux, `python` on Windows; do not try `python3` first on Windows, where it resolves to the Microsoft Store alias stub and opens the Store instead of failing cleanly.
 
 Capture from script output:
+
 - Title tag → infers primary positioning
 - Meta description → infers niche and value proposition
 - H1/H2 structure → reveals content priorities
@@ -149,10 +143,10 @@ curl -s "<WEBSITE_URL>/robots.txt"
 
 Build **Existing Coverage Map** table:
 
-| Cluster / Segment | URL Count | Sample URLs | Oldest Last-Modified |
-|-------------------|-----------|-------------|----------------------|
-| /blog/ | N | [url1], [url2] | YYYY-MM-DD |
-| /guides/ | N | ... | ... |
+| Cluster / Segment | URL Count | Sample URLs    | Oldest Last-Modified |
+| ----------------- | --------- | -------------- | -------------------- |
+| /blog/            | N         | [url1], [url2] | YYYY-MM-DD           |
+| /guides/          | N         | ...            | ...                  |
 
 #### 2.3 Deep Content Page Sampling
 
@@ -201,6 +195,7 @@ WebSearch: <primary_keyword> site:[country TLD if not .com]
 ```
 
 From SERP results, extract:
+
 - Top-10 page titles → reveal proven content formats and angles
 - People Also Ask (PAA) questions → FAQ fodder + direct content ideas
 - Related searches at bottom of SERP → long-tail cluster topics
@@ -216,6 +211,7 @@ WebSearch: <niche> forum question <topic>
 Reddit is a rich source for consumer, software and developer niches and a thin one for industrial, regulated and procurement-led ones. For those, mine specialist forums, association and standards-body publications, trade-press archives, LinkedIn discussion under expert posts, and the questions that arrive through the client's own support and sales channels — that last source is usually the best available and is often sitting unused in an inbox.
 
 Extract from results:
+
 - Natural language questions (verbatim phrasings are keyword goldmines)
 - Recurring pain points and frustrations
 - Jargon and terminology used by the community (not just the brand)
@@ -229,6 +225,7 @@ WebSearch: site:youtube.com <niche> how to
 ```
 
 Extract:
+
 - Video titles with high view counts → validated demand signals
 - Video description keywords → secondary keyword ideas
 - Comment-section questions → PAA equivalents for article FAQ sections
@@ -244,6 +241,7 @@ WebSearch: <niche> trends [CURRENT_YEAR+1]
 (Use the current calendar year — today's date is available from context.)
 
 Extract:
+
 - Regulatory or compliance angle topics (evergreen + authoritative)
 - Emerging trend topics (early-mover advantage, AI citability)
 - Seasonal event hooks tied to the industry calendar
@@ -253,6 +251,7 @@ Extract:
 Pull the brand entity terms surfaced in Phase 2.3 — product names, certifications, proprietary materials, regulatory codes, and any other named entities found on the site — and mine them as topical angles.
 
 For each entity term identified:
+
 - Generate 2-3 topic ideas that use the entity as the topical lens (e.g., site sells PFAS-free gaskets → entity term "PFAS-free" → topic ideas: "What Does PFAS-Free Mean for Industrial Seals?", "PFAS-Free vs. Standard Gasket Materials: Performance Comparison", "Regulations Driving PFAS-Free Material Adoption in 2025")
 - Run a SERP check per entity term:
   ```
@@ -268,16 +267,11 @@ Entity terms with unique angles (competitor coverage = 0) are the highest-priori
 
 Before clustering, sort every candidate topic into exactly one list:
 
-**List 1 — Already Covered (exclude from plan)**
-Topics clearly addressed by URLs already in the site's sitemap.
+**List 1 — Already Covered (exclude from plan)** Topics clearly addressed by URLs already in the site's sitemap.
 
-**List 2 — Competitor-Covered Gap (direct opportunity)**
-Topics covered by at least one competitor but absent from the target site.
-Sort by: number of competitors covering the topic (more = higher demand signal).
+**List 2 — Competitor-Covered Gap (direct opportunity)** Topics covered by at least one competitor but absent from the target site. Sort by: number of competitors covering the topic (more = higher demand signal).
 
-**List 3 — Industry Blind Spot (highest strategic value)**
-Topics actively discussed in community/SERP/YouTube but not well covered by any competitor.
-These are the highest-value opportunities: lower competition, differentiated positioning, strong AI citability potential.
+**List 3 — Industry Blind Spot (highest strategic value)** Topics actively discussed in community/SERP/YouTube but not well covered by any competitor. These are the highest-value opportunities: lower competition, differentiated positioning, strong AI citability potential.
 
 ---
 
@@ -295,36 +289,40 @@ Transform the topic lists into a structured pillar-and-cluster architecture.
 
 **Cluster size guidelines:**
 
-| Role | Content Type | Length Code |
-|------|-------------|-------------|
-| Pillar | Comprehensive guide (covers the full topic) | xl |
-| Supporting | Deep-dive on one subtopic | md or lg |
-| Supporting | How-to or tutorial | md |
-| Supporting | FAQ or comparison | sm or md |
+| Role       | Content Type                                | Length Code |
+| ---------- | ------------------------------------------- | ----------- |
+| Pillar     | Comprehensive guide (covers the full topic) | xl          |
+| Supporting | Deep-dive on one subtopic                   | md or lg    |
+| Supporting | How-to or tutorial                          | md          |
+| Supporting | FAQ or comparison                           | sm or md    |
 
 #### 4.2 Topic Scoring (0-12 scale)
 
 Score every candidate topic on 4 dimensions (0-3 each):
 
 **Dimension 1: Search Intent Fit (0-3)**
+
 - 3 = Intent directly matches site's commercial purpose (e.g., site sells X, topic targets buyers of X)
 - 2 = Intent adjacent to commercial purpose (informational but directly supports purchase decision)
 - 1 = Informational, tangentially related to offering
 - 0 = Informational, no clear path to commercial outcome
 
 **Dimension 2: Competition Gap (0-3)**
+
 - 3 = Top 10 results are thin, outdated, or don't fully address the query
 - 2 = Decent coverage exists but there is a clear angle or format gap
 - 1 = Well-covered topic but site could match quality
 - 0 = Saturated topic, no differentiation angle visible
 
 **Dimension 3: Business Value (0-3)**
+
 - 3 = Transactional — directly connects to product/service purchase
 - 2 = Commercial investigation — comparison, review, "best X" format
 - 1 = Informational close to product (how-to that requires the product)
 - 0 = Pure informational, no product touchpoint
 
 **Dimension 4: AI-Citability Potential (0-3)**
+
 - 3 = Clear-answer query, factual, structured-answer-friendly (definition, how-to, comparison table) — strong candidate for ChatGPT/Perplexity citation
 - 2 = Topic can be made citation-friendly with FAQ and structured sections
 - 1 = Opinion or trend piece — lower citation potential
@@ -343,19 +341,21 @@ Score every candidate topic on 4 dimensions (0-3 each):
 Produce the file with the following sections in order:
 
 **Header block:**
+
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Content Plan
+
 ## [Site Name / URL]
+
 ### Generated: [Date]
 ```
 
 If `SELF_RESEARCH_MODE=true`, add this banner immediately after the header:
 
 ```markdown
-> **Self-research mode** — This plan was built without BRAND-VOICE.md, COMPETITOR-REPORT.md, or SEO-AUDIT.md.
-> Precision is lower than when prerequisite files exist. Run `/marketkit:brand`, `/marketkit:competitors`,
-> `/marketkit:seo` for a higher-confidence plan.
+> **Self-research mode** — This plan was built without BRAND-VOICE.md, COMPETITOR-REPORT.md, or SEO-AUDIT.md. Precision is lower than when prerequisite files exist. Run `/marketkit:brand`, `/marketkit:competitors`, `/marketkit:seo` for a higher-confidence plan.
 ```
 
 **Section 1: Cluster Map (ASCII topology)**
@@ -379,9 +379,10 @@ Show the full pillar-and-cluster structure as an ASCII tree:
 One row per article. Columns:
 
 | # | Cluster | Pillar/Support | Target Keyword | Suggested Title | Content Type | Search Intent | Priority Score | Size | Internal Links | Schema Type | Source Notes |
-|---|---------|----------------|----------------|-----------------|--------------|---------------|----------------|------|----------------|-------------|--------------|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 Column definitions:
+
 - **#** — Sequential row number, used for approval references
 - **Cluster** — Parent cluster name
 - **Pillar/Support** — `Pillar` or `Support`
@@ -404,17 +405,17 @@ List 3-5 List 3 topics (industry blind spots) from Phase 3.7 with rationale:
 ```markdown
 ## Blind-Spot Opportunities
 
-These topics are actively discussed in forums/SERP/YouTube but no competitor covers them well.
-High strategic value: low competition, potential first-mover advantage, strong AI citability.
+These topics are actively discussed in forums/SERP/YouTube but no competitor covers them well. High strategic value: low competition, potential first-mover advantage, strong AI citability.
 
 | Topic | Evidence of Demand | Why Competitors Miss It | Recommended Angle |
-|-------|--------------------|------------------------|-------------------|
+| ----- | ------------------ | ----------------------- | ----------------- |
 | ...   | ...                | ...                     | ...               |
 ```
 
 **Section 4: Editorial Calendar**
 
 Suggest a publishing order over 8-12 weeks (if the plan has fewer than 16 articles total, compress to a 4-6 week calendar instead). Rules:
+
 - Pillar pieces must be published before their cluster's supporting articles.
 - Higher priority scores publish earlier.
 - No more than 2 xl-size articles in the same week.
@@ -423,16 +424,17 @@ Suggest a publishing order over 8-12 weeks (if the plan has fewer than 16 articl
 ```markdown
 ## Editorial Calendar (Suggested — 12-Week Plan)
 
-| Week | Article # | Title | Size | Notes |
-|------|-----------|-------|------|-------|
+| Week | Article # | Title | Size | Notes                                    |
+| ---- | --------- | ----- | ---- | ---------------------------------------- |
 | 1    | #1        | ...   | xl   | Pillar — publish first to anchor cluster |
-| 1    | #3        | ...   | md   | Support — internal links to #1 |
-...
+| 1    | #3        | ...   | md   | Support — internal links to #1           |
+| ...  |
 ```
 
 **Section 5: Brand Voice Notes**
 
 If `MARKETKIT - BRAND-VOICE - <domain>.md` is available:
+
 - Excerpt the voice dimensions (formality, tone) and key vocabulary guidelines
 - Note any explicit audience language preferences to apply during drafting
 
@@ -477,6 +479,7 @@ Run the resolver separately for every article filename, using the exact same `<d
 #### 6.1 Slug Derivation
 
 Derive the slug from the Target Keyword, then uppercase and kebab it for the resolver's `--purpose`:
+
 - Lowercase, hyphen-separated
 - Remove stop words (a, the, and, for, of, to, in, on, with)
 - Maximum 6 words
@@ -510,19 +513,21 @@ date_planned: "[YYYY-MM-DD from editorial calendar]"
 #### 6.3 Article Structure
 
 Build the article outline by combining:
+
 1. SERP top-10 structure (most common H2 headings across top-ranking pages for the target keyword)
 2. PAA box questions (map each to an FAQ entry or an H2/H3 section)
 3. Author angle (a specific perspective, opinion, or data point that differentiates from existing results — particularly important for AI citability)
 
 **Required sections (all articles):**
 
-**Hook paragraph (40-60 words)**
-Placed immediately after H1, before any other content. This is the featured-snippet candidate. It must:
+**Hook paragraph (40-60 words)** Placed immediately after H1, before any other content. This is the featured-snippet candidate. It must:
+
 - State the core answer or promise of the article in plain language
 - Include the target keyword naturally in the first sentence
 - Be complete enough to stand alone as a snippet
 
 **Main body (H2/H3 hierarchy)**
+
 - Every H2 maps to a major subtopic
 - H3s break H2s into scannable subsections
 - At least one H2 must contain the target keyword or a close variation
@@ -530,12 +535,13 @@ Placed immediately after H1, before any other content. This is the featured-snip
 - Include at least one table where comparison or structured data is natural
 
 **Entity coverage section**
+
 - Name all relevant entities (people, organizations, products, standards, regulations) related to the topic
 - Reference authoritative external sources for factual claims (link to gov sites, academic papers, industry bodies)
 - This section does not need its own H2 — entities woven into body copy
 
-**FAQ section**
-Must appear as a standalone H2 section titled "Frequently Asked Questions" or "FAQ: [Topic]":
+**FAQ section** Must appear as a standalone H2 section titled "Frequently Asked Questions" or "FAQ: [Topic]":
+
 - Source questions from PAA box (captured in Phase 3.2) and Reddit threads (Phase 3.3)
 - 4-6 questions minimum
 - Each answer: 40-80 words (featured-snippet friendly)
@@ -544,12 +550,13 @@ Must appear as a standalone H2 section titled "Frequently Asked Questions" or "F
 This section enables `FAQPage` schema and directly boosts AI citability (ChatGPT and Perplexity preferentially cite FAQ-structured factual content).
 
 **Internal links (3-5 per article)**
+
 - Link to: the cluster's pillar (if this is a supporting article), other supporting articles in the cluster, and 1-2 existing site pages from the Coverage Map
 - Use descriptive anchor text (not "click here" or "read more")
 - Place links in the body copy at contextually natural points, not forced at the end
 
-**CTA (call to action)**
-Final section before FAQ — one specific, benefit-led call to action aligned with the site's primary commercial intent:
+**CTA (call to action)** Final section before FAQ — one specific, benefit-led call to action aligned with the site's primary commercial intent:
+
 - Aligned with site's commercial intent (e.g., "Try [Product]", "Get a free audit", "Download the guide", "Request a quote", "Download the datasheet", "Book technical consultation", "Reserve a course seat")
 - If commercial intent is unclear, use a newsletter or resource CTA
 - Single, specific CTA — not multiple competing actions
@@ -557,11 +564,13 @@ Final section before FAQ — one specific, benefit-led call to action aligned wi
 #### 6.4 Voice Application
 
 If `MARKETKIT - BRAND-VOICE - <domain>.md` is available:
+
 - Apply formality level, vocabulary preferences, and do/don't rules from the brand voice guide
 - Replicate the brand's sentence length patterns and punctuation style
 - Use vocabulary from the "Words We Use" list; avoid words from "Words We Avoid"
 
 If no `MARKETKIT - BRAND-VOICE - <domain>.md`:
+
 - Default to clear, professional, direct prose
 - Match the approximate formality level inferred from Phase 2.3
 - Add a note in the article front-matter: `brand_voice: "inferred — run /marketkit:brand for calibrated voice"`
@@ -569,7 +578,7 @@ If no `MARKETKIT - BRAND-VOICE - <domain>.md`:
 #### 6.5 Word Count Targets by Size
 
 | Size Code | Word Count Target | Typical Use |
-|-----------|------------------|-------------|
+| --- | --- | --- |
 | sm | 600-900 words | FAQ pages, narrow how-tos, simple comparisons |
 | md | 900-1500 words | Standard how-tos, supporting subtopic articles |
 | lg | 1500-2500 words | In-depth guides, comparison articles, case studies |
@@ -617,8 +626,11 @@ MARKETKIT - ARTICLE-<SLUG> - <domain>.md             ← Phase 6 output. One fil
 
 ```markdown
 [YAML front matter from the Phase 0 metadata resolver — exact shape in references/output-location.md. Omit the whole block when the resolver returned null.]
+
 # Content Plan
+
 ## [Site Name / URL]
+
 ### Generated: [Date]
 
 > [Self-research mode banner if applicable]
@@ -626,6 +638,7 @@ MARKETKIT - ARTICLE-<SLUG> - <domain>.md             ← Phase 6 output. One fil
 ---
 
 ## Cluster Map
+
 [ASCII topology tree]
 
 ---
@@ -633,26 +646,30 @@ MARKETKIT - ARTICLE-<SLUG> - <domain>.md             ← Phase 6 output. One fil
 ## Content Plan
 
 | # | Cluster | Pillar/Support | Target Keyword | Suggested Title | Content Type | Search Intent | Priority Score | Size | Internal Links | Schema Type | Source Notes |
-|---|---------|----------------|----------------|-----------------|--------------|---------------|----------------|------|----------------|-------------|--------------|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 ---
 
 ## Blind-Spot Opportunities
+
 [Table of high-value uncovered topics with evidence and rationale]
 
 ---
 
 ## Editorial Calendar (Suggested — 12-Week Plan)
+
 [Week-by-week publishing schedule]
 
 ---
 
 ## Brand Voice Notes
+
 [Excerpt from BRAND-VOICE.md or inferred voice summary]
 
 ---
 
 ## Existing Coverage Map
+
 [Table of current site content by URL segment]
 ```
 
@@ -709,4 +726,3 @@ MARKETKIT - ARTICLE-<SLUG> - <domain>.md             ← Phase 6 output. One fil
 - **Never fabricate keyword metrics.** You do not have access to real-time search volume data. Use qualitative signals (competitor coverage count, Reddit thread volume, SERP result quality) to justify prioritization. Never invent numerical search volumes.
 - **Brand voice consistency is a final check, not an afterthought.** If `MARKETKIT - BRAND-VOICE - <domain>.md` is available, re-read the voice chart and do/don't rules before writing each article. Inconsistent voice across a content cluster is harder to fix than inconsistent SEO.
 - **Internal links must be planned before drafting begins.** The Internal Links column in the plan is the source of truth. Every article draft must honor those links — adding them during drafting, not retrofitting them after.
-

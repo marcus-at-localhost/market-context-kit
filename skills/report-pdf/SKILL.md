@@ -27,9 +27,11 @@ Use `python3` on macOS/Linux. The first call's `output_path` is the final PDF; t
 ---
 
 ## Skill Purpose
+
 Generate a professional, visually polished PDF marketing report using the Python script `scripts/generate_pdf_report.py`. This skill collects all available audit and analysis data, structures it into the expected JSON format, invokes the script, and produces a branded PDF with score gauges, bar charts, comparison tables, findings, and a prioritized action plan.
 
 ## When to Use
+
 - User wants a PDF version of the marketing report (not just Markdown)
 - User is preparing a deliverable for a client presentation
 - User asks for a "polished report", "client-ready report", or "PDF report"
@@ -39,7 +41,7 @@ Generate a professional, visually polished PDF marketing report using the Python
 ## When to Use PDF vs Markdown
 
 | Format | Best For | Pros | Cons |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **PDF** | Client presentations, email attachments, sales collateral | Professional appearance, consistent formatting, visual charts, printable | Harder to edit, requires Python script |
 | **Markdown** | Internal use, quick reference, iterative editing, version control | Easy to edit, readable in any editor, git-friendly | Less visually polished, no charts |
 
@@ -48,9 +50,11 @@ Generate a professional, visually polished PDF marketing report using the Python
 ## How to Execute
 
 ### Step 1: Collect All Available Data
+
 Gather data from all previous skill runs. Check only inside the `audit_dir` resolved in Phase 0, for the exact same domain scope — never search older audit folders.
 
 **Primary data sources** (`MARKETKIT - <PURPOSE> - <domain>.md` unless noted):
+
 - `MARKETING-AUDIT` -- Overall audit results
 - `LANDING-CRO` -- Landing page conversion analysis
 - `SEO-AUDIT` -- SEO findings
@@ -62,11 +66,13 @@ Gather data from all previous skill runs. Check only inside the `audit_dir` reso
 - `AD-CAMPAIGNS` -- Advertising plan
 
 **If no previous data exists:**
+
 1. Recommend the user run `/marketkit:audit <url>` first for the best results
 2. If the user insists on generating a report without prior audits, analyze the provided URL directly and build the data structure from scratch
 3. Use the analyze_page.py script to gather automated data: `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/analyze_page.py" "<url>"` (`python` instead of `python3` on Windows)
 
 ### Step 2: Build the JSON Data Structure
+
 The `scripts/generate_pdf_report.py` script expects a JSON file as input with this exact structure:
 
 ```json
@@ -166,22 +172,29 @@ The `scripts/generate_pdf_report.py` script expects a JSON file as input with th
 ### Step 3: Field-by-Field Data Assembly Guide
 
 #### `url` (string, required)
+
 The target website URL. Use the full URL including protocol.
 
 #### `date` (string, required)
+
 The report generation date. Format: "Month DD, YYYY" (e.g., "March 1, 2026").
 
 #### `brand_name` (string, required)
+
 The company or brand name. Used in competitor comparison table headers.
 
 #### `overall_score` (integer, 0-100, required)
+
 The weighted average of all category scores. Calculate as:
+
 ```
 overall_score = (content * 0.25) + (conversion * 0.20) + (seo * 0.20) + (competitive * 0.15) + (brand * 0.10) + (growth * 0.10)
 ```
 
 #### `executive_summary` (string, required)
+
 A 2-4 sentence summary covering:
+
 - Current marketing health assessment
 - Top 1-2 most impactful findings
 - Estimated revenue impact of implementing recommendations
@@ -190,10 +203,11 @@ A 2-4 sentence summary covering:
 Keep it concise and impactful. This appears on the cover page right below the score gauge.
 
 #### `categories` (object, required)
+
 Exactly 6 categories with their scores. The categories map to these evaluation areas:
 
 | Category | What It Measures | Scoring Guidance |
-|---|---|---|
+| --- | --- | --- |
 | Content & Messaging | Copy quality, value proposition, headline clarity, CTA text, brand voice consistency | 80+: Clear, benefit-driven, specific. 60-79: Adequate but generic. <60: Vague, feature-focused, unclear |
 | Conversion Optimization | Social proof, form design, CTA placement, objection handling, urgency | 80+: Multiple proof types, optimized forms, clear CTAs. 60-79: Some elements present. <60: Missing critical elements |
 | SEO & Discoverability | Title tags, meta descriptions, headers, schema, internal linking, page speed | 80+: Fully optimized. 60-79: Mostly present with gaps. <60: Major issues or missing elements |
@@ -202,15 +216,18 @@ Exactly 6 categories with their scores. The categories map to these evaluation a
 | Growth & Strategy | Lead capture, email marketing, content strategy, acquisition channels | 80+: Multi-channel strategy in place. 60-79: Some channels active. <60: No clear growth strategy |
 
 #### `findings` (array, required)
+
 An array of finding objects, each with `severity` and `finding` fields.
 
 **Severity levels:**
+
 - `Critical` -- Directly losing revenue or customers. Fix immediately.
 - `High` -- Significant impact on growth. Fix within 1-2 weeks.
 - `Medium` -- Meaningful improvement opportunity. Fix within 1 month.
 - `Low` -- Nice-to-have improvement. Fix when time allows.
 
 **Writing effective findings:**
+
 - Be specific: "Homepage headline says 'Welcome to Our Platform'" not "Headline needs improvement"
 - Quantify impact: "Missing meta descriptions on 8 of 12 landing pages"
 - Reference benchmarks: "Page load time is 4.2s (benchmark: under 2s)"
@@ -219,6 +236,7 @@ An array of finding objects, each with `severity` and `finding` fields.
 Aim for 5-10 findings. Order from most to least severe.
 
 #### `quick_wins` (array, required)
+
 3-5 action items that can be implemented within one week with minimal effort. Each should be a specific, actionable instruction.
 
 **Good quick win:** "Rewrite the homepage headline from 'Welcome to Our Platform' to 'Cut Your Reporting Time by 75% -- Automated Analytics for Growth Teams'"
@@ -226,12 +244,15 @@ Aim for 5-10 findings. Order from most to least severe.
 **Bad quick win:** "Improve the headline" (too vague)
 
 #### `medium_term` (array, required)
+
 3-5 action items requiring 1-3 months to implement. These are more involved but have high impact.
 
 #### `strategic` (array, required)
+
 3-5 action items requiring 3-6 months. These are foundational changes that require planning and sustained effort.
 
 #### `competitors` (array, optional)
+
 Up to 3 competitor objects for the comparison table. If no competitor data is available, omit this field -- the script will skip the competitor section.
 
 ### Step 4: Write the JSON File
@@ -242,8 +263,8 @@ Do not build this file with a shell heredoc or `echo` redirect. Heredoc quoting 
 
 ### Step 5: Invoke the PDF Generator Script
 
-**Prerequisites check:**
-First, verify that `reportlab` is installed:
+**Prerequisites check:** First, verify that `reportlab` is installed:
+
 ```bash
 # macOS / Linux
 python3 -c "import reportlab" || pip3 install reportlab
@@ -252,6 +273,7 @@ python -c "import reportlab" || pip install reportlab
 ```
 
 **Generate the report:**
+
 ```bash
 # macOS / Linux
 python3 "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py" "<REPORT-DATA output_path>" "<MARKETING-REPORT output_path>"
@@ -261,15 +283,17 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py" "<REPORT-DATA outp
 
 `${CLAUDE_PLUGIN_ROOT}` resolves to this plugin's directory on any machine — never hardcode a path. Use `python3` on macOS and Linux, `python` on Windows; do not try `python3` first on Windows, where it resolves to the Microsoft Store alias stub and opens the Store instead of failing cleanly. Pass the two exact `output_path` values resolved in Phase 0 — do not reconstruct them.
 
-**Demo mode (no arguments):**
-Running the script without arguments generates a sample report with placeholder data:
+**Demo mode (no arguments):** Running the script without arguments generates a sample report with placeholder data:
+
 ```bash
 python3 "${CLAUDE_PLUGIN_ROOT}/scripts/generate_pdf_report.py"
 # Creates: MARKETING-REPORT-sample.pdf in the current directory
 ```
 
 ### Step 6: Verify the Output
+
 After generation, verify the PDF was created:
+
 ```bash
 ls -la "<MARKETING-REPORT output_path>"
 ```
@@ -283,6 +307,7 @@ The `REPORT-DATA` JSON under `data/` is a kept intermediate, not a temp file —
 The generated PDF includes the following pages:
 
 ### Page 1: Cover Page
+
 - Report title: "Marketing Audit Report"
 - Target URL
 - Generation date
@@ -291,26 +316,31 @@ The generated PDF includes the following pages:
 - Executive summary paragraph
 
 ### Page 2: Score Breakdown
+
 - Horizontal bar chart showing all 6 category scores with color coding
 - Score table with category names, scores, weights, and status labels
 - Color coding: Green (80+), Blue (60-79), Yellow (40-59), Red (<40)
 
 ### Page 3: Key Findings
+
 - Findings table with severity labels and descriptions
 - Color-coded severity indicators (Critical = red, High = orange, Medium = yellow, Low = blue)
 - Findings ordered from most to least severe
 
 ### Page 4: Prioritized Action Plan
+
 - Quick Wins section (This Week)
 - Medium-Term section (1-3 Months)
 - Strategic section (3-6 Months)
 - Numbered action items in each tier
 
 ### Page 5: Competitive Landscape (if competitor data provided)
+
 - Comparison table with client vs up to 3 competitors
 - Rows: Positioning, Pricing, Social Proof, Content
 
 ### Final Page: Methodology
+
 - Scoring methodology explanation
 - Category weights and measurement criteria
 - Optional footer: exact toolkit, host, provider, and model from `report_metadata`; omit when metadata is disabled
@@ -319,20 +349,21 @@ The generated PDF includes the following pages:
 
 The PDF uses a professional color palette:
 
-| Element | Color | Hex Code |
-|---|---|---|
-| Primary (headers, titles) | Dark Navy | #1B2A4A |
-| Accent (links, highlights) | Blue | #2D5BFF |
-| Highlight (attention) | Orange | #FF6B35 |
-| Success (high scores) | Green | #00C853 |
-| Warning (medium scores) | Amber | #FFB300 |
-| Danger (low scores, critical) | Red | #FF1744 |
-| Light background | Light Gray | #F5F7FA |
-| Body text | Dark Gray | #2C3E50 |
-| Secondary text | Medium Gray | #7F8C9B |
-| Borders | Light Border | #E0E6ED |
+| Element                       | Color        | Hex Code |
+| ----------------------------- | ------------ | -------- |
+| Primary (headers, titles)     | Dark Navy    | #1B2A4A  |
+| Accent (links, highlights)    | Blue         | #2D5BFF  |
+| Highlight (attention)         | Orange       | #FF6B35  |
+| Success (high scores)         | Green        | #00C853  |
+| Warning (medium scores)       | Amber        | #FFB300  |
+| Danger (low scores, critical) | Red          | #FF1744  |
+| Light background              | Light Gray   | #F5F7FA  |
+| Body text                     | Dark Gray    | #2C3E50  |
+| Secondary text                | Medium Gray  | #7F8C9B  |
+| Borders                       | Light Border | #E0E6ED  |
 
 ## Score-to-Color Mapping
+
 - 80-100: Green (#00C853) -- Strong performance
 - 60-79: Blue (#2D5BFF) -- Solid with room to improve
 - 40-59: Amber (#FFB300) -- Needs attention
@@ -341,7 +372,7 @@ The PDF uses a professional color palette:
 ## Troubleshooting
 
 | Issue | Solution |
-|---|---|
+| --- | --- |
 | `ModuleNotFoundError: No module named 'reportlab'` | Run `pip3 install reportlab` |
 | Script produces empty PDF | Check that JSON data has all required fields |
 | Score gauge not rendering | Ensure `overall_score` is a number 0-100 |
@@ -362,6 +393,7 @@ This skill works best when combined with other audit skills. The recommended wor
 The PDF report skill will automatically look for output files from these skills and incorporate their data into the report JSON.
 
 ## Output: MARKETKIT - MARKETING-REPORT - <domain>.pdf
+
 - **File:** the exact `output_path` resolved in Phase 0 for `MARKETING-REPORT`
 - **Location:** the active audit folder, resolved per `${CLAUDE_PLUGIN_ROOT}/references/output-location.md` (`Audit/`)
 - **Data:** `MARKETKIT - REPORT-DATA - <domain>.json`, kept flat under `data/`
@@ -369,6 +401,7 @@ The PDF report skill will automatically look for output files from these skills 
 - **Pages:** 5-7 pages depending on whether competitor data and additional sections are included
 
 ## Key Principles
+
 - The PDF report is the most client-facing deliverable in the toolkit. Quality matters.
 - Always verify the JSON data is complete and accurate before generating. Garbage in, garbage out.
 - Use the PDF for initial client impressions and sales conversations. Follow up with the more detailed Markdown report if the client engages.
@@ -376,4 +409,3 @@ The PDF report skill will automatically look for output files from these skills 
 - Round scores to whole numbers. Decimals imply false precision.
 - Keep the executive summary tight -- 2-4 sentences maximum. Clients skim cover pages.
 - If generating for a prospect (not yet a client), the report serves as a sales tool. Make the opportunities compelling and the action plan achievable.
-
